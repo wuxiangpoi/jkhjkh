@@ -1,0 +1,17 @@
+<div class="editor-form-group"
+     ng-switch="page.ver">
+
+    <div class="editor-form-version"
+         ng-switch-when="1">
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">播放<br/>时长</label>
+            <editor-control-range class="editor-form-range" min-val="5" max-val="300"
+                                  on-change="stayChange(newVal,oldVal)"
+                                  val="page.stay"></editor-control-range>
+            <span class="editor-form-span">{{page.stay}}秒</span>
+        </section>
+
+    </div>
+
+</div>

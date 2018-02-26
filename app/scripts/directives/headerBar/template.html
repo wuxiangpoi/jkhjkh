@@ -1,0 +1,40 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <!-- <div class="brand">
+        <a>
+            <img ng-src="{{root_logo}}" class="img-responsive logo">
+        </a>
+    </div> -->
+    <div>
+        <div class="navbar-btn">
+            <button type="button" ng-click="toggleFullwidth()" class="btn-toggle-fullwidth">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <div class="navPosition">
+                <span>{{navPosition.split('>')[0]}}</span>
+                <span ng-if="navPosition.split('>')[1]">&gt</span>
+                <span ng-if="navPosition.split('>')[1]" style="color:#0cf5c0;">{{navPosition.split('>')[1]}}</span>
+            </div>
+        </div>
+        <div id="navbar-menu">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown user">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="iconfont icon-touxiang"></i>
+                        <span>{{userData.admin.name}}</span>
+                    </a>
+                    <ul class="dropdown-menu  animated fadeInRight">
+                        <li>
+                            <a href="" ng-click="updatePwd()">
+                                <i class="fa fa-user fa-fw"></i> 修改密码</a>
+                        </li>
+                        <li>
+                            <a href="" ng-click="logout()">
+                                <i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

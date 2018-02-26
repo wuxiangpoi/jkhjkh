@@ -1,0 +1,49 @@
+<div class="dmbd-videoViewer2">
+    <div class="video-part">
+        <video class="video" preload="auto" autoplay></video>
+        <div class="control-mask video-mask">
+            <div class="control-panel video-panel">
+                <button ng-hide="isLoaded" ng-click="loadVideo($event)">播放</button>
+                <button ng-if="isLoaded" ng-hide="isPlaying" ng-click="playVideo($event)">播放</button>
+                <button ng-if="isLoaded" ng-show="isPlaying" ng-click="pauseVideo($event)">暂停</button>
+                <button ng-click="selectVideo($event)">{{buttonText}}</button>
+            </div>
+        </div>
+        <div class="info-mask video-mask" ng-class="{'hidden':!isShowMore}">
+            <div class="info-panel video-panel">
+                <table class="info-table">
+                    <tr>
+                        <td class="td-left"><label>播放时长：</label></td>
+                        <td class="td-right"><span>{{data.duration|dmbdVideoTimeFormatFilter}}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-left"><label>文件大小：</label></td>
+                        <td class="td-right"><span>{{data.size|dmbdResourceSizeFilter}}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-left"><label>分&nbsp;辨&nbsp;率：</label></td>
+                        <td class="td-right"><span>{{data.width}} × {{data.height}}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-left"><label>视频码率：</label></td>
+                        <td class="td-right"><span>{{data.bitrate}} kbps</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-left"><label>创建时间：</label></td>
+                        <td class="td-right"><span>{{data.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="title-part">
+        <div class="left-title" title="{{data.name}}">{{data.name}}</div>
+        <div class="right-more">
+            <button class="fa fa-info-circle"
+                    ng-class="{'clickDown':isMoreDown}"
+                    ng-click="mouseClick($event)"
+                    ng-mouseenter="mouseEnter($event)"
+                    ng-mouseleave="mouseLeave($event)"></button>
+        </div>
+    </div>
+</div>

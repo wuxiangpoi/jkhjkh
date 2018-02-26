@@ -1,0 +1,133 @@
+<!-- version:20180104 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>节目播放</title>
+
+    <link href="css/animation.css" rel="stylesheet">
+    <link href="css/parser.css" rel="stylesheet">
+    <!--<link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">-->
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>
+
+<script src="js/parser.js"></script>
+<script src="js/util.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // var navigatorInfo = 'appCodeName:' + navigator.appCodeName
+        //         + '|appName:' + navigator.appName
+        //         + '|appVersion:' + navigator.appVersion
+        //         + '|platform:' + navigator.platform
+        //         + '|product:' + navigator.product;
+        // kmsz.util.toast(navigatorInfo, 30000);
+
+        var relativePath = '';//资源文件根目录相对本index.html页面的相对路径
+        var searchObj = kmsz.util.parseUrl(location.href).search;
+        var programUrl = 'content/' + (searchObj['pid'] || 'default') + '.js';
+        kmsz.util.asyncLoadScript(programUrl, function (e) {
+            var keepScale = searchObj['keepScale'] === '1';//保持比例
+            var autoRotate = searchObj['autoRotate'] === '1';//自动旋转
+            var canvas = document.body;
+
+            var parser = new kmsz.editor.Parser();
+
+            parser.setPixelHorizontal(program.pixelHorizontal);
+            parser.setPixelVertical(program.pixelVertical);
+            parser.setKeepScale(keepScale);
+            parser.setAutoScale(autoRotate);
+            parser.setImageUrlConverter(function (image) {
+                switch (image.ver) {
+                    case 1:
+                        return relativePath + image.path;
+                    default :
+                        return relativePath + image;
+                }
+            });
+            parser.setVideoUrlConverter(function (video) {
+                switch (video.ver) {
+                    case 1:
+                        return relativePath + video.path;
+                    default :
+                        return relativePath + video;
+                }
+            });
+            resize();
+            parser.inflate(canvas, program.pages);
+
+            if (window.addEventListener) {
+                var evtName = 'orientationchange' in window ? 'orientationchange' : 'resize';
+                window.addEventListener(evtName, resize, false);
+            }
+
+            function resize() {
+                parser.resize(canvas.clientWidth, canvas.clientHeight);
+            }
+
+            //关闭页面时销毁
+            window.addEventListener('beforeunload', function () {
+                parser.destroy();
+            });
+        });
+    }, false);
+</script>
+
+<script>
+
+    //以下代码仅为配合客户端截图使用
+    document.addEventListener("DOMContentLoaded", function () {
+        window.setInterval(getVideosInfos, 3000);
+    });
+
+    window.myjsbridge = {
+        callbackFromNative: function (callId, callType, params) {
+            return getVideosInfos();
+            //return window.JSON.stringify(getVideosInfos());
+        }
+    };
+
+    function getVideosInfos() {
+        var videos = document.getElementsByTagName('video');
+        var infos = [];
+        for (var i = 0, len = videos.length; i < len; i++) {
+            var info = getVideoInfo(videos[i]);
+            if (!window.isNaN(info.currentTime) && info.currentTime !== 0) {
+                infos.push(info);
+            }
+        }
+
+        //console.log(infos, window.JSON.stringify(infos));
+
+        return infos;
+    }
+
+    function getVideoInfo(video) {
+        var pageWidth = document.body.clientWidth;
+        var pageHeight = document.body.clientHeight;
+        var clientRect = video.getBoundingClientRect();
+        return {
+            path: video.getAttribute('src'),
+            currentTime: video.currentTime,
+            left: clientRect.left / pageWidth,
+            top: clientRect.top / pageHeight,
+            width: clientRect.width / pageWidth,
+            height: clientRect.height / pageHeight
+        };
+    }
+
+</script>

@@ -1,0 +1,19 @@
+<div class="ui-dialog" ng-keydown="$event.stopPropagation()">
+    <div class="ui-dialog-title">
+        节目预览
+    </div>
+
+    <div class="programPreview">
+        <section class="content">
+            <dmbd-program-preview2
+                    style="margin: 0 auto;"
+                    ng-if="pages"
+                    program-pixel-horizontal="pixelHorizontal"
+                    program-pixel-vertical="pixelVertical"
+                    program-pages="pages"
+                    size="520">
+            </dmbd-program-preview2>
+        </section>
+    </div>
+
+</div>

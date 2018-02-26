@@ -1,0 +1,48 @@
+<div class="program_list">
+    <div class="header no_select">
+        <button class="btn_program_add" ui-sref="program.add">添加节目</button>
+    </div>
+    <div class="body scroll_y">
+
+        <ul class="program_list_ul">
+            <li ng-repeat="program in programs">
+                <div class="program-view">
+                    <editor-page-thumb
+                            ng-if="program.pages.length!==0"
+                            pixel-horizontal="program.pixelHorizontal"
+                            pixel-vertical="program.pixelVertical"
+                            size="200"
+                            program-size="200"
+                            page="program.pages[0]">
+                    </editor-page-thumb>
+                    <section class="program_opera_panel">
+                        <div>
+                            <button ng-click="programPreviewById(program.id)">预览</button>
+                            <button ui-sref="program.edit({id:program.id})">修改</button>
+                            <button ui-sref="program.copy({id:program.id})">复制</button>
+                            <button ng-click="deleteProgram(program)">删除</button>
+                        </div>
+                    </section>
+                </div>
+                <div class="program-title"
+                     title="节目名称：{{program.name}}
+节目时长：{{program.duration|dmbdVideoTimeFormatFilter}}
+推荐分辨率：{{program.pixelHorizontal}}×{{program.pixelVertical}}
+资源大小：{{program.size|dmbdResourceSizeFilter}}
+创建时间：{{program.createTime|date:'yyyy-MM-dd HH:mm:ss'}}">{{program.name}}
+                </div>
+            </li>
+        </ul>
+
+    </div>
+    <div class="footer">
+        <div class="pager">
+            <dmbd-pager
+                    page-size="pageSize"
+                    page-index="pageIndex"
+                    record-count="recordCount"
+                    on-paging="doPaging($index)">
+            </dmbd-pager>
+        </div>
+    </div>
+</div>

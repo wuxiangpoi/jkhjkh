@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+</div>
+
+
+<div class="modal-body">
+    <form name="roleForm" novalidate>
+
+        <div class="form-group form-group-sm clearfix">
+            <label class="col-sm-3 form_right">角色名称</label>
+            <div class="col-sm-9 form_input">
+                <input type="text" required class="form-control" name="name" ng-model="data.name" />
+                <div class="help-block"  ng-messages="roleForm.name.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请输入角色名称</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group form-group-sm clearfix">
+            <label class="col-sm-3 form_right">角色说明</label>
+            <div class="col-sm-9 form_input">
+                <input type="text" class="form-control" name="remark" ng-model="data.remark" />
+
+            </div>
+        </div>
+        <div class="form-group form-group-sm clearfix">
+            <label class="col-sm-3 form_right"></label>
+            <div class="col-sm-9">
+                <button style="width:100%;" class="btn btn-primary" ng-click="checkPerms(data,0)">选择权限</button>
+            </div>
+        </div>
+    </form>
+
+
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-success" type="button" ng-click="modalConfirmSubmit()" id="form_modal_btn">确定</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+</div>

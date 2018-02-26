@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+.sidebar_nav {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.sidebar_nav > li {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    color: #b4c6d6;
+    cursor: pointer;
+    -webkit-transition: background-color 0.3s, color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar_nav > li:hover {
+    color: #48cc97;
+}
+
+.sidebar_nav > li.active {
+    background-color: #364660;
+    color: #48cc97;
+}
+
+.sidebar_nav > li > * {
+    vertical-align: middle;
+}
+
+.sidebar_nav > li > i {
+    font-size: 20px;
+}
+
+.sidebar_nav > li > span {
+    margin-left: 15px;
+}
+
+.sidebar_nav.fold > li > span {
+    display: none;
+}

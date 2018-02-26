@@ -1,0 +1,16 @@
+<div ng-switch="data.ver" class="editor-element-full editor-element-relative preserve3d"
+     ng-style="{
+            '-webkit-perspective':'100em',
+            '-moz-perspective':'100em',
+            'perspective':'100em'}">
+    <img class="editor-element-full editor-element-absolute"
+         ng-if="data.images.length===1"
+         ng-src="{{data.images[0].url}}">
+    <img class="editor-element-full editor-element-absolute backface-hidden"
+         ng-switch-when="1"
+         ng-if="data.images.length>1"
+         ng-repeat="image in data.images track by $index"
+         ng-src="{{image.url}}"
+         ng-show="$index===prevIndex||$index===nextIndex"
+         ng-style="{'animation':($index===nextIndex?inAnimation:outAnimation)+' '+data.duration+'ms forwards'}">
+</div>

@@ -1,0 +1,17 @@
+<div class="dmbd-program-preview2"
+     ng-style="{'width':size+'px'}">
+    <div ng-if="programPages.length>1" class="page-nav">
+        <span ng-class="{'selected':isPreviewAll}" ng-click="previewAll()">全部场景</span>
+        <span ng-class="{'selected':!isPreviewAll&&page===programPages[curPageIndex]}"
+              ng-click="previewPage(page)"
+              ng-repeat="page in programPages">场景{{$index+1}}</span>
+    </div>
+    <div class="page-content">
+        <editor-page-view
+                pixel-horizontal="programPixelHorizontal"
+                pixel-vertical="programPixelVertical"
+                size="size"
+                program-size="size-20"
+                page="currentPage"></editor-page-view>
+    </div>
+</div>

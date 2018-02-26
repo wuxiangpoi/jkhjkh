@@ -1,0 +1,18 @@
+<div class="tbxeditWrapper">
+<div ng-if="program" style="width: 100%;height: 100%;">
+    <editor
+            pixel-horizontal="program.pixelHorizontal"
+            pixel-vertical="program.pixelVertical"
+            pages="program.pages"
+            on-preview="goPreview(pixelHorizontal,pixelVertical,pages)"
+            on-back="goBack()"
+            on-save-program="submitEditProgram(pixelHorizontal,pixelVertical,pages)"
+            on-save-template="saveTemplate(pixelHorizontal,pixelVertical,page)"
+            on-add-single-template="addSingleTemplate(callback)"
+            on-check-pixel="selectPixel(ph,pv,callback)"
+            on-select-single-image="selectSingleImage(image,callback)"
+            on-select-multiple-image="selectMultipleImage(images,callback)"
+            on-select-single-video="selectSingleVideo(video,callback)"
+            on-select-multiple-video="selectMultipleVideo(videos,callback)"></editor>
+</div>
+</div>

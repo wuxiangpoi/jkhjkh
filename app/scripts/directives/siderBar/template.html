@@ -1,0 +1,94 @@
+<div id="sidebar-nav" class="sidebar">
+    <div class="sidebar-scroll">
+        <div class="brand">
+            <a>
+                <img ng-src="{{root_logo}}" class="img-responsive logo">
+            </a>
+        </div>
+        <nav>
+            <ul class="nav level1">
+                <li ui-sref-active="active">
+                    <a ui-sref="main.home" ng-click="check(0)">
+                        <i class="iconfont icon-shouye"></i>
+                        <span>首页</span>
+                    </a>
+                </li>
+                
+                <li ng-if="perms(1)" ng-class="{active: collapseVar==1}">
+                    <a href="" ng-click="check(1)">
+                        <i class="fa fa-cogs fa-fw"></i>
+                        <span>系统管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level" ng-class="{collapse: collapseVar!=1}">
+                        <li ng-if="perms(11)" ui-sref-active="active">
+                            <a ui-sref="main.dictionary">数据字典</a>
+                        </li>
+                        <li ng-if="perms(12)" ui-sref-active="active">
+                            <a ui-sref="main.versionfile">版本文件管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-if="perms(2)" ui-sref-active="active">
+                    <a ui-sref="main.domain" ng-click="check(2)">
+                        <i class="fa fa-suitcase"></i>
+                        <span>企业管理</span>
+                    </a>
+                </li>
+                <li ng-if="perms(3)" ng-class="{active: location.path() == '/main/terminalreport' || location.path().indexOf('/main/terminal') != -1}">
+                    <a ui-sref="main.terminalreport" ng-click="check(3)">
+                        <i class="iconfont icon-zhongduanguanli"></i>
+                        <span>终端管理</span>
+                    </a>
+                </li>
+                <li ng-if="perms(4)" ui-sref-active="active">
+                    <a ui-sref="main.checkModel" ng-click="check(4)">
+                        <i class="iconfont icon-shenheguanli"></i>
+                        <span>审核管理</span>
+                    </a>
+                </li>
+                <li ng-if="perms(5)" ng-class="{active: collapseVar==6}">
+                    <a href="" ng-click="check(6)">
+                        <i class="iconfont icon-zhanghuguanli"></i>
+                        <span>账户管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav" ng-class="{collapse: collapseVar!=6}">
+                        <li ui-sref-active="active">
+                            <a ui-sref="main.user" class="">账号管理</a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="main.role" class="">角色管理</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li ng-if="perms(6)" ng-class="{active: collapseVar==5}">
+                    <a href="" ng-click="check(5)">
+                        <i class="fa fa-tasks fa-fw"></i>
+                        <span>数据统计</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level" ng-class="{collapse: collapseVar!=5}">
+                        <!-- <li ui-sref-active="active">
+                            <a ui-sref="main.terminalChart">终端统计</a>
+                        </li> -->
+                        <li ui-sref-active="active">
+                            <a ui-sref="main.materialchart">内容统计</a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="main.incomeChart">收入统计</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-if="perms(7)" ui-sref-active="active">
+                    <a ui-sref="main.terminalcommand" ng-click="check(7)">
+                        <i class="iconfont icon-rizhiguanli"></i>
+                        <span>操作日志</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="clearfix"></div>
+</div>

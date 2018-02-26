@@ -1,0 +1,25 @@
+<div class="template_list">
+    <div class="header no_select">
+    </div>
+
+    <div class="body scroll_y">
+
+        <ul class="template_list_ul">
+            <li ng-repeat="template in templates">
+                {{template.name}}
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="footer">
+        <div class="pager">
+            <dmbd-pager
+                    page-size="pageSize"
+                    page-index="pageIndex"
+                    record-count="recordCount"
+                    on-paging="doPaging($index)">
+            </dmbd-pager>
+        </div>
+    </div>
+</div>

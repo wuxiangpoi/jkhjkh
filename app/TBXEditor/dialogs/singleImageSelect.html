@@ -1,0 +1,42 @@
+<div class="ui-dialog" ng-keydown="$event.stopPropagation()">
+    <div class="ui-dialog-title">
+        选择图片
+    </div>
+
+    <div class="singleImageSelect">
+        <div class="content-title">
+            <div class="title-table">
+                <div class="left-label">
+                    <label>待选择图片（{{recordCount}}）</label>
+                </div>
+                <div class="right-query">
+                    <input type="text" ng-model="search" placeholder="图片名称">
+                    <button ng-click="doQuery()">查询</button>
+                </div>
+            </div>
+        </div>
+        <section class="content">
+            <ul class="clear_fix" ng-if="images.length!==0">
+                <li class="image-item" ng-repeat="image in images">
+                    <dmbd-image-viewer2
+                            data="image"
+                            button-text="选择"
+                            on-button-click="chooseImage(image)">
+                    </dmbd-image-viewer2>
+                </li>
+            </ul>
+            <div class="empty-data" ng-if="images.length===0">未找到图片</div>
+        </section>
+        <div class="content-pager">
+            <footer class="pager">
+                <dmbd-pager
+                        page-size="pageSize"
+                        page-index="pageIndex"
+                        record-count="recordCount"
+                        on-paging="doPaging($index)">
+                </dmbd-pager>
+            </footer>
+        </div>
+    </div>
+
+</div>

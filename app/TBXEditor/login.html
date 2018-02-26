@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- 框架及库 -->
+    <script src="./bower_components/angular/angular.min.js"></script>
+    <script src="./bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="./bower_components/blueimp-md5/js/md5.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="loginCtrl">
+<label>公司代号</label>
+<input type="text" ng-model="comID">
+<br/>
+<label>用户名</label>
+<input type="text" ng-model="userID">
+<br/>
+<label>密码</label>
+<input type="text" ng-model="userPass">
+<br/>
+<button ng-click="doLogin()">登录</button>
+<div id="contextmenu" style="background-color: #0086b3;width: 300px; height: 180px;"></div>
+
+<div id="pEvent" style="background-color: #ff8e32;width: 400px;height: 200px;border: solid 1px red;">
+    <div id="cEvent" style="background-color: #a7eeff;width: 200px; height: 100px;margin: 50px 0 0 100px;"></div>
+</div>
+
+</body>
+</html>
+
+<script>
+    var app = angular.module('myApp', ['ui.router']);
+
+
+</script>
+<script src="app/rest.js"></script>
+<script>
+    (function (app) {
+        function u_md5(pwd) {
+            var hexDigits = ['0', '1', '2', '3', '4', '5', '6', '7',
+                '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+            var enStr = md5(pwd + "dmbd!@#$%^&*");
+            var str = '';
+            for (var i = 0; i < enStr.length; i++) {
+                for (var j = 0; j < hexDigits.length; j++) {
+                    if (hexDigits[j] == enStr.charAt(i)) {
+                        j = j + 1;
+                        str += hexDigits[j == hexDigits.length ? 0 : j];
+                    }
+                }
+            }
+            return str;
+        }
+
+        app.controller('loginCtrl', ['$scope', 'dmbdRest', function ($scope, dmbdRest) {
+
+            $scope.comID = 'whkm';
+            $scope.userID = 'admin';
+            $scope.userPass = 'admin123';
+
+            $scope.doLogin = function () {
+                var apiUrl = '../api/auth/login';
+                dmbdRest.post(apiUrl, {
+                    domain: $scope.comID,
+                    account: $scope.userID,
+                    password: u_md5($scope.userPass)
+                }, function (content) {
+                    console.log(content);
+                    window.location.href = 'index.html';
+                });
+            };
+
+        }]);
+
+    })(app);
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var contextmenu = document.getElementById('contextmenu');
+        console.log(contextmenu);
+
+        contextmenu.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            console.log('====');
+        });
+
+        contextmenu.addEventListener('mouseenter', function (e) {
+            console.log(e.type);
+        });
+        contextmenu.addEventListener('mouseleave', function (e) {
+            console.log(e.type);
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var pEvent = document.getElementById('pEvent');
+        var cEvent = document.getElementById('cEvent');
+
+        var isStart = false;
+        var isMove = false;
+        document.addEventListener('mousedown', function (e) {
+            if (e.button === 0 || e.which === 1) {//鼠标左键
+                isStart = true;
+                isMove = false;
+            }
+        }, true);
+        document.addEventListener('mousemove', function (e) {
+            if (isStart && ((e.button === 0 || e.which === 1))) {
+                isMove = true;
+            }
+        }, true);
+        document.addEventListener('mouseup', function (e) {
+            if (isStart && !isMove && ((e.button === 0 || e.which === 1))) {
+                var event = document.createEvent('HTMLEvents');
+                event.initEvent("onlyclick", true, true);
+                event.eventType = 'onlyclick';
+
+//                var event = new MouseEvent('onlyclick', {
+//                    cancelable: true,
+//                    bubble: true,
+//                    view: window
+//                });
+                e.target.dispatchEvent(event);
+                console.log(e.target);
+            }
+            isStart = false;
+            isMove = false;
+        }, true);
+
+        cEvent.addEventListener('onlyclick', function (e) {
+            //e.stopPropagation();
+            console.log('cEvent---', e.type);
+        }, true);
+        pEvent.addEventListener('onlyclick', function (e) {
+            //e.stopPropagation();
+            console.log('pEvent---', e.type);
+        }, true);
+        pEvent.addEventListener('click', function (e) {
+            console.log('pEvent', e.type);
+        });
+
+    });
+</script>

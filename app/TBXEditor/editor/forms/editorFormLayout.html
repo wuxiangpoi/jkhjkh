@@ -1,0 +1,65 @@
+<div class="editor-form-group"
+     ng-switch="layout.ver">
+
+    <div class="editor-form-version"
+         ng-switch-when="1">
+
+        <section class="editor-form-section editor-form-section-input">
+            <label class="editor-form-label">宽度</label>
+            <input class="editor-form-number" type="number" ng-model="rect.pixelWidth"
+                   ng-keydown="$event.stopPropagation();">
+        </section>
+
+        <section class="editor-form-section editor-form-section-input">
+            <label class="editor-form-label">高度</label>
+            <input class="editor-form-number" type="number" ng-model="rect.pixelHeight"
+                   ng-keydown="$event.stopPropagation();">
+        </section>
+
+        <section class="editor-form-section editor-form-section-input">
+            <label class="editor-form-label">左边距</label>
+            <input class="editor-form-number" type="number" ng-model="rect.pixelLeft"
+                   ng-keydown="$event.stopPropagation();">
+        </section>
+
+        <section class="editor-form-section editor-form-section-input">
+            <label class="editor-form-label">上边距</label>
+            <input class="editor-form-number" type="number" ng-model="rect.pixelTop"
+                   ng-keydown="$event.stopPropagation();">
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">对齐</label>
+            <span class="editor-form-layoutAlign iconfont icon-yangshi-zuo-youduiqi" title="水平左对齐"
+                  ng-click="alignLeft()"></span>
+            <span class="editor-form-layoutAlign iconfont icon-yangshi-juzhongduiqi" title="水平居中对齐"
+                  ng-click="alignCenter()"></span>
+            <span class="editor-form-layoutAlign iconfont icon-yangshi-youduiqi" title="水平右对齐"
+                  ng-click="alignRight()"></span>
+            <span class="editor-form-layoutAlign iconfont icon-yangshi-dingduiqi" title="垂直顶部对齐"
+                  ng-click="alignTop()"></span>
+            <span class="editor-form-layoutAlign iconfont icon-shuipingjuzhong" title="垂直居中对齐"
+                  ng-click="alignMiddle()"></span>
+            <span class="editor-form-layoutAlign iconfont icon-yangshi-diduiqi" title="垂直底部对齐"
+                  ng-click="alignBottom()"></span>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">图层</label>
+            <span class="editor-form-fontButton iconfont icon-zhiyudingceng" title="置顶"
+                  ng-click="setFront()"></span>
+            <span class="editor-form-fontButton iconfont icon-zhiyudiceng" title="置底"
+                  ng-click="setBack()"></span>
+        </section>
+
+        <!--<section class="editor-form-section">-->
+        <!--<label class="editor-form-label">旋转</label>-->
+        <!--<editor-control-range class="editor-form-range" min-val="0" max-val="360"-->
+        <!--on-change="rotateChange(newVal,oldVal)"-->
+        <!--val="layout.rotate"></editor-control-range>-->
+        <!--<span class="editor-form-span">{{layout.rotate}}度</span>-->
+        <!--</section>-->
+
+    </div>
+
+</div>

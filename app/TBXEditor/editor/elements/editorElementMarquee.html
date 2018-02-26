@@ -1,0 +1,17 @@
+<div ng-switch="data.ver" class="editor-element-full">
+    <div ng-switch-when="1" class="editor-element-full editor-element-table"
+         style="overflow: visible;"
+         ng-style="{
+            'animation':outerAnimationStyle
+         }">
+        <div style="white-space: nowrap;"
+             ng-style="{'vertical-align':data.verticalAlign,'font-size':data.size/10+'em'}">
+            <span style="display: inline-block;"
+                  ng-style="{
+                      'font-family':(data.font|editorFontFamilyFilter),
+                      'color':'rgb('+data.color.r+','+data.color.g+','+data.color.b+')',
+                      'animation':innerAnimationStyle
+                  }">{{data.value}}</span>
+        </div>
+    </div>
+</div>

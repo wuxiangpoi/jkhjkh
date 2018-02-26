@@ -1,0 +1,32 @@
+<div class="editor-form-group">
+
+    <div class="editor-form-version">
+
+        <section class="editor-form-section editor-form-section-input">
+             <textarea rows="3" placeholder="请在这里输入网址，如：http://m.baidu.com"
+                       ng-model="url" spellcheck="false"
+                       ng-blur="onBlur(url)"
+                       class="editor-form-txtArea-input"></textarea>
+        </section>
+
+        <section class="editor-form-section">
+            <div>
+                <input type="checkbox" name="pageBackgroundState" id="webviewPropertyEdit_autoRefresh"
+                       class="editor-form-radio-input"
+                       ng-value="true" ng-model="data.autoRefresh"
+                       ng-change="autoRefreshChange(data.autoRefresh)">
+                <label for="webviewPropertyEdit_autoRefresh" class="editor-form-radio-label">自动刷新</label>
+            </div>
+        </section>
+
+        <section class="editor-form-section"
+                 ng-if="data.autoRefresh">
+            <label class="editor-form-label">刷新<br/>间隔</label>
+            <editor-control-range class="editor-form-range" min-val="10" max-val="600" val="data.refreshInterval"
+                                  on-change="refreshIntervalChange(oldVal,newVal)"></editor-control-range>
+            <span class="editor-form-span">{{data.refreshInterval}}秒</span>
+        </section>
+
+    </div>
+
+</div>

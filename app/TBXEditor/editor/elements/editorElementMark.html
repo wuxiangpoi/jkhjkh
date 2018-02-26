@@ -1,0 +1,11 @@
+<div class="editor-element-mark" style="border: solid 0.2em #e2e3e6;">
+    <div class="editor-element-absolute"
+         style="color: #9f9f9f;"
+         ng-style="{'font-size':fontSize+'px'}">
+        {{'('+((layout.left*pixelHorizontal/100)|editorMathRoundFilter)+','+((layout.top*pixelVertical/100)|editorMathRoundFilter)+')'}}
+    </div>
+    <div class="editor-element-center-middle" style="background-color: rgba(0,0,0,0.25);color: white;"
+         ng-style="{'font-size':fontSize+'px'}">
+        {{((layout.width*pixelHorizontal/100)|editorMathRoundFilter)+'×'+((layout.height*pixelVertical/100)|editorMathRoundFilter)}}
+    </div>
+</div>

@@ -1,0 +1,6 @@
+    <tr ng-if="displayed.length == 0 && !isLoading">
+        <td colspan="10" class="text-center">没有查询到记录</td>
+    </tr>
+    <tr ng-show="isLoading">
+        <td colspan="{{displayed.length}}" class="text-center">Loading ... </td>
+    </tr>

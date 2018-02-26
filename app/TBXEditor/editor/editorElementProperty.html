@@ -1,0 +1,83 @@
+<div class="editor-property">
+
+    <ul class="editor-property-tabs">
+        <li ng-class="{'selected':tabIndex===0}" ng-click="setTabIndex(0)">基本</li>
+        <li ng-class="{'selected':tabIndex===1}" ng-click="setTabIndex(1)">布局</li>
+        <li ng-class="{'selected':tabIndex===2}" ng-click="setTabIndex(2)">边框</li>
+        <!--<li ng-class="{'selected':tabIndex===3}" ng-click="setTabIndex(3)">背景</li>-->
+        <!--<li ng-class="{'selected':tabIndex===4}" ng-click="setTabIndex(4)">效果</li>-->
+    </ul>
+
+    <div class="editor-property-contents">
+        <!-- 基本编辑部分 -->
+        <div ng-show="tabIndex===0"
+             ng-switch="ele.type">
+            <editor-form-text
+                    ng-switch-when="100"
+                    data="ele.data"
+                    commit="commit({undo:undo,redo:redo})">
+            </editor-form-text>
+            <editor-form-text-marquee
+                    ng-switch-when="160"
+                    data="ele.data"
+                    back-ground="ele.background"
+                    commit="commit({undo:undo,redo:redo})">
+            </editor-form-text-marquee>
+            <editor-form-marquee
+                    ng-switch-when="150"
+                    data="ele.data"
+                    commit="commit({undo:undo,redo:redo})">
+            </editor-form-marquee>
+            <editor-form-image
+                    ng-switch-when="200"
+                    data="ele.data"
+                    on-select-single-image="onSelectSingleImage({image:image,callback:callback})">
+            </editor-form-image>
+            <editor-form-carousel
+                    ng-switch-when="250"
+                    data="ele.data"
+                    commit="commit({undo:undo,redo:redo})"
+                    on-select-multiple-image="onSelectMultipleImage({images:images,callback:callback})">
+            </editor-form-carousel>
+            <editor-form-video
+                    ng-switch-when="300"
+                    data="ele.data"
+                    on-select-single-video="onSelectSingleVideo({video:video,callback:callback})">
+            </editor-form-video>
+            <editor-form-serie
+                    ng-switch-when="350"
+                    data="ele.data"
+                    commit="commit({undo:undo,redo:redo})"
+                    on-select-multiple-video="onSelectMultipleVideo({videos:videos,callback:callback})">
+            </editor-form-serie>
+            <editor-form-time
+                    ng-switch-when="500"
+                    data="ele.data"
+                    commit="commit({undo:undo,redo:redo})">
+            </editor-form-time>
+            <editor-form-webview
+                    ng-switch-when="900"
+                    data="ele.data"
+                    commit="commit({undo:undo,redo:redo})">
+            </editor-form-webview>
+        </div>
+
+        <!-- 布局编辑部分 -->
+        <editor-form-layout
+                ng-show="tabIndex===1"
+                pixel-horizontal="pixelHorizontal"
+                pixel-vertical="pixelVertical"
+                layout="ele.layout"
+                page="page"
+                commit="commit({undo:undo,redo:redo})">
+        </editor-form-layout>
+
+        <!-- 边框编辑部分 -->
+        <editor-form-border
+                ng-show="tabIndex===2"
+                border="ele.border"
+                commit="commit({undo:undo,redo:redo})">
+        </editor-form-border>
+
+    </div>
+</div>

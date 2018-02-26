@@ -1,0 +1,647 @@
+@charset "UTF-8";
+/**
+ * common.scss
+ * 这里放一些公用的
+ */
+/* line 8, app/scss/common.scss */
+.btnGreen {
+  background: #0ac399 !important;
+  border: 0;
+}
+.btnGreen.active,
+.btnGreen.focus {
+  background: #0ac399 !important;
+}
+.btnGreen:hover {
+  background: #09b991!important;
+}
+.btbRed {
+  background: #f33c45 !important;
+  border: 0;
+}
+.btbRed.active,
+.btbRed.focus {
+  background: #f33c45 !important;
+}
+.btbRed:hover {
+  background: #ea3a43!important;
+}
+a:focus {
+  outline: none;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.dibk {
+  display: block;
+}
+.martr20 {
+  margin-right: 20px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
+.mrb20 {
+  margin-bottom: 20px;
+}
+.pdl15 {
+  padding-left: 15px;
+}
+.pdr0 {
+  padding-right: 0px;
+}
+.pdr15 {
+  padding-right: 15px;
+}
+.bg-red {
+  background: red;
+}
+.tdClick {
+  color: #00a0e9;
+  cursor: pointer;
+}
+.form_right {
+  text-align: right;
+  padding: 0px;
+  line-height: 30px;
+  font-weight: 400;
+}
+.form_input {
+  line-height: 30px;
+}
+.moment-picker {
+  z-index: 10001!important;
+}
+.modal-body .form-group {
+  margin-bottom: 4px;
+}
+/* line 12, app/scss/common.scss */
+.bg-mediumseagreen {
+  background: mediumseagreen;
+}
+/* line 16, app/scss/common.scss */
+.bg-yellow {
+  background: #e8e855;
+}
+/* line 20, app/scss/common.scss */
+.pointer {
+  cursor: pointer;
+}
+.plr {
+  position: relative;
+}
+/* line 24, app/scss/common.scss */
+.border-right {
+  border-right: 1px solid #ddd;
+}
+/* line 28, app/scss/common.scss */
+.border-bottom {
+  border-bottom: 1px solid #ddd;
+}
+/* line 32, app/scss/common.scss */
+.p0 {
+  padding: 0;
+}
+/* line 36, app/scss/common.scss */
+.pl10 {
+  padding-left: 10px;
+}
+/* line 41, app/scss/common.scss */
+.w40 {
+  width: 40px;
+}
+/* line 45, app/scss/common.scss */
+.w85 {
+  width: 85px;
+}
+/* line 49, app/scss/common.scss */
+.w120 {
+  width: 120px !important;
+}
+/* line 53, app/scss/common.scss */
+.w160 {
+  width: 160px;
+}
+.cursorP {
+  cursor: pointer;
+}
+a.file {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+  text-indent: 0;
+  padding: 0 22px;
+}
+a.file input {
+  position: absolute;
+  font-size: 100px;
+  right: 0;
+  top: 0;
+  opacity: 0;
+}
+.help-block {
+  margin: 0;
+}
+.help-block p {
+  color: red;
+  text-align: left;
+  font-size: 12px;
+  margin-bottom: 0;
+}
+div.timeSelectWrap {
+  display: inline-block;
+  cursor: pointer!important;
+  position: relative;
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  background-color: #eee;
+  outline: none;
+  opacity: 1;
+  width: 100%;
+}
+.timeSelectWrap > input {
+  cursor: pointer!important;
+  margin-right: 0;
+  width: 100%!important;
+}
+.timeSelectWrap .fa {
+  position: absolute;
+  right: 5px;
+  top: 7px;
+  font-size: 18px;
+  color: #c4c4c4;
+}
+/* line 58, app/scss/common.scss */
+.min-h38 {
+  min-height: 38px;
+}
+/* line 63, app/scss/common.scss */
+.no-data-panel {
+  height: 280px;
+  color: #959595;
+  font-size: 24px;
+  text-align: center;
+  vertical-align: middle !important;
+}
+/* line 73, app/scss/common.scss */
+.child-div-inline-block div {
+  display: inline-block;
+}
+/* line 79, app/scss/common.scss */
+.has-error {
+  border: 1px solid red !important;
+}
+/* line 80, app/scss/common.scss */
+.has-error:focus {
+  outline: none;
+}
+.ellipsTXt {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+}
+.selectWrap {
+  line-height: 30px;
+  border-bottom: 1px solid #bbbbbb;
+  position: relative;
+  margin-left: 10px;
+}
+.selectWrap .middle-select {
+  width: 100px;
+  cursor: pointer;
+  line-height: 30px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  text-align: left;
+  outline: none;
+}
+.selectWrap.first {
+  margin-left: 0px;
+}
+.selectWrap i.fa {
+  position: absolute;
+  right: 4px;
+  top: 8px;
+}
+.searchInputWrap {
+  border-bottom: 1px solid #bbbbbb;
+  position: relative;
+}
+.searchInputWrap .middle-input {
+  width: 100%;
+  line-height: 30px;
+  border: 0;
+  text-align: left;
+  outline: none;
+  padding-left: 5px;
+  padding-right: 25px;
+}
+.searchInputWrap i.fa {
+  position: absolute;
+  right: 4px;
+  top: 8px;
+  color: #00a0e9;
+}
+.serchBtn {
+  height: 34px;
+  line-height: 34px;
+  padding: 0 18px;
+}
+.table-wrapper > table {
+  border-top: 1px solid #e2e3e6;
+}
+.table-wrapper > table > thead > tr > th {
+  border-bottom: 1px solid #e2e3e6;
+}
+.table-wrapper > table > tbody {
+  border-bottom: 1px solid #e2e3e6;
+}
+.table-wrapper > table > tfoot > tr > td {
+  border: none;
+}
+.table-wrapper > table > tfoot > tr > td a {
+  cursor: pointer;
+}
+.table-wrapper th,
+.table-wrapper td {
+  font-size: 14px;
+  vertical-align: middle!important;
+  max-width: 100px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 0 8px!important;
+  line-height: 44px!important;
+}
+.table-wrapper th input[type="checkbox"],
+.table-wrapper td input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 0;
+  vertical-align: middle;
+}
+.table-wrapper .tableBtn {
+  padding: 6px 14px;
+  border: 0;
+}
+.table-wrapper .tableBtn.focus,
+.table-wrapper .tableBtn.active {
+  border: 0;
+}
+body.toggleFullwidth .main {
+  width: 100%!important;
+}
+body.toggleFullwidth .sidebar {
+  left: -260px !important;
+}
+body.toggleFullwidth .navbar-default {
+  padding-left: 20px;
+}
+body.toggleFullwidth .navbar-btn .fa.fa-chevron-left::before {
+  content: "\f054";
+}
+@media screen and (max-width: 1024px) {
+  body.toggleFullwidth .main {
+    width: calc(100% - 260px) !important;
+  }
+  body.toggleFullwidth .sidebar {
+    left: 0px!important;
+  }
+  body.toggleFullwidth .navbar-default {
+    padding-left: 280px!important;
+  }
+  body.toggleFullwidth .navbar-btn .fa.fa-chevron-left {
+    color: #fff!important;
+  }
+  body.toggleFullwidth .navbar-btn .fa.fa-chevron-left::before {
+    content: "\f053" !important;
+  }
+  .navbar-btn {
+    color: #fff!important;
+  }
+  .navbar-btn .fa.fa-chevron-left::before {
+    content: "\f054" !important;
+  }
+}
+.pagination {
+  margin: 10px 0!important;
+}
+.pagination a {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #00a0e9;
+  color: #c4c4c4!important;
+  padding: 0!important;
+  text-align: center;
+  line-height: 26px!important;
+  margin-left: 5px!important;
+  border: none!important;
+}
+.pagination a.next {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+.pagination li.first > a,
+.pagination li.last > a {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+.pagination li.active a {
+  color: #fff!important;
+  background-color: #00a0e9;
+}
+.pagination li.active a:hover {
+  background-color: #00a0e9;
+}
+.timeSelect {
+  width: 100%;
+  line-height: 30px;
+  border-bottom: 1px solid #bbbbbb;
+  outline: none;
+  position: relative;
+}
+.timeSelect i.fa {
+  position: absolute;
+  right: 4px;
+  top: 8px;
+}
+.modalDetail {
+  font-size: 12px;
+}
+.modalDetail .form_input,
+.modalDetail .form_right {
+  line-height: 24px;
+}
+.tabsNav {
+  border-bottom: 1px solid #00AAFF;
+  margin-bottom: 20px;
+}
+.tabsNav .tabsItem {
+  padding: 5px 10px;
+  display: inline-block;
+}
+.tabsNav .tabsItem.active {
+  background: #00AAFF;
+  color: #fff;
+}
+.cityPickerWrap .dropdown-menu {
+  width: 300px;
+}
+.cityPickerWrap .dropdown-menu > li {
+  line-height: 2;
+  clear: both;
+  padding: 3px 0;
+  margin: 0;
+}
+.cityPickerWrap .dropdown-menu > li .provincesLabel {
+  position: absolute;
+  width: 2.5em;
+  font-weight: 500;
+  text-align: right;
+  line-height: 2;
+}
+.cityPickerWrap .dropdown-menu > li .cityWrap {
+  margin-left: 3em;
+}
+.cityPickerWrap .dropdown-menu > li .cityWrap .cityItem {
+  display: inline-block;
+  padding: 0 10px;
+  outline: 0;
+  white-space: nowrap;
+  margin-right: 2px;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+.cityPickerWrap .provinceWrap {
+  display: inline-block;
+}
+.cityPickerWrap .provinceWrap .cityName {
+  display: inline-block;
+  cursor: pointer;
+  line-height: 30px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  text-align: left;
+  outline: none;
+  border-bottom: 1px solid #bbbbbb;
+  position: relative;
+  min-width: 90px;
+  padding-right: 15px;
+}
+.cityPickerWrap .provinceWrap .cityName i.fa {
+  position: absolute;
+  right: 4px;
+  top: 8px;
+}
+.cityPickerWrap .provinceWrap ul.cityWrap {
+  line-height: 2;
+  clear: both;
+  padding: 3px 0;
+  margin: 0;
+}
+.cityPickerWrap .provinceWrap ul.cityWrap li {
+  margin-left: 0;
+  line-height: 2;
+  display: inline-block;
+  padding: 0 10px;
+  outline: 0;
+  white-space: nowrap;
+  margin-right: 2px;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+.modalZtree {
+  min-height: 300px;
+  overflow: auto;
+}
+.groupTreeWrap .ztree li a {
+  line-height: 36px;
+}
+.groupTreeWrap .ztree li span.button {
+  background: url('../img/zTreeStandard_big.png');
+}
+.groupTreeWrap .ztree li ul.line {
+  background: url('../img/line_conn_big.png') 16px 0 repeat-y;
+}
+.groupTreeWrap .ztree li span.button.switch {
+  width: 36px;
+  height: 36px;
+}
+.groupTreeWrap .ztree li span.button.root_open {
+  background-position: -184px -108px;
+}
+.groupTreeWrap .ztree li span.button.root_close {
+  background-position: -148px -108px;
+}
+.groupTreeWrap .ztree li span.button.roots_open {
+  background-position: -184px 0;
+}
+.groupTreeWrap .ztree li span.button.roots_close {
+  background-position: -148px 0;
+}
+.groupTreeWrap .ztree li span.button.center_open {
+  background-position: -184px -36px;
+}
+.groupTreeWrap .ztree li span.button.center_close {
+  background-position: -148px -36px;
+}
+.groupTreeWrap .ztree li span.button.bottom_open {
+  background-position: -184px -72px;
+}
+.groupTreeWrap .ztree li span.button.bottom_close {
+  background-position: -148px -72px;
+}
+.groupTreeWrap .ztree li span.button.noline_open {
+  background-position: -184px -148px;
+}
+.groupTreeWrap .ztree li span.button.noline_close {
+  background-position: -148px -148px;
+}
+.groupTreeWrap .ztree li span.button.root_docu {
+  background: none;
+}
+.groupTreeWrap .ztree li span.button.roots_docu {
+  background-position: -112px 0;
+}
+.groupTreeWrap .ztree li span.button.center_docu {
+  background-position: -112px -36px;
+}
+.groupTreeWrap .ztree li span.button.bottom_docu {
+  background-position: -112px -72px;
+}
+.groupTreeWrap .ztree li span.button.noline_docu {
+  background: none;
+}
+.groupTreeWrap .ztree li span.button.chk {
+  width: 26px;
+  height: 26px;
+  margin: 0 6px 0 0;
+  cursor: auto;
+}
+.groupTreeWrap .ztree li span.button.chk.checkbox_false_full {
+  background-position: 0 0;
+}
+.groupTreeWrap .ztree li span.button.chk.checkbox_false_full_focus {
+  background-position: 0 -28px;
+}
+.groupTreeWrap .ztree li span.button.chk.checkbox_false_part {
+  background-position: 0 -56px;
+}
+.groupTreeWrap .ztree li span.button.chk.checkbox_false_part_focus {
+  background-position: 0 -84px;
+}
+.groupTreeWrap .ztree li span.button.chk.checkbox_false_disable {
+  background-position: 0 -112px;
+}
+.groupTreeWrap .ztree li span.button.chk.checkbox_true_full {
+  background-position: -28px 0;
+}
+.groupTreeWrap .ztree li span.button.chk.checkbox_true_full_focus {
+  background-position: -28px -28px;
+}
+.groupTreeWrap .ztree li span.button.chk.checkbox_true_part {
+  background-position: -28px -56px;
+}
+.groupTreeWrap .ztree li span.button.chk.checkbox_true_part_focus {
+  background-position: -28px -84px;
+}
+.groupTreeWrap .ztree li span.button.chk.checkbox_true_disable {
+  background-position: -28px -112px;
+}
+.groupTreeWrap .ztree li span.button.chk.radio_false_full {
+  background-position: -56px 0;
+}
+.groupTreeWrap .ztree li span.button.chk.radio_false_full_focus {
+  background-position: -56px -28px;
+}
+.groupTreeWrap .ztree li span.button.chk.radio_false_part {
+  background-position: -56px -56px;
+}
+.groupTreeWrap .ztree li span.button.chk.radio_false_part_focus {
+  background-position: -56px -84px;
+}
+.groupTreeWrap .ztree li span.button.chk.radio_false_disable {
+  background-position: -56px -112px;
+}
+.groupTreeWrap .ztree li span.button.chk.radio_true_full {
+  background-position: -84px 0;
+}
+.groupTreeWrap .ztree li span.button.chk.radio_true_full_focus {
+  background-position: -84px -28px;
+}
+.groupTreeWrap .ztree li span.button.chk.radio_true_part {
+  background-position: -84px -56px;
+}
+.groupTreeWrap .ztree li span.button.chk.radio_true_part_focus {
+  background-position: -84px -84px;
+}
+.groupTreeWrap .ztree li span.button.chk.radio_true_disable {
+  background-position: -84px -112px;
+}
+.groupTreeWrap .ztreeBtn {
+  margin-left: 5px;
+  font-size: 18px;
+  color: #00a0e9;
+}
+.groupTreeWrap li a span {
+  font-size: 14px;
+}
+.groupTreeWrap .ztree li .checkbox_true_full + a,
+.groupTreeWrap .ztree li a.curSelectedNode,
+.ztree li a.curSelectedNode {
+  border: 0;
+  background: none;
+  color: #00a0e9;
+  padding: 1px 3px 0 0;
+}
+.groupTreeWrap .ztree li a:hover,
+.ztree li a:hover {
+  color: #00a0e9;
+  text-decoration: none;
+}
+.ztree li span.button.edit {
+  background: none;
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  vertical-align: baseline;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.ztree li span.button.edit:before {
+  content: "\e6ee";
+}
+.ztree li span.button.remove {
+  background: none;
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  vertical-align: baseline;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.ztree li span.button.remove:before {
+  content: "\e6f4";
+}

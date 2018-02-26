@@ -1,0 +1,6 @@
+<div ng-switch="data.ver" class="editor-element-full editor-element-table">
+    <div ng-switch-when="1" style="white-space: nowrap;"
+         ng-style="{'font-size':data.size/10+'em','text-align':data.horizontalAlign,'vertical-align':data.verticalAlign}">
+        <span ng-style="{'font-family':(data.font|editorFontFamilyFilter),'color':'rgb('+data.color.r+','+data.color.g+','+data.color.b+')'}">{{nowTime|editorDateTimeFormatterFilter:data.formatter}}</span>
+    </div>
+</div>

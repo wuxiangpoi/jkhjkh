@@ -1,0 +1,479 @@
+@charset "utf-8";
+
+.dmbd-pager {
+    display: table;
+    width: auto;
+    height: auto;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.dmbd-pager > * {
+    display: table-cell;
+    width: auto;
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.dmbd-pager > * > span {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    margin: 0 1px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    font-size: 14px;
+    color: #c4c4c4;
+    cursor: pointer;
+}
+
+.dmbd-pager > * > span.fa:before {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.dmbd-pager > * > span:hover {
+    background-color: #00a0e9;
+    color: white;
+}
+
+.dmbd-pager > * > span.selected {
+    background-color: #00a0e9;
+    color: white;
+    cursor: default;
+}
+
+.dmbd-pager > * > label {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    margin: 0 1px;
+    font-size: 14px;
+    color: #999999;
+}
+
+/* 视频查看器 */
+.dmbd-videoViewer {
+    width: 100%;
+    height: 100%;
+}
+
+.dmbd-videoViewer > video {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.dmbd-videoViewer > .video-mask {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+}
+
+.dmbd-videoViewer > .video-mask:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dmbd-videoViewer > .video-mask > button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    display: none;
+    width: 3em;
+    height: 3em;
+    border: solid 1px white;
+    color: white;
+}
+
+.dmbd-videoViewer > .video-mask > button:hover {
+    border-color: #00a0e9;
+    color: #00a0e9;
+}
+
+.dmbd-videoViewer > .video-mask:hover > button {
+    display: inline-block;
+}
+
+/* 图片选择 */
+.dmbd-imageViewer2 {
+    width: 160px;
+    height: auto;
+}
+
+.dmbd-imageViewer2 > .image-part {
+    width: 160px;
+    height: 160px;
+    position: relative;
+}
+
+.dmbd-imageViewer2 > .image-part > .image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -ms-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+}
+
+.dmbd-imageViewer2 > .image-part > .image-mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.dmbd-imageViewer2 > .image-part > .image-mask > .image-panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.dmbd-imageViewer2 > .image-part > .control-mask {
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+}
+
+.dmbd-imageViewer2 > .image-part:hover > .control-mask {
+    display: block;
+}
+
+.dmbd-imageViewer2 > .image-part > .control-mask > .control-panel {
+    width: 70%;
+    height: auto;
+    text-align: center;
+}
+
+.dmbd-imageViewer2 > .image-part > .control-mask > .control-panel > button {
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+    border: solid 1px white;
+    color: white;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    margin: 0 0.3em;
+}
+
+.dmbd-imageViewer2 > .image-part > .control-mask > .control-panel > button:hover {
+    border-color: #00a0e9;
+    color: #00a0e9;
+}
+
+.dmbd-imageViewer2 > .image-part > .info-mask {
+    background-color: #00a0e9;
+    overflow: visible;
+}
+
+.dmbd-imageViewer2 > .image-part > .info-mask:after,
+.dmbd-imageViewer2 > .image-part > .info-mask::after {
+    content: ' ';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    border-style: solid;
+    border-width: 8px 4px 0 4px;
+    border-color: #00a0e9 transparent transparent transparent;
+}
+
+.dmbd-imageViewer2 > .image-part > .info-mask.hidden {
+    display: none;
+}
+
+.dmbd-imageViewer2 > .image-part > .info-mask > .info-panel {
+    width: 90%;
+    height: auto;
+    color: white;
+    font-size: 12px;
+    line-height: 1.2;
+    overflow: hidden;
+}
+
+.dmbd-imageViewer2 > .image-part > .info-mask > .info-panel > .info-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.dmbd-imageViewer2 > .image-part > .info-mask > .info-panel > .info-table .td-left {
+    text-align: right;
+    vertical-align: top;
+    width: 45%;
+    height: 25px;
+}
+
+.dmbd-imageViewer2 > .image-part > .info-mask > .info-panel > .info-table .td-right {
+    text-align: left;
+    vertical-align: top;
+    width: auto;
+    height: 25px;
+}
+
+.dmbd-imageViewer2 > .title-part {
+    width: 140px;
+    height: 30px;
+    display: table;
+    table-layout: fixed;
+    margin: 0 auto;
+}
+
+.dmbd-imageViewer2 > .title-part > * {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.dmbd-imageViewer2 > .title-part > .right-more {
+    width: 30px;
+    text-align: right;
+}
+
+.dmbd-imageViewer2 > .title-part > .right-more > button {
+    width: 20px;
+    height: 20px;
+    font-size: 18px;
+    color: #999999;
+    vertical-align: middle;
+}
+
+.dmbd-imageViewer2 > .title-part > .right-more > .clickDown {
+    color: #00a0e9;
+    border-color: #00a0e9;
+}
+
+.dmbd-imageViewer2 > .title-part > .left-title {
+    width: auto;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+/* 视频选择 */
+.dmbd-videoViewer2 {
+    width: 160px;
+    height: auto;
+}
+
+.dmbd-videoViewer2 > .video-part {
+    width: 160px;
+    height: 160px;
+    position: relative;
+}
+
+.dmbd-videoViewer2 > .video-part > .video {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.dmbd-videoViewer2 > .video-part > .video-mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.dmbd-videoViewer2 > .video-part > .video-mask > .video-panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.dmbd-videoViewer2 > .video-part > .control-mask {
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+}
+
+.dmbd-videoViewer2 > .video-part:hover > .control-mask {
+    display: block;
+}
+
+.dmbd-videoViewer2 > .video-part > .control-mask > .control-panel {
+    width: 70%;
+    height: auto;
+    text-align: center;
+}
+
+.dmbd-videoViewer2 > .video-part > .control-mask > .control-panel > button {
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+    border: solid 1px white;
+    color: white;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    margin: 0 0.3em;
+}
+
+.dmbd-videoViewer2 > .video-part > .control-mask > .control-panel > button:hover {
+    border-color: #00a0e9;
+    color: #00a0e9;
+}
+
+.dmbd-videoViewer2 > .video-part > .info-mask {
+    background-color: #00a0e9;
+    overflow: visible;
+}
+
+.dmbd-videoViewer2 > .video-part > .info-mask:after,
+.dmbd-videoViewer2 > .video-part > .info-mask::after {
+    content: ' ';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    border-style: solid;
+    border-width: 8px 4px 0 4px;
+    border-color: #00a0e9 transparent transparent transparent;
+}
+
+.dmbd-videoViewer2 > .video-part > .info-mask.hidden {
+    display: none;
+}
+
+.dmbd-videoViewer2 > .video-part > .info-mask > .info-panel {
+    width: 90%;
+    height: auto;
+    color: white;
+    font-size: 12px;
+    line-height: 1.2;
+    overflow: hidden;
+}
+
+.dmbd-videoViewer2 > .video-part > .info-mask > .info-panel > .info-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.dmbd-videoViewer2 > .video-part > .info-mask > .info-panel > .info-table .td-left {
+    text-align: right;
+    vertical-align: top;
+    width: 45%;
+    height: 25px;
+}
+
+.dmbd-videoViewer2 > .video-part > .info-mask > .info-panel > .info-table .td-right {
+    text-align: left;
+    vertical-align: top;
+    width: auto;
+    height: 25px;
+}
+
+.dmbd-videoViewer2 > .title-part {
+    width: 140px;
+    height: 30px;
+    display: table;
+    table-layout: fixed;
+    margin: 0 auto;
+}
+
+.dmbd-videoViewer2 > .title-part > * {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.dmbd-videoViewer2 > .title-part > .right-more {
+    width: 30px;
+    text-align: right;
+}
+
+.dmbd-videoViewer2 > .title-part > .right-more > button {
+    width: 20px;
+    height: 20px;
+    font-size: 18px;
+    color: #999999;
+    vertical-align: middle;
+}
+
+.dmbd-videoViewer2 > .title-part > .right-more > .clickDown {
+    color: #00a0e9;
+    border-color: #00a0e9;
+}
+
+.dmbd-videoViewer2 > .title-part > .left-title {
+    width: auto;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+/* 节目预览 */
+.dmbd-program-preview2 {
+    height: auto;
+}
+
+.dmbd-program-preview2 > .page-nav {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+}
+
+.dmbd-program-preview2 > .page-nav > span {
+    color: #24243e;
+    font-size: 12px;
+    margin: 0 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.dmbd-program-preview2 > .page-nav > span:hover {
+    background-color: #777777;
+    color: white;
+}
+
+.dmbd-program-preview2 > .page-nav > span.selected {
+    background-color: #999999;
+    color: white;
+    cursor: default;
+}
+
+.dmbd-program-preview2 > .page-content {
+    width: 100%;
+    height: auto;
+    background-color: #f1f2f5;
+}

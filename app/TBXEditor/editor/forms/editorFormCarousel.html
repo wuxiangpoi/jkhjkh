@@ -1,0 +1,41 @@
+<div class="editor-form-group">
+
+    <div class="editor-form-version">
+
+        <section class="editor-form-section" style="text-align: center;">
+            <div style="width: 160px;height: 160px; margin: 0 auto;">
+                <editor-control-multiple-image-viewer
+                        images="data.images">
+                </editor-control-multiple-image-viewer>
+            </div>
+            <button class="editor-form-button" ng-click="showDialogForSelectMultipleImage()">选择/更换图片</button>
+        </section>
+
+        <section class="editor-form-section"
+                 ng-if="data.images.length>1">
+            <label class="editor-form-label">特效</label>
+            <editor-control-animation animation="data.animation"
+                                      on-change="animationChange(newVal,oldVal)"></editor-control-animation>
+        </section>
+
+        <section class="editor-form-section"
+                 ng-if="data.images.length>1">
+            <label class="editor-form-label">图片<br/>停留<br/>时间</label>
+            <editor-control-range class="editor-form-range" min-val="3" max-val="30"
+                                  on-change="stayChange(newVal,oldVal)"
+                                  val="data.stay"></editor-control-range>
+            <span class="editor-form-span">{{data.stay}}秒</span>
+        </section>
+
+        <section class="editor-form-section"
+                 ng-if="data.images.length>1">
+            <label class="editor-form-label">图片<br/>切换<br/>时间</label>
+            <editor-control-range class="editor-form-range" min-val="300" max-val="3000"
+                                  on-change="durationChange(newVal,oldVal)"
+                                  step="100" val="data.duration"></editor-control-range>
+            <span class="editor-form-span">{{(data.duration/1000).toFixed(1)}}秒</span>
+        </section>
+
+    </div>
+
+</div>

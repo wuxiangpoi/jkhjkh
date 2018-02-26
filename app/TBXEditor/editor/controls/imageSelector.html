@@ -1,0 +1,12 @@
+<div class="editor-control-imageSelector"
+     ng-style="{'background':image? (image.url|editorContainBackgroundFilter):''}">
+
+    <div ng-if="!image" class="panel-area panel-add">
+        <button class="iconfont icon-tianjia" ng-click="insertImage()"></button>
+    </div>
+
+    <div ng-if="image" class="panel-area panel-edit">
+        <button class="iconfont icon-genggai" ng-click="updateImage()"></button>
+        <button class="iconfont icon-shanchu" ng-click="deleteImage()"></button>
+    </div>
+</div>

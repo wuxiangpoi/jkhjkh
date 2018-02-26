@@ -1,0 +1,81 @@
+@charset "utf-8";
+
+.template_list {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* 头部 */
+.template_list > .header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 40px;
+    line-height: 40px;
+    background-color: #293750;
+    text-align: right;
+}
+
+.template_list > .footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40px;
+    text-align: center;
+}
+
+.template_list > .footer > .pager {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/* 主体 */
+.template_list > .body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40px;
+    bottom: 40px;
+    background-color: #f1f5f8;
+    padding: 12px;
+}
+
+/* 节目数据呈现部分 */
+.template_list .template_list_ul {
+    width: auto;
+    height: auto;
+}
+
+.template_list .template_list_ul:after,
+.template_list .template_list_ul::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.template_list .template_list_ul > li {
+    float: left;
+    border: solid 1px #ccc;
+    margin: 12px;
+    padding: 12px;
+    position: relative;
+    overflow: hidden;
+
+    width: 200px;
+    height: 200px;
+}
+
+.template_list .template_list_ul > li:hover {
+    background-color: #f2f2f2;
+    border-color: #00a0e9;
+}
+

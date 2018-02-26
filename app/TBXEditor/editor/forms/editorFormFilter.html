@@ -1,0 +1,73 @@
+<div class="editor-form-group"
+     ng-switch="filter.ver">
+
+    <div class="editor-form-version"
+         ng-switch-when="1">
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">不透明</label>
+            <editor-control-range class="editor-form-range" min-val="0" max-val="100"
+                                  on-change="opacityChange(newVal, oldVal)"
+                                  val="filter.opacity"></editor-control-range>
+            <span class="editor-form-span">{{filter.opacity}}%</span>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">亮度</label>
+            <editor-control-range class="editor-form-range" min-val="50" max-val="200"
+                                  on-change="brightnessChange(newVal, oldVal)"
+                                  val="filter.brightness"></editor-control-range>
+            <span class="editor-form-span">{{filter.brightness}}%</span>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">对比度</label>
+            <editor-control-range class="editor-form-range" min-val="50" max-val="200"
+                                  on-change="contrastChange(newVal, oldVal)"
+                                  val="filter.contrast"></editor-control-range>
+            <span class="editor-form-span">{{filter.contrast}}%</span>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">饱和度</label>
+            <editor-control-range class="editor-form-range" min-val="50" max-val="200"
+                                  on-change="saturateChange(newVal, oldVal)"
+                                  val="filter.saturate"></editor-control-range>
+            <span class="editor-form-span">{{filter.saturate}}%</span>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">灰度</label>
+            <editor-control-range class="editor-form-range" min-val="0" max-val="100"
+                                  on-change="grayscaleChange(newVal, oldVal)"
+                                  val="filter.grayscale"></editor-control-range>
+            <span class="editor-form-span">{{filter.grayscale}}%</span>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">反色</label>
+            <editor-control-range class="editor-form-range" min-val="0" max-val="100"
+                                  on-change="invertChange(newVal, oldVal)"
+                                  val="filter.invert"></editor-control-range>
+            <span class="editor-form-span">{{filter.invert}}%</span>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">模糊</label>
+            <editor-control-range class="editor-form-range" min-val="0" max-val="10"
+                                  on-change="blurChange(newVal, oldVal)"
+                                  val="filter.blur"></editor-control-range>
+            <span class="editor-form-span">{{filter.blur}}</span>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">色相</label>
+            <editor-control-range class="editor-form-range" min-val="0" max-val="360"
+                                  on-change="hueRotateChange(newVal, oldVal)"
+                                  val="filter.hueRotate"></editor-control-range>
+            <span class="editor-form-span">{{filter.hueRotate}}度</span>
+        </section>
+
+    </div>
+
+</div>

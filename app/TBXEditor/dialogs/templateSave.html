@@ -1,0 +1,33 @@
+<div class="ui-dialog" ng-keydown="$event.stopPropagation()">
+    <div class="ui-dialog-title">
+        存为模板
+    </div>
+
+    <div class="programSave">
+        <section class="title" style="padding: 20px 0;">
+            <label>模板名称</label>
+            <input type="text" ng-model="name">
+            <span>必填</span>
+        </section>
+        <table class="content">
+            <tr>
+                <th>分辨率</th>
+                <td>
+                    <span>{{pixelHorizontal+'×'+pixelVertical}}</span>
+                </td>
+                <th>时长</th>
+                <td>{{page.stay|dmbdVideoTimeFormatFilter}}</td>
+            </tr>
+            <tr>
+                <th>资源总数</th>
+                <td>{{resourceCount}}</td>
+                <th>资源大小</th>
+                <td>{{resourceSize|dmbdResourceSizeFilter}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="ui-dialog-footer">
+        <button class="dialog_ok" ng-click="ensureClick()">确定</button>
+        <button class="dialog_close" ng-click="close_dialog()">取消</button>
+    </div>
+</div>

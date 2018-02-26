@@ -1,0 +1,27 @@
+<nav ng-if="pages.length >= 2">
+    <ul class="pagination">
+        <li class="first">
+            <a ng-click="selectPage(1)"><i class="iconfont icon-dingye"></i></a>
+        </li>
+        <li>
+            <a ng-click="selectPage(currentPage - 1)"><i class="iconfont icon-xialajiantou"></i></a>
+        </li>
+        <li ng-repeat="page in pages" ng-class="{active: page==currentPage}">
+            <a ng-click="selectPage(page)">{{page}}</a>
+        </li>
+        <li ng-if="numPages - pages[pages.length - 1] > 1">
+            <span class="ellipsis" style="border:0;">…</span>
+        </li>
+        <li ng-if="numPages != pages[pages.length - 1]">
+            <a ng-click="selectPage(numPages)">{{numPages}}</a>
+        </li>
+        <li>
+            <a class="next" ng-click="selectPage(currentPage + 1)">
+                <i class="iconfont icon-xialajiantou"></i>
+            </a>
+        </li>
+        <li class="last">
+            <a ng-click="selectPage(numPages)"><i class="iconfont icon-weiye"></i></a>
+        </li>
+    </ul>
+</nav>

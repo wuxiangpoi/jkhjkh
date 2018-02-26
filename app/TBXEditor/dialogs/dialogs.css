@@ -1,0 +1,996 @@
+@charset "utf-8";
+
+/* 覆盖默认样式 */
+.ngdialog.ngdialog-theme-default {
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+    background-color: white;
+}
+
+/* 覆盖默认样式，修复火狐下自带关闭按钮不能点击 */
+.ngdialog.ngdialog-theme-default .ngdialog-close {
+    -webkit-outline: none;
+    -moz-outline: none;
+    -ms-outline: none;
+    -o-outline: none;
+    outline: none;
+}
+
+.ngdialog.ngdialog-theme-default .ngdialog-close:before,
+.ngdialog.ngdialog-theme-default .ngdialog-close::before {
+    position: static;
+    display: inline-block;
+}
+
+.ui-dialog {
+    width: auto;
+    height: auto;
+    font-size: 12px;
+}
+
+.ui-dialog * {
+    margin: 0;
+    padding: 0;
+    border: none;
+    -webkit-outline: none;
+    -moz-outline: none;
+    -ms-outline: none;
+    -o-outline: none;
+    outline: none;
+}
+
+.ui-dialog table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.ui-dialog a {
+    text-decoration: none;
+}
+
+.ui-dialog ul,
+.ui-dialog ol,
+.ui-dialog dl,
+.ui-dialog li,
+.ui-dialog dd,
+.ui-dialog dt {
+    list-style: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
+
+.ui-dialog p,
+.ui-dialog h1,
+.ui-dialog h2,
+.ui-dialog h3,
+.ui-dialog h4,
+.ui-dialog h5,
+.ui-dialog h6 {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+
+.ui-dialog button,
+.ui-dialog input[type="button"] {
+    cursor: pointer;
+    background-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* 水印样式 */
+.ui-dialog ::-webkit-input-placeholder {
+    color: #dddddd;
+}
+
+.ui-dialog :-ms-input-placeholder {
+    color: #dddddd;
+}
+
+.ui-dialog :-moz-placeholder {
+    color: #dddddd;
+}
+
+.ui-dialog ::-moz-placeholder {
+    color: #dddddd;
+}
+
+/* 清除浮动影响 */
+.ui-dialog .clear_fix:after,
+.ui-dialog .clear_fix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* 单行文本溢出 */
+.ui-dialog .text_ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+/* 头部 */
+.ui-dialog > .ui-dialog-title {
+    width: auto;
+    font-size: 12px;
+    color: #9f9f9f;
+    border-bottom: solid 1px #CCCCCC;
+}
+
+/* 底部 */
+.ui-dialog > .ui-dialog-footer {
+    width: auto;
+    height: auto;
+    text-align: center;
+    padding: 8px 0;
+}
+
+.ui-dialog > .ui-dialog-footer > button {
+    width: 60px;
+    padding: 4px 0;
+    border: solid 1px transparent;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-weight: 400;
+    margin: 0 8px;
+    cursor: pointer;
+}
+
+.ui-dialog > .ui-dialog-footer > button.dialog_ok {
+    background-color: #00a0e9;
+    color: white;
+}
+
+.ui-dialog > .ui-dialog-footer > button.dialog_close {
+    background-color: white;
+    border-color: #cccccc;
+    color: #666666;
+}
+
+.ui-dialog > .ui-dialog-footer > button:hover {
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* 基础部件 */
+.ui-dialog .pager {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/* 模板选择 */
+.ui-dialog > .singleTemplateSelect {
+    width: 100%;
+    height: auto;
+    background-color: white;
+}
+
+.ui-dialog > .singleTemplateSelect > .nav {
+    width: 100%;
+    background-color: #f6f7fa;
+    height: 40px;
+    line-height: 40px;
+}
+
+.ui-dialog > .singleTemplateSelect > .nav > span {
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: bottom;
+    cursor: pointer;
+    margin: 0 0.5em;
+    color: #24243e;
+}
+
+.ui-dialog > .singleTemplateSelect > .nav > span.selected {
+    background-color: white;
+    color: #00a0e9;
+}
+
+.ui-dialog > .singleTemplateSelect > .content {
+    width: 100%;
+    height: 480px;
+    background-color: white;
+    position: relative;
+}
+
+.ui-dialog > .singleTemplateSelect > .content > * {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+}
+
+.ui-dialog > .singleTemplateSelect > .content > .selected {
+    visibility: inherit;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .content-body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 40px;
+    overflow: auto;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .content-body .empty {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .content-body .empty > label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: #CCCCCC;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .content-pager {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40px;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .template-item {
+    float: left;
+    width: 160px;
+    height: 190px;
+    border: solid 1px #CCCCCC;
+    background-color: #f6f7fa;
+    margin: 10px;
+    cursor: pointer;
+    text-align: center;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    position: relative;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .template-item:hover {
+    border-color: #00a0e9;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .template-item .empty-template {
+    width: 100%;
+    height: 160px;
+    position: relative;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .template-item .empty-template > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: white;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .template-item .template-name {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #24243e;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .template-item .template-delete {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 2px 5px;
+    cursor: pointer;
+    background-color: #ffad9b;
+    display: none;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .template-item:hover .template-delete {
+    display: inline-block;
+}
+
+.ui-dialog > .singleTemplateSelect > .content .template-item .template-delete:hover {
+    background-color: #ff8c78;
+}
+
+/* 单图片选择 */
+.ui-dialog > .singleImageSelect {
+    width: 100%;
+    height: auto;
+    background-color: white;
+}
+
+.ui-dialog > .singleImageSelect > .content-title {
+    width: 100%;
+    height: 50px;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .singleImageSelect > .content-title > .title-table {
+    display: table;
+    /*table-layout: fixed;*/
+    width: 100%;
+    height: 100%;
+}
+
+.ui-dialog > .singleImageSelect > .content-title > .title-table > .left-label {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 1em;
+}
+
+.ui-dialog > .singleImageSelect > .content-title > .title-table > .right-query {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.ui-dialog > .singleImageSelect > .content-title > .title-table > .right-query > input {
+    width: 200px;
+    border: solid 1px #cccccc;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px;
+    margin-right: 10px;
+}
+
+.ui-dialog > .singleImageSelect > .content-title > .title-table > .right-query > button {
+    background-color: #777777;
+    color: white;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px 15px;
+    margin-right: 20px;
+}
+
+.ui-dialog > .singleImageSelect > .content {
+    width: 100%;
+    height: 430px;
+    overflow: auto;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .singleImageSelect > .content > .empty-data {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: #cccccc;
+}
+
+.ui-dialog > .singleImageSelect > .content .image-item {
+    float: left;
+    border: solid 1px #CCCCCC;
+    background-color: white;
+    margin: 10px;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.ui-dialog > .singleImageSelect > .content-pager {
+    width: 100%;
+    height: 40px;
+    background-color: #f6f7fa;
+    position: relative;
+}
+
+/* 多图片选择 */
+.ui-dialog > .multipleImageSelect {
+    width: 100%;
+    height: auto;
+    background-color: white;
+}
+
+.ui-dialog > .multipleImageSelect > .layout {
+    width: 100%;
+    height: 515px;
+    position: relative;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .left-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 220px;
+    height: 50px;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .left-title > .title-table {
+    display: table;
+    /*table-layout: fixed;*/
+    width: 100%;
+    height: 100%;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .left-title > .title-table > .left-label {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 1em;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .left-title > .title-table > .right-query {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .left-title > .title-table > .right-query > input {
+    width: 200px;
+    border: solid 1px #cccccc;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px;
+    margin-right: 10px;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .left-title > .title-table > .right-query > button {
+    background-color: #777777;
+    color: white;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px 15px;
+    margin-right: 20px;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .left-content {
+    position: absolute;
+    top: 50px;
+    bottom: 40px;
+    left: 0;
+    right: 220px;
+    overflow: auto;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .left-content > .empty-data {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: #cccccc;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .left-content .image-item {
+    float: left;
+    border: solid 1px #CCCCCC;
+    background-color: white;
+    margin: 10px;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .left-content .image-item.checked {
+    border-color: #00a0e9;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .left-pager {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 220px;
+    height: 40px;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .right-title {
+    position: absolute;
+    right: 0;
+    width: 200px;
+    top: 0;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 2em;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .right-content {
+    position: absolute;
+    right: 0;
+    width: 200px;
+    top: 50px;
+    bottom: 0;
+    overflow: auto;
+    border-left: solid 5px #f6f7fa;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .right-content > ul {
+    margin: 0 auto;
+    width: 160px;
+    height: auto;
+}
+
+.ui-dialog > .multipleImageSelect > .layout > .right-content .image-item-selected {
+    width: 100%;
+    height: auto;
+    margin: 8px 0;
+    border: solid 1px #CCCCCC;
+    background-color: white;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 单视频选择 */
+.ui-dialog > .singleVideoSelect {
+    width: 100%;
+    height: auto;
+    background-color: white;
+}
+
+.ui-dialog > .singleVideoSelect > .content-title {
+    width: 100%;
+    height: 50px;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .singleVideoSelect > .content-title > .title-table {
+    display: table;
+    /*table-layout: fixed;*/
+    width: 100%;
+    height: 100%;
+}
+
+.ui-dialog > .singleVideoSelect > .content-title > .title-table > .left-label {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 1em;
+}
+
+.ui-dialog > .singleVideoSelect > .content-title > .title-table > .right-query {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.ui-dialog > .singleVideoSelect > .content-title > .title-table > .right-query > input {
+    width: 200px;
+    border: solid 1px #cccccc;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px;
+    margin-right: 10px;
+}
+
+.ui-dialog > .singleVideoSelect > .content-title > .title-table > .right-query > button {
+    background-color: #777777;
+    color: white;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px 15px;
+    margin-right: 20px;
+}
+
+.ui-dialog > .singleVideoSelect > .content {
+    width: 100%;
+    height: 430px;
+    overflow: auto;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .singleVideoSelect > .content > .empty-data {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: #cccccc;
+}
+
+.ui-dialog > .singleVideoSelect > .content .video-item {
+    float: left;
+    border: solid 1px #CCCCCC;
+    background-color: white;
+    margin: 10px;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.ui-dialog > .singleVideoSelect > .content-pager {
+    width: 100%;
+    height: 40px;
+    background-color: #f6f7fa;
+    position: relative;
+}
+
+/* 多视频选择 */
+.ui-dialog > .multipleVideoSelect {
+    width: 100%;
+    height: auto;
+    background-color: white;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout {
+    width: 100%;
+    height: 515px;
+    position: relative;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .left-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 220px;
+    height: 50px;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .left-title > .title-table {
+    display: table;
+    /*table-layout: fixed;*/
+    width: 100%;
+    height: 100%;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .left-title > .title-table > .left-label {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 1em;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .left-title > .title-table > .right-query {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .left-title > .title-table > .right-query > input {
+    width: 200px;
+    border: solid 1px #cccccc;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px;
+    margin-right: 10px;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .left-title > .title-table > .right-query > button {
+    background-color: #777777;
+    color: white;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px 15px;
+    margin-right: 20px;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .left-content {
+    position: absolute;
+    top: 50px;
+    bottom: 40px;
+    left: 0;
+    right: 220px;
+    overflow: auto;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .left-content > .empty-data {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: #cccccc;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .left-content .video-item {
+    float: left;
+    margin: 10px;
+    background-color: white;
+    border: solid 1px #cccccc;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .left-content .video-item.checked {
+    border-color: #00a0e9;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .left-pager {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 220px;
+    height: 40px;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .right-title {
+    position: absolute;
+    right: 0;
+    width: 200px;
+    top: 0;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 2em;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .right-content {
+    position: absolute;
+    right: 0;
+    width: 200px;
+    top: 50px;
+    bottom: 0;
+    overflow: auto;
+    border-left: solid 5px #f6f7fa;
+    background-color: #f6f7fa;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .right-content > ul {
+    margin: 0 auto;
+    width: 160px;
+    height: auto;
+}
+
+.ui-dialog > .multipleVideoSelect > .layout > .right-content .video-item-selected {
+    width: 100%;
+    height: auto;
+    margin: 8px 0;
+    border: solid 1px #CCCCCC;
+    background-color: white;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 分辨率选择 */
+.ui-dialog > .pixelSelector {
+    width: 150px;
+    height: auto;
+    margin: 20px auto;
+}
+
+.ui-dialog > .pixelSelector > .row {
+    margin-top: 20px;
+}
+
+.ui-dialog > .pixelSelector > .row > input {
+    border: solid 1px #ccc;
+    padding: 5px;
+    width: 100px;
+}
+
+/* 保存节目 */
+.ui-dialog > .programSave {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding-bottom: 30px;
+}
+
+.ui-dialog > .programSave > .title {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.ui-dialog > .programSave > .title * {
+    vertical-align: middle;
+}
+
+.ui-dialog > .programSave > .title > label {
+    color: #666666;
+    font-weight: bold;
+}
+
+.ui-dialog > .programSave > .title > input {
+    color: #999999;
+    border: solid 1px #CCCCCC;
+    width: 350px;
+    padding: 4px;
+    margin: 0.5em;
+}
+
+.ui-dialog > .programSave > .title > input:focus {
+    color: #666666;
+}
+
+.ui-dialog > .programSave > .title > span {
+    color: #c9c9c9;
+}
+
+.ui-dialog > .programSave > .title > span:before {
+    content: '*';
+    color: red;
+    vertical-align: middle;
+    margin-right: 0.5em;
+}
+
+.ui-dialog > .programSave > .content {
+    table-layout: fixed;
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.ui-dialog > .programSave > .content tr {
+    height: 50px;
+}
+
+.ui-dialog > .programSave > .content th {
+    text-align: center;
+    vertical-align: middle;
+    background-color: #f6f7fa;
+    color: #666666;
+    font-size: 12px;
+    font-weight: bold;
+    border: solid 1px #CCCCCC;
+}
+
+.ui-dialog > .programSave > .content td {
+    text-align: center;
+    vertical-align: middle;
+    background-color: #f6f7fa;
+    color: #9f9f9f;
+    font-size: 12px;
+    border: solid 1px #CCCCCC;
+}
+
+.ui-dialog > .programSave > .content2 {
+    table-layout: fixed;
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 20px auto 0 auto;
+    background-color: white;
+}
+
+.ui-dialog > .programSave > .content2 tr {
+    height: 30px;
+}
+
+.ui-dialog > .programSave > .content2 th {
+    text-align: center;
+    vertical-align: middle;
+    background-color: #f6f7fa;
+    color: #666666;
+    font-size: 12px;
+    font-weight: bold;
+    border: solid 1px #CCCCCC;
+}
+
+.ui-dialog > .programSave > .content2 td {
+    text-align: center;
+    vertical-align: middle;
+    background-color: #f6f7fa;
+    color: #9f9f9f;
+    font-size: 12px;
+    border: solid 1px #CCCCCC;
+}
+
+.ui-dialog > .programSave > .content2 td input {
+    padding: 2px;
+    border: solid 1px #999999;
+    width: 80px;
+}
+
+/* 节目预览 */
+.ui-dialog > .programPreview {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding-bottom: 30px;
+    margin-top: 10px;
+}
+
+.ui-dialog > .programPreview > .title {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px 0;
+    vertical-align: middle;
+
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.ui-dialog > .programPreview > .title * {
+    vertical-align: middle;
+}
+
+.ui-dialog > .programPreview > .title > .screenOrientation {
+    margin-left: 2em;
+    cursor: pointer;
+}
+
+.ui-dialog > .programPreview > .title > .checkboxStyle {
+    margin-left: 2em;
+    cursor: pointer;
+}
+
+.ui-dialog > .programPreview > .title > .checkboxStyleSelected {
+    background-color: #00a0e9;
+}
+
+.ui-dialog > .programPreview > .title > .checkboxLabel {
+    cursor: pointer;
+}
+
+.ui-dialog > .programPreview > .title > .checkboxLabelSelected {
+    color: #00a0e9;
+}
+
+.ui-dialog > .programPreview > .content {
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    background-color: white;
+}

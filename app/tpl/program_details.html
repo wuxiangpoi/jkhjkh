@@ -1,0 +1,36 @@
+<div class="modal-header">
+	<h4 ng-if="data.detailType == 0" class="modal-title">详情</h4>
+	<h4 ng-if="data.detailType == 1" class="modal-title">审核</h4>
+</div>
+
+
+<div class="modal-body" style="padding-top:10px;padding-bottom:10px;">
+
+	<div class="row modalDetail">
+		<div class="col-sm-8 marb20 p0">
+			<div class="previewWrap">
+				<dmbd-program-preview2 ng-if="program" program-pixel-horizontal="program.pixelHorizontal" program-pixel-vertical="program.pixelVertical"
+				    program-pages="program.pages" size="478"></dmbd-program-preview2>
+			</div>
+		</div>
+		<div class="col-sm-4 pdr0 form-horizontal" style="margin-top:40px;">
+			<div class="col-sm-12 form-horizontal ">
+				<label class="col-sm-3 form_right">节目名称</label>
+				<div class="col-sm-9 form_input">{{data.name}}
+				</div>
+
+			</div>
+			<div class="col-sm-12 form-horizontal " ng-if="data.status">
+				<label class="col-sm-3 form_right">当前状态</label>
+				<div class="col-sm-9 form_input">{{data.nstatus}}</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal-footer" ng-if="data.detailType == 1">
+	<button class="btn btn-success" type="button" ng-click="modalConfirmSubmit(3)">审核通过</button>
+	<button class="btn btn-warning" type="button" ng-click="modalConfirmSubmit(4)">审核不通过</button>
+</div>

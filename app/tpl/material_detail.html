@@ -1,0 +1,69 @@
+<div class="modal-header">
+    <h4 ng-if="data.detailType == 0" class="modal-title">详情</h4>
+    <h4 ng-if="data.detailType == 1" class="modal-title">审核</h4>
+</div>
+
+<div class="modal-body" style="padding-top:10px;padding-bottom:10px;">
+    <div class="row">
+        <div class="col-sm-8 marb20 p0" style="background:#f6f7fa;height:350px;">
+            <div ng-if="data.type==0">
+                <img ng-if="data.width > data.height" style="width:100%;height:350px;display:block;" ng-src="{{data.nUrl}}" />
+                <img ng-if="data.width < data.height || data.width == data.height" style="width:auto;height:350px;display:block;min-width:200px;margin:0 auto;"
+                    ng-src="{{data.nUrl}}" />
+
+            </div>
+            <video ng-if="data.type==1" width="100%" height="100%" controls>
+                <source ng-src="{{data.play_url}}">
+            </video>
+        </div>
+        <div class="col-sm-4 pdr0 modalDetail">
+                <div class="col-sm-12 p0 form-horizontal">
+                    <label class="col-sm-3 p0">名称</label>
+                    <div class="col-sm-9 pdr0 form_input ellipsTXt">{{data.name}}
+                    </div>
+                </div>
+                <div class="col-sm-12 p0 form-horizontal">
+                    <label class="col-sm-3 p0">分辨率</label>
+                    <div class="col-sm-9 pdr0 form_input">{{data.width}}X {{data.height}}
+                    </div>
+                </div>
+                <div class="col-sm-12 p0 form-horizontal">
+                    <label class="col-sm-3 p0">文件大小</label>
+                    <div class="col-sm-9 pdr0 form_input">
+                        {{data.size
+                        <(1024*1024)?((data.size/1024|number:2)+ 'KB'):((data.size/1024/1024|number:2)+ 'MB')}} </div>
+                    </div>
+                    <div class="col-sm-12 p0 form-horizontal">
+                        <label class="col-sm-3 p0">格式</label>
+                        <div class="col-sm-9 pdr0 form_input">{{data.mime}}</div>
+                    </div>
+                    <div class="col-sm-12 p0 form-horizontal" ng-if="data.type==1">
+                        <label class="col-sm-3 p0">时长</label>
+                        <div class="col-sm-9 pdr0 form_input">{{data.duration}}</div>
+                    </div>
+                    <div class="col-sm-12 p0 form-horizontal" ng-if="data.type==1">
+                        <label class="col-sm-3 p0">码率</label>
+                        <div class="col-sm-9 pdr0 form_input">{{data.bitrate}}kb/s</div>
+                    </div>
+                    <div class="col-sm-12 p0 form-horizontal" ng-if="data.type==1">
+                        <label class="col-sm-3 p0">视频编码</label>
+                        <div class="col-sm-9 pdr0 form_input">{{data.vc}}</div>
+                    </div>
+                    <div class="col-sm-12 p0 form-horizontal" ng-if="data.type==1">
+                        <label class="col-sm-3 p0">音频编码</label>
+                        <div class="col-sm-9 pdr0 form_input">{{data.ac}}</div>
+                    </div>
+                    <div class="col-sm-12 p0 form-horizontal ">
+                        <label class="col-sm-3 p0">当前状态</label>
+                        <div class="col-sm-9 pdr0 form_input">{{data.nstatus}}</div>
+                    </div>
+                </div>
+        
+        
+            </div>
+    </div>
+    
+    <div class="modal-footer" ng-if="data.detailType == 1">
+        <button class="btn btn-success" type="button" ng-click="modalConfirmSubmit(3)">审核通过</button>
+        <button class="btn btn-warning" type="button" ng-click="modalConfirmSubmit(4)">审核不通过</button>
+    </div>

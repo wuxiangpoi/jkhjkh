@@ -1,0 +1,35 @@
+<div class="loginContent">
+
+    <div class="loginBox">
+        <div class="loginContent">
+
+            <div class="left">
+                <img src="img/banner1.jpg" style="width:100%;height:100%;" />
+            </div>
+            <div class="right">
+                <img src="img/logo.png" class="logo" />
+                <div class="title">
+                    智能营销传播系统管理后台
+                </div>
+                <div class="english">
+                    Intelligent Marketing Communication System
+                </div>
+                <form name="loginForm" novalidate style=" text-align: center;margin-top: 30px;">
+                    <input type="text" name="account" placeholder="账户" class="txtinput" ng-model="account" required>
+                    <div class="help-block" style="padding-left:10%;" ng-messages="loginForm.account.$error" ng-if="isShowMessage">
+                        <p ng-message="required">请输入用户名</p>
+                      </div>
+                    <input type="password" name="password" placeholder="密码" class="txtinput" ng-model="password" required>
+                    <div class="help-block" style="padding-left:10%;" ng-messages="loginForm.password.$error" ng-if="isShowMessage">
+                        <p ng-message="required">请输入密码</p>
+                      </div>
+                    <button type="button" id="form_modal_btn" class="subbtn" ng-click="login()">登录</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer_text">鄂ICP备17013099号-1 快媒数字 版权所有</div>
+
+</div>

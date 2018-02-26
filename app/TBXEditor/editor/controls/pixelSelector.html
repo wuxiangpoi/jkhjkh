@@ -1,0 +1,20 @@
+<div class="editor-control-pixelSelector"
+     ng-click="spreadChange($event)">
+    <div class="current">{{pixelHorizontal}} × {{pixelVertical}}</div>
+    <div class="selector-panel"
+         ng-show="isSpread">
+        <div class="selector-item"
+             ng-repeat="pixel in pixels"
+             ng-class="{'selected': pixel.h===pixelHorizontal&&pixel.v===pixelVertical}"
+             ng-click="changeItem(pixel)">
+            <span>{{pixel.h}} × {{pixel.v}}</span>
+            <button ng-if="pixel.isCustom&&(pixel.h!==pixelHorizontal||pixel.v!==pixelVertical)"
+                    ng-click="deleteItem(pixel,$event)">X
+            </button>
+        </div>
+        <div class="selector-item selector-custom"
+             ng-click="onCustomClick()">
+            <span>自定义</span>
+        </div>
+    </div>
+</div>

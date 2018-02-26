@@ -1,0 +1,10 @@
+<div ng-switch="data.ver" class="editor-element-full editor-element-relative">
+    <iframe ng-switch-when="1" class="editor-element-full editor-element-absolute"
+            frameborder="0" scrolling="auto"
+            sandbox="allow-popups allow-pointer-lock allow-forms allow-same-origin allow-scripts"
+            ng-if="data.url"
+            ng-src="{{data.url|editorTrustAsResourceUrl}}">
+    </iframe>
+    <div class="editor-element-full editor-element-absolute"
+         style="pointer-events: auto;"></div>
+</div>

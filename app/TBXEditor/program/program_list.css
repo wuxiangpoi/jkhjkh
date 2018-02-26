@@ -1,0 +1,182 @@
+@charset "utf-8";
+
+.program_list {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* 头部 */
+.program_list > .header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 40px;
+    line-height: 40px;
+    background-color: #293750;
+    text-align: right;
+}
+
+.program_list > .header > .btn_program_add {
+    padding: 5px 12px;
+    color: white;
+    background-color: #00a0e9;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-right: 1em;
+}
+
+.program_list > .header > .btn_program_add:hover {
+    -webkit-box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    -moz-box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.program_list > .footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40px;
+    text-align: center;
+}
+
+.program_list > .footer > .pager {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/* 主体 */
+.program_list > .body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40px;
+    bottom: 40px;
+    background-color: #f1f5f8;
+    padding: 12px;
+}
+
+/* 节目数据呈现部分 */
+.program_list .program_list_ul {
+    width: auto;
+    height: auto;
+}
+
+.program_list .program_list_ul:after,
+.program_list .program_list_ul::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.program_list .program_list_ul > li {
+    float: left;
+    border: solid 1px #ccc;
+    margin: 12px;
+}
+
+.program_list .program_list_ul > li:hover {
+    background-color: #f2f2f2;
+    border-color: #00a0e9;
+}
+
+/* 节目操作面板 */
+
+.program_list .program-view {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.program_list .program-view:hover > .program_opera_panel {
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.program_list .program_opera_panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: solid 1px transparent;
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-transform: translate(100%, -100%);
+    -moz-transform: translate(100%, -100%);
+    -ms-transform: translate(100%, -100%);
+    -o-transform: translate(100%, -100%);
+    transform: translate(100%, -100%);
+    -webkit-transition: -webkit-transform 0.3s, background-color 0.3s;
+    -moz-transition: -moz-transform 0.3s, background-color 0.3s;
+    -ms-transition: -ms-transform 0.3s, background-color 0.3s;
+    -o-transition: -o-transform 0.3s, background-color 0.3s;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.program_list .program_opera_panel > div {
+    width: 100%;
+    text-align: center;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.program_list .program_opera_panel > div > button {
+    background-color: transparent;
+    border: solid 1px white;
+    color: white;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: color 0.3s, border-color 0.3s;
+    -moz-transition: color 0.3s, border-color 0.3s;
+    -ms-transition: color 0.3s, border-color 0.3s;
+    -o-transition: color 0.3s, border-color 0.3s;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.program_list .program_opera_panel > div > button:hover {
+    border-color: #48cc97;
+    color: #48cc97;
+}
+
+.program_list .program-title {
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #24243e;
+
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}

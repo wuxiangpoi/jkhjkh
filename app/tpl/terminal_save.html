@@ -1,0 +1,51 @@
+<form class="form-horizontal" role="form" id="form_modal_terminal" method="post" action="{{data.form_action}}">
+
+	<div class="modal-header">
+		<h4 class="modal-title">{{data.id==null?'添加新设备':'编辑设备信息'}}</h4>
+	</div>
+	<div class="modal-body" style="padding-top:20px;padding-bottom:20px;">
+		<div ng-if="data.id!=null" class="form-group form-group-sm">
+			<label class="col-sm-3 form_right p0" ng-if="data.id!=null">终端编号</label>
+			<div class="col-sm-9 form_input" ng-if="data.id!=null">
+				{{data.no}}</div>
+		</div>
+		<div class="form-group form-group-sm">
+
+			<label class="col-sm-3 form_right p0">终端名称</label>
+			<div class="col-sm-9 form_input">
+				<input type="text" class="form-control" maxlength="20" name="name" notnull ng-model="data.name" message="终端名称不能为空" />
+				<input type="hidden" name="id" value="{{data.id}}" />
+				<input type="hidden" name="city_no" value="{{data.city_no}}" />
+				<input type="hidden" name="cityName" value="{{data.cityName}}" />
+
+			</div>
+		</div>
+
+		<div class="form-group form-group-sm">
+
+			<label class="col-sm-3 form_right p0">备注信息</label>
+			<div class="col-sm-9 form_input">
+				<input type="text" class="form-control" ng-model="data.remark" name="remark" maxlength="30" />
+
+			</div>
+
+		</div>
+
+		<div class="form-group form-group-sm ">
+			<label class="col-sm-3 form_right p0">地址</label>
+			<div class="col-sm-9 form_input">
+				<input type="text" class="form-control" name="addr" readonly notnull message="地址不能为空" ng-model="data.addr" maxlength="30" />
+			</div>
+
+		</div>
+		
+	</div>
+
+
+
+	<div class="modal-footer">
+		<button class="btn btn-success" type="button" ng-click="modalConfirmSubmit()" id="form_modal_btn">保存</button>
+		<button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+	</div>
+
+</form>

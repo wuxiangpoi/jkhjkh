@@ -1,0 +1,162 @@
+@charset "utf-8";
+
+.qmedia-editor .row-flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.qmedia-editor .row-flex > .title {
+    width: 60px;
+}
+
+.qmedia-editor .row-flex > .content {
+    flex: auto;
+}
+
+/* 元素属性样式 */
+.qmedia-editor .editor-form-group {
+    width: auto;
+    padding: 5px;
+}
+
+.qmedia-editor .editor-form-version {
+    width: auto;
+    height: auto;
+}
+
+.qmedia-editor .editor-form-section {
+    padding: 6px 0;
+    margin: 8px auto;
+    border: solid 1px #CCCCCC;
+    background-color: white;
+    width: 220px;
+    white-space: nowrap;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.qmedia-editor .editor-form-section-input {
+    background-color: #f1f3f9;
+}
+
+.qmedia-editor .editor-form-section > * {
+    vertical-align: middle;
+}
+
+/* 标签、输入框 等公共样式 */
+.qmedia-editor .editor-form-label {
+    color: #9f9f9f;
+    display: inline-block;
+    width: 45px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.qmedia-editor .editor-form-range {
+    width: 120px;
+}
+
+.qmedia-editor .editor-form-span {
+    color: #24243e;
+    display: inline-block;
+    width: 42px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.qmedia-editor .editor-form-layoutAlign {
+    font-size: 16px;
+    color: #24243e;
+    cursor: pointer;
+    margin: 0 2px;
+}
+
+.qmedia-editor .editor-form-layoutAlign:hover {
+    color: #00a0e9;
+}
+
+.qmedia-editor .editor-form-layoutAlign:active {
+    color: white;
+    background-color: #00a0e9;
+}
+
+.qmedia-editor .editor-form-fontButton {
+    font-size: 26px;
+    color: #24243e;
+    cursor: pointer;
+}
+
+.qmedia-editor .editor-form-fontButton:hover {
+    color: #00a0e9;
+}
+
+.qmedia-editor .editor-form-fontButton:active {
+    color: white;
+    background-color: #00a0e9;
+}
+
+.qmedia-editor .editor-form-number {
+    width: 160px;
+    border: solid 1px #CCCCCC;
+}
+
+.qmedia-editor .editor-form-button {
+    color: white;
+    background-color: #00b3ee;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    width: 160px;
+    padding: 5px 0;
+    margin: 10px auto;
+}
+
+.qmedia-editor .editor-form-button:hover {
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
+}
+
+.qmedia-editor .editor-form-txt-input {
+    width: 100%;
+    border: solid 1px #008000;
+    padding: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #777;
+}
+
+.qmedia-editor .editor-form-txtArea-input {
+    width: 90%;
+    margin-left: 11px;
+    border: solid 1px #CCCCCC;
+    padding: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #777;
+    resize: vertical;
+}
+
+.qmedia-editor .editor-form-radio-input {
+    cursor: pointer;
+    border: solid 1px #00a0e9;
+    padding: 2px;
+    vertical-align: middle;
+    margin-left: 0.5em;
+}
+
+.qmedia-editor .editor-form-radio-label {
+    color: #24243e;
+    font-size: 12px;
+    cursor: pointer;
+    vertical-align: middle;
+}

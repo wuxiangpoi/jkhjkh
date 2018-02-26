@@ -1,0 +1,182 @@
+@charset "utf-8";
+
+.qmedia-editor-parser,
+.qmedia-editor-parser * {
+    margin: 0;
+    padding: 0;
+    border: none;
+    -webkit-outline: none;
+    -moz-outline: none;
+    -ms-outline: none;
+    -o-outline: none;
+    outline: none;
+}
+
+.qmedia-editor-parser * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    font-family: inherit;
+    font-style: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+.qmedia-editor-parser ul,
+.qmedia-editor-parser ol,
+.qmedia-editor-parser dl,
+.qmedia-editor-parser li,
+.qmedia-editor-parser dd,
+.qmedia-editor-parser dt {
+    list-style: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
+
+.qmedia-editor-parser .preserve_3d {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.qmedia-editor-parser .backface_hidden {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.qmedia-editor-parser .transform-will-change {
+    -webkit-will-change: -webkit-transform;
+    -moz-will-change: -moz-transform;
+    will-change: transform;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.qmedia-editor-parser .hidden {
+    visibility: hidden !important;
+}
+
+.qmedia-editor-parser .hidden2 {
+    display: none !important;
+}
+
+.qmedia-editor-parser {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+
+    /*font-family: sans-serif;*/
+    font-style: normal;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.qmedia-editor-parser .program-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.qmedia-editor-parser .page-view {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.qmedia-editor-parser .page-elements {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+
+.qmedia-editor-parser .element-layout {
+    position: absolute;
+}
+
+.qmedia-editor-parser .element-transform {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.qmedia-editor-parser .element-background {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute; /* 防止布局失效时高度塌缩 */
+}
+
+.qmedia-editor-parser .element-border {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative; /* 防止圆角溢出 */
+}
+
+.qmedia-editor-parser .element-filter {
+    width: 100%;
+    height: 100%;
+}
+
+/* 内容部分 */
+.qmedia-editor-parser .element-full {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.qmedia-editor-parser .element-relative {
+    position: relative;
+}
+
+.qmedia-editor-parser .element-absolute {
+    position: absolute;
+}
+
+.qmedia-editor-parser .element-table {
+    display: table;
+    table-layout: fixed;
+}
+
+.qmedia-editor-parser .element-table > * {
+    display: table-cell;
+    height: 100%;
+}
+
+.qmedia-editor-parser .element-video-fill {
+    -o-object-fit: fill;
+    object-fit: fill;
+}
+
+.qmedia-editor-parser .text-element {
+    /*-webkit-transform: scale(0.01);*/
+    /*-moz-transform: scale(0.01);*/
+    /*-ms-transform: scale(0.01);*/
+    /*-o-transform: scale(0.01);*/
+    /*transform: scale(0.01);*/
+    /*-webkit-transform-origin: top left;*/
+    /*-moz-transform-origin: top left;*/
+    /*-ms-transform-origin: top left;*/
+    /*-o-transform-origin: top left;*/
+    /*transform-origin: top left;*/
+    /*width: 10000%;*/
+    /*height: 10000%;*/
+}

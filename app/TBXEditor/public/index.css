@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* 页面布局 */
+
+/* 头部 */
+.index_header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #364660;
+}
+
+/* 主体 */
+.index_body {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.index_body > .right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 140px;
+    right: 0;
+}
+
+.index_body > .right.fold {
+    left: 65px;
+}
+
+.index_body > .left {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 140px;
+    background-color: #44546e;
+}
+
+.index_body > .left.fold {
+    width: 65px;
+}
+
+.index_body > .left > .header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 40px;
+    text-align: center;
+    background-color: #293750;
+}
+
+.index_body > .left > .header > i {
+    color: #b4c6d6;
+    font-size: 16px;
+    padding: 12px;
+    cursor: pointer;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.index_body > .left.fold > .header > i {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+.index_body > .left > .body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40px;
+    bottom: 0;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--<link href="./bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">-->
+
+    <link href="./bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./bower_components/ng-dialog/css/ngDialog.min.css" rel="stylesheet">
+    <link href="./bower_components/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet">
+
+    <!-- 编辑器模块样式 -->
+    <link href="editor/assets/font_icon/iconfont.css" rel="stylesheet">
+    <link href="editor/editor.css" rel="stylesheet">
+    <link href="editor/pages/pages.css" rel="stylesheet">
+    <link href="editor/elements/elements.css" rel="stylesheet">
+    <!--<link href="editor/properties/propertys.css" rel="stylesheet">-->
+    <link href="editor/forms/forms.css" rel="stylesheet">
+    <link href="editor/controls/controls.css" rel="stylesheet">
+
+    <!-- 轮播动画 -->
+    <link href="public/animation.css" rel="stylesheet">
+    <!-- 对话框样式 -->
+    <link href="dialogs/dialogs.css" rel="stylesheet">
+    <!-- 组件样式 -->
+    <link href="app/components/dmbd.css" rel="stylesheet">
+
+    <link href="public/reset.css" rel="stylesheet">
+    <link href="public/index.css" rel="stylesheet">
+    <link href="public/header.css" rel="stylesheet">
+    <link href="public/sidebar.css" rel="stylesheet">
+    <link href="program/program_list.css" rel="stylesheet">
+    <link href="template/template_list.css" rel="stylesheet">
+
+</head>
+<body ng-app="myApp" ng-controller="indexCtrl">
+
+<header class="index_header" ng-include="'./public/header.html'"></header>
+
+<div class="index_body">
+    <aside class="left" ng-class="{'fold': isSidebarFold }">
+        <div class="header">
+            <i class="fa fa-navicon" ng-click="slideFold()"></i>
+        </div>
+        <div class="body scroll_y" ng-include="'./public/sidebar.html'"></div>
+    </aside>
+    <section class="right" ng-class="{'fold': isSidebarFold }">
+        <div ui-view style="width: 100%;height: 100%;position: relative;"></div>
+    </section>
+</div>
+
+</body>
+</html>
+
+<script src="./bower_components/jquery/dist/jquery.js"></script>
+<script src="./bower_components/jquery-ui/jquery-ui.js"></script>
+<script src="./bower_components/layer/build/layer.js"></script>
+
+<!-- 框架及库 -->
+<script src="./bower_components/angular/angular.js"></script>
+<script src="./bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="./bower_components/ng-dialog/js/ngDialog.js"></script>
+<script src="./bower_components/angular-ui-sortable/sortable.js"></script>
+
+<!-- 数组扩展 -->
+<script src="public/array.js"></script>
+<!-- 敏感词过滤 -->
+<script src="public/sentences.js"></script>
+
+<!-- 编辑器模块指令 -->
+<script src="editor/editorDirective.js"></script>
+<script src="editor/pages/pageDirectives.js"></script>
+<script src="editor/elements/elementDirectives.js"></script>
+<!--<script src="editor/properties/propertyDirectives.js"></script>-->
+<script src="editor/forms/formDirectives.js"></script>
+<script src="editor/controls/controlDirectives.js"></script>
+
+<!-- 入口及路由 -->
+<script src="app/main.js"></script>
+<script src="app/router.js"></script>
+
+<!-- 公用 -->
+<script src="app/rest.js"></script>
+<script src="app/filters.js"></script>
+<script src="app/components/directives.js"></script>
+
+<!-- 服务 -->
+<script src="dialogs/dialogServices.js"></script>
+<script src="dialogs/imageService.js"></script>
+<script src="dialogs/videoService.js"></script>
+<script src="program/programService.js"></script>
+<script src="template/templateService.js"></script>
+
+<!-- 控制器 -->
+<script src="program/programController.js"></script>
+<script src="template/templateController.js"></script>

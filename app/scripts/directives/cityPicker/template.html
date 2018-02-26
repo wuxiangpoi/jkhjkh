@@ -1,0 +1,50 @@
+<div class="cityPickerWrap">
+    <div class="provinceWrap" style="position:relative;">
+        <span class="cityName" data-toggle="dropdown">
+            {{province}}
+            <i class="fa fa-caret-down"></i>
+        </span>
+
+        <ul class="dropdown-menu">
+            <li>
+                <div class="cityWrap" style="margin-left:0px;">
+                    <span ng-click="provinceSel({code:'',address:'选择省份'})" class="cityItem">全部</span>
+                </div>
+            </li>
+            <li ng-repeat="(p,v) in provinces">
+                <span class="provincesLabel">{{p}}</span>
+                <div class="cityWrap">
+                    <span ng-click="provinceSel(c)" ng-repeat="c in v" class="cityItem">{{c.address}}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="provinceWrap" style="position:relative;">
+        <span class="cityName" data-toggle="dropdown">
+            {{city}}
+            <i class="fa fa-caret-down"></i>
+        </span>
+        <ul class="dropdown-menu cityWrap">
+            <li ng-click="citySel('','选择城市')">
+                <span>全部</span>
+            </li>
+            <li ng-click="citySel(c,v)" ng-repeat="(c,v) in citySeled">
+                <span>{{v}}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="provinceWrap" style="position:relative;">
+        <span class="cityName" data-toggle="dropdown">
+            {{district}}
+            <i class="fa fa-caret-down"></i>
+        </span>
+        <ul class="dropdown-menu cityWrap">
+            <li ng-click="districtSel('','选择区域')" >
+                <span>全部</span>
+            </li>
+            <li ng-click="districtSel(c,v)" ng-repeat="(c,v) in districtSeled">
+                <span>{{v}}</span>
+            </li>
+        </ul>
+    </div>
+</div>

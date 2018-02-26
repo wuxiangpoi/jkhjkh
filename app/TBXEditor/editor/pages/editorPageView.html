@@ -1,0 +1,99 @@
+<div class="qmedia-editor-page"
+     ng-style="{'width':size+'px','height':size+'px'}"
+     ng-switch="page.ver">
+
+    <div class="page-canvas page-view-canvas"
+         ng-switch-when="1"
+         ng-style="{
+             'font-size':fontSize+'px',
+             'width':pixelHorizontal+'px',
+             'height':pixelVertical+'px',
+             '-webkit-transform':'translate3d(-50%,-50%,0) scale('+ (programSize/originalPixel) +')',
+             '-moz-transform':'translate3d(-50%,-50%,0) scale('+ (programSize/originalPixel) +')',
+             '-ms-transform':'translate3d(-50%,-50%,0) scale('+ (programSize/originalPixel) +')',
+             '-o-transform':'translate3d(-50%,-50%,0) scale('+ (programSize/originalPixel) +')',
+             'transform':'translate3d(-50%,-50%,0) scale('+ (programSize/originalPixel) +')'
+         }">
+
+        <!-- 背景图层 -->
+        <div class="editor-page-container">
+            <editor-element-background back-ground="page.background"></editor-element-background>
+        </div>
+
+        <!-- 元素图层 -->
+        <div class="editor-page-container" ng-mousedown="$event.preventDefault()">
+            <!-- 布局层 -->
+            <editor-element-layout
+                    ng-repeat="ele in page.elements"
+                    ng-if="ele.ver===1"
+                    layout="ele.layout">
+                <!-- 3D转换及动画层 -->
+                <editor-element-transform>
+                    <!-- 背景层 -->
+                    <editor-element-background
+                            back-ground="ele.background"
+                            border="ele.border">
+                    </editor-element-background>
+                    <!-- 边框层 -->
+                    <editor-element-border border="ele.border">
+                        <!-- 滤镜层 -->
+                        <editor-element-filter
+                                filter="ele.filter"
+                                ng-switch="ele.type">
+
+                            <editor-element-text
+                                    ng-switch-when="100"
+                                    data="ele.data">
+                            </editor-element-text>
+
+                            <editor-element-marquee
+                                    ng-switch-when="150"
+                                    data="ele.data"
+                                    original-pixel="originalPixel">
+                            </editor-element-marquee>
+
+                            <editor-element-text-marquee
+                                    ng-switch-when="160"
+                                    data="ele.data"
+                                    original-pixel="originalPixel">
+                            </editor-element-text-marquee>
+
+                            <editor-element-image
+                                    ng-switch-when="200"
+                                    data="ele.data">
+                            </editor-element-image>
+
+                            <editor-element-carousel-view
+                                    ng-switch-when="250"
+                                    data="ele.data"
+                                    original-pixel="originalPixel">
+                            </editor-element-carousel-view>
+
+                            <editor-element-video
+                                    ng-switch-when="300"
+                                    data="ele.data">
+                            </editor-element-video>
+
+                            <editor-element-serie-view
+                                    ng-switch-when="350"
+                                    data="ele.data">
+                            </editor-element-serie-view>
+
+                            <editor-element-time
+                                    ng-switch-when="500"
+                                    data="ele.data">
+                            </editor-element-time>
+
+                            <editor-element-webview
+                                    ng-switch-when="900"
+                                    data="ele.data">
+                            </editor-element-webview>
+
+                        </editor-element-filter>
+                    </editor-element-border>
+                </editor-element-transform>
+            </editor-element-layout>
+        </div>
+
+    </div>
+</div>

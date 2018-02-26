@@ -1,0 +1,43 @@
+<div class="dmbd-imageViewer2">
+    <div class="image-part">
+        <div class="image"
+             ng-style="{'background-image':'url(\''+(data.url)+'\')'}"></div>
+        <div class="control-mask image-mask">
+            <div class="control-panel image-panel">
+                <button ng-click="selectImage($event)">{{buttonText}}</button>
+            </div>
+        </div>
+        <div class="info-mask image-mask" ng-class="{'hidden':!isShowMore}">
+            <div class="info-panel image-panel">
+                <table class="info-table">
+                    <tr>
+                        <td class="td-left"><label>文件大小：</label></td>
+                        <td class="td-right"><span>{{data.size|dmbdResourceSizeFilter}}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-left"><label>分&nbsp;辨&nbsp;率：</label></td>
+                        <td class="td-right"><span>{{data.width}} × {{data.height}}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-left"><label>图片类型：</label></td>
+                        <td class="td-right"><span>{{data.mime}}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td-left"><label>创建时间：</label></td>
+                        <td class="td-right"><span>{{data.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="title-part">
+        <div class="left-title" title="{{data.name}}">{{data.name}}</div>
+        <div class="right-more">
+            <button class="fa fa-info-circle"
+                    ng-class="{'clickDown':isMoreDown}"
+                    ng-click="mouseClick($event)"
+                    ng-mouseenter="mouseEnter($event)"
+                    ng-mouseleave="mouseLeave($event)"></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="editor-form-group">
+
+    <div class="editor-form-version">
+
+        <section class="editor-form-section editor-form-section-input">
+            <editor-control-is-multiple is-multiple="data.isMultiple"
+                                        on-change="isMultipleChange(newVal, oldVal)"></editor-control-is-multiple>
+        </section>
+
+        <section class="editor-form-section editor-form-section-input">
+            <textarea rows="5" placeholder="请在这里输入内容"
+                      ng-model="data.value" spellcheck="false"
+                      ng-focus="valueFocus(data.value)"
+                      ng-blur="valueBlur(data.value)"
+                      class="editor-form-txtArea-input"></textarea>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">字体</label>
+            <editor-control-font font="data.font"
+                                 on-change="fontChange(newVal, oldVal)"></editor-control-font>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">颜色</label>
+            <editor-control-rgb-color rgb-color="data.color"
+                                      on-change="colorChange(newVal, oldVal)"></editor-control-rgb-color>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">大小</label>
+            <editor-control-range class="editor-form-range" min-val="10" max-val="50"
+                                  on-change="sizeChange(newVal, oldVal)"
+                                  val="data.size"></editor-control-range>
+            <span class="editor-form-span">{{data.size}}</span>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">水平<br/>对齐</label>
+            <editor-control-align-horizontal align="data.horizontalAlign"
+                                             on-change="horizontalAlignChange(newVal, oldVal)"></editor-control-align-horizontal>
+        </section>
+
+        <section class="editor-form-section">
+            <label class="editor-form-label">垂直<br/>对齐</label>
+            <editor-control-align-vertical align="data.verticalAlign"
+                                           on-change="verticalAlignChange(newVal, oldVal)"></editor-control-align-vertical>
+        </section>
+
+    </div>
+
+</div>

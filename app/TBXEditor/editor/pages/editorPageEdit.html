@@ -1,0 +1,145 @@
+<div class="qmedia-editor-page"
+     ng-style="{
+        'width':(pixelHorizontal>pixelVertical?size: (pixelHorizontal/pixelVertical)*size) +'px',
+        'height':(pixelHorizontal>pixelVertical? (pixelVertical/pixelHorizontal)*size:size)+'px'
+     }"
+     ng-switch="cache.currentPage.ver">
+
+    <div class="page-canvas page-edit-canvas"
+         ng-switch-when="1"
+         ng-style="{
+             'font-size':fontSize+'px',
+             'width':pixelHorizontal+'px',
+             'height':pixelVertical+'px',
+             '-webkit-transform':'translate3d(-50%,-50%,0) scale('+ (programSize/originalPixel) +')',
+             '-moz-transform':'translate3d(-50%,-50%,0) scale('+ (programSize/originalPixel) +')',
+             '-ms-transform':'translate3d(-50%,-50%,0) scale('+ (programSize/originalPixel) +')',
+             '-o-transform':'translate3d(-50%,-50%,0) scale('+ (programSize/originalPixel) +')',
+             'transform':'translate3d(-50%,-50%,0) scale('+ (programSize/originalPixel) +')'
+         }"
+         ng-click="unSelectElement($event)">
+
+        <!-- 背景图层 -->
+        <div class="editor-page-container">
+            <editor-element-background
+                    back-ground="cache.currentPage.background">
+            </editor-element-background>
+        </div>
+
+        <!-- 元素图层 -->
+        <div class="editor-page-container" ng-mousedown="$event.preventDefault()">
+            <!-- 布局层 -->
+            <editor-element-layout
+                    ng-repeat="ele in cache.currentPage.elements"
+                    ng-if="ele.ver===1"
+                    layout="ele.layout"
+                    ng-click="selectElement(ele,$event)">
+                <!-- 3D转换及动画层 -->
+                <editor-element-transform>
+                    <!-- 背景层 -->
+                    <editor-element-background
+                            back-ground="ele.background"
+                            border="ele.border">
+                    </editor-element-background>
+                    <!-- 边框层 -->
+                    <editor-element-border border="ele.border">
+                        <!-- 滤镜层 -->
+                        <editor-element-filter
+                                filter="ele.filter"
+                                ng-switch="ele.type">
+
+                            <editor-element-text
+                                    ng-switch-when="100"
+                                    data="ele.data">
+                            </editor-element-text>
+
+                            <editor-element-text-marquee
+                                    ng-switch-when="160"
+                                    data="ele.data"
+                                    back-ground="ele.background"
+                                    original-pixel="originalPixel">
+                            </editor-element-text-marquee>
+
+                            <editor-element-marquee
+                                    ng-switch-when="150"
+                                    data="ele.data"
+                                    original-pixel="originalPixel">
+                            </editor-element-marquee>
+
+                            <editor-element-image
+                                    ng-switch-when="200"
+                                    data="ele.data">
+                            </editor-element-image>
+
+                            <editor-element-carousel
+                                    ng-switch-when="250"
+                                    data="ele.data"
+                                    original-pixel="originalPixel">
+                            </editor-element-carousel>
+
+                            <editor-element-video
+                                    ng-switch-when="300"
+                                    data="ele.data">
+                            </editor-element-video>
+
+                            <editor-element-serie
+                                    ng-switch-when="350"
+                                    data="ele.data">
+                            </editor-element-serie>
+
+                            <editor-element-time
+                                    ng-switch-when="500"
+                                    data="ele.data">
+                            </editor-element-time>
+
+                            <editor-element-webview
+                                    ng-switch-when="900"
+                                    data="ele.data">
+                            </editor-element-webview>
+
+                        </editor-element-filter>
+                    </editor-element-border>
+                </editor-element-transform>
+
+                <editor-element-mark
+                        layout="ele.layout"
+                        type="ele.type"
+                        data="ele.data"
+                        font-size="14*originalPixel/programSize"
+                        pixel-horizontal="pixelHorizontal"
+                        pixel-vertical="pixelVertical">
+                </editor-element-mark>
+
+                <!-- 拖放操作图层 -->
+                <editor-element-dragger
+                        ng-if="cache.currentElement&&cache.currentElement===ele"
+                        pixel-horizontal="pixelHorizontal"
+                        pixel-vertical="pixelVertical"
+                        horizontal-size="(pixelHorizontal<pixelVertical?pixelHorizontal/pixelVertical*programSize:programSize)"
+                        vertical-size="(pixelHorizontal<pixelVertical?programSize:pixelVertical/pixelHorizontal*programSize)"
+                        cache="cache"
+                        commit="commit({undo:undo,redo:redo})"
+                        font-size="14*originalPixel/programSize"
+                        on-select-single-image="onSelectSingleImage({image:image,callback:callback})"
+                        on-select-multiple-image="onSelectMultipleImage({images:images,callback:callback})"
+                        on-select-single-video="onSelectSingleVideo({video:video,callback:callback})"
+                        on-select-multiple-video="onSelectMultipleVideo({videos:videos,callback:callback})">
+                </editor-element-dragger>
+            </editor-element-layout>
+        </div>
+
+        <!-- 网格图层 -->
+        <div class="editor-page-container"
+             style="pointer-events: none;">
+            <editor-element-gridding
+                    cache="cache"
+                    pixel-horizontal="pixelHorizontal"
+                    pixel-vertical="pixelVertical"
+                    original-pixel="originalPixel"
+                    auto-anchor="autoAnchor"
+                    is-show-gridding="isShowGridding">
+            </editor-element-gridding>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="modal-header">
+	<h4 class="modal-title">{{title}}</h4>
+</div>
+<div class="modal-body managePlay" style="padding-top:0;padding-bottom:0;">
+
+	<div class="table-wrapper">
+		<table class="table" st-pipe="callServer" st-table="displayed">
+			<thead>
+				<tr>
+					<th st-sort="id">节目名称</th>
+					<th st-sort="name">播放日期</th>
+					<th st-sort="name">播放时段</th>
+					<th st-sort="">发布时间</th>
+					<!-- <th st-sort="">发布账号</th> -->
+				</tr>
+			</thead>
+			<tbody ng-show="!isLoading">
+				<tr ng-repeat="row in displayed">
+					<td class="tdClick" ng-click="showPlay(row)">{{row.name}}</td>
+					<td style="width:174px;">{{formateDate(row.startDate) + '至'+formateDate(row.endDate)}}</td>
+					<td>{{row.startTime.substr(0,5) + '至'+row.endTime.substr(0,5)}}</td>
+					<td>{{row.createTime ? $filter('date')(row.createTime, 'yyyy-MM-dd HH:mm:ss') : ''}}</td>
+					<!-- <td>{{row.userAccount}}</td> -->
+				</tr>
+			</tbody>
+			<tbody ng-include="'tpl/table.html'"></tbody>
+			<tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+		</table>
+	</div>
+</div>

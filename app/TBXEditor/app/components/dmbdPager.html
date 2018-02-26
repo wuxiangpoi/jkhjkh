@@ -1,0 +1,19 @@
+<div class="dmbd-pager">
+    <div>
+        <span class="fa fa-angle-double-left" ng-show="pageIndex>0" ng-click="goFirstPage()"></span>
+    </div>
+    <div>
+        <span class="fa fa-angle-left" ng-show="pageIndex>0" ng-click="goPrevPage()"></span>
+    </div>
+    <div ng-repeat="pagerData in pagerDataList">
+        <span ng-if="pagerData.isLink" ng-class="{'selected':pageIndex===pagerData.linkIndex}"
+              ng-click="goPageIndex(pagerData.linkIndex)">{{pagerData.linkIndex+1}}</span>
+        <label ng-if="!pagerData.isLink">...</label>
+    </div>
+    <div>
+        <span class="fa fa-angle-right" ng-show="pageIndex!==pageCount-1" ng-click="goNextPage()"></span>
+    </div>
+    <div>
+        <span class="fa fa-angle-double-right" ng-show="pageIndex!==pageCount-1" ng-click="goLastPage()"></span>
+    </div>
+</div>

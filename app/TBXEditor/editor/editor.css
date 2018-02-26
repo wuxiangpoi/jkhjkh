@@ -1,0 +1,526 @@
+@charset "utf-8";
+
+.qmedia-editor,
+.qmedia-editor * {
+    margin: 0;
+    padding: 0;
+    border: none;
+    -webkit-outline: none;
+    -moz-outline: none;
+    -ms-outline: none;
+    -o-outline: none;
+    outline: none;
+}
+
+.qmedia-editor * {
+    font-family: inherit;
+    font-style: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+.qmedia-editor table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.qmedia-editor a {
+    text-decoration: none;
+}
+
+.qmedia-editor ul,
+.qmedia-editor ol,
+.qmedia-editor dl,
+.qmedia-editor li,
+.qmedia-editor dd,
+.qmedia-editor dt {
+    list-style: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
+
+.qmedia-editor p,
+.qmedia-editor h1,
+.qmedia-editor h2,
+.qmedia-editor h3,
+.qmedia-editor h4,
+.qmedia-editor h5,
+.qmedia-editor h6 {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+
+.qmedia-editor button,
+.qmedia-editor input[type="button"] {
+    cursor: pointer;
+    background-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.qmedia-editor ::-webkit-scrollbar {
+    /*高宽分别对应横竖滚动条的尺寸*/
+    width: 8px;
+    height: 8px;
+}
+
+.qmedia-editor ::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: #939393;
+}
+
+.qmedia-editor ::-webkit-scrollbar-thumb:hover {
+    background: #737373;
+}
+
+.qmedia-editor ::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    background: #fdfdfd;
+}
+
+/* 水印样式 */
+.qmedia-editor ::-webkit-input-placeholder {
+    color: #dddddd;
+}
+
+.qmedia-editor :-ms-input-placeholder {
+    color: #dddddd;
+}
+
+.qmedia-editor :-moz-placeholder {
+    color: #dddddd;
+}
+
+.qmedia-editor ::-moz-placeholder {
+    color: #dddddd;
+}
+
+.qmedia-editor {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    /* 禁止选中 */
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    /*font-family: sans-serif;*/
+    font-style: normal;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.4;
+}
+
+.qmedia-editor > .editor-header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50px;
+    line-height: 50px;
+    background-color: #f1f2f5;
+    -webkit-box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.qmedia-editor > .editor-header > section {
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+
+.qmedia-editor > .editor-header > section > * {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.qmedia-editor > .editor-header > section > .left {
+    width: auto;
+    text-align: left;
+    white-space: nowrap;
+    float: none;
+}
+
+.qmedia-editor > .editor-header > section > .left > select {
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.qmedia-editor > .editor-header > section > .left > label,
+.qmedia-editor > .editor-header > section > .left > span {
+    color: #24243e;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.qmedia-editor > .editor-header > section > .left > span {
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.qmedia-editor > .editor-header > section > .left > .icon-qiehuanhengping:before {
+    font-size: 1.3em;
+    padding-right: 0.5em;
+    vertical-align: middle;
+}
+
+.qmedia-editor > .editor-header > section > .left > .icon-pingmubili {
+    margin-left: 2em;
+}
+
+.qmedia-editor > .editor-header > section > .left > .icon-pingmubili:before {
+    font-size: 1.3em;
+    padding-right: 0.5em;
+    vertical-align: middle;
+}
+
+.qmedia-editor > .editor-header > section > .left > .icon-xianshiwangge {
+    margin-left: 2em;
+}
+
+.qmedia-editor > .editor-header > section > .left > .icon-xianshiwangge:before {
+    font-size: 1.3em;
+    padding-right: 0.5em;
+    vertical-align: middle;
+}
+
+.qmedia-editor > .editor-header > section > .left > .scaleLabel {
+    margin-left: 2em;
+}
+
+.qmedia-editor > .editor-header > section > .left > .scaleRange {
+    vertical-align: middle;
+    font-size: 12px;
+    width: 100px;
+}
+
+.qmedia-editor > .editor-header > section > .right {
+    width: auto;
+    text-align: right;
+    float: none;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.qmedia-editor > .editor-header > section > .right > span {
+    padding: 5px 12px;
+    color: white;
+    font-size: 12px;
+    background-color: #00a0e9;
+    margin: 0 5px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.qmedia-editor > .editor-header > section > .right > span.disabled {
+    background-color: #c4c4c4;
+    cursor: default;
+}
+
+.qmedia-editor > .editor-header > section > .right > span:hover {
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.qmedia-editor > .editor-header > section > .right > span > .icon-chexiao,
+.qmedia-editor > .editor-header > section > .right > span > .icon-zhongzhi {
+    font-size: 20px;
+    vertical-align: middle;
+    cursor: inherit;
+}
+
+.qmedia-editor > .editor-body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50px;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.qmedia-editor > .editor-body > .left {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 190px;
+    background-color: #f6f7fa;
+}
+
+.qmedia-editor > .editor-body > .left > .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    background-color: #00b3ee;
+}
+
+.qmedia-editor > .editor-body > .left > .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0;
+}
+
+.qmedia-editor > .editor-body > .left > .bottom > button {
+    background-color: #00a0e9;
+    color: white;
+    font-size: 12px;
+    line-height: 1.4;
+    vertical-align: middle;
+    width: 80%;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.qmedia-editor > .editor-body > .left > .bottom > button.icon-tianjia:before {
+    font-size: 2.2em;
+    vertical-align: middle;
+    margin-right: 0.5em;
+}
+
+.qmedia-editor > .editor-body > .left > .bottom > button:hover {
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.qmedia-editor > .editor-body > .left > .middle {
+    position: absolute;
+    top: 0;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    overflow: auto;
+}
+
+.qmedia-editor > .editor-body > .right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 250px;
+    background-color: white;
+}
+
+/* 工具面板 */
+.qmedia-editor > .editor-body > .right > .tools-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #f6f7fa;
+}
+
+/* 工具属性样式 */
+.qmedia-editor > .editor-body > .right > .tools-panel .property_tools {
+    width: auto;
+    height: auto;
+    padding: 10px;
+}
+
+.qmedia-editor > .editor-body > .right > .tools-panel .property_tools:after,
+.qmedia-editor > .editor-body > .right > .tools-panel .property_tools::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.qmedia-editor > .editor-body > .right > .tools-panel .property_tools > li {
+    float: left;
+    width: 33.33%;
+    height: auto;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.qmedia-editor > .editor-body > .right > .tools-panel .property_tools > li > .button {
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.qmedia-editor > .editor-body > .right > .tools-panel .property_tools > li > .button:hover {
+    background-color: #e0e0e0;
+}
+
+.qmedia-editor > .editor-body > .right > .tools-panel .property_tools > li > .button > .icon {
+    display: block;
+    width: 100%;
+    font-size: 26px;
+    cursor: inherit;
+}
+
+.qmedia-editor > .editor-body > .right > .tools-panel .property_tools > li > .button > .text {
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    cursor: inherit;
+}
+
+/* 属性面板 */
+.qmedia-editor > .editor-body > .right > .properties-panel {
+    position: absolute;
+    top: 160px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f6f7fa;
+}
+
+.qmedia-editor > .editor-body > .right > .properties-panel .editor-property {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.qmedia-editor > .editor-body > .right > .properties-panel .editor-property-tabs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 32px;
+    line-height: 32px;
+    background-color: #f1f3f9;
+}
+
+.qmedia-editor > .editor-body > .right > .properties-panel .editor-property-tabs:after,
+.qmedia-editor > .editor-body > .right > .properties-panel .editor-property-tabs::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.qmedia-editor > .editor-body > .right > .properties-panel .editor-property-tabs > li {
+    float: left;
+    width: 15%;
+    height: 100%;
+    color: #24243e;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.qmedia-editor > .editor-body > .right > .properties-panel .editor-property-tabs > li:hover {
+    color: #00a0e9;
+}
+
+.qmedia-editor > .editor-body > .right > .properties-panel .editor-property-tabs > li.selected {
+    background-color: #f6f7fa;
+    color: #00a0e9;
+    cursor: default;
+}
+
+.qmedia-editor > .editor-body > .right > .properties-panel .editor-property-contents {
+    position: absolute;
+    top: 32px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+.qmedia-editor > .editor-body > .center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 190px;
+    right: 250px;
+    background-color: white;
+    border: solid 20px transparent;
+    overflow: auto;
+}
+
+/* 页面列表 */
+.qmedia-editor .page-list {
+    width: 170px;
+    margin: 0 auto;
+    padding: 10px 0;
+    position: relative;
+}
+
+.qmedia-editor .page-list > li {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    border: solid 1px #e2e2e2;
+    background-color: #f1f2f5;
+    margin: 10px 0;
+}
+
+.qmedia-editor .page-list > li > button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
+    color: #c4c4c4;
+    vertical-align: middle;
+    display: none;
+}
+
+.qmedia-editor .page-list > li:hover > button {
+    display: inline-block;
+}
+
+.qmedia-editor .page-list > li > button:hover {
+    color: #24243e;
+}
+
+.qmedia-editor .page-list > li:first-child {
+    margin-top: 0;
+}
+
+.qmedia-editor .page-list > li:last-child {
+    margin-bottom: 0;
+}
+
+.qmedia-editor .page-list > li:hover {
+    background-color: #f0f0f0;
+}
+
+.qmedia-editor .page-list > li.selected {
+    border-color: #00a0e9;
+    background-color: #f0f0f0;
+}
+
+.qmedia-editor .editor-page-openhand {
+    cursor: url("./assets/openhand.cur") 8 8, default;
+}
+
+.qmedia-editor .editor-page-closehand {
+    cursor: url("./assets/closedhand.cur") 8 8, move;
+}
