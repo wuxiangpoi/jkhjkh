@@ -35,12 +35,12 @@
                     <form id="mailForm" name="mailForm" novalidate>
                         <label class="col-sm-12">关联邮箱{{data.email}}</label>
                         <div class="col-sm-12">
-                            <input type="text" required ng-pattern="/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/" class="form-control"
-                                name="email" ng-model="data.email" />
+                            <input type="text" required ng-pattern="/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/" class="form-control" name="email"
+                                ng-model="data.email" />
                             <div class="help-block" ng-messages="mailForm.email.$error" ng-if="isShowMessage">
-                                    <p ng-message="required">请输入邮箱</p>
-                                    <p ng-message="pattern">请输入正确邮箱</p>
-                                </div>
+                                <p ng-message="required">请输入邮箱</p>
+                                <p ng-message="pattern">请输入正确邮箱</p>
+                            </div>
                         </div>
                         <label class="col-sm-12">验证码</label>
                         <div class="col-sm-12">
@@ -51,24 +51,30 @@
                                 <a ng-click="sendYz()" class="getYz" ng-class="{'disabled': isSend}">{{isSend?countdown + 's':'获取验证码'}}</a>
                             </div>
                             <div class="help-block" ng-messages="mailForm.yanz.$error" ng-if="isShowMessage">
-                                    <p ng-message="required">请输入验证码</p>
-                                </div>
+                                <p ng-message="required">请输入验证码</p>
+                            </div>
                         </div>
                     </form>
 
                 </div>
                 <div class="row" ng-show="step == 2">
-                    <form id="psd_form">
+                    <form id="psd_form" name="psdForm" novalidate>
                         <label class="col-sm-12">新密码</label>
                         <div class="col-sm-12">
-                            <input type="password" class="form-control" name="newPassword1" reg="/(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$/"
-                                maxlength="16" message="新密码6~16位，至少包含数字、字母、符号中的两种" ng-model="data.newPassword1" />
+                            <input type="password" class="form-control" name="newPassword1" ng-pattern="/(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$/"
+                                required ng-model="data.newPassword1" />
+                            <div class="help-block" ng-messages="psdForm.newPassword1.$error" ng-if="isShowMessage">
+                                <p ng-message="required">请输入密码</p>
+                                <p ng-message="required">新密码6~16位，至少包含数字、字母、符号中的两种</p>
+                            </div>
                         </div>
                         <label class="col-sm-12">确认密码</label>
                         <div class="col-sm-12">
-                            <input type="password" class="form-control" name="reNewPassword" equal="{{data.newPassword1}}" message="两次输入密码不一致" maxlength="16"
-                                ng-model="data.newPassword" />
-
+                            <input type="password" class="form-control" name="reNewPassword" message="两次输入密码不一致" ng-model="data.newPassword" />
+                            <div class="help-block" ng-messages="psdForm.reNewPassword.$error" ng-if="isShowMessage">
+                                <p ng-message="required">请输入确认密码</p>
+                                <p ng-message="required">两次输入密码不一致</p>
+                            </div>
                         </div>
                     </form>
 

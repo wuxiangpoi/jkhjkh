@@ -1,8 +1,13 @@
-    <tr>
-        <td ng-if="tableState.pagination.numberOfPages >= 2" colspan='2' class="text-left" style="vertical-align:top!important;width:50px;">每页
-            <select ng-init="10" ng-options="p for p in paginationNumber" ng-model="sp.length" ng-change="callServer(tableState)">
-            </select>条</td>
-
-        <td class="text-right" st-pagination="" st-template="tpl/pagination.html" st-items-by-page="sp.length" colspan="6">
-        </td>
-    </tr>
+<tr>
+    <td ng-if="tableState.pagination.numberOfPages >= 2" colspan='10' class="text-left" style="vertical-align:top!important;width:50px;">
+        <div class="fl">
+            每页
+            <span>
+                <select ng-init="10" ng-options="p for p in paginationNumber" ng-model="sp.length" ng-change="callServer(tableState)">
+                </select>
+            </span>
+            条
+        </div>
+        <div class="fr" st-pagination="" st-template="tpl/pagination.html" st-items-by-page="sp.length"></div>
+    </td>
+</tr>

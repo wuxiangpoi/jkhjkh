@@ -19,10 +19,7 @@ angular.module('sbAdminApp')
 					newPassword: '',
 					reNewPassword: ''
 				}
-				userService.getUserSrc(function (userData) {
-					$rootScope.userData = userData;
-					$rootScope.current_perms = userData.current_perms;
-				});
+				
 				$scope.updatePwd = function () {
 					baseService.confirmDialog(540, '修改密码', postData, 'tpl/update_password.html', function (ngDialog, vm) {
 						if (vm.updatePwdForm.$valid && postData.newPassword == postData.reNewPassword) {
@@ -45,9 +42,7 @@ angular.module('sbAdminApp')
 						baseService.goToUrl('/login')
 					})
 				}
-				$scope.toggleFullwidth = function () {
-					$('body').toggleClass('toggleFullwidth');
-				}
+				
 			}
 		}
 	});

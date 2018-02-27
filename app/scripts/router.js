@@ -36,10 +36,55 @@
                         }
                     }
                 })
+                .state('help', {
+                    url: '/help',
+                    controller: function($state){
+                        if($state.current.name == 'help'){
+                            $state.go('help.guide')
+                        }
+                    },
+                    templateUrl: 'scripts/modules/help/main.html',
+                })
+                .state('help.guide', {
+                    url: '/guide',
+                    templateUrl: 'scripts/modules/help/guide.html',
+                })
+                .state('help.statement', {
+                    url: '/statement',
+                    templateUrl: 'scripts/modules/help/statement.html',
+                })
+                .state('help.agreement', {
+                    url: '/agreement',
+                    templateUrl: 'scripts/modules/help/agreement.html',
+                })
+                .state('help.partner', {
+                    url: '/partner',
+                    templateUrl: 'scripts/modules/help/partner.html',
+                })
+                .state('help.aboutus', {
+                    url: '/aboutus',
+                    templateUrl: 'scripts/modules/help/aboutus.html',
+                })
                 .state('dashboard', {
                     url: '/dashboard',
                     templateUrl: 'tpl/main.html'
         
+                })
+                .state('dashboard.home', {
+                    url: '/home',
+                    controller: 'homeCtrl',
+                    templateUrl: 'scripts/modules/home/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'css/home/style.css',
+                                    'scripts/modules/home/index.js'
+                                ]
+                            })
+                        }
+                    }
                 })
                 .state('dashboard.terminal', {
                     url: '/terminal',
@@ -52,6 +97,21 @@
                                 files: [
                                     'css/terminal/style.css',
                                     'scripts/modules/terminal/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
+                .state('dashboard.programCommand', {
+                    url: '/programCommand',
+                    controller: 'programCommandCtrl',
+                    templateUrl: 'scripts/modules/programCommand/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/programCommand/index.js'
                                 ]
                             })
                         }

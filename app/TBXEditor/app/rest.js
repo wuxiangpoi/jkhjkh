@@ -28,9 +28,9 @@
 
     app.service('dmbdRest', ['$http', '$state', function ($http, $state) {
 
-        //var host = 'http://47.92.116.16:9090/TBXEditor/';
+        var host = 'http://47.92.116.16:9090/TBXEditor/';
 
-        var host = currentScriptFolder + '../';
+        //var host = currentScriptFolder + '../';
 
         function handlerResponse(response, success) {
             var result = response.data;

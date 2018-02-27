@@ -4,8 +4,36 @@
  * 这里放一些公用的
  */
 /* line 8, app/scss/common.scss */
+.txt-grey {
+  color: #9f9f9f;
+}
+.txt-green {
+  color: #0ac399;
+}
+.tex-red {
+  color: #ff4040;
+}
+.btn {
+  transition: .3s;
+  border-radius: 6px;
+}
+.btn-primary {
+  background: #00a0e9;
+  border: 1px solid #00a0e9;
+}
+.btn-primary:hover {
+  background: #19a7f0;
+  border: 1px solid #19a7f0;
+}
+.form-control {
+  padding-left: 5px;
+}
 a:focus {
   outline: none;
+  background: none!important;
+}
+li {
+  list-style-type: none;
 }
 .fl {
   float: left;
@@ -38,7 +66,10 @@ a:focus {
   background: red;
 }
 .tdClick {
-  color: #00a0e9;
+  color: #2c2c4c;
+  cursor: pointer;
+}
+select {
   cursor: pointer;
 }
 .form_right {
@@ -197,57 +228,21 @@ div.timeSelectWrap {
   -o-text-overflow: ellipsis;
   overflow: hidden;
 }
+.tableHeader {
+  margin-bottom: 20px;
+}
 .selectWrap {
-  line-height: 30px;
-  border-bottom: 1px solid #bbbbbb;
-  position: relative;
-  margin-left: 10px;
+  float: left;
 }
-.selectWrap .middle-select {
-  width: 100px;
-  cursor: pointer;
-  line-height: 30px;
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  border: 0;
-  text-align: left;
-  outline: none;
-}
-.selectWrap.first {
-  margin-left: 0px;
-}
-.selectWrap i.fa {
-  position: absolute;
-  right: 4px;
-  top: 8px;
-}
-.searchInputWrap {
-  border-bottom: 1px solid #bbbbbb;
-  position: relative;
-}
-.searchInputWrap .middle-input {
-  width: 100%;
-  line-height: 30px;
-  border: 0;
-  text-align: left;
-  outline: none;
-  padding-left: 5px;
-  padding-right: 25px;
-}
-.searchInputWrap i.fa {
-  position: absolute;
-  right: 4px;
-  top: 8px;
-  color: #00a0e9;
-}
-.serchBtn {
-  height: 34px;
-  line-height: 34px;
-  padding: 0 18px;
+.serchWrap .txtInputWrap {
+  width: 160px;
+  margin-right: 5px;
 }
 .table-wrapper > table {
   border-top: 1px solid #e2e3e6;
+}
+.table-wrapper > table tr.odd {
+  background: #f6f7fa;
 }
 .table-wrapper > table > thead > tr > th {
   border-bottom: 1px solid #e2e3e6;
@@ -271,7 +266,7 @@ div.timeSelectWrap {
   -o-text-overflow: ellipsis;
   overflow: hidden;
   padding: 0 8px!important;
-  line-height: 44px!important;
+  line-height: 38px!important;
 }
 .table-wrapper th input[type="checkbox"],
 .table-wrapper td input[type="checkbox"] {
@@ -283,45 +278,6 @@ div.timeSelectWrap {
 .table-wrapper .tableBtn {
   padding: 6px 14px;
   border: 0;
-}
-.table-wrapper .tableBtn.focus,
-.table-wrapper .tableBtn.active {
-  border: 0;
-}
-body.toggleFullwidth .main {
-  width: 100%!important;
-}
-body.toggleFullwidth .sidebar {
-  left: -260px !important;
-}
-body.toggleFullwidth .navbar-default {
-  padding-left: 20px;
-}
-body.toggleFullwidth .navbar-btn .fa.fa-chevron-left::before {
-  content: "\f054";
-}
-@media screen and (max-width: 1024px) {
-  body.toggleFullwidth .main {
-    width: calc(100% - 260px) !important;
-  }
-  body.toggleFullwidth .sidebar {
-    left: 0px!important;
-  }
-  body.toggleFullwidth .navbar-default {
-    padding-left: 280px!important;
-  }
-  body.toggleFullwidth .navbar-btn .fa.fa-chevron-left {
-    color: #fff!important;
-  }
-  body.toggleFullwidth .navbar-btn .fa.fa-chevron-left::before {
-    content: "\f053" !important;
-  }
-  .navbar-btn {
-    color: #fff!important;
-  }
-  .navbar-btn .fa.fa-chevron-left::before {
-    content: "\f054" !important;
-  }
 }
 .pagination {
   margin: 10px 0!important;
@@ -374,91 +330,12 @@ body.toggleFullwidth .navbar-btn .fa.fa-chevron-left::before {
 .modalDetail {
   font-size: 12px;
 }
+.modalDetail label {
+  font-weight: 400;
+}
 .modalDetail .form_input,
 .modalDetail .form_right {
   line-height: 24px;
-}
-.tabsNav {
-  border-bottom: 1px solid #00AAFF;
-  margin-bottom: 20px;
-}
-.tabsNav .tabsItem {
-  padding: 5px 10px;
-  display: inline-block;
-}
-.tabsNav .tabsItem.active {
-  background: #00AAFF;
-  color: #fff;
-}
-.cityPickerWrap .dropdown-menu {
-  width: 300px;
-}
-.cityPickerWrap .dropdown-menu > li {
-  line-height: 2;
-  clear: both;
-  padding: 3px 0;
-  margin: 0;
-}
-.cityPickerWrap .dropdown-menu > li .provincesLabel {
-  position: absolute;
-  width: 2.5em;
-  font-weight: 500;
-  text-align: right;
-  line-height: 2;
-}
-.cityPickerWrap .dropdown-menu > li .cityWrap {
-  margin-left: 3em;
-}
-.cityPickerWrap .dropdown-menu > li .cityWrap .cityItem {
-  display: inline-block;
-  padding: 0 10px;
-  outline: 0;
-  white-space: nowrap;
-  margin-right: 2px;
-  text-decoration: none;
-  color: #333;
-  cursor: pointer;
-}
-.cityPickerWrap .provinceWrap {
-  display: inline-block;
-}
-.cityPickerWrap .provinceWrap .cityName {
-  display: inline-block;
-  cursor: pointer;
-  line-height: 30px;
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  border: 0;
-  text-align: left;
-  outline: none;
-  border-bottom: 1px solid #bbbbbb;
-  position: relative;
-  min-width: 90px;
-  padding-right: 15px;
-}
-.cityPickerWrap .provinceWrap .cityName i.fa {
-  position: absolute;
-  right: 4px;
-  top: 8px;
-}
-.cityPickerWrap .provinceWrap ul.cityWrap {
-  line-height: 2;
-  clear: both;
-  padding: 3px 0;
-  margin: 0;
-}
-.cityPickerWrap .provinceWrap ul.cityWrap li {
-  margin-left: 0;
-  line-height: 2;
-  display: inline-block;
-  padding: 0 10px;
-  outline: 0;
-  white-space: nowrap;
-  margin-right: 2px;
-  text-decoration: none;
-  color: #333;
-  cursor: pointer;
 }
 .modalZtree {
   min-height: 300px;
@@ -633,6 +510,64 @@ body.toggleFullwidth .navbar-btn .fa.fa-chevron-left::before {
 .ztree li span.button.remove:before {
   content: "\e6f4";
 }
+.smenuSideBar {
+  position: fixed;
+}
+.smenuSideBar #menuSideBar {
+  width: 280px;
+}
+.smenuSideBar #menuSideBar li {
+  background: #fff;
+}
+.smenuSideBar #menuSideBar li a {
+  padding-left: 140px;
+  color: #000;
+}
+.smenuSideBar #menuSideBar li a:hover {
+  background: #fff;
+  color: #00a0e9;
+}
+.smenuSideBar #menuSideBar li a.active {
+  color: #00a0e9;
+  border-left: 4px solid #00a0e9;
+  padding-left: 136px;
+}
+.mainFrameTabs {
+  margin-left: 295px;
+  margin-right: 15px;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+.mainFrameTabs .page-header {
+  margin: 0;
+}
+.mainFrameTabs .ui_content_div {
+  padding: 20px 0;
+  line-height: 32px;
+  border-bottom: 1px solid #eee;
+}
+.mainFrameTabs h3 {
+  margin: 0 0 10px 0;
+}
+.mainFrameTabs .grid_wrapper .grid {
+  overflow: hidden;
+  padding: 0;
+  margin: 20px auto;
+}
+.mainFrameTabs .grid_wrapper .grid li {
+  float: left;
+  width: 130px;
+  height: 130px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
+  -moz-box-shadow: 0 0 4px #999;
+  -webkit-box-shadow: 0 0 4px #999;
+  box-shadow: 0 0 4px #999;
+}
+#wrapper {
+  background: #f1f2f5;
+}
 #topNav {
   height: 70px;
   background: #fff;
@@ -655,4 +590,19 @@ body.toggleFullwidth .navbar-btn .fa.fa-chevron-left::before {
   padding-right: 15px;
   text-decoration: none;
   color: #00a0e9;
+}
+#topNav .navbar-static-side {
+  margin-top: 70px;
+  position: fixed;
+  height: 100%;
+  background: #24243e;
+}
+.content-wrap {
+  margin: 90px 20px 0 270px;
+  padding: 15px;
+  background: #fff;
+  min-height: 400px;
+}
+.ngdialog-content .modal-header {
+  padding: 0 0 15px 0;
 }

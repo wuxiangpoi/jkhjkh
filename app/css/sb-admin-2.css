@@ -1,52 +1,37 @@
-/*!
- * Start Bootstrap - SB Admin 2 Bootstrap Admin Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
+/* Global Styles */
 
-body {
-    background-color: #44546E;
-}
+/* ------------------------------- */
 
 
+/* Wrappers */
 
-.row{
-    margin-left:0px;
-    margin-right:0px;
-}
+/* ------------------------------- */
 
 #wrapper {
     width: 100%;
 }
 
 #page-wrapper {
-    padding: 0 8px;
-    position: absolute;
-    top: 51px;
-    bottom: 0;
-    left: 200px;
-    right: 0;
+    padding: 0 15px;
+    min-height: 568px;
     background-color: #fff;
-    overflow: auto;
 }
 
 @media(min-width:768px) {
     #page-wrapper {
-        position: absolute;
-        top: 51px;
-        bottom: 0;
-        left: 200px;
-        right: 0;
-        padding: 0 8px;
+        position: inherit;
+        margin: 0 0 0 250px;
+        padding: 0 30px;
+        min-height: 1300px;
         border-left: 1px solid #e7e7e7;
-        overflow: auto;
-
     }
 }
 
-.navbar-top-links {
-    margin-right: 0;
-}
+/* Navigation */
+
+/* ------------------------------- */
+
+/* Top Right Navigation Dropdown Styles */
 
 .navbar-top-links li {
     display: inline-block;
@@ -102,65 +87,46 @@ body {
     left: auto;
 }
 
-.sidebar .sidebar-nav.navbar-collapse {
-    padding-right: 0;
-    padding-left: 0;
+/* Sidebar Menu Styles */
+
+.navbar-static-side ul li {
+    border-bottom: 1px solid #e7e7e7;
 }
 
-.sidebar .sidebar-search {
+.sidebar-search {
     padding: 15px;
 }
 
-
-.nav > li {
-    background: #44546E none repeat scroll 0 0;
-    border: medium none;
-    border-radius: 0;
-    padding: 0;
+.arrow {
+    float: right;
 }
 
-.nav > li >  a {
-    color: #B5C7D7;
-    line-height: 20px;
-    padding: 15px 10px;
-    text-decoration: none;
-}
-
-
-.nav > li >  a:hover, .nav > li >  a:focus,.nav > li >  a:active {
-    background-color: #364660;
-    color: #49CC97;
-}
-
-
-
-
-.sidebar .fa.arrow:before {
+.fa.arrow:before {
     content: "\f104";
 }
 
-.sidebar .active>a>.fa.arrow:before {
+.active > a > .fa.arrow:before {
     content: "\f107";
 }
 
-.sidebar .nav-second-level li,
-.sidebar .nav-third-level li {
-    border-bottom: 0!important;
+.nav-second-level li,
+.nav-third-level li {
+    border-bottom: none !important;
 }
 
-.sidebar .nav-second-level li a {
+.nav-second-level li a {
     padding-left: 37px;
 }
 
-.sidebar .nav-third-level li a {
+.nav-third-level li a {
     padding-left: 52px;
 }
 
 @media(min-width:768px) {
-    .sidebar {
+    .navbar-static-side {
         z-index: 1;
         position: absolute;
-        width: 200px;
+        width: 250px;
         margin-top: 51px;
     }
 
@@ -170,6 +136,24 @@ body {
         margin-left: auto;
     }
 }
+
+@media(max-height:600px) and (max-width:767px) {
+    .sidebar-collapse {
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+}
+
+@media(max-height:400px) and (max-width:767px) {
+    .sidebar-collapse {
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+}
+
+/* Buttons */
+
+/* ------------------------------- */
 
 .btn-outline {
     color: inherit;
@@ -205,6 +189,12 @@ body {
     color: #fff;
 }
 
+/* Pages */
+
+/* ------------------------------- */
+
+/* Dashboard Chat */
+
 .chat {
     margin: 0;
     padding: 0;
@@ -214,7 +204,7 @@ body {
 .chat li {
     margin-bottom: 10px;
     padding-bottom: 5px;
-    border-bottom: 1px dotted #999;
+    border-bottom: 1px dotted #B3A9A9;
 }
 
 .chat li.left .chat-body {
@@ -227,6 +217,7 @@ body {
 
 .chat li .chat-body p {
     margin: 0;
+    color: #777777;
 }
 
 .panel .slidedown .glyphicon,
@@ -239,9 +230,13 @@ body {
     overflow-y: scroll;
 }
 
+/* Login Page */
+
 .login-panel {
     margin-top: 25%;
 }
+
+/* Flot Chart Containers */
 
 .flot-chart {
     display: block;
@@ -253,21 +248,18 @@ body {
     height: 100%;
 }
 
-.dataTables_wrapper {
-    position: relative;
-    clear: both;
-}
+/* DataTables Overrides */
 
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc,
 table.dataTable thead .sorting_desc,
 table.dataTable thead .sorting_asc_disabled,
 table.dataTable thead .sorting_desc_disabled {
-    background: 0 0;
+    background: transparent;
 }
 
 table.dataTable thead .sorting_asc:after {
-  /** content: "\f0de";   **/
+    content: "\f0de";
     float: right;
     font-family: fontawesome;
 }
@@ -284,6 +276,8 @@ table.dataTable thead .sorting:after {
     font-family: fontawesome;
     color: rgba(50,50,50,.5);
 }
+
+/* Circle Buttons */
 
 .btn-circle {
     width: 30px;
@@ -313,71 +307,13 @@ table.dataTable thead .sorting:after {
     line-height: 1.33;
 }
 
-.show-grid [class^=col-] {
+.show-grid [class^="col-"] {
     padding-top: 10px;
     padding-bottom: 10px;
     border: 1px solid #ddd;
-    background-color: #eee!important;
+    background-color: #eee !important;
 }
 
 .show-grid {
     margin: 15px 0;
-}
-
-.huge {
-    font-size: 40px;
-}
-
-.panel-green {
-    border-color: #5cb85c;
-}
-
-.panel-green .panel-heading {
-    border-color: #5cb85c;
-    color: #fff;
-    background-color: #5cb85c;
-}
-
-.panel-green a {
-    color: #5cb85c;
-}
-
-.panel-green a:hover {
-    color: #3d8b3d;
-}
-
-.panel-red {
-    border-color: #d9534f;
-}
-
-.panel-red .panel-heading {
-    border-color: #d9534f;
-    color: #fff;
-    background-color: #d9534f;
-}
-
-.panel-red a {
-    color: #d9534f;
-}
-
-.panel-red a:hover {
-    color: #b52b27;
-}
-
-.panel-yellow {
-    border-color: #f0ad4e;
-}
-
-.panel-yellow .panel-heading {
-    border-color: #f0ad4e;
-    color: #fff;
-    background-color: #f0ad4e;
-}
-
-.panel-yellow a {
-    color: #f0ad4e;
-}
-
-.panel-yellow a:hover {
-    color: #df8a13;
 }
