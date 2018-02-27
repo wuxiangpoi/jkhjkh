@@ -103,7 +103,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  background: #fff;
+  background: #f1f2f5;
 }
 /* line 53, app/scss/common.scss */
 .w160 {
@@ -632,4 +632,27 @@ body.toggleFullwidth .navbar-btn .fa.fa-chevron-left::before {
 }
 .ztree li span.button.remove:before {
   content: "\e6f4";
+}
+#topNav {
+  height: 70px;
+  background: #fff;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 900;
+}
+#topNav .logoImg {
+  width: 220px;
+  height: auto;
+}
+#topNav .navbar-brand {
+  padding: 10px;
+}
+#topNav .loginBth {
+  line-height: 70px;
+  padding-right: 15px;
+  text-decoration: none;
+  color: #00a0e9;
 }

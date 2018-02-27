@@ -20,6 +20,22 @@
                         }
                     }
                 })
+                .state('password_find', {
+                    url: '/password_find',
+                    controller: 'password_findCtrl',
+                    templateUrl: 'scripts/modules/passwordFind/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'css/passwordFind/style.css',
+                                    'scripts/modules/passwordFind/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
                 .state('dashboard', {
                     url: '/dashboard',
                     templateUrl: 'tpl/main.html'
