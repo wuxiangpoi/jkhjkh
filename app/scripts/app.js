@@ -14,7 +14,6 @@ var app = angular.module('sbAdminApp', [
         'ui.bootstrap',
         'angularFileUpload',
         'moment-picker',
-        'imageViewer',
         'smart-table',
         'ngMessages',
         'baseService',
@@ -51,7 +50,7 @@ var app = angular.module('sbAdminApp', [
     ])
     .config(['ngDialogProvider', function (ngDialogProvider) {
         ngDialogProvider.setDefaults({
-            closeByDocument: false
+            closeByDocument: true
         });
     }])
     .config(['momentPickerProvider', function (momentPickerProvider) {

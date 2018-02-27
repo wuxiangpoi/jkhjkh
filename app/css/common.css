@@ -4,28 +4,6 @@
  * 这里放一些公用的
  */
 /* line 8, app/scss/common.scss */
-.btnGreen {
-  background: #0ac399 !important;
-  border: 0;
-}
-.btnGreen.active,
-.btnGreen.focus {
-  background: #0ac399 !important;
-}
-.btnGreen:hover {
-  background: #09b991!important;
-}
-.btbRed {
-  background: #f33c45 !important;
-  border: 0;
-}
-.btbRed.active,
-.btbRed.focus {
-  background: #f33c45 !important;
-}
-.btbRed:hover {
-  background: #ea3a43!important;
-}
 a:focus {
   outline: none;
 }
@@ -120,6 +98,11 @@ a:focus {
 /* line 49, app/scss/common.scss */
 .w120 {
   width: 120px !important;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 /* line 53, app/scss/common.scss */
 .w160 {

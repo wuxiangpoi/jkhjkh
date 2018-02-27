@@ -1,5 +1,5 @@
-<div class="loginContent">
-
+<div class="loginContainer">
+    <img src="img/defaultbg.jpg" class="loginBg">
     <div class="loginBox">
         <div class="loginContent">
 
@@ -9,24 +9,57 @@
             <div class="right">
                 <img src="img/logo.png" class="logo" />
                 <div class="title">
-                    智能营销传播系统管理后台
+                    智能营销传播系统
                 </div>
                 <div class="english">
                     Intelligent Marketing Communication System
                 </div>
-                <form name="loginForm" novalidate style=" text-align: center;margin-top: 30px;">
-                    <input type="text" name="account" placeholder="账户" class="txtinput" ng-model="account" required>
-                    <div class="help-block" style="padding-left:10%;" ng-messages="loginForm.account.$error" ng-if="isShowMessage">
-                        <p ng-message="required">请输入用户名</p>
-                      </div>
-                    <input type="password" name="password" placeholder="密码" class="txtinput" ng-model="password" required>
-                    <div class="help-block" style="padding-left:10%;" ng-messages="loginForm.password.$error" ng-if="isShowMessage">
-                        <p ng-message="required">请输入密码</p>
-                      </div>
+                <form name="loginForm" id="loginForm" novalidate style=" text-align: center;margin-top: 10px;">
+                    <div class="form-group">
+                        <input class="form-control" name="domain" placeholder="企业代码" class="txtinput" ng-model="account" required>
+                        <div class="help-block" style="padding-left:10%;" ng-messages="loginForm.account.$error" ng-if="isShowMessage">
+                            <p ng-message="required">请输入企业代码</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" name="domain" placeholder="账户" class="txtinput" ng-model="account" required>
+                        <div class="help-block" style="padding-left:10%;" ng-messages="loginForm.account.$error" ng-if="isShowMessage">
+                            <p ng-message="required">请输入用户名</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" name="password" placeholder="密码" class="txtinput" ng-model="password" required>
+                        <div class="help-block" style="padding-left:10%;" ng-messages="loginForm.password.$error" ng-if="isShowMessage">
+                            <p ng-message="required">请输入密码</p>
+                        </div>
+                    </div>
+                    <div class="chkdiv">
+                        <div class="left">
+                            <input type="checkbox" id="login_remember">
+                            <label for="login_remember">记住账户</label>
+                        </div>
+                        <a ui-sref="password_find" class="fr">忘记密码？</a>
+                    </div>
                     <button type="button" id="form_modal_btn" class="subbtn" ng-click="login()">登录</button>
                 </form>
             </div>
-
+            <div class="helpNavWrap">
+                <div class="helpNav">
+                    <a ui-sref="help.guide">新手指南</a>
+                </div>
+                <div class="helpNav">
+                    <a ui-sref="help.statement">法律声明</a>
+                </div>
+                <div class="helpNav">
+                    <a ui-sref="help.agreement">服务协议</a>
+                </div>
+                <div class="helpNav">
+                    <a ui-sref="help.partner">合作伙伴</a>
+                </div>
+                <div class="helpNav">
+                    <a ui-sref="help.aboutus">关于我们</a>
+                </div>
+            </div>
         </div>
     </div>
 

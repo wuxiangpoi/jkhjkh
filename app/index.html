@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="sbAdminApp">
+<html>
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -14,13 +14,6 @@
     <title>智能营销传播系统管理后台</title>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <base href="/">
-    <style>
-        .loading-mask {
-            text-align: center;
-            padding-top: 18%;
-            background-color: #fff;
-        }
-    </style>
     <!-- build:css css/combined.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
@@ -31,25 +24,10 @@
     <link rel="stylesheet" href="bower_components/zTree/zTreeStyle.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="css/font/iconfont.css" />
-    <link rel="stylesheet" href="css/animate.css" />
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/animate.css"/>
+    <link rel="stylesheet" href="css/sb-admin-2.css" />
     <link rel="stylesheet" href="css/common.css" />
-    <!-- 编辑器模块样式 -->
-    <link href="css/editor/assets/font_icon/iconfont.css" rel="stylesheet">
-    <link href="css/editor/editor.css" rel="stylesheet">
-    <link href="css/editor/pages/pages.css" rel="stylesheet">
-    <link href="css/editor/elements/elements.css" rel="stylesheet">
-    <link href="css/editor/forms/forms.css" rel="stylesheet">
-    <link href="css/editor/controls/controls.css" rel="stylesheet">
-    <!-- 节目预览样式 -->
-    <link href="css/editor/parser.css" rel="stylesheet">
-    <!-- 轮播动画 -->
-    <link href="css/editor/animation.css" rel="stylesheet">
-    <!-- 对话框样式 -->
-    <link href="css/editor/dialogs.css" rel="stylesheet">
-    <!-- 组件样式 -->
-    <link href="css/editor/dmbd.css" rel="stylesheet">
-    <!-- endbuild -->
+   
 </head>
 
 <body ng-app="sbAdminApp" id="sbAdminApp">
@@ -84,45 +62,18 @@
     <!-- endbuild -->
     <!-- build:js scripts/vendor.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/ocLazyLoad.config.js"></script>
     <script src="scripts/router.js"></script>
-    <script src="scripts/env.js"></script>
     <script src="scripts/directives/headerBar/index.js"></script>
-    <script src="scripts/directives/siderBar/index.js"></script>
-    <script src="scripts/directives/cityPicker/index.js"></script>
     <script src="scripts/directives/zTree.js"></script>
-    <!-- 编辑器模块指令 -->
-    <script src="TBXEditor/editor/editorDirective.js"></script>
-    <script src="TBXEditor/editor/pages/pageDirectives.js"></script>
-    <script src="TBXEditor/editor/elements/elementDirectives.js"></script>
-    <script src="TBXEditor/editor/forms/formDirectives.js"></script>
-    <script src="TBXEditor/editor/controls/controlDirectives.js"></script>
-    <!-- 节目预览解析器 -->
-    <script src="TBXEditor/preview/js/parser.js"></script>
-    <!-- 数组扩展 -->
-    <script src="TBXEditor/public/array.js"></script>
-    <!-- 公用 -->
-    <script src="TBXEditor/app/rest.js"></script>
-    <script src="TBXEditor/app/filters.js"></script>
-    <script src="TBXEditor/app/components/directives.js"></script>
+    
     <!--  services start -->
-    <script src="scripts/services/transDateTime.js"></script>
-    <script src="scripts/services/customHTTPInterceptor.js"></script>
     <script src="scripts/services/angular-locale_zh-cn.js"></script>
-    <script src="scripts/services/image-viewer.js"></script>
     <script src="scripts/services/baseService.js"></script>
     <script src="scripts/services/userService.js"></script>
-    <script src="scripts/directives/eCharts.js"></script>
-    <script src="scripts/directives/eChartMap.js"></script>
-    <script src="scripts/directives/eChartMeter.js"></script>
     <script src="scripts/directives/sentencesService.js"></script>
 
     <!-- 服务 -->
-    <script src="TBXEditor/dialogs/dialogServices.js"></script>
-    <script src="TBXEditor/program/programService.js"></script>
-    <script src="TBXEditor/dialogs/imageService.js"></script>
-    <script src="TBXEditor/dialogs/videoService.js"></script>
-    <script src="TBXEditor/template/templateService.js"></script>
+   
 
     <!--  services end -->
     <!--  filters start -->
@@ -130,6 +81,66 @@
     <!--  filters end -->
     <!-- endbuild -->
     <!--  js start -->
+    <!-- <link href="styles/morrisjs/morris.css" rel="stylesheet"> -->
+    <!-- <script src="./bower_components/jquery/dist/jquery.js"></script> -->
+    <script src="TBXEditor/bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="TBXEditor/bower_components/layer/build/layer.js"></script>
+
+    <!-- ng-dialog -->
+    <link href="TBXEditor/bower_components/ng-dialog/css/ngDialog.min.css" rel="stylesheet">
+    <link href="TBXEditor/bower_components/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet">
+
+    <script src="TBXEditor/bower_components/angular-ui-sortable/sortable.js"></script>
+    <!-- 编辑器模块样式 -->
+    <link href="TBXEditor/editor/assets/font_icon/iconfont.css" rel="stylesheet">
+    <link href="TBXEditor/editor/editor.css" rel="stylesheet">
+    <link href="TBXEditor/editor/pages/pages.css" rel="stylesheet">
+    <link href="TBXEditor/editor/elements/elements.css" rel="stylesheet">
+    <link href="TBXEditor/editor/forms/forms.css" rel="stylesheet">
+    <link href="TBXEditor/editor/controls/controls.css" rel="stylesheet">
+
+    <!-- 节目预览样式 -->
+    <link href="TBXEditor/preview/css/parser.css" rel="stylesheet">
+    <!-- 轮播动画 -->
+    <link href="TBXEditor/public/animation.css" rel="stylesheet">
+    <!-- 对话框样式 -->
+    <link href="TBXEditor/dialogs/dialogs.css" rel="stylesheet">
+    <!-- 组件样式 -->
+    <link href="TBXEditor/app/components/dmbd.css" rel="stylesheet">
+
+
+    <script src="TBXEditor/bower_components/ng-dialog/js/ngDialog.min.js"></script>
+
+    <!-- 数组扩展 -->
+    <script src="TBXEditor/public/array.js"></script>
+    <!-- 敏感词过滤 -->
+    <script src="TBXEditor/public/sentences.js"></script>
+
+    <!-- 编辑器模块指令 -->
+    <script src="TBXEditor/editor/editorDirective.js"></script>
+    <script src="TBXEditor/editor/pages/pageDirectives.js"></script>
+    <script src="TBXEditor/editor/elements/elementDirectives.js"></script>
+    <script src="TBXEditor/editor/forms/formDirectives.js"></script>
+    <script src="TBXEditor/editor/controls/controlDirectives.js"></script>
+
+    <!-- 节目预览解析器 -->
+    <script src="TBXEditor/preview/js/parser.js"></script>
+
+    <!-- 公用 -->
+    <script src="TBXEditor/app/rest.js"></script>
+    <script src="TBXEditor/app/filters.js"></script>
+    <script src="TBXEditor/app/components/directives.js"></script>
+
+    <!-- 服务 -->
+    <script src="TBXEditor/dialogs/dialogServices.js"></script>
+    <script src="TBXEditor/dialogs/imageService.js"></script>
+    <script src="TBXEditor/dialogs/videoService.js"></script>
+    <script src="TBXEditor/program/programService.js"></script>
+    <script src="TBXEditor/template/templateService.js"></script>
+
+    <!-- 控制器 -->
+    <script src="TBXEditor/program/programController.js"></script>
+    <script src="TBXEditor/template/templateController.js"></script>
     <script src="http://api.map.baidu.com/api?v=2.0&ak=hWot28fmyYXe1AMOfBfHoMMfSlnVnkeb"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
