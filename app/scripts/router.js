@@ -102,6 +102,36 @@
                         }
                     }
                 })
+                .state('dashboard.materialCheck', {
+                    url: '/materialCheck',
+                    controller: 'materialCheckCtrl',
+                    templateUrl: 'scripts/modules/materialCheck/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/materialCheck/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
+                .state('dashboard.terminalCommand', {
+                    url: '/terminalCommand',
+                    controller: 'terminalCommandCtrl',
+                    templateUrl: 'scripts/modules/terminalCommand/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/terminalCommand/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
                 .state('dashboard.programCommand', {
                     url: '/programCommand',
                     controller: 'programCommandCtrl',

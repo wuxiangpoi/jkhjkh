@@ -15,6 +15,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             terminal: apiUrl + '/api/terminal/',
             program: apiUrl + '/api/program/',
             programCmd: apiUrl + '/api/programCmd/',
+            terminalCmd: apiUrl + '/api/terminalCmd/',
             role: apiUrl + '/api/role/',
             user: apiUrl + '/api/user/',
             organization: apiUrl + '/api/organization/',
@@ -218,6 +219,10 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 return day.toString();
             }
         },
+        dmbdOSSImageUrlResizeFilter: function(imgUrl, size){
+                var joinChar = imgUrl.indexOf('?') >= 0 ? '&' : '?';
+                return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,' + size + ',w_' + size;
+        },
         showProgram: function(item){
             var me = this;
            
@@ -231,6 +236,16 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 }, function (vm) {
                     vm.program = program;
                 });
+            });
+            
+        },
+        showMaterial: function(item,detailType){
+            item.detailType = detailType;
+            item.nUrl = baseService.dmbdOSSImageUrlResizeFilter(item.path,400);
+            this.confirmDialog(750, '素材详情', item, "tpl/material_detail.html", function (ngDialog, vm) {
+
+            }, function (vm) {
+                
             });
             
         }

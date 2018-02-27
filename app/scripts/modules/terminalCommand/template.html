@@ -1,0 +1,60 @@
+<div class="content-wrap" style="min-width:740px;">
+    <div class="tableHeader clearfix">
+        <div class="selectWrap">
+            <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+                <option value="">下发状态</option>
+                <option value="1">下发成功</option>
+                <option value="2">下发失败</option>
+                <option value="3">正在下发</option>
+            </select>
+        </div>
+        <div class="serchWrap fr">
+            <div class="fl txtInputWrap">
+                <input class="form-control" ng-model="sp.user" placeholder="用户账号/名称">
+            </div>
+            <div class="fl txtInputWrap">
+                <input class="form-control" ng-model="sp.terminal" placeholder="终端编号/名称">
+            </div>
+            <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
+        </div>
+
+    </div>
+    <div class="table-wrapper">
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <thead>
+                <tr>
+                    <th>终端编号</th>
+                    <th>终端名称</th>
+                    <th>用户账号</th>
+                    <th>命令代码</th>
+                    <th>命令名称</th>
+                    <th>下发状态</th>
+                    <th>下发时间</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+                <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
+                    <td>{{row.terNo}}</td>
+                    <td>{{row.terName}}</td>
+                    <td>{{row.userAccount}}</td>
+                    <td>
+                        {{row.cmdCode}}
+                    </td>
+                    <td>
+                        {{getRootDicName('terminal_cmd', row.cmdCode)}}
+                    </td>
+                    <td>
+                        <div class="txt-green" ng-if="row.status == 1">下发成功</div>
+                        <div class="txt-grey" ng-if="row.status == 2">下发失败</div>
+                        <div ng-if="row.status == 3">正在下发</div>
+                    </td>
+                    <td>
+                        {{row.sendTime | formateTime}}
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-include="'tpl/table.html'"></tbody>
+            <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+        </table>
+    </div>
+</div>

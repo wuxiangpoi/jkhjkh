@@ -19,7 +19,7 @@ var app = angular.module('sbAdminApp', [
         'baseService',
         'userService',
         'qmedia.editor'
-    ]).run(function ($rootScope, $state, $location, $stateParams, $filter, ngDialog, baseService,userService) {
+    ]).run(function ($rootScope, $state, $location, $stateParams, $filter, ngDialog, baseService, userService) {
         $rootScope.paginationNumber = [10, 15, 20, 30, 50, 100];
         $rootScope.$on('$stateChangeSuccess', function () {
             window.scrollTo(0, 0);
@@ -44,19 +44,22 @@ var app = angular.module('sbAdminApp', [
 
         });
         $rootScope.getRootDicName = function (key, did) {
-			var ar = $rootScope.userData.root_dic[key];
-			for (var i in ar) {
-				if (ar.hasOwnProperty(i)) {
-	
-					var _dic = ar[i];
-					if (_dic.val == did) {
-						return _dic.name;
-					}
-				}
-			}
-			return "";
-		
-	}
+            var ar = $rootScope.userData.root_dic[key];
+            for (var i in ar) {
+                if (ar.hasOwnProperty(i)) {
+
+                    var _dic = ar[i];
+                    if (_dic.val == did) {
+                        return _dic.name;
+                    }
+                }
+            }
+            return "";
+
+        }
+        $rootScope.perms = function (rid) {
+            return ("," + $rootScope.userData.current_perms + ",").indexOf("," + rid + ",") > -1 ? true : false;
+        }
     })
     .config(['$urlRouterProvider', '$locationProvider',
         function ($urlRouterProvider, $locationProvider) {

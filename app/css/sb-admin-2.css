@@ -89,14 +89,6 @@
 
 /* Sidebar Menu Styles */
 
-.navbar-static-side ul li {
-    border-bottom: 1px solid #e7e7e7;
-}
-
-.sidebar-search {
-    padding: 15px;
-}
-
 .arrow {
     float: right;
 }
@@ -122,34 +114,6 @@
     padding-left: 52px;
 }
 
-@media(min-width:768px) {
-    .navbar-static-side {
-        z-index: 1;
-        position: absolute;
-        width: 250px;
-        margin-top: 51px;
-    }
-
-    .navbar-top-links .dropdown-messages,
-    .navbar-top-links .dropdown-tasks,
-    .navbar-top-links .dropdown-alerts {
-        margin-left: auto;
-    }
-}
-
-@media(max-height:600px) and (max-width:767px) {
-    .sidebar-collapse {
-        max-height: 300px;
-        overflow-y: scroll;
-    }
-}
-
-@media(max-height:400px) and (max-width:767px) {
-    .sidebar-collapse {
-        max-height: 200px;
-        overflow-y: scroll;
-    }
-}
 
 /* Buttons */
 

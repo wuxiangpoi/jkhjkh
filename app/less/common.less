@@ -91,6 +91,9 @@ li {
 .tdClick {
   color:#2c2c4c;
   cursor: pointer;
+  &:hover {
+    color: @main-color;
+  }
 }
 
 select {
@@ -333,8 +336,14 @@ div.timeSelectWrap {
     }
   }
   .tableBtn {
-    padding: 6px 14px;
-    border: 0;
+    background: #fff;
+    color: #24243e;
+    font-size: 14px;
+    border: 1px solid #e2e3e7;
+    outline: 0;
+    border-radius: 6px;
+    padding: 0 10px;
+    line-height: 28px;
   }
 }
 
@@ -711,6 +720,55 @@ div.timeSelectWrap {
     position: fixed;
     height: 100%;
     background: #24243e;
+    width: 250px;
+    .nav {
+      li {
+        a {
+          color: #fff;
+          padding-left: 25px;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          .arrow {
+            line-height: 32px;
+          }
+          .iconfont {
+            display: inline-block;
+            font-size: 24px;
+            margin-right: 15px;
+            vertical-align: middle;
+            width: 32px;
+            height: 32px;
+          }
+          &.active {
+            color: @main-color;
+            background: #2c2c4c;
+          }
+          &:hover {
+            color: @main-color;
+            background: #2c2c4c;
+          }
+        }
+        .navSecondLevel {
+          cursor: pointer;
+          &.current {
+            background: #2c2c4c;
+            .arrow::before {
+              content: "\f107";
+            }
+          }
+          &+.nav-second-level {
+            background: #0f0c29;
+            li {
+              a {
+                font-size: 13px;
+                padding-left: 90px;
+                line-height: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 

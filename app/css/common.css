@@ -69,6 +69,9 @@ li {
   color: #2c2c4c;
   cursor: pointer;
 }
+.tdClick:hover {
+  color: #00a0e9;
+}
 select {
   cursor: pointer;
 }
@@ -276,8 +279,14 @@ div.timeSelectWrap {
   vertical-align: middle;
 }
 .table-wrapper .tableBtn {
-  padding: 6px 14px;
-  border: 0;
+  background: #fff;
+  color: #24243e;
+  font-size: 14px;
+  border: 1px solid #e2e3e7;
+  outline: 0;
+  border-radius: 6px;
+  padding: 0 10px;
+  line-height: 28px;
 }
 .pagination {
   margin: 10px 0!important;
@@ -596,6 +605,49 @@ div.timeSelectWrap {
   position: fixed;
   height: 100%;
   background: #24243e;
+  width: 250px;
+}
+#topNav .navbar-static-side .nav li a {
+  color: #fff;
+  padding-left: 25px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+#topNav .navbar-static-side .nav li a .arrow {
+  line-height: 32px;
+}
+#topNav .navbar-static-side .nav li a .iconfont {
+  display: inline-block;
+  font-size: 24px;
+  margin-right: 15px;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+}
+#topNav .navbar-static-side .nav li a.active {
+  color: #00a0e9;
+  background: #2c2c4c;
+}
+#topNav .navbar-static-side .nav li a:hover {
+  color: #00a0e9;
+  background: #2c2c4c;
+}
+#topNav .navbar-static-side .nav li .navSecondLevel {
+  cursor: pointer;
+}
+#topNav .navbar-static-side .nav li .navSecondLevel.current {
+  background: #2c2c4c;
+}
+#topNav .navbar-static-side .nav li .navSecondLevel.current .arrow::before {
+  content: "\f107";
+}
+#topNav .navbar-static-side .nav li .navSecondLevel + .nav-second-level {
+  background: #0f0c29;
+}
+#topNav .navbar-static-side .nav li .navSecondLevel + .nav-second-level li a {
+  font-size: 13px;
+  padding-left: 90px;
+  line-height: 24px;
 }
 .content-wrap {
   margin: 90px 20px 0 270px;

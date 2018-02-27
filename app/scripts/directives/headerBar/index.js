@@ -42,7 +42,15 @@ angular.module('sbAdminApp')
 						baseService.goToUrl('/login')
 					})
 				}
-				
+				$scope.collapseVar = 0;
+				$scope.check = function (x, $event) {
+					if (x == $scope.collapseVar)
+					  $scope.collapseVar = 0;
+					else {
+					  $scope.collapseVar = x;
+					}
+		  
+				  };
 			}
 		}
 	});
