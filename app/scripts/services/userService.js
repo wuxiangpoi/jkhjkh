@@ -2,7 +2,7 @@ var userService = angular.module('userService', []);
 baseService.factory('userService', ['baseService', function (baseService) {
     var userService = {
         getUserSrc: function (cb) {
-            baseService.getJson(baseService.api.auth + 'getAdminSrc', {}, function (userData) {
+            baseService.getJson(baseService.api.auth + 'getUserSrc', {}, function (userData) {
                 cb(userData)
             })
         },

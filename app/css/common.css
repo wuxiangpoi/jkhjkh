@@ -103,6 +103,7 @@ html,
 body {
   width: 100%;
   height: 100%;
+  background: #fff;
 }
 /* line 53, app/scss/common.scss */
 .w160 {
@@ -127,14 +128,18 @@ a.file input {
   top: 0;
   opacity: 0;
 }
+.form-group {
+  margin-bottom: 10px;
+}
 .help-block {
   margin: 0;
 }
 .help-block p {
-  color: red;
+  color: #ff4040;
   text-align: left;
   font-size: 12px;
   margin-bottom: 0;
+  padding-top: 5px;
 }
 div.timeSelectWrap {
   display: inline-block;

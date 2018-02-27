@@ -16,26 +16,26 @@
                 </div>
                 <form name="loginForm" id="loginForm" novalidate style=" text-align: center;margin-top: 10px;">
                     <div class="form-group">
-                        <input class="form-control" name="domain" placeholder="企业代码" class="txtinput" ng-model="account" required>
-                        <div class="help-block" style="padding-left:10%;" ng-messages="loginForm.account.$error" ng-if="isShowMessage">
+                        <input class="form-control" name="domain" placeholder="企业代码" class="txtinput" ng-model="domain" required>
+                        <div class="help-block" ng-messages="loginForm.domain.$error" ng-if="isShowMessage">
                             <p ng-message="required">请输入企业代码</p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" name="domain" placeholder="账户" class="txtinput" ng-model="account" required>
-                        <div class="help-block" style="padding-left:10%;" ng-messages="loginForm.account.$error" ng-if="isShowMessage">
+                        <input class="form-control" name="account" placeholder="账户" class="txtinput" ng-model="account" required>
+                        <div class="help-block" ng-messages="loginForm.account.$error" ng-if="isShowMessage">
                             <p ng-message="required">请输入用户名</p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" name="password" placeholder="密码" class="txtinput" ng-model="password" required>
-                        <div class="help-block" style="padding-left:10%;" ng-messages="loginForm.password.$error" ng-if="isShowMessage">
+                        <input type="password" class="form-control" name="password" placeholder="密码" class="txtinput" ng-model="password" required>
+                        <div class="help-block" ng-messages="loginForm.password.$error" ng-if="isShowMessage">
                             <p ng-message="required">请输入密码</p>
                         </div>
                     </div>
                     <div class="chkdiv">
                         <div class="left">
-                            <input type="checkbox" id="login_remember">
+                            <input ng-model="isRemembered" type="checkbox" id="login_remember">
                             <label for="login_remember">记住账户</label>
                         </div>
                         <a ui-sref="password_find" class="fr">忘记密码？</a>

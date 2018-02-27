@@ -9,6 +9,7 @@
 @txt-lh: 34px;
 @green: #0ac399;
 @red: #ff4040;
+@mainRadius: 8px;
 
 a:focus {
   outline: none;
@@ -133,6 +134,7 @@ a:focus {
 html,body {
   width: 100%;
   height: 100%;
+  background: #fff;
 }
 
 /* line 53, app/scss/common.scss */
@@ -162,13 +164,18 @@ a.file input {
   opacity: 0;
 }
 
+.form-group {
+  margin-bottom: 10px;
+}
+
 .help-block {
   margin: 0;
   p {
-    color: red;
+    color: @red;
     text-align: left;
     font-size: 12px;
     margin-bottom: 0;
+    padding-top: 5px; 
   }
 }
 
