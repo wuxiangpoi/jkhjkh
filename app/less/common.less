@@ -27,14 +27,49 @@
 .btn {
   transition: .3s;
   border-radius: @mainRadius;
+  outline: none;
+  &:focus {
+    outline: none;
+  }
 }
 
 .btn-primary {
   background: @main-color;
   border: 1px solid @main-color;
   &:hover {
-    background: #19a7f0;
-    border: 1px solid #19a7f0;
+    background: #58cbff;
+    border: 1px solid #58cbff;
+  }
+  .fa-spinner {
+    display: none;
+  }
+  &.disabled {
+    color: #a4a4a4!important;
+    background: #e2e3e6;
+    border: 1px solid #e2e3e6;
+    cursor: pointer;
+    .fa-spinner {
+      display: inline-block;
+      -webkit-transition-property: -webkit-transform;
+      -webkit-transition-duration: 1s;
+      -moz-transition-property: -moz-transform;
+      -moz-transition-duration: 1s;
+      -webkit-animation: rotate 3s linear infinite;
+      -moz-animation: rotate 3s linear infinite;
+      -o-animation: rotate 3s linear infinite;
+      animation: rotate 3s linear infinite;}
+      @-webkit-keyframes rotate{from{-webkit-transform: rotate(0deg)}
+        to{-webkit-transform: rotate(360deg)}
+      }
+      @-moz-keyframes rotate{from{-moz-transform: rotate(0deg)}
+      to{-moz-transform: rotate(359deg)}
+    }
+    @-o-keyframes rotate{from{-o-transform: rotate(0deg)}
+    to{-o-transform: rotate(359deg)}
+}
+    @keyframes rotate{from{transform: rotate(0deg)}
+    to{transform: rotate(359deg)}
+    }
   }
 }
 
@@ -42,7 +77,7 @@
   padding-left: 5px;
 }
 
-a:focus {
+a:focus,a:hover {
   outline: none;
   background: none!important;
   }
@@ -55,6 +90,14 @@ li {
 
 .fr {
   float: right;
+}
+
+.positionR {
+  position: relative;
+}
+
+.nowrap {
+  white-space:nowrap; 
 }
 
 .dibk {
@@ -98,6 +141,27 @@ li {
 
 select {
   cursor: pointer;
+}
+
+.vedioPre {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  top: 15px;
+  left: 25px;
+  color: #fff;
+  text-align: center;
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  & i {
+    margin-top: -4px;
+    display: block;
+}
 }
 
 .form_right {
@@ -693,6 +757,8 @@ div.timeSelectWrap {
   background: #f1f2f5;
 }
 
+
+
 #topNav {
   height: 70px;
   background: #fff;
@@ -705,9 +771,66 @@ div.timeSelectWrap {
   .logoImg {
     width: 220px;
     height: auto;
+    max-height: 55px;
   }
   .navbar-brand {
-    padding: 10px;
+    padding: 5px 10px;
+  }
+  .navbar-right {
+    height: 70px;
+    & > li {
+      top: 0;
+      margin-right: 30px;
+      &.open {
+        &>a {
+          background: #fff!important;
+        }
+      }
+      .userName {
+        display: inline-block;
+        margin: 0px 5px 0 10px;
+        color: #000;
+        vertical-align: 7px;
+      }
+      & > a {
+        padding: 0;
+        line-height: 62px;
+        cursor: pointer;
+        .icon-touxiang {
+          font-size: 36px;
+        }
+        &:focus {
+          background: #fff!important;
+        }
+        & > i {
+          font-size: 32px;
+          color: #000;
+        }
+        &:hover {
+          color: @main-color;
+          & > i {
+            color: @main-color;
+          }
+          .userName {
+            color: @main-color;
+          }
+        }
+      }
+      
+      .indicator {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        font-size: 10px;
+        background: #ff3e3e;
+        color: #fff;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        line-height: 20px;
+        text-align: center;
+      }
+    }
   }
   .loginBth {
     line-height: 70px;
@@ -772,6 +895,87 @@ div.timeSelectWrap {
   }
 }
 
+.dropdown-menu {
+  margin: 0;
+  padding: 0;
+  li {
+    margin-right: 0!important;
+    
+  }
+  &.dropdown-user {
+    li {
+      overflow: hidden;
+      a {
+        padding: 5px 0!important;
+        &:hover {
+          background: #f1f2f5!important;
+        }
+      }
+    }
+    .iconWrap {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      line-height: 36px;
+      text-align: center;
+      margin: 6px 10px;
+      i {
+        font-size: 20px;
+        color: #fff;
+        display: inline-block;
+        width: 22px;
+        height: 20px;
+        vertical-align: middle;
+      }
+    }
+  }
+  &.dropdown-message {
+    width: 220px;
+    height: 250px;
+    .dropdown-item {
+      padding: 5px 0;
+      cursor: pointer;
+      &:hover {
+        background: #f1f2f5;
+        color: @main-color;
+      }
+    }
+    h6 {
+      background: #fff;
+      padding: 8px 10px;
+      border-bottom: 1px solid #e2e3e6;
+      margin: 0;
+      font-size: 14px;
+      color: #24243e;
+      span.fr {
+        background: #ff4040;
+        padding: 5px 8px;
+        color: #fff;
+        border-radius: 6px;
+        line-height: 10px;
+        font-size: 12px;
+      }
+    }
+    span.messageLeft {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: red;
+      line-height: 36px;
+      text-align: center;
+      margin: 6px 10px;
+      i {
+      font-size: 20px;
+      color: #fff;
+      display: inline-block;
+      width: 22px;
+      height: 20px;
+    }
+    }
+  }
+}
+
 .content-wrap {
     margin: 90px 20px 0 270px;
     padding:15px;
@@ -783,5 +987,14 @@ div.timeSelectWrap {
 .ngdialog-content {
   .modal-header {
     padding: 0 0 15px 0;
+  }
+  .modal-footer {
+    border-top: none; 
+    text-align: center;
+    .btn {
+      display: inline-block;
+      line-height: 46px;
+      padding: 0 48px;
+    }
   }
 }

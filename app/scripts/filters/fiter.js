@@ -6,7 +6,11 @@
         }
     });
     //OSS图片裁减
-    
+    app.filter('play_url', function ($sce) {
+        return function (url) {
+            return $sce.trustAsResourceUrl(url);
+        }
+    });
     app.filter('programStatusTxt', function () {
         var programStatus = [{
                 name: '待提交审核',

@@ -16,19 +16,76 @@
 .btn {
   transition: .3s;
   border-radius: 6px;
+  outline: none;
+}
+.btn:focus {
+  outline: none;
 }
 .btn-primary {
   background: #00a0e9;
   border: 1px solid #00a0e9;
 }
 .btn-primary:hover {
-  background: #19a7f0;
-  border: 1px solid #19a7f0;
+  background: #58cbff;
+  border: 1px solid #58cbff;
+}
+.btn-primary .fa-spinner {
+  display: none;
+}
+.btn-primary.disabled {
+  color: #a4a4a4!important;
+  background: #e2e3e6;
+  border: 1px solid #e2e3e6;
+  cursor: pointer;
+}
+.btn-primary.disabled .fa-spinner {
+  display: inline-block;
+  -webkit-transition-property: -webkit-transform;
+  -webkit-transition-duration: 1s;
+  -moz-transition-property: -moz-transform;
+  -moz-transition-duration: 1s;
+  -webkit-animation: rotate 3s linear infinite;
+  -moz-animation: rotate 3s linear infinite;
+  -o-animation: rotate 3s linear infinite;
+  animation: rotate 3s linear infinite;
+}
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes rotate {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-o-keyframes rotate {
+  from {
+    -o-transform: rotate(0deg);
+  }
+  to {
+    -o-transform: rotate(359deg);
+  }
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
 .form-control {
   padding-left: 5px;
 }
-a:focus {
+a:focus,
+a:hover {
   outline: none;
   background: none!important;
 }
@@ -40,6 +97,12 @@ li {
 }
 .fr {
   float: right;
+}
+.positionR {
+  position: relative;
+}
+.nowrap {
+  white-space: nowrap;
 }
 .dibk {
   display: block;
@@ -74,6 +137,26 @@ li {
 }
 select {
   cursor: pointer;
+}
+.vedioPre {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  top: 15px;
+  left: 25px;
+  color: #fff;
+  text-align: center;
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+.vedioPre i {
+  margin-top: -4px;
+  display: block;
 }
 .form_right {
   text-align: right;
@@ -590,9 +673,63 @@ div.timeSelectWrap {
 #topNav .logoImg {
   width: 220px;
   height: auto;
+  max-height: 55px;
 }
 #topNav .navbar-brand {
-  padding: 10px;
+  padding: 5px 10px;
+}
+#topNav .navbar-right {
+  height: 70px;
+}
+#topNav .navbar-right > li {
+  top: 0;
+  margin-right: 30px;
+}
+#topNav .navbar-right > li.open > a {
+  background: #fff!important;
+}
+#topNav .navbar-right > li .userName {
+  display: inline-block;
+  margin: 0px 5px 0 10px;
+  color: #000;
+  vertical-align: 7px;
+}
+#topNav .navbar-right > li > a {
+  padding: 0;
+  line-height: 62px;
+  cursor: pointer;
+}
+#topNav .navbar-right > li > a .icon-touxiang {
+  font-size: 36px;
+}
+#topNav .navbar-right > li > a:focus {
+  background: #fff!important;
+}
+#topNav .navbar-right > li > a > i {
+  font-size: 32px;
+  color: #000;
+}
+#topNav .navbar-right > li > a:hover {
+  color: #00a0e9;
+}
+#topNav .navbar-right > li > a:hover > i {
+  color: #00a0e9;
+}
+#topNav .navbar-right > li > a:hover .userName {
+  color: #00a0e9;
+}
+#topNav .navbar-right > li .indicator {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 10px;
+  background: #ff3e3e;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
 }
 #topNav .loginBth {
   line-height: 70px;
@@ -649,6 +786,83 @@ div.timeSelectWrap {
   padding-left: 90px;
   line-height: 24px;
 }
+.dropdown-menu {
+  margin: 0;
+  padding: 0;
+}
+.dropdown-menu li {
+  margin-right: 0!important;
+}
+.dropdown-menu.dropdown-user li {
+  overflow: hidden;
+}
+.dropdown-menu.dropdown-user li a {
+  padding: 5px 0!important;
+}
+.dropdown-menu.dropdown-user li a:hover {
+  background: #f1f2f5!important;
+}
+.dropdown-menu.dropdown-user .iconWrap {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  line-height: 36px;
+  text-align: center;
+  margin: 6px 10px;
+}
+.dropdown-menu.dropdown-user .iconWrap i {
+  font-size: 20px;
+  color: #fff;
+  display: inline-block;
+  width: 22px;
+  height: 20px;
+  vertical-align: middle;
+}
+.dropdown-menu.dropdown-message {
+  width: 220px;
+  height: 250px;
+}
+.dropdown-menu.dropdown-message .dropdown-item {
+  padding: 5px 0;
+  cursor: pointer;
+}
+.dropdown-menu.dropdown-message .dropdown-item:hover {
+  background: #f1f2f5;
+  color: #00a0e9;
+}
+.dropdown-menu.dropdown-message h6 {
+  background: #fff;
+  padding: 8px 10px;
+  border-bottom: 1px solid #e2e3e6;
+  margin: 0;
+  font-size: 14px;
+  color: #24243e;
+}
+.dropdown-menu.dropdown-message h6 span.fr {
+  background: #ff4040;
+  padding: 5px 8px;
+  color: #fff;
+  border-radius: 6px;
+  line-height: 10px;
+  font-size: 12px;
+}
+.dropdown-menu.dropdown-message span.messageLeft {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: red;
+  line-height: 36px;
+  text-align: center;
+  margin: 6px 10px;
+}
+.dropdown-menu.dropdown-message span.messageLeft i {
+  font-size: 20px;
+  color: #fff;
+  display: inline-block;
+  width: 22px;
+  height: 20px;
+}
 .content-wrap {
   margin: 90px 20px 0 270px;
   padding: 15px;
@@ -657,4 +871,13 @@ div.timeSelectWrap {
 }
 .ngdialog-content .modal-header {
   padding: 0 0 15px 0;
+}
+.ngdialog-content .modal-footer {
+  border-top: none;
+  text-align: center;
+}
+.ngdialog-content .modal-footer .btn {
+  display: inline-block;
+  line-height: 46px;
+  padding: 0 48px;
 }

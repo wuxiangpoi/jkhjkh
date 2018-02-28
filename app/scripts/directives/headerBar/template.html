@@ -9,84 +9,52 @@
     <ul class="nav navbar-top-links navbar-right">
 
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <a class="dropdown-toggle positionR" data-toggle="dropdown">
                 <i class="fa fa-bell fa-fw"></i>
-                <i class="fa fa-caret-down"></i>
+                <span ng-if="materialCheckCounts + programCheckCounts > 0" class="indicator">
+                    {{materialCheckCounts + programCheckCounts}}
+                </span>
             </a>
-            <ul class="dropdown-menu dropdown-alerts">
+            <ul class="dropdown-menu dropdown-message">
                 <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-comment fa-fw"></i> New Comment
-                            <span class="pull-right text-muted small">4 minutes ago</span>
+                    <h6 class="dropdown-header clearfix">
+                        <span class="fl">新通知</span>
+                        <span class="fr">{{materialCheckCounts + programCheckCounts}}</span>
+                        </span>
+                    </h6>
+                    <div class="dropdownItemWrap">
+                        <div ng-repeat="tip in userMessage" ng-click="goToDetail(tip)" class="dropdown-item clearfix">
+                            <span class="messageLeft fl" ng-style="{'background-color':'{{colorArr[$index%3]}}'}">
+                                <i class="{{tip.name == 'materialCheck'?'iconfont icon-neirongguanli':'iconfont icon-jiemuguanli'}}"></i>
+                            </span>
+                            <span class="messageRight fl" style="line-height:48px;">
+                                您有{{tip.value}}个{{tip.name == 'materialCheck'?'素材':'节目'}}待审核
+                            </span>
                         </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                            <span class="pull-right text-muted small">12 minutes ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-envelope fa-fw"></i> Message Sent
-                            <span class="pull-right text-muted small">4 minutes ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-tasks fa-fw"></i> New Task
-                            <span class="pull-right text-muted small">4 minutes ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                            <span class="pull-right text-muted small">4 minutes ago</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a class="text-center" href="#">
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                    </a>
+                    </div>
                 </li>
             </ul>
             <!-- /.dropdown-alerts -->
         </li>
         <!-- /.dropdown -->
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i>
+            <a class="dropdown-toggle" data-toggle="dropdown">
+                <i class="iconfont icon-touxiang"></i>
+                <span class="userName">{{userData.root_account}}</span>
                 <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <li>
-                    <a href="#">
-                        <i class="fa fa-user fa-fw"></i> User Profile</a>
+                    <a href="javascript:void(0)" ng-click="updatePwd()">
+                        <span class="iconWrap" style="background:#00a0e9;">
+                            <i class="fa fa-user fa-fw"></i>
+                        </span>修改密码</a>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fa fa-gear fa-fw"></i> Settings</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="login.html">
-                        <i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <a href="javascript:void(0)" ng-click="logout()">
+                        <span class="iconWrap" style="background:#ff4040;">
+                            <i class="fa fa-sign-out fa-fw"></i>
+                        </span>退出登录</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -99,24 +67,24 @@
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
                 <li class="current">
-                    <a ui-sref-active="active" ui-sref="dashboard.home">
+                    <a ui-sref-active="active" ui-sref="dashboard.home" ng-click="check(0,$event)">
                         <i class="iconfont icon-shouye"></i>
                         <span class="navTle">首页</span>
                     </a>
                 </li>
                 <li ng-mouseenter="showMenu('',$event)" ng-mouseleave="hideMenu($event)" ng-if="perms(21)" ui-sref-active="active">
-                    <a ui-sref-active="active" ui-sref="dashboard.terminal" ng-click="checkRoute($event,2)">
+                    <a ui-sref-active="active" ui-sref="dashboard.terminal" ng-click="check(21,$event)">
                         <i class="iconfont icon-zhongduanguanli"></i>
                         <span class="navTle">终端管理</span>
                     </a>
 
                 </li>
                 <li ng-mouseenter="showMenu('',$event)" ng-mouseleave="hideMenu($event)" ng-if="perms(41)" ui-sref-active="active">
-                        <a ng-class="{hasBorder: location.path() == '/dashboard/material'}" ui-sref="dashboard.material" ng-click="checkRoute($event,41)">
-                            <i class="iconfont icon-neirongguanli"></i>
-                            <span class="navTle">素材管理</span>
-                        </a>
-                    </li>
+                    <a ng-class="{hasBorder: location.path() == '/dashboard/material'}" ui-sref="dashboard.material" ng-click="checkRoute($event,41)">
+                        <i class="iconfont icon-neirongguanli"></i>
+                        <span class="navTle">素材管理</span>
+                    </a>
+                </li>
                 <li ng-mouseenter="showMenu('',$event)" ng-mouseleave="hideMenu($event)" ng-if="perms(43)" ui-sref-active="active">
                     <a ng-class="{hasBorder: location.path() == '/dashboard/program'}" ui-sref="dashboard.program" ng-click="checkRoute($event,43)">
                         <i class="iconfont icon-jiemuguanli"></i>
@@ -154,26 +122,69 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
+                <li ng-if="perms(3)" ng-class="{active: collapseVar==6}">
+                    <a class="navSecondLevel" ng-click="check(6)">
+                        <i class="iconfont icon-zhanghuguanli"></i>
+                        <span class="navTle">账户管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level nav-sub" ng-class="{'collapse':collapseVar != 6}">
+                        <li ng-if="perms(33)" ui-sref-active="active">
+                            <a ui-sref="dashboard.group">
+                                <span class="navName">组织机构</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(31)">
+                            <a ui-sref="dashboard.user" ng-click="checkRoute($event)">
+                                <span class="navName">账户管理</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(32)">
+                            <a ui-sref="dashboard.role" ng-click="checkRoute($event)">
+                                <span class="navName">角色管理</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(32)">
+                            <a ui-sref="dashboard.auser" ng-click="checkRoute($event)">
+                                <span class="navName">安装人员</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
                 <li ng-mouseenter="showMenu(8,$event)" ng-mouseleave="hideMenu($event)" ng-if="perms(6)" ng-class="{active: collapseVar==8}">
-                        <a  ng-class="{hasBorder: location.path() == '/dashboard/terminalCommand' || location.path() == '/dashboard/programCommand'}" class="navSecondLevel" href="" ng-click="check(8)">
-                            <i class="iconfont icon-rizhiguanli"></i>
-                            <span class="navTle">日志记录</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level nav-sub" collapse="collapseVar!=8">
-                            <li ui-sref-active="active" ng-if="perms(61)">
-                                <a ui-sref="dashboard.terminalCommand" ng-click="checkRoute($event)"><span class="navName">终端命令记录</span></a>
-                            </li>
-                            <li ui-sref-active="active" ng-if="perms(62)">
-                                <a ui-sref="dashboard.programCommand" ng-click="checkRoute($event)"><span class="navName">节目命令记录</span></a>
-                            </li>
-        
-        
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
+                    <a ng-class="{hasBorder: location.path() == '/dashboard/terminalCommand' || location.path() == '/dashboard/programCommand'}"
+                        class="navSecondLevel" ng-click="check(8)">
+                        <i class="iconfont icon-rizhiguanli"></i>
+                        <span class="navTle">日志记录</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level nav-sub" ng-class="{'collapse':collapseVar != 8}">
+                        <li ui-sref-active="active" ng-if="perms(61)">
+                            <a ui-sref="dashboard.terminalCommand" ng-click="checkRoute($event)">
+                                <span class="navName">终端命令记录</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(62)">
+                            <a ui-sref="dashboard.programCommand" ng-click="checkRoute($event)">
+                                <span class="navName">节目命令记录</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
             </ul>
             <!-- /#side-menu -->
+        </div>
+        <div class="progressWrap smallTxt">
+            <div class="progress">
+                <div ng-style="progressBar" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{root_oss_percent}}"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            {{'已使用' + root_oss_percent}}%
+            <span class="pull-right text-muted">{{ root_oss_title}}</span>
         </div>
         <!-- /.sidebar-collapse -->
     </div>

@@ -172,11 +172,11 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                   }  
             }).then(function (res) {
                 var data = res.data;
+                $rootScope.isPosting = false;
                 if (data.code == 1) {
                     cb(data.content);
                 } else if (data.code == 2) {
-                    // me.goToUrl('/login');
-                    // return false;
+                    me.goToUrl('/login');
                 } else {
                     me.alert(data.message, 'warning');
                     return false;

@@ -102,6 +102,22 @@
                         }
                     }
                 })
+                .state('dashboard.group', {
+                    url: '/group',
+                    controller: 'groupCtrl',
+                    templateUrl: 'scripts/modules/group/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'css/group/style.css',
+                                    'scripts/modules/group/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
                 .state('dashboard.materialCheck', {
                     url: '/materialCheck',
                     controller: 'materialCheckCtrl',
@@ -112,6 +128,21 @@
                                 name: 'sbAdminApp',
                                 files: [
                                     'scripts/modules/materialCheck/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
+                .state('dashboard.programCheck', {
+                    url: '/programCheck',
+                    controller: 'programCheckCtrl',
+                    templateUrl: 'scripts/modules/programCheck/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/programCheck/index.js'
                                 ]
                             })
                         }

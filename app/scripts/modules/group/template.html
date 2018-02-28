@@ -1,0 +1,18 @@
+<div class="content-wrap">
+    <div class="row">
+        <a ng-if="!isSort" class="addRole" ng-click="sort()">
+            <i class="iconfont icon-paixu"></i>排序
+        </a>
+        <a ng-if="isSort" class="addRole" ng-click="sumbitSort()">
+            保存
+        </a>
+        <a ng-if="isSort" class="addRole" ng-click="cancelSort()">
+            取消
+        </a>
+    </div>
+    <div class="row">
+        <div class="groupTreeWrap">
+            <ul id="group_tree" class="ztree" z-tree></ul>
+        </div>
+    </div>
+</div>

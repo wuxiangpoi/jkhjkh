@@ -15,6 +15,7 @@ var app = angular.module('sbAdminApp', [
         'angularFileUpload',
         'moment-picker',
         'smart-table',
+        'me-lazyload',
         'ngMessages',
         'baseService',
         'userService',
@@ -59,6 +60,10 @@ var app = angular.module('sbAdminApp', [
         }
         $rootScope.perms = function (rid) {
             return ("," + $rootScope.userData.current_perms + ",").indexOf("," + rid + ",") > -1 ? true : false;
+        }
+        $rootScope.dmbdOSSImageUrlResizeFilter = function (imgUrl, size) {
+            var joinChar = imgUrl.indexOf('?') >= 0 ? '&' : '?';
+            return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,' + size + ',w_' + size;
         }
     })
     .config(['$urlRouterProvider', '$locationProvider',

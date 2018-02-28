@@ -29,8 +29,18 @@
             </thead>
             <tbody ng-show="!isLoading">
                 <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
-                    <td class="tdClick" ng-click="showMaterial(row)">
-                        {{row.name}}
+                    <td class="tdClick" style="min-width:160px;" ng-click="showMaterial(row)">
+                        <div style="position:relative;">
+                            <div style="width:80px;position:absolute;top:10px;">
+                                <img ng-if="row.type == 0" src="img/loading.jpg" style="width:80px;height:60px;" lazy-src="{{dmbdOSSImageUrlResizeFilter(row.path,100)}}">
+                                <img ng-if="row.type == 1" src="img/loading.jpg" style="width:80px;height:60px;" lazy-src="{{ata.status == 7?'/img/no_pic.jpg':dmbdOSSImageUrlResizeFilter(row.snapshot,100)}}">
+                                <div ng-if="row.type == 1" class="vedioPre">
+                                    <i class="iconfont icon-xialajiantou"></i>
+                                </div>
+                            </div>
+                            <div class="ellipsTXt" style="padding-left:85px;line-height:80px;">{{row.name}}</div>
+                        </div>
+
                     </td>
                     <td>{{row.size | dmbdResourceSizeFilter}}</td>
                     <td>{{row.width + "*" + row.height}}</td>
