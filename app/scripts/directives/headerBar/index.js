@@ -46,11 +46,11 @@ angular.module('sbAdminApp')
 								newPassword: baseService.md5_pwd(vm.data.newPassword),
 								reNewPassword: baseService.md5_pwd(vm.data.reNewPassword)
 							}
-							$rootScope.isPosting = true;
-							// userService.updatePwd(updpostData, function () {
-							// 	ngDialog.close();
-							// 	baseService.alert('修改成功', 'success');
-							// })
+							vm.isPosting = true;
+							userService.updatePwd(updpostData, function () {
+								ngDialog.close();
+								baseService.alert('修改成功', 'success');
+							},vm)
 						} else {
 							vm.isShowMessage = true;
 						}

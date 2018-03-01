@@ -157,7 +157,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 me.alert('网络或服务端异常', 'warning')
             })
         },
-        postData: function (url, params, cb) {
+        postData: function (url, params, cb,vm) {
             var me = this;
             $http.post(url, params,{
                 headers: {
@@ -172,7 +172,9 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                   }  
             }).then(function (res) {
                 var data = res.data;
-                $rootScope.isPosting = false;
+                if(vm){
+                    vm.isPosting = false;
+                }
                 if (data.code == 1) {
                     cb(data.content);
                 } else if (data.code == 2) {

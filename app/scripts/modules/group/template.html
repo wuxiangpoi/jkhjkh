@@ -1,18 +1,18 @@
 <div class="content-wrap">
-    <div class="row">
-        <a ng-if="!isSort" class="addRole" ng-click="sort()">
+    <div class="level2">
+        <button ng-if="!isSort" class="iconBtn btn btn-primary" ng-click="sort()">
             <i class="iconfont icon-paixu"></i>排序
-        </a>
-        <a ng-if="isSort" class="addRole" ng-click="sumbitSort()">
+        </button>
+        <button ng-if="isSort" class="addRole" ng-click="sumbitSort()">
             保存
-        </a>
-        <a ng-if="isSort" class="addRole" ng-click="cancelSort()">
+        </button>
+        <button ng-if="isSort" class="addRole" ng-click="cancelSort()">
             取消
-        </a>
+        </button>
     </div>
-    <div class="row">
+    <div class="table-wrapper">
         <div class="groupTreeWrap">
-            <ul id="group_tree" class="ztree" z-tree></ul>
+            <ul class="ztree" z-tree ztreeSetting="{{ztreeSetting}}"></ul>
         </div>
     </div>
 </div>
