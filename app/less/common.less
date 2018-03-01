@@ -79,7 +79,6 @@
 
 a:focus,a:hover {
   outline: none;
-  background: none!important;
   }
 li {
   list-style-type: none;
@@ -844,9 +843,32 @@ div.timeSelectWrap {
     height: 100%;
     background: #24243e;
     width: 250px;
+    .progressWrap {
+      position: absolute;
+      bottom: 90px;
+      width: 90%;
+      left: 5%;
+      color: #9f9f9f;
+      z-index: 0;
+      font-size: 12px;
+      z-index: 0;
+      .progress {
+        width: 100%;
+        height: 10px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        .progress-bar-danger {
+          background-color: #00a0e9;
+        }
+      }
+    }
     .nav {
+      position: relative;
+      z-index: 10;
+      background: #24243e;
       li {
         a {
+          transition: .3s;
           color: #fff;
           padding-left: 25px;
           padding-top: 8px;

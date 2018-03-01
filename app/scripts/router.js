@@ -95,8 +95,37 @@
                             return $ocLazyLoad.load({
                                 name: 'sbAdminApp',
                                 files: [
-                                    'css/terminal/style.css',
                                     'scripts/modules/terminal/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
+                .state('dashboard.material', {
+                    url: '/material',
+                    controller: 'materialCtrl',
+                    templateUrl: 'scripts/modules/material/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/material/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
+                .state('dashboard.program', {
+                    url: '/program',
+                    controller: 'programCtrl',
+                    templateUrl: 'scripts/modules/program/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/program/index.js'
                                 ]
                             })
                         }

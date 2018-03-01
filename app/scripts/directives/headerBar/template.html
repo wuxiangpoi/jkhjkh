@@ -66,27 +66,27 @@
     <div class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
-                <li class="current">
+                <li>
                     <a ui-sref-active="active" ui-sref="dashboard.home" ng-click="check(0,$event)">
                         <i class="iconfont icon-shouye"></i>
                         <span class="navTle">首页</span>
                     </a>
                 </li>
-                <li ng-mouseenter="showMenu('',$event)" ng-mouseleave="hideMenu($event)" ng-if="perms(21)" ui-sref-active="active">
+                <li ng-if="perms(21)">
                     <a ui-sref-active="active" ui-sref="dashboard.terminal" ng-click="check(21,$event)">
                         <i class="iconfont icon-zhongduanguanli"></i>
                         <span class="navTle">终端管理</span>
                     </a>
 
                 </li>
-                <li ng-mouseenter="showMenu('',$event)" ng-mouseleave="hideMenu($event)" ng-if="perms(41)" ui-sref-active="active">
-                    <a ng-class="{hasBorder: location.path() == '/dashboard/material'}" ui-sref="dashboard.material" ng-click="checkRoute($event,41)">
+                <li ng-if="perms(41)">
+                    <a  ui-sref-active="active" ui-sref="dashboard.material" ng-click="checkRoute($event,41)">
                         <i class="iconfont icon-neirongguanli"></i>
                         <span class="navTle">素材管理</span>
                     </a>
                 </li>
-                <li ng-mouseenter="showMenu('',$event)" ng-mouseleave="hideMenu($event)" ng-if="perms(43)" ui-sref-active="active">
-                    <a ng-class="{hasBorder: location.path() == '/dashboard/program'}" ui-sref="dashboard.program" ng-click="checkRoute($event,43)">
+                <li  ng-if="perms(43)" >
+                    <a ui-sref-active="active" ui-sref="dashboard.program" ng-click="checkRoute($event,43)">
                         <i class="iconfont icon-jiemuguanli"></i>
                         <span class="navTle">节目管理</span>
                     </a>
@@ -183,8 +183,8 @@
                 <div ng-style="progressBar" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{root_oss_percent}}"
                     aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            {{'已使用' + root_oss_percent}}%
-            <span class="pull-right text-muted">{{ root_oss_title}}</span>
+            {{'已使用' + userData.root_oss_percent}}%
+            <span class="pull-right text-muted">{{ userData.root_oss_title}}</span>
         </div>
         <!-- /.sidebar-collapse -->
     </div>

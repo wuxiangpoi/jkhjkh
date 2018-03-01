@@ -1,7 +1,7 @@
 'use strict';
 angular.module('sbAdminApp')
 	.controller(
-		'terminalCtrl',
+		'materialCtrl',
 		function ($scope, $rootScope, $stateParams, baseService) {
 			$scope.displayed = [];
 			$scope.sp = {};
@@ -10,14 +10,14 @@ angular.module('sbAdminApp')
 			$scope.idsNormal = [];
 
 			$scope.callServer = function (tableState) {
-				baseService.initTable($scope, tableState, baseService.api.terminal + 'getTerminalPageList');
+				baseService.initTable($scope, tableState, baseService.api.material + 'getMaterialList');
 			}
 			
 			$scope.details = function (item) {
 				baseService.getJson(baseService.api.terminal + 'getTerminalInfo', {
 					tid: item.id
 				}, function (data) {
-					baseService.confirmDialog(580, '终端状态信息', data, 'tpl/terminal_details.html', function (ngDialog) {
+					baseService.confirmDialog(580, '设备详情', data, 'tpl/terminal_details.html', function (ngDialog) {
 
 					})
 				});
@@ -147,18 +147,11 @@ angular.module('sbAdminApp')
 				baseService.getJson(baseService.api.terminal + 'getTerminalInfo', {
 					tid: item.id
 				}, function (data) {
-					baseService.confirmDialog(580, '终端状态信息', data, 'tpl/terminal_details.html', function (ngDialog) {
+					baseService.confirmDialog(580, '终端详情', data, 'tpl/terminal_details.html', function (ngDialog) {
 						ngDialog.close();
 					})
 				});
 
-			}
-			$scope.save = function (item){
-				baseService.confirmDialog(540, '', item, "tpl/terminal_save.html", function (ngDialog) {
-					
-				}, function (vm) {
-					
-				})
 			}
 			$scope.showPrograms = function (item) {
 				baseService.confirmDialog(720, '播放列表', item, 'tpl/terminal_programPlay_list.html', function (ngDialog) {

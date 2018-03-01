@@ -58,6 +58,17 @@ var app = angular.module('sbAdminApp', [
             return "";
 
         }
+        $rootScope.getCityName = function (cno) {
+            for (var i in $rootScope.userData.root_citys) {
+                if ($rootScope.userData.root_citys.hasOwnProperty(i)) {
+    
+                    if (cno == $rootScope.userData.root_citys[i].key) {
+                        return $rootScope.userData.root_citys[i].value;
+                    }
+    
+                }
+            }
+        }
         $rootScope.perms = function (rid) {
             return ("," + $rootScope.userData.current_perms + ",").indexOf("," + rid + ",") > -1 ? true : false;
         }

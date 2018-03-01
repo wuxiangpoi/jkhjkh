@@ -1,127 +1,23 @@
-<div class="tabsNav" style="min-width:1110px;">
-	<a class="tabsItem" ui-sref="main.terminalreport" ui-sref-active="active">按企业查看</a>
-	<a class="tabsItem" ui-sref="main.terminal" ui-sref-active="active">按终端查看</a>
-</div>
-<div class="level2 clearfix" style="min-width:1110px;">
-	<div ng-if="perms(31)" class="dropdown fl martr20" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event) style="cursor:pointer;position:relative;">
-		<div class="tipDiv" style="z-index:100;padding-left:20px;border-radius:8px;position:absolute;background:red;bottom:-42px;left:0px;width:300px;line-height:40px;color:#fff;display:none;">选中正常状态下的终端才能进行此操作</div>
-		<button ng-class="{'disabled': idsNormal.length == 0}" type="button" data-toggle="dropdown" class="btn btn-primary">
-			下发命令
-			<i class="fa fa-caret-down"></i>
-		</button>
-		<ul class="dropdown-menu dropdown-user">
-			<li>
-				<a href="javascript:void(0)" ng-click="sendCommand(7)">
-					<i class="fa fa-camera fa-fw"></i>
-					终端截屏</a>
-			</li>
-			<li class="divider"></li>
-			<li>
-				<a href="javascript:void(0)" ng-click="sendCommand(8)">
-					<i class="fa fa-share fa-fw"></i>
-					获取终端信息</a>
-			</li>
-			<li class="divider"></li>
-			<li>
-				<a href="javascript:void(0)" ng-click="sendCommand(9)">
-					<i class="fa fa-refresh fa-fw"></i>
-					终端初始化</a>
-			</li>
-			<!-- <li class="divider"></li>
-			<li>
-				<a href="javascript:void(0)" ng-click="sendCommand(31)">
-					<i class="fa fa-download fa-fw"></i>
-					终端App升级</a>
-			</li> -->
-		</ul>
-	</div>
-	<div ng-if="perms(32)" class="fl plr cursorP" ng-mouseenter="showTip($event)" ng-mouseleave="hideTip($event)">
-		<button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="sendNotice()" class="btn btn-primary martr20">
-			发布紧急通知
-		</button>
-		<div class="tipDiv" style="z-index:100;display:none;padding-left:20px;border-radius:8px;position:absolute;background:red;bottom:-42px;left:0px;width:130px;line-height:40px;color:#fff;">请先选择终端</div>
-	</div>
-	<div ng-if="perms(31)" class="fl plr cursorP" ng-mouseenter="showTip($event)" ng-mouseleave="hideTip($event)">
-		<button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="sendCommand(31)" class="btn btn-primary martr20">
-			终端升级
-		</button>
-		<div class="tipDiv" style="z-index:100;display:none;padding-left:20px;border-radius:8px;position:absolute;background:red;bottom:-42px;left:0px;width:130px;line-height:40px;color:#fff;">请先选择终端</div>
-	</div>
-	<!-- <div class="fl plr cursorP" ng-mouseenter="showTip($event)" ng-mouseleave="hideTip($event)">
-		<button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="setEnabled(1)" class="btn btn-primary martr20">
-			启用
-		</button>
-		<div class="tipDiv" style="z-index:100;display:none;padding-left:20px;border-radius:8px;position:absolute;background:red;bottom:-42px;left:0px;width:130px;line-height:40px;color:#fff;">请先选择终端</div>
-	</div>
-	<div class="fl plr cursorP" ng-mouseenter="showTip($event)" ng-mouseleave="hideTip($event)">
-		<button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="setEnabled(0)" class="btn btn-primary backgroundSelect">
-			停用
-		</button>
-		<div class="tipDiv" style="z-index:100;display:none;padding-left:20px;border-radius:8px;position:absolute;background:red;bottom:-42px;left:0px;width:130px;line-height:40px;color:#fff;">请先选择终端</div>
-	</div> -->
+<div class="content-wrap" style="min-width:740px;">
+	<div class="tableHeader clearfix">
+		<div class="selectWrap">
+			<select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+				<option value="">下发状态</option>
+				<option value="1">下发成功</option>
+				<option value="2">下发失败</option>
+				<option value="3">正在下发</option>
+			</select>
+		</div>
+		<div class="serchWrap fr">
+			<div class="fl txtInputWrap">
+				<input class="form-control" ng-model="sp.user" placeholder="用户账号/名称">
+			</div>
+			<div class="fl txtInputWrap">
+				<input class="form-control" ng-model="sp.terminal" placeholder="终端编号/名称">
+			</div>
+			<button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
+		</div>
 
-</div>
-
-<div class="content-wrap" style="min-width:1110px;">
-	<div class="row mb10 pdl15 pdr15">
-		<div class="fl">
-			<city-picker></city-picker>
-		</div>
-		<div class="selectWrap clearfix  fl">
-			<select class="middle-select" ng-model="sp.op" ng-change="callServer(tableState)">
-				<option value="">系统类型</option>
-				<option value="1">Android</option>
-				<option value="2">Windows</option>
-			</select>
-			<i class="fa fa-caret-down"></i>
-		</div>
-		<div ng-if="stateParamsId" class="selectWrap clearfix  fl">
-			<select class="middle-select" ng-model="sp.resolution" ng-change="callServer(tableState)">
-				<option value="">屏幕分辨率</option>
-				<option ng-repeat="t in root_terminalReslotions" value="{{t}}">{{t}}</option>
-			</select>
-			<i class="fa fa-caret-down"></i>
-		</div>
-		<!-- <div class="selectWrap clearfix  fl">
-			<select class="middle-select" ng-model="sp.city_no" ng-change="callServer(tableState)">
-				<option value="">所在城市</option>
-				<option ng-repeat="c in root_citys" value="{{c.key}}">{{c.value}}</option>
-			</select>
-			<i class="fa fa-caret-down"></i>
-		</div> -->
-		<div class="selectWrap clearfix  fl">
-			<select class="middle-select" ng-model="sp.status" ng-change="callServer(tableState)">
-				<option value="">网络状态</option>
-				<option ng-selected="init_status==1" value="1">正常</option>
-				<option ng-selected="init_status==2" value="2">离线</option>
-				<option ng-selected="init_status==3" value="3">异常</option>
-			</select>
-			<i class="fa fa-caret-down"></i>
-		</div>
-		<!-- <div class="selectWrap clearfix  fl">
-			<select class="middle-select" ng-model="sp.enabled" ng-change="callServer(tableState)">
-				<option value="">使用状态</option>
-				<option value="1">启用</option>
-				<option value="0">停用</option>
-			</select>
-			<i class="fa fa-caret-down"></i>
-		</div> -->
-		<div class="selectWrap clearfix  fl">
-			<select class="middle-select" ng-model="sp.hasProgram" ng-change="callServer(tableState)">
-				<option value="">节目状态</option>
-				<option value="1">有节目</option>
-				<option value="0">无节目</option>
-			</select>
-			<i class="fa fa-caret-down"></i>
-		</div>
-		<div class="searchInputWrap fr">
-				<input style="width:156px;" type="text" class="middle-input" ng-model="sp.search" placeholder="终端编号/终端名称" />
-				<i type="button" ng-click="callServer(tableState)" class="fa fa-search">
-			</i>
-		</div>
-		<div class="searchInputWrap fr" style="margin-right:4px;">
-				<input style="width:156px;padding-right:4px;" type="text" class="middle-input" ng-model="sp.domain" placeholder="企业代码" />
-		</div>
 	</div>
 	<div class="table-wrapper">
 		<table class="table" st-pipe="callServer" st-table="displayed">
@@ -130,35 +26,46 @@
 					<th>
 						<input ng-checked="ids.length == displayed.length && displayed.length != 0" ng-click="checkAll($event)" type="checkbox">
 					</th>
-					<th st-sort="id">终端编号</th>
-					<th st-sort="name">终端名称</th>
-					<th ng-if="!stateParamsId" st-sort="name">所属企业</th>
-					<th st-sort="">网络状态</th>
-					<!-- <th st-sort="">使用状态</th> -->
-					<th st-sort="">屏幕分辨率</th>
-					<th st-sort="">所属城市</th>
-					<th st-sort="">节目数量</th>
-					<!-- <th st-sort="">操作</th> -->
+					<th>终端编号</th>
+					<th>终端名称</th>
+					<th>网络状态</th>
+					<th>屏幕分辨率</th>
+					<th>所属城市</th>
+					<th>节目数量</th>
+					<th>操作</th>
 				</tr>
 			</thead>
-
 			<tbody ng-show="!isLoading">
-				<tr ng-repeat="row in displayed">
+				<tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
 					<td>
 						<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
 					</td>
 					<td class="tdClick" ng-click="details(row)">{{row.no}}</td>
 					<td>{{row.name}}</td>
-					<td ng-if="!stateParamsId">{{row.domain + '('+ row.domainName +')'}}</td>
-					<td>{{getDeviceNetStatus(row.status)}}</td>
-					<!-- <td>{{row.enabled == 1? '启用':'停用'}}</td> -->
-					<td>{{row.resolution}}</td>
-					<td>{{getCityName(row.city_no)}}</td>
 					<td>
-						<span ng-if="row.programCounts == 0">0</span>
-						<span class="tdClick dibk" ng-click="showPrograms(row)" ng-if="row.programCounts != 0">{{row.programCounts}}</span>
+						<div class="txt-red" ng-if="row.status == 0">未激活</div>
+						<div class="txt-green" ng-if="row.status == 1">在线</div>
+						<div class="txt-grey" ng-if="row.status == 2">离线</div>
+						<div class="txt-red" ng-if="row.status == 3">异常</div>
 					</td>
-
+					<td>
+						{{row.resolution}}
+					</td>
+					<td>
+						{{getCityName(row.city_no)}}
+					</td>
+					<td>
+						<div ng-if="row.programCounts == 0">
+							0
+						</div>
+						<div class="tdClick" ng-if="row.programCounts > 0" ng-click="programPlayManage()">
+							{{row.programCounts}}
+						</div>
+					</td>
+					<td>
+						<button ng-if="perms(213)" class="btn tableBtn" ng-click="save(row)">编辑
+						</button>
+					</td>
 				</tr>
 			</tbody>
 			<tbody ng-include="'tpl/table.html'"></tbody>
