@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+</div>
+
+
+<div class="modal-body">
+    <div class="modalZtree groupTreeWrap">
+        <ul z-tree id="modalZtree" class="ztree" ztreeSetting="{{zTreeSetting}}"></ul>
+    </div>
+
+</div>
+
+<div class="modal-footer" ng-if="data.set != 1">
+    <button class="btn btn-primary" type="button" ng-click="modalConfirmSubmit()" id="form_modal_btn">确定</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
+</div>

@@ -26,7 +26,8 @@ angular.module('sbAdminApp')
                         callback: {
                             onClick: function (event, treeId, treeNode, clickFlag) {
                                 $(event.target).parent().prev('.chk').click();
-                            }
+                            },
+                            onRename: onRename //修改事件 
                         }
 
                     };
@@ -67,7 +68,6 @@ angular.module('sbAdminApp')
                             var upBtn = $("#upBtn_" + treeNode.tId);
                             var downBtn = $("#downBtn_" + treeNode.tId);
                             if (upBtn) upBtn.bind("click", function (e) {
-                                $scope.change = true;
                                 var zTree = $.fn.zTree.getZTreeObj($(element).eq(0).attr('id'));
                                 var prevNode = treeNode.getPreNode();
                                 var oIndex = zTree.getNodeIndex(treeNode);
@@ -84,7 +84,7 @@ angular.module('sbAdminApp')
                             });
                             if (downBtn) downBtn.bind("click", function (e) {
                                 $scope.change = true;
-                                var zTree = $.fn.zTree.getZTreeObj(initObj);
+                                var zTree = $.fn.zTree.getZTreeObj($(element).eq(0).attr('id'));
                                 var nextNode = treeNode.getNextNode();
                                 var oIndex = zTree.getNodeIndex(treeNode);
                                 zTree.moveNode(treeNode, nextNode, "prev");
@@ -102,23 +102,9 @@ angular.module('sbAdminApp')
                                 sObj.after(addStr); //加载添加按钮 
                                 var addBtn = $("#addBtn_level0");
                                 if (addBtn) addBtn.bind("click", function () {
-                                    var zTree = $.fn.zTree.getZTreeObj(initObj);
-                                    //将新节点添加到数据库中  
-                                    $scope.addNode(function (data) {
-                                        $scope.baseService.postData(apiUrl + '/api/organization/saveOrganization', {
-                                            name: data.name,
-                                            pid: treeNode.id
-                                        }, function (res) {
-                                            $rootScope.root_organizations = $scope.groups = res;
-                                            zTree.addNodes(treeNode, {
-                                                pid: treeNode.id,
-                                                name: data.name
-                                            });
-                                        })
-
-                                    })
-
-
+                                    var zTree = $.fn.zTree.getZTreeObj($(element).eq(0).attr('id'));
+                                    //将新节点添加到数据库中 
+                                    $scope.$emit('addNode', zTree, treeNode);
                                 });
                             }
                         }
@@ -142,52 +128,26 @@ angular.module('sbAdminApp')
 
                         //绑定添加事件，并定义添加操作  
                         if (addBtn) addBtn.bind("click", function () {
-                            var zTree = $.fn.zTree.getZTreeObj(initObj);
-                            //将新节点添加到数据库中  
-                            $scope.addNode(function (data) {
-                                $scope.baseService.postData(apiUrl + '/api/organization/saveOrganization', {
-                                    name: data.name,
-                                    pid: treeNode.id
-                                }, function (res) {
-                                    $rootScope.root_organizations = $scope.groups = res;
-                                    var newId = '';
-                                    for (var i = 0; i < $rootScope.root_organizations.length; i++) {
-                                        if ($rootScope.root_organizations[i].name == data.name) {
-                                            newId = $rootScope.root_organizations[i].id
-                                        }
-                                    }
-                                    zTree.addNodes(treeNode, {
-                                        pid: treeNode.id,
-                                        name: data.name,
-                                        id: newId
-                                    });
-                                })
-
-                            })
+                            var zTree = $.fn.zTree.getZTreeObj($(element).eq(0).attr('id'));
+                            //将新节点添加到数据库中 
+                            $scope.$emit('addNode', zTree, treeNode);
                         });
                         if (editBtn) editBtn.bind("click", function () {
-                            var zTree = $.fn.zTree.getZTreeObj(initObj);
+                            var zTree = $.fn.zTree.getZTreeObj($(element).eq(0).attr('id'));
                             var oVal = treeNode.name;
                             zTree.editName(treeNode);
                         });
                         if (delBtn) delBtn.bind("click", function () {
-                            var zTree = $.fn.zTree.getZTreeObj(initObj);
-                            $scope.beforeRemove(treeNode, function () {
-                                if (treeNode.isParent) {
-                                    $scope.baseService.confirmAlert('删除组织机构', '该机构包含子机构，请先删除子机构再进行删除！', 'warning');
-                                } else {
-                                    $scope.baseService.postData(apiUrl + '/api/organization/deleteOrganization', {
-                                        id: treeNode.id
-                                    }, function (res) {
-                                        $rootScope.root_organizations = $scope.groups = res;
-                                        zTree.removeNode(treeNode);
-                                    }, function () {}, function (msg) {
-                                        $scope.baseService.confirmAlert('删除组织机构', msg, 'warning');
-                                    })
-                                }
-                            })
+                            var zTree = $.fn.zTree.getZTreeObj($(element).eq(0).attr('id'));
+                            $scope.$emit('delNode', zTree, treeNode);
+
                         });
                     };
+
+                    function onRename(e, treeId, treeNode) {
+                        var zTree = $.fn.zTree.getZTreeObj($(element).eq(0).attr('id'));
+                        $scope.$emit('editNode', zTree, treeNode);
+                    }
 
                     function removeHoverDom(treeId, treeNode) {
                         $("#addBtn_" + treeNode.tId).unbind().remove();
@@ -204,15 +164,6 @@ angular.module('sbAdminApp')
                     $.fn.zTree.init(element, setting, ztreeSetting.zNodes);
                     var zTree = $.fn.zTree.getZTreeObj($(element).eq(0).attr('id'));
                     zTree.expandAll(true);
-                    $scope.$on('getZtreeData', function (e, data) {
-                        var emitData = [];
-                        switch (data) {
-                            case 'getChecked':
-                                emitData = zTree.getCheckedNodes(true);
-                                break;
-                        }
-                        $scope.$emit('emitZtreeData', emitData);
-                    });
                 }
             }, true);
 

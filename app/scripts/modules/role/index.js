@@ -12,52 +12,65 @@ angular.module('sbAdminApp', [])
         $scope.sp = {};
         $scope.tableState = {};
         $scope.callServer = function (tableState) {
-            baseService.initTable($scope, tableState, baseService.api.admin + 'getAdminRoleInfoPage');
+            baseService.initTable($scope, tableState, baseService.api.role + 'getRolePageList');
         }
 
-        function checkPerms(scope, item, set, zNodeSel) {
-            baseService.confirmDialog(540, set == 1 ? '查看权限' : '设置权限', {
-                set: set
-            }, "tpl/perms_set.html", function (ngDialog, vm) {
-                vm.$broadcast('getZtreeData', 'getChecked');
-                vm.closeThisDialog();
-            }, function (vm) {
-                vm.$on('emitZtreeData', function (e, data) {
-                    vm.fids = data;
-                    scope.fids = data;
-                });
-                baseService.getPerms(function (permsData) {
-                    var zNodes = [];
-                    for (var i = 0; i < permsData.length; i++) {
-                        if (set == 1 && zNodeSel.length) {
-                            if (zNodeSel.split(',').indexOf(permsData[i].id) != -1) {
-                                zNodes.push({
-                                    id: permsData[i].id,
-                                    pId: permsData[i].pid,
-                                    name: permsData[i].name,
-                                })
-                            }
-                        } else if(set == 0){
-                            zNodes.push({
-                                id: permsData[i].id,
-                                pId: permsData[i].pid,
-                                name: permsData[i].name,
-                            })
-                        }
-
-                    }
-                    vm.zTreeSetting = {
-                        isCheck: set == 1 ? false : true,
-                        zNodes: zNodes,
-                        selectedNodes: set == 0 ? zNodeSel.split(',') : ''
-                    };
+        function getPerms(cb) {
+            if ($scope.permList) {
+                cb();
+            } else {
+                baseService.getJson(baseService.api.role + 'getPermsList', {}, function (data) {
+                    $scope.permList = data;
+                    cb();
                 })
-
-
-            })
+            }
         }
-        $scope.checkPerms = function (item, set) {
-            checkPerms($scope, item, set, item.fids);
+
+        function getpermList(fids) {
+            var zNodes = [];
+            if (fids && fids.length > 0) {
+                var fidsArr = fids.split(',')
+                for (var i = 0; i < $scope.permList.length; i++) {
+                    for (var j = 0; j < fidsArr.length; j++) {
+                        if (fidsArr[j] == $scope.permList[i].id) {
+                            zNodes.push({
+                                id: $scope.permList[i].id,
+                                pId: $scope.permList[i].pid,
+                                name: $scope.permList[i].name,
+                            });
+                        }
+                    }
+
+                }
+            } else {
+                for (var i = 0; i < $scope.permList.length; i++) {
+                    zNodes.push({
+                        id: $scope.permList[i].id,
+                        pId: $scope.permList[i].pid,
+                        name: $scope.permList[i].name,
+                    });
+                }
+            }
+
+            return zNodes;
+        }
+        $scope.checkPerms = function (item) {
+            getPerms(function () {
+                baseService.confirmDialog(540, '查看权限', {
+                    set: 1
+                }, 'tpl/perms_set.html', function (ngDialog, vm) {
+
+                }, function (vm) {
+                    vm.zTreeSetting = {
+                        zNodes: getpermList(item.fids),
+                        isSort: false,
+                        isSet: false,
+                        isCheck: false,
+                        selectedNodes: []
+                    }
+                })
+            })
+
         };
         $scope.save = function (item) {
             var postData = {
@@ -68,20 +81,17 @@ angular.module('sbAdminApp', [])
             }
             baseService.confirmDialog(540, item ? '编辑角色' : '添加角色', postData, 'tpl/role_save.html', function (ngDialog, vm) {
                 vm.isShowMessage = false;
-                if (vm.roleForm.$valid) {
+                if (vm.modalForm.$valid) {
                     if (vm.fids && vm.fids.length) {
-                        vm.data.fids = [];
-                        for (var i = 0; i < vm.fids.length; i++) {
-                            vm.data.fids.push(vm.fids[i].id);
-                        }
-                        vm.data.fids = vm.data.fids.join(',');
-                        baseService.postData(baseService.api.admin + 'saveAdminRoleInfo', vm.data, function () {
+                        vm.data.fids = vm.fids.join(',');
+                        vm.isPosting = true;
+                        baseService.postData(baseService.api.role + 'saveRole', vm.data, function () {
                             ngDialog.close();
-                            baseService.alert(item ? '修改成功' : '添加成功','success');
+                            baseService.alert(item ? '修改成功' : '添加成功', 'success');
                             $scope.callServer($scope.tableState);
                         })
                     } else {
-                        baseService.alert('请先选择权限', 'warning');
+                        baseService.alert('请先选择权限', 'warning', true);
                     }
 
 
@@ -91,33 +101,43 @@ angular.module('sbAdminApp', [])
 
             }, function (vm) {
                 vm.fids = item ? item.fids.split(',') : [];
-                vm.checkPerms = function (item, set) {
-                    checkPerms(vm, item, set, item.fids);
+                vm.checkPerms = function () {
+                    getPerms(function () {
+                        baseService.confirmDialog(540, '权限设置', {
+                            set: 2
+                        }, 'tpl/perms_set.html', function (ngDialog, vm1) {
+                            var zTree = $.fn.zTree.getZTreeObj('modalZtree');
+                            var okNodes = zTree.getCheckedNodes(true);
+                            var fids = [];
+                            for (var i = 0; i < okNodes.length; i++) {
+                                fids.push(okNodes[i].id);
+                            }
+                            if (fids.length > 0) {
+                                vm1.closeThisDialog();
+                                vm.fids = fids;
+                            } else {
+                                baseService.alert('请先选择权限', 'warning', true);
+                            }
+                        }, function (vm1) {
+                            vm1.zTreeSetting = {
+                                zNodes: getpermList(),
+                                isSort: false,
+                                isSet: false,
+                                isCheck: true,
+                                selectedNodes: item ? item.fids.split(',') : []
+                            }
+                        })
+                    })
                 }
-
-            })
-        }
-        $scope.changeStatus = function (item, index) {
-            baseService.confirm(item.enabled == 0 ? '解禁账户' : '禁用账户', item.enabled == 0 ? '您确定解禁安装人员：' + item.name : '您确定禁用安装人员：' + item.name, function (ngDialog) {
-                aUserService.change({
-                    uid: item.id,
-                    enabled: item.enabled == 0 ? 1 : 0
-                }, function () {
-                    ngDialog.close();
-                    baseService.alert("操作成功", 'success');
-                    var nArr = $scope.displayed;
-                    $scope.displayed[index].enabled = $scope.displayed[index].enabled == 0 ? 1 : 0;
-                    $scope.displayed = [];
-                    $scope.displayed = nArr;
-                })
 
             })
         }
         $scope.del = function (item) {
             baseService.confirm('删除', '您确定删除角色：' + item.name + '?',
-                function (ngDialog) {
-                    baseService.postData(baseService.api.admin + 'deleteAdminRoleInfo', {
-                        id: item.id
+                function (ngDialog, vm) {
+                    vm.isPosting = true;
+                    baseService.postData(baseService.api.role + 'deleteRole', {
+                        rid: item.id
                     }, function () {
                         ngDialog.close();
                         baseService.alert("删除成功", 'success');

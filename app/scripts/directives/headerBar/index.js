@@ -66,7 +66,6 @@ angular.module('sbAdminApp')
 				}
 				
 				$scope.collapseVar = 0;
-				console.log($state)
 				$scope.check = function (x, $event) {
 					if (x == $scope.collapseVar)
 					  $scope.collapseVar = 0;

@@ -3,16 +3,16 @@
         <button ng-if="!isSort" class="iconBtn btn btn-primary" ng-click="sort()">
             <i class="iconfont icon-paixu"></i>排序
         </button>
-        <button ng-if="isSort" class="addRole" ng-click="sumbitSort()">
+        <button ng-if="isSort" class="btn btn-primary" ng-click="sumbitSort()">
             保存
         </button>
-        <button ng-if="isSort" class="addRole" ng-click="cancelSort()">
+        <button ng-if="isSort" class="btn btn-primary" ng-click="cancelSort()">
             取消
         </button>
     </div>
     <div class="table-wrapper">
         <div class="groupTreeWrap">
-            <ul class="ztree" z-tree ztreeSetting="{{ztreeSetting}}"></ul>
+            <ul id="groupSet" class="ztree" z-tree ztreeSetting="{{ztreeSetting}}"></ul>
         </div>
     </div>
 </div>

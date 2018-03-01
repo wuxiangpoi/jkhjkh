@@ -179,7 +179,12 @@ select {
 }
 
 .modal-body .form-group {
-  margin-bottom: 4px;
+  label {
+    margin-bottom: 0;
+    line-height: 34px;
+    text-align: right;
+    font-weight: 400;
+  }
 }
 
 /* line 12, app/scss/common.scss */
@@ -364,7 +369,7 @@ div.timeSelectWrap {
 
 .table-wrapper {
   background: #fff;
-  padding:15px;
+  padding:20px;
 
   & > table {
     tr.odd {
@@ -477,7 +482,18 @@ div.timeSelectWrap {
 //ztree自定义
 .modalZtree {
   min-height: 300px;
-  overflow: auto; 
+  margin-top: -20px;
+}
+
+.groupTreeWrap {
+  background: #fff;
+  min-height: 400px;
+}
+
+.groupTreeWrap .curSelectedNode_Edit input {
+  line-height: 24px!important;
+  height: 24px!important;
+  font-size: 14px!important;
 }
 
 .groupTreeWrap .ztree li a {
@@ -1004,7 +1020,7 @@ div.timeSelectWrap {
 .content-wrap {
     margin: 90px 20px 0 270px;
     min-height: 400px;
-    .level2 {
+    &>.level2 {
       margin-bottom: 20px;
     }
 }
@@ -1023,13 +1039,17 @@ div.timeSelectWrap {
     line-height:36px;
     color:#fff;
     white-space:nowrap; 
-    display:block;
+    display:none;
   }
 }
 
 .ngdialog-content {
   .modal-header {
     padding: 0 0 15px 0;
+  }
+  .modal-body {
+    max-height: 450px;
+    overflow-y: auto;
   }
   .modal-footer {
     border-top: none; 

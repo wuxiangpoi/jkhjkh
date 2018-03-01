@@ -169,8 +169,11 @@ select {
 .moment-picker {
   z-index: 10001!important;
 }
-.modal-body .form-group {
-  margin-bottom: 4px;
+.modal-body .form-group label {
+  margin-bottom: 0;
+  line-height: 34px;
+  text-align: right;
+  font-weight: 400;
 }
 /* line 12, app/scss/common.scss */
 .bg-mediumseagreen {
@@ -325,7 +328,7 @@ div.timeSelectWrap {
 }
 .table-wrapper {
   background: #fff;
-  padding: 15px;
+  padding: 20px;
 }
 .table-wrapper > table {
   border-top: 1px solid #e2e3e6;
@@ -434,7 +437,16 @@ div.timeSelectWrap {
 }
 .modalZtree {
   min-height: 300px;
-  overflow: auto;
+  margin-top: -20px;
+}
+.groupTreeWrap {
+  background: #fff;
+  min-height: 400px;
+}
+.groupTreeWrap .curSelectedNode_Edit input {
+  line-height: 24px!important;
+  height: 24px!important;
+  font-size: 14px!important;
 }
 .groupTreeWrap .ztree li a {
   line-height: 36px;
@@ -895,7 +907,7 @@ div.timeSelectWrap {
   margin: 90px 20px 0 270px;
   min-height: 400px;
 }
-.content-wrap .level2 {
+.content-wrap > .level2 {
   margin-bottom: 20px;
 }
 .tipBtnWrap {
@@ -913,10 +925,14 @@ div.timeSelectWrap {
   line-height: 36px;
   color: #fff;
   white-space: nowrap;
-  display: block;
+  display: none;
 }
 .ngdialog-content .modal-header {
   padding: 0 0 15px 0;
+}
+.ngdialog-content .modal-body {
+  max-height: 450px;
+  overflow-y: auto;
 }
 .ngdialog-content .modal-footer {
   border-top: none;

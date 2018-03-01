@@ -1,14 +1,15 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="form-group form-group-sm info" style="text-align:center;font-size:20px;line-height:40px;color:#24243e;">
+        <i style="color: #ff4040;font-size:26px;vertical-align: -4px;" class="iconfont icon-jinggao"></i>&nbsp&nbsp {{info}}
+    </div>
 
-    <div class="modal-header">
-        <h4 class="modal-title">{{title}}</h4>
-    </div>
-    <div class="modal-body">
-        <div class="form-group form-group-sm info" style="text-align:center;font-size:20px;line-height:40px;color:#24243e;">
-            <i style="color: #ff4040;font-size:26px;vertical-align: -4px;" class="iconfont icon-jinggao"></i>&nbsp&nbsp {{info}}
-        </div>
-
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="modalConfirmSubmit()" id="form_modal_btn">确定</button>
-        <button class="btn btn-default"  ng-click="cancel()" type="button">取消</button>
-    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="modalConfirmSubmit()" id="form_modal_btn">确定
+        <i class="fa fa-spinner"></i>
+    </button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
+</div>

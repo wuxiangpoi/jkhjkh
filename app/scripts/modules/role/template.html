@@ -1,16 +1,11 @@
-<div class="row mrb20">
-    <div class="col-sm-12">
-        <div class="fl">
-            <button type="button" ng-click="save()" class="btn btn-primary addRole">
-                <i class="iconfont icon-tianjia-"></i>
-                添加角色
-            </button>
-        </div>
+<div class="content-wrap">
+    <div class="level2 clearfix">
+        <button type="button" ng-click="save()" class="btn btn-primary">
+            <i class="iconfont icon-tianjia-"></i>
+            添加角色
+        </button>
     </div>
 
-</div>
-
-<div class="content-wrap">
     <div class="table-wrapper">
         <table class="table" st-pipe="callServer" st-table="displayed">
             <thead>
@@ -21,14 +16,14 @@
                 </tr>
             </thead>
             <tbody ng-show="!isLoading">
-                <tr ng-repeat="row in displayed">
+                <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
                     <td>{{row.name}}</td>
                     <td>{{row.remark}}</td>
                     <td>
                         <div>
-                            <button class="btn btn-primary tableBtn" ng-click="checkPerms(row,1)">查看权限</button>
-                            <button class="btn btn-primary tableBtn btnGreen" ng-click="save(row)">编辑</button>
-                            <button class="btn btn-primary tableBtn btbRed" ng-click="del(row,$index)">删除</button>
+                            <button class="btn btn-primary tableBtn" ng-click="checkPerms(row)">查看权限</button>
+                            <button ng-if="row.id != 0 && row.id != 1" class="btn btn-primary tableBtn" ng-click="save(row)">编辑</button>
+                            <button ng-if="row.id != 0 && row.id != 1" class="btn btn-primary tableBtn" ng-click="del(row)">删除</button>
                         </div>
                     </td>
                 </tr>

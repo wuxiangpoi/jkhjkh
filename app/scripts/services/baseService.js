@@ -49,7 +49,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     $scope.info = info
                     $scope.title = title
                     $scope.modalConfirmSubmit = function () {
-                        cb(ngDialog)
+                        cb(ngDialog,$scope)
                     }
                     $scope.cancel = function () {
                         ngDialog.close()
@@ -88,18 +88,54 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 width: size
             })
         },
-        alert: function (info, type) {
+        alert: function (info, type, disappear, cb) {
             ngDialog.open({
                 template: 'tpl/alert.html' + verson,
                 closeByEscape: false,
                 controller: ['$scope', function ($scope) {
                     $scope.type = type;
                     $scope.info = info;
-                    setTimeout(function () {
-                        $scope.closeThisDialog()
-                    }, 1000)
+                    if (disappear) {
+                        setTimeout(function () {
+                            $scope.closeThisDialog()
+                            if (cb) {
+                                cb()
+                            }
+                        }, 1000)
+                    } else {
+                        setTimeout(function () {
+                            ngDialog.close()
+                        }, 1000)
+                    }
+
                 }]
             });
+        },
+        confirmAlert: function (title, info, type, sInfo, tInfo, cb,link) {
+            ngDialog.openConfirm({
+                template: 'tpl/confirmalert.html' + verson ,
+                cache: false,
+                className: 'ngdialog-theme-default',
+                controller: ['$scope', function ($scope) {
+                    $scope.info = info;
+                    $scope.title = title;
+                    $scope.type = type;
+                    $scope.sInfo = sInfo;
+                    $scope.tInfo = tInfo;
+                    $scope.link = link;
+                    $scope.modalConfirmSubmit = function () {
+                        ngDialog.close();
+                        if (cb) {
+                            cb();
+                        }
+                    }
+                    $scope.cancel = function () {
+                        ngDialog.close();
+                    }
+
+                }],
+                width: 540
+            })
         },
         getJson: function (url, params, cb) {
             var me = this;
@@ -157,30 +193,32 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 me.alert('网络或服务端异常', 'warning')
             })
         },
-        postData: function (url, params, cb,vm) {
-            var me = this;
-            $http.post(url, params,{
+        postData: function (url, params, cb, fcb, show) {
+            let me = this;
+            $http.post(url, params, {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                transformRequest: function(obj) {  
-                    var str = [];  
-                    for(var p in obj){  
-                      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
-                    }  
-                    return str.join("&");  
-                  }  
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj) {
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    }
+                    return str.join("&");
+                }
             }).then(function (res) {
                 var data = res.data;
-                if(vm){
-                    vm.isPosting = false;
-                }
                 if (data.code == 1) {
                     cb(data.content);
                 } else if (data.code == 2) {
-                    me.goToUrl('/login');
+                    me.goToLogin();
+                    return false;
                 } else {
-                    me.alert(data.message, 'warning');
+                    if (fcb) {
+                        fcb(data.message);
+                    } else {
+                        me.alert(data.message, 'warning');
+                    }
                     return false;
                 }
             }, function (res) {
