@@ -1,0 +1,19 @@
+<div class="groupSelect">
+    <div class="diy_select" ng-click="showMenu($event)">
+        <div class="diy_select_txt">{{currentGroup.name}}</div>
+        <div class="diy_select_list group_select">
+            <ul id="{{treeId}}" z-tree ztreeSetting="{{ztreeSetting}}" class="ztree" ></ul>
+        </div>
+    </div>
+
+    <!-- <div class="leafWrap">
+        <div id="currentLeafName" class="currentName" ng-click="showLeafMenu($event)">全部分组</div>
+        <div class="treeWrapLeaf">
+            <ul>
+                <li ng-click="leafClick()">全部分组</li>
+                <li ng-repeat="leaf in groupLeafes" ng-click="leafClick(leaf)">{{leaf.name}}</li>
+            </ul>
+        </div>
+    </div> -->
+
+</div>

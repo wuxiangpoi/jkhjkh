@@ -5,10 +5,53 @@
             return $filter('date')(date, 'yyyy-MM-dd HH:mm:ss');
         }
     });
+    app.filter('formateDate', function () {
+        return function (date) {
+			return date.toString().substring(0, 4) + '-' + date.toString().substring(4, 6) + '-' + date.toString().substring(6, 8);
+        }
+    });
+    app.filter('formateMinate', function () {
+        return function (date) {
+			return date.substring(0, 5);
+        }
+    });
     //OSS图片裁减
     app.filter('play_url', function ($sce) {
         return function (url) {
             return $sce.trustAsResourceUrl(url);
+        }
+    });
+
+    app.filter('getOrganizations', function ($rootScope) {
+        var groups = $rootScope.userData.root_organizations;
+        var cName = '';
+        var finalName = [];
+
+        function findParent(data) {
+            if (data.pid == '') {
+                return finalName.reverse().push(cName);
+            } else {
+
+                for (var i = 0; i < groups.length; i++) {
+                    if (groups[i].id == data.pid) {
+                        finalName.push(groups[i].name)
+                        if (groups[i].pid == '') {
+                            return finalName.reverse().push(cName);
+                        } else {
+                            findParent(groups[i]);
+                        }
+                    }
+                }
+            }
+        }
+        return function (oid) {
+            for (var i = 0; i < groups.length; i++) {
+                if (groups[i].id == oid) {
+                    cName = groups[i].name;
+                    findParent(groups[i]);
+                }
+            }
+            return finalName.join('>');
         }
     });
     app.filter('programStatusTxt', function () {

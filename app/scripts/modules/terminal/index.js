@@ -2,117 +2,267 @@
 angular.module('sbAdminApp')
 	.controller(
 		'terminalCtrl',
-		function ($scope, $rootScope, $stateParams, baseService) {
+		function ($scope, $rootScope, $stateParams, baseService, leafService) {
 			$scope.displayed = [];
 			$scope.sp = {};
 			$scope.tableState = {};
 			$scope.ids = [];
 			$scope.idsNormal = [];
-
+			$scope.leafes = [];
+			$scope.currentGroup = $rootScope.rootGroup;
+			$scope.sp.oid = $scope.currentGroup.id;
+			$scope.currentLeaf = {};
+			$scope.currentLeaf.id = '';
+			$scope.sp.gid = '';
 			$scope.callServer = function (tableState) {
 				baseService.initTable($scope, tableState, baseService.api.terminal + 'getTerminalPageList');
 			}
-			
+			$scope.getTerminalGroups = function (oid) {
+				leafService.getLeafes(baseService.api.terminal + 'getTerminalGroups', oid, function (data) {
+					$scope.leafes = data;
+				})
+			}
+			$scope.initPage = function () {
+				$scope.callServer($scope.tableState);
+				$scope.ids = [];
+				$scope.idsNormal = [];
+			}
+			$scope.$on('emitGroupLeaf', function (e, group) {
+				if ($scope.sp.oid != group.id) {
+					$scope.currentGroup = group;
+					$scope.sp.oid = group.id;
+					$scope.sp.gid = '';
+					$scope.initPage();
+					$scope.getTerminalGroups($scope.sp.oid);
+				}
+
+			});
+			$scope.getTerminalGroups($scope.currentGroup.id);
+			$scope.addGroup = function () {
+				leafService.addGroup(baseService.api.terminal + 'optGroupSave', $scope.currentGroup.id, function () {
+					$scope.getTerminalGroups($scope.currentGroup.id);
+					baseService.alert('添加成功', 'success');
+				})
+			}
+			$scope.setGroup = function () {
+				var gids = $scope.ids.join(',');
+				leafService.setGroup(baseService.api.terminal + 'setOrganization', gids, function () {
+					$scope.getTerminalGroups($scope.currentGroup.id);
+					baseService.alert('设置成功', 'success');
+					$scope.initPage();
+				})
+			}
+			$scope.chooseLeaf = function (id, $event) {
+				$scope.currentLeaf.id = id;
+				$scope.sp.gid = id;
+				$scope.initPage();
+			}
+			$scope.setLeaf = function () {
+				var gids = $scope.ids.join(',');
+				leafService.setLeaf(baseService.api.terminal + 'setGroupRelations', $scope.currentGroup.id, gids, $scope.leafes, function () {
+					baseService.alert('设置成功', 'success', true);
+					$scope.initPage();
+				})
+			}
+			$scope.cancelLeaf = function () {
+				var gids = $scope.ids.join(',');
+				leafService.cancelLeaf(baseService.api.terminal + 'setGroupRelations', gids, $scope.currentLeaf, function () {
+					baseService.alert('设置成功', 'success', true);
+					$scope.initPage();
+				})
+			}
+			$scope.editLeaf = function (item, $event) {
+				var parent = $($event.currentTarget).parents('.leafGroup');
+				var leafName = $($event.currentTarget).parents('.leafGroup').children('.leafName');
+				var editInput = $($event.currentTarget).parents('.leafGroup').children('.leafEdit').children('input');
+				var oVal = editInput.val();
+				parent.addClass('edit');
+				editInput.focus();
+				editInput.blur(function () {
+					var nVal = editInput.val();
+					if (nVal == '' || nVal == oVal) {
+						editInput.val(oVal);
+						parent.removeClass('edit');
+					} else {
+						leafService.editLeaf(baseService.api.terminal + 'optGroupSave', {
+							id: item.id,
+							name: nVal,
+							oid: $scope.currentGroup.id
+						}, function () {
+							parent.removeClass('edit');
+							$scope.getTerminalGroups($scope.currentGroup.id);
+							baseService.alert('修改成功', 'success', true);
+						}, function () {
+							leafName.text(oVal);
+							editInput.val(oVal);
+							parent.removeClass('edit');
+						})
+					}
+				})
+
+			}
+			$scope.delLeaf = function (item) {
+				leafService.delLeaf(baseService.api.terminal + 'optGroupDel', item, function () {
+					$scope.getTerminalGroups($scope.currentGroup.id);
+					baseService.alert('删除成功', 'success');
+					$scope.currentLeaf = {};
+					$scope.currentLeaf.id = '';
+					$scope.sp.gid = '';
+					$scope.callServer($scope.tableState);
+				})
+
+			}
 			$scope.details = function (item) {
 				baseService.getJson(baseService.api.terminal + 'getTerminalInfo', {
 					tid: item.id
 				}, function (data) {
 					baseService.confirmDialog(580, '终端状态信息', data, 'tpl/terminal_details.html', function (ngDialog) {
-
+						ngDialog.close();
 					})
 				});
+
 			}
 
 			$scope.save = function (item) {
-				baseService.confirmDialog(580, '', item, 'tpl/terminal_save.html', function (ngDialog) {
-					var formData = {
-						name: item.name,
-						id: item.id,
-						city_no: item.city_no,
-						remark: item.remark,
-						cityName: '',
-						addr: item.addr
+				baseService.confirmDialog(580, '编辑终端信息', item, 'tpl/terminal_save.html', function (ngDialog, vm) {
+					if (vm.modalForm.$valid) {
+						var formData = {
+							name: item.name,
+							id: item.id,
+							city_no: item.city_no,
+							remark: item.remark,
+							cityName: '',
+							addr: item.addr
+						}
+						vm.isPosting = true;
+						baseService.postData(baseService.api.terminal + 'modifyTerminalInfo', formData, function () {
+							ngDialog.close();
+							$scope.callServer($scope.tableState);
+							baseService.alert(item ? '修改成功' : '添加成功', 'success');
+						})
+
+					} else {
+						vm.isShowMessage = true;
 					}
-					terminalService.saveTerminal(formData, function () {
-						ngDialog.close();
-						baseService.alert("编辑成功", 'success');
-					})
+
 				})
 			}
-
-			
 			$scope.sendCommand = function (command) {
-				var tids = $scope.ids.join(',');
+				var tids = $scope.idsNormal.join(',');
 
-				function switchCommand(commandTxt) {
-					switch (commandTxt) {
-						case 7:
-							return '终端截屏'
-							break;
-						case 8:
-							return '获取终端信息'
-							break;
-						case 9:
-							return '终端初始化'
-							break;
-					}
-				}
 				switch (command) {
+					case 2:
+					case 3:
+						var modalData = {
+							command: command
+						}
+						if ($scope.idsNormal.length == 1) {
+							var t = {};
+							for (var i = 0; i < $scope.displayed.length; i++) {
+								if ($scope.displayed[i].id == tids) {
+									t = $scope.displayed[i];
+								}
+							}
+							if (command == 3) {
+								modalData.volumn = t.volumn;
+							} else {
+								if (t.workCron) {
+									var st = t.workCron.split("/")[0];
+									var et = t.workCron.split("/")[1];
+									modalData.start_h = parseInt(st.split(" ")[2]);
+									modalData.start_m = parseInt(st.split(" ")[1]);
+									modalData.end_h = parseInt(et.split(" ")[2]);
+									modalData.end_m = parseInt(et.split(" ")[1]);
+									var _week = st.split(" ")[5];
+									modalData.weeks = _week == '*' ? '1,2,3,4,5,6,7' : _week;
+								}
+							}
+						}
+						baseService.confirmDialog(450, $rootScope.getRootDicName('terminal_cmd', command), modalData, 'tpl/terminal_command.html', function (ngDialog, vm) {
+							if (vm.modalForm.$valid) {
+								vm.isPosting = true;
+								var postData = {
+									tids: tids,
+									command: command
+								}
+								if (command == 3) {
+									vm.isPosting = true;
+									postData.volumn = vm.data.volumn;
+									vm.isPosting = true;
+									baseService.postData(baseService.api.terminal + 'sendCommand', postData,
+										function (data) {
+											ngDialog.close();
+											baseService.alert('设置成功', 'success');
+											$scope.callServer($scope.tableState);
+
+										});
+								} else {
+									if (parseFloat(vm.end_h + vm.end_m / 60) <= parseFloat(vm.start_h + vm.start_m / 60)) {
+										baseService.alert('关机时间不得小于开机时间', 'warning', true);
+									} else {
+										vm.isPosting = true;
+										postData.start_h = vm.data.start_h;
+										postData.start_m = vm.data.start_m;
+										postData.end_h = vm.data.end_h;
+										postData.end_m = vm.data.end_m;
+										postData.week = '1,2,3,4,5,6,7'.split(',');
+										baseService.postData(baseService.api.terminal + 'sendCommand', postData,
+											function (data) {
+												ngDialog.close();
+												baseService.alert('设置成功', 'success');
+												$scope.callServer($scope.tableState);
+
+											});
+									}
+								}
+
+
+							} else {
+								vm.isShowMessage = true;
+							}
+						}, function (vm) {
+							vm.start_h = 0;
+							vm.start_m = 0;
+							vm.end_h = 24;
+							vm.end_m = 0;
+							vm.selectH = [];
+							vm.selectM = [];
+							for (var i = 0; i < 25; i++) {
+								vm.selectH.push({
+									name: i + '时',
+									value: i
+								})
+							}
+							for (var i = 0; i < 60; i++) {
+								vm.selectM.push({
+									name: i + '分',
+									value: i
+								})
+							}
+							vm.checkTime = function () {
+								if (vm.start_h == 24) {
+									vm.start_m = 0;
+								}
+								if (vm.end_h == 24) {
+									vm.end_m = 0;
+								}
+
+							}
+						})
+						break;
+					case 4:
 					case 7:
 					case 8:
-					case 9:
-						baseService.confirm('终端操作', "确定对当前选中的设备执行命令：" + switchCommand(command) + "?", function (ngDialog) {
-							baseService.postData(baseService.api.terminalCommandSend + 'sendCommand', {
+						baseService.confirm('终端操作', "确定对当前选中的设备执行命令：" + $rootScope.getRootDicName('terminal_cmd', command) + "?", function (ngDialog, vm) {
+							vm.isPosting = true;
+							baseService.postData(baseService.api.terminal + 'sendCommand', {
 									tids: tids,
 									command: command
 								},
 								function (data) {
 									ngDialog.close()
-									$scope.sendCommand()
 									baseService.alert('操作成功', 'success')
 								});
-						})
-						break;
-					case 31:
-						baseService.confirmDialog(720, '终端升级', {}, "tpl/versionFile_list.html", function (ngDialog, vm) {
-							if (vm.displayed.length == 0) {
-								baseService.alert('请至少勾选一个版本文件再进行操作', 'info', true);
-							} else {
-								baseService.postData(baseService.api.terminalCommandSend + 'sendCommand', {
-									tids: tids,
-									version: vm.ids.join(','),
-									command: 31
-								}, function () {
-									ngDialog.close();
-									baseService.alert('操作成功', 'success', true);
-								})
-							}
-						}, function (vm) {
-							vm.displayed = [];
-							vm.sp = {};
-							vm.tableState = {};
-							vm.ids = [];
-							vm.callServer = function (tableState) {
-								baseService.initTable(vm, tableState, baseService.api.versionFile + 'getVersionFileListPage');
-							}
-							vm.checkAll = function ($event) {
-								vm.ids = [];
-								if ($($event.currentTarget).is(':checked')) {
-									for (var i = 0; i < vm.displayed.length; i++) {
-										vm.ids.push(vm.displayed[i].id)
-										if (vm.displayed[i].status == 1) {}
-									}
-								} else {
-									vm.ids = [];
-								}
-							}
-							vm.checkThis = function (item, $event) {
-								if ($($event.currentTarget).is(':checked')) {
-									vm.ids.push(item.id);
-								} else {
-									vm.ids = baseService.removeAry(vm.ids, item.id);
-								}
-							}
 						})
 						break;
 				}
@@ -143,74 +293,49 @@ angular.module('sbAdminApp')
 					$scope.idsNormal = baseService.removeAry($scope.idsNormal, item.id);
 				}
 			}
-			$scope.details = function (item) {
-				baseService.getJson(baseService.api.terminal + 'getTerminalInfo', {
-					tid: item.id
-				}, function (data) {
-					baseService.confirmDialog(580, '终端状态信息', data, 'tpl/terminal_details.html', function (ngDialog) {
-						ngDialog.close();
-					})
-				});
 
-			}
-			$scope.save = function (item){
-				baseService.confirmDialog(540, '', item, "tpl/terminal_save.html", function (ngDialog) {
-					
-				}, function (vm) {
-					
-				})
-			}
 			$scope.showPrograms = function (item) {
-				baseService.confirmDialog(720, '播放列表', item, 'tpl/terminal_programPlay_list.html', function (ngDialog) {
-
+				item.info = '(仅显示登录账号权限范围内的节目)';
+				baseService.confirmDialog(720, '播放管理', item, 'tpl/terminal_programPlay_list.html', function (ngDialog, vm) {
+					var s = '';
+					s = vm.ids.join(',');
+					if (s.length) {
+						baseService.confirm('节目操作', "确定在该设备上停播选中节目?", function (ngDialog, vm1) {
+							vm1.isPosting = true;
+							baseService.postData(baseService.api.program + 'programManage_sendCommand_StopPlayByPids', {
+									tid: item.id,
+									type: 0, // 0停播  1 下发
+									pids: s
+								},
+								function (data) {
+									ngDialog.close();
+									baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，将停播此节目，同时不显示在终端列表中~', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
+								});
+						})
+					} else {
+						baseService.alert('请至少勾选一个节目再进行操作', 'warning', true);
+					}
 				}, function (vm) {
 					vm.displayed = [];
 					vm.sp = {};
 					vm.sp.tid = item.id;
-					vm.sp.domain = $stateParams.id ? $stateParams.id : item.domain;
 					vm.tableState = {};
+					vm.ids = [];
 					vm.callServer = function (tableState) {
-						baseService.initTable(vm, tableState, baseService.api.terminal + 'getProgramPlayByTid');
+						baseService.initTable(vm, tableState, baseService.api.terminal + 'getTerminalProgramPlayPageByTid');
 					}
-					vm.showPlay = function (row) {
-						row.detailType = 0;
-						row.nstatus = $rootScope.getCheckStatusAttr(row.status, 0);
-						baseService.confirmDialog(750, '节目预览', row, "tpl/program_details.html", function (ngDialog, vm) {
+					vm.checkAll = function ($event) {
+						baseService.checkAll($event, vm);
+					}
+					vm.checkThis = function (item, $event) {
+						baseService.checkThis(item, $event, vm);
+					}
+					vm.showPlay = function (item) {
+						baseService.showProgram(item);
+					}
+				})
+			}
 
-						}, function (vm) {
-							programService.getProgramById(row.pid, $stateParams.id ? $stateParams.id : item.domain, function (program) {
-								vm.program = program;
-							});
-						})
-					}
-					vm.stop = function (row) {
-						baseService.confirm('节目操作', "确定在该设备上停播节目：" + row.name + "?", function (ngDialog) {
-							baseService.postData($http,
-								baseService.api.terminal + 'programManage_sendCommand', {
-									tids: row.id,
-									type: 0, // 0停播  1 下发
-									pid: row.pid
-								},
-								function (data) {
-									ngDialog.close();
-									baseService.alert('操作成功', 'success', true);
-								});
-						})
-					}
-				})
-			}
-			$scope.setEnabled = function (enable) {
-				baseService.confirm(enable == 1 ? '启用' : '停用', enable == 1 ? '确定启用选中设备？' : '确定停用选中设备？', function (ngDialog) {
-					terminalService.changeEnabled({
-						tids: $scope.ids.join(','),
-						enabled: enable
-					}, function () {
-						ngDialog.close();
-						baseService.alert("操作成功", 'success');
-						$scope.callServer($scope.tableState);
-					})
-				})
-			}
 			$scope.showTip = function ($event) {
 				if ($($event.currentTarget).children('.btn').hasClass('disabled')) {
 					$($event.currentTarget).children('.tipDiv').show();
@@ -219,61 +344,24 @@ angular.module('sbAdminApp')
 			$scope.hideTip = function ($event) {
 				$($event.currentTarget).children('.tipDiv').hide();
 			}
-			$scope.sendNotice = function () {
-				var data = {
-					tids: $scope.ids.join(','),
-					command: 23,
-					start_h: '',
-					start_m: '',
-					end_h: '',
-					end_m: '',
-					noticeText: '',
+
+			function getExportQuery() {
+				var q = '';
+				for (var k in $scope.sp) {
+					if ($scope.sp[k]) {
+						q += "&" + k + "=" + $scope.sp[k];
+					}
 				}
-				baseService.confirmDialog(540, '发布通知', data, 'tpl/send_notice.html', function (ngDialog, vm) {
-					vm.isShowMessage = false;
-					if (vm.noticeForm.$valid) {
-						if (sentencesService.checkCon(vm.data.noticeText).sentencesArr.length) {
-							baseService.alert('抱歉，您输入的内容包含被禁止的词汇，建议修改相关内容', 'warning');
-							vm.data.noticeText = sentencesService.checkCon(vm.data.noticeText).sentencesCon;
-						} else {
-							var startTime = vm.startDate.toString() + vm.data.start_h.toString() + (vm.data.start_m/60).toString();
-							var endTime = vm.endDate.toString() + vm.data.end_h.toString() + (vm.data.end_m/60).toString();
-							if (parseInt(startTime) > parseInt(endTime)) {
-								baseService.alert('结束时间不得小于开始时间', 'warning');
-							} else {
-								vm.data.startDate = $rootScope.formateDate(vm.startDate);
-								vm.data.endDate = $rootScope.formateDate(vm.endDate);
-								baseService.postData(baseService.api.terminalCommandSend + 'sendCommandWithNotice', vm.data, function (data) {
-									ngDialog.close();
-									baseService.alert('发布成功', 'success');
-								})
-							}
-						}
-
-
-					} else {
-						vm.isShowMessage = true;
-					}
-				}, function (vm) {
-					vm.selectH = [];
-					vm.selectM = [];
-					var day = new Date();
-					vm.today = day.getFullYear() + '-' + baseService.formateDay(day.getMonth() + 1) + baseService.formateDay(day.getDate());
-					for (var i = 0; i < 25; i++) {
-						vm.selectH.push({
-							name: i + '时',
-							value: i
-						})
-					}
-					for (var i = 0; i < 60; i++) {
-						vm.selectM.push({
-							name: i + '分',
-							value: i
-						})
-					}
-					vm.formDate = function (n, o, attr) {
-						vm[attr] = n._i.split('-').join('');
-					}
+				if (q) {
+					q = "?" + q.substr(1);
+				}
+				return q;
+			}
+			$scope.exportExcel = function () {
+				baseService.confirm('导出表格', '确定将当前查询的所有的设备信息导出excel表格?', function (ngDialog) {
+					ngDialog.close()
+					window.open(baseService.api.terminal + 'exportTerminal' +
+						getExportQuery());
 				})
 			}
 		})

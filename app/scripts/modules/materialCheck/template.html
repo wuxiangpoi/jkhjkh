@@ -1,21 +1,22 @@
 <div class="content-wrap" style="min-width:680px;">
-    <div class="tableHeader clearfix">
-        <div class="selectWrap">
-            <select class="form-control" ng-model="sp.type" ng-change="callServer(tableState)">
-                <option value="">素材类型</option>
-                <option value="0">图片</option>
-                <option value="1">视频</option>
-            </select>
-        </div>
-        <div class="serchWrap fr">
-            <div class="fl txtInputWrap">
-                <input class="form-control" ng-model="sp.search" placeholder="素材名称">
-            </div>
-            <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
-        </div>
-
-    </div>
+    
     <div class="table-wrapper">
+            <div class="tableHeader clearfix">
+                    <div class="selectWrap">
+                        <select class="form-control" ng-model="sp.type" ng-change="callServer(tableState)">
+                            <option value="">素材类型</option>
+                            <option value="0">图片</option>
+                            <option value="1">视频</option>
+                        </select>
+                    </div>
+                    <div class="serchWrap fr">
+                        <div class="fl txtInputWrap">
+                            <input class="form-control" ng-model="sp.search" placeholder="素材名称">
+                        </div>
+                        <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
+                    </div>
+            
+                </div>
         <table class="table" st-pipe="callServer" st-table="displayed">
             <thead>
                 <tr>
@@ -32,8 +33,8 @@
                     <td class="tdClick" style="min-width:160px;" ng-click="showMaterial(row)">
                         <div style="position:relative;">
                             <div style="width:80px;position:absolute;top:10px;">
-                                <img ng-if="row.type == 0" src="img/loading.jpg" style="width:80px;height:60px;" lazy-src="{{dmbdOSSImageUrlResizeFilter(row.path,100)}}">
-                                <img ng-if="row.type == 1" src="img/loading.jpg" style="width:80px;height:60px;" lazy-src="{{ata.status == 7?'/img/no_pic.jpg':dmbdOSSImageUrlResizeFilter(row.snapshot,100)}}">
+                                <img ng-if="row.type == 0" src="img/loading.gif" style="width:80px;height:60px;" lazy-src="{{dmbdOSSImageUrlResizeFilter(row.path,100)}}">
+                                <img ng-if="row.type == 1" src="img/loading.gif" style="width:80px;height:60px;" lazy-src="{{ata.status == 7?'/img/no_pic.jpg':dmbdOSSImageUrlResizeFilter(row.snapshot,100)}}">
                                 <div ng-if="row.type == 1" class="vedioPre">
                                     <i class="iconfont icon-xialajiantou"></i>
                                 </div>

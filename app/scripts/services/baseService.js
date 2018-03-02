@@ -1,5 +1,5 @@
 var baseService = angular.module('baseService', []);
-baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog','programService', function ($rootScope, $http, $location, ngDialog,programService) {
+baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
     var apiUrl = 'http://47.92.116.16:9090';
     var verson = '?_v1.5';
     var baseService = {
@@ -49,7 +49,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     $scope.info = info
                     $scope.title = title
                     $scope.modalConfirmSubmit = function () {
-                        cb(ngDialog,$scope)
+                        cb(ngDialog, $scope)
                     }
                     $scope.cancel = function () {
                         ngDialog.close()
@@ -111,9 +111,9 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 }]
             });
         },
-        confirmAlert: function (title, info, type, sInfo, tInfo, cb,link) {
+        confirmAlert: function (title, info, type, sInfo, tInfo, cb, link) {
             ngDialog.openConfirm({
-                template: 'tpl/confirmalert.html' + verson ,
+                template: 'tpl/confirmalert.html' + verson,
                 cache: false,
                 className: 'ngdialog-theme-default',
                 controller: ['$scope', function ($scope) {
@@ -143,13 +143,13 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                transformRequest: function(obj) {  
-                    var str = [];  
-                    for(var p in obj){  
-                      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
-                    }  
-                    return str.join("&");  
-                  }  
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj) {
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    }
+                    return str.join("&");
+                }
             }).then(function (res) {
                 var data = res.data;
                 if (data.code == 1) {
@@ -171,13 +171,13 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                transformRequest: function(obj) {  
-                    var str = [];  
-                    for(var p in obj){  
-                      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
-                    }  
-                    return str.join("&");  
-                  }  
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj) {
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    }
+                    return str.join("&");
+                }
             }).then(function (res) {
                 var data = res.data;
                 if (data.code == 1) {
@@ -225,10 +225,10 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 me.alert('网络或服务端异常', 'warning')
             })
         },
-        removeAry: function(aObj,val){
+        removeAry: function (aObj, val) {
             var nArr = [];
-            for(var i = 0; i < aObj.length; i ++){
-                if(aObj[i] != val){
+            for (var i = 0; i < aObj.length; i++) {
+                if (aObj[i] != val) {
                     nArr.push(aObj[i]);
                 }
             }
@@ -237,14 +237,14 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
         goToUrl: function (path) {
             $location.path(path);
         },
-        initTable: function($scope,tableState,url){
+        initTable: function ($scope, tableState, url) {
             $scope.isLoading = true;
             $scope.tableState = tableState;
             var pagination = tableState.pagination;
             var start = pagination.start || 0;
             var num = $scope.sp.length;
             $scope.sp.start = start;
-            this.getJson(url,$scope.sp,function(result){
+            this.getJson(url, $scope.sp, function (result) {
                 $scope.displayed = result.data;
                 num = num || $rootScope.paginationNumber[0];
                 tableState.pagination.number = num;
@@ -252,20 +252,38 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 $scope.isLoading = false;
             })
         },
-        formateDay: function(day){
-            if(day < 10){
+        checkAll: function ($event, vm) {
+            vm.ids = [];
+            if ($($event.currentTarget).is(':checked')) {
+                for (var i = 0; i < vm.displayed.length; i++) {
+                    vm.ids.push(vm.displayed[i].id)
+                }
+            } else {
+                vm.ids = [];
+            }
+        },
+        checkThis: function (item, $event, vm) {
+            if ($($event.currentTarget).is(':checked')) {
+                vm.ids.push(item.id);
+
+            } else {
+                vm.ids = this.removeAry(vm.ids, item.id);
+            }
+        },
+        formateDay: function (day) {
+            if (day < 10) {
                 return '0' + day.toString();
-            }else{
+            } else {
                 return day.toString();
             }
         },
-        dmbdOSSImageUrlResizeFilter: function(imgUrl, size){
-                var joinChar = imgUrl.indexOf('?') >= 0 ? '&' : '?';
-                return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,' + size + ',w_' + size;
+        dmbdOSSImageUrlResizeFilter: function (imgUrl, size) {
+            var joinChar = imgUrl.indexOf('?') >= 0 ? '&' : '?';
+            return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,' + size + ',w_' + size;
         },
-        showProgram: function(item){
+        showProgram: function (item) {
             var me = this;
-           
+
             programService.getProgramById(item.pid, function (program) {
                 program.creator = item.creator;
                 program.status = item.status;
@@ -277,17 +295,17 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     vm.program = program;
                 });
             });
-            
+
         },
-        showMaterial: function(item,detailType){
+        showMaterial: function (item, detailType) {
             item.detailType = detailType;
-            item.nUrl = baseService.dmbdOSSImageUrlResizeFilter(item.path,400);
+            item.nUrl = baseService.dmbdOSSImageUrlResizeFilter(item.path, 400);
             this.confirmDialog(750, '素材详情', item, "tpl/material_detail.html", function (ngDialog, vm) {
 
             }, function (vm) {
-                
+
             });
-            
+
         }
     }
     return baseService;

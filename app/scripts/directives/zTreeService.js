@@ -26,6 +26,7 @@ angular.module('sbAdminApp')
                         callback: {
                             onClick: function (event, treeId, treeNode, clickFlag) {
                                 $(event.target).parent().prev('.chk').click();
+                                $scope.$emit('leafClick',treeNode,event);
                             },
                             onRename: onRename //修改事件 
                         }

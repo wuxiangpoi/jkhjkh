@@ -19,6 +19,7 @@ var app = angular.module('sbAdminApp', [
         'ngMessages',
         'baseService',
         'userService',
+        'leafService',
         'qmedia.editor'
     ]).run(function ($rootScope, $state, $location, $stateParams, $filter, ngDialog, baseService, userService) {
         $rootScope.paginationNumber = [10, 15, 20, 30, 50, 100];

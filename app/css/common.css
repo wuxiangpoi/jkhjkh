@@ -19,9 +19,14 @@
   outline: none;
 }
 .btn:focus {
-  outline: none;
+  outline: none!important;
 }
 .btn-primary {
+  background: #00a0e9;
+  border: 1px solid #00a0e9;
+  position: relative;
+}
+.btn-primary:focus {
   background: #00a0e9;
   border: 1px solid #00a0e9;
 }
@@ -30,12 +35,16 @@
   border: 1px solid #58cbff;
 }
 .btn-primary .fa-spinner {
+  position: absolute;
+  top: 50%;
+  margin-top: -8px;
+  right: 20px;
   display: none;
 }
 .btn-primary.disabled {
   color: #a4a4a4!important;
-  background: #e2e3e6;
-  border: 1px solid #e2e3e6;
+  background: #e2e3e6!important;
+  border: 1px solid #e2e3e6!important;
   cursor: pointer;
 }
 .btn-primary.disabled .fa-spinner {
@@ -85,8 +94,9 @@
   padding-left: 5px;
 }
 a:focus,
-a:hover {
-  outline: none;
+a:hover,
+input:focus {
+  outline: none!important;
 }
 li {
   list-style-type: none;
@@ -117,6 +127,9 @@ li {
 }
 .pdl15 {
   padding-left: 15px;
+}
+.pdl0 {
+  padding-left: 0px;
 }
 .pdr0 {
   padding-right: 0px;
@@ -168,12 +181,6 @@ select {
 }
 .moment-picker {
   z-index: 10001!important;
-}
-.modal-body .form-group label {
-  margin-bottom: 0;
-  line-height: 34px;
-  text-align: right;
-  font-weight: 400;
 }
 /* line 12, app/scss/common.scss */
 .bg-mediumseagreen {
@@ -286,6 +293,55 @@ div.timeSelectWrap {
   font-size: 18px;
   color: #c4c4c4;
 }
+.diy_select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  line-height: 34px;
+}
+.diy_select .diy_select_txt {
+  cursor: pointer;
+  padding: 0 20px 0 5px;
+}
+.diy_select .diy_select_list {
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  z-index: 88;
+  border-top: none;
+  width: 101%;
+  background: #fff;
+  border: 1px solid #73839F;
+  min-width: 160px;
+  min-height: 250px;
+  max-height: 280px;
+  overflow: auto;
+  display: none;
+}
+.diy_select .diy_select_list > ul {
+  padding: 0;
+}
+.groupSelect .diy_select_txt {
+  background: url(../img/select_arrow.png) right center no-repeat;
+}
+.groupWrap.form {
+  display: block;
+  width: 100%;
+  height: 34px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding-right: 5px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
 /* line 58, app/scss/common.scss */
 .min-h38 {
   min-height: 38px;
@@ -316,8 +372,79 @@ div.timeSelectWrap {
   -o-text-overflow: ellipsis;
   overflow: hidden;
 }
+.panelSelectWrap {
+  display: inline-block;
+  margin-right: 20px;
+}
+.panelSelectWrap select {
+  border: 0;
+  box-shadow: none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: url(../img/select_arrow.png) right center no-repeat;
+  text-align: left;
+  padding-right: 20px;
+}
+.panelSelectWrap select:focus {
+  box-shadow: none;
+}
 .tableHeader {
   margin-bottom: 20px;
+}
+.tableHeader .panel {
+  margin-bottom: 0;
+  background: #f6f7fa;
+  border-radius: 0;
+  padding: 0 10px;
+}
+.tableHeader .panel .panelRow {
+  line-height: 36px;
+  border-bottom: 1px dashed #ddd;
+  position: relative;
+}
+.tableHeader .panel .panelRow.last {
+  border-bottom: none;
+}
+.tableHeader .panel .panelRow .panel-left {
+  padding: 0 15px;
+  color: #9f9f9f;
+  display: inline-block;
+}
+.tableHeader .panel .panelRow .panel-right {
+  display: inline-block;
+}
+.tableHeader .panel .panelRow .panel-right .leafGroup {
+  padding: 5px;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.tableHeader .panel .panelRow .panel-right .leafGroup i {
+  cursor: pointer;
+  margin-left: 10px;
+  display: none;
+}
+.tableHeader .panel .panelRow .panel-right .leafGroup .leafEdit {
+  display: none;
+}
+.tableHeader .panel .panelRow .panel-right .leafGroup .leafEdit input {
+  line-height: 32px;
+  border: 1px solid #ddd;
+  width: 160px;
+}
+.tableHeader .panel .panelRow .panel-right .leafGroup.current {
+  color: #00a0e9;
+}
+.tableHeader .panel .panelRow .panel-right .leafGroup.current i {
+  display: inline-block;
+}
+.tableHeader .panel .panelRow .panel-right .leafGroup.edit .leafName,
+.tableHeader .panel .panelRow .panel-right .leafGroup.edit i {
+  display: none;
+}
+.tableHeader .panel .panelRow .panel-right .leafGroup.edit .leafEdit {
+  display: inline-block;
 }
 .selectWrap {
   float: left;
@@ -425,15 +552,64 @@ div.timeSelectWrap {
   right: 4px;
   top: 8px;
 }
-.modalDetail {
-  font-size: 12px;
+/* 群组树 */
+.ztree li a {
+  line-height: 27px;
 }
-.modalDetail label {
-  font-weight: 400;
+.ztree li ul.line {
+  background: url('../img/line_conn.gif') 4px 0px repeat-y;
 }
-.modalDetail .form_input,
-.modalDetail .form_right {
-  line-height: 24px;
+.ztree li span.button {
+  background: url('../img/zTreeStandard_mid.png');
+}
+.ztree li span.button.switch {
+  width: 27px;
+  height: 27px;
+}
+.ztree li span.button.root_open {
+  background-position: -138px -81px;
+}
+.ztree li span.button.root_close {
+  background-position: -111px -81px;
+}
+.ztree li span.button.roots_open {
+  background-position: -138px 0;
+}
+.ztree li span.button.roots_close {
+  background-position: -111px 0;
+}
+.ztree li span.button.center_open {
+  background-position: -138px -27px;
+}
+.ztree li span.button.center_close {
+  background-position: -111px -27px;
+}
+.ztree li span.button.bottom_open {
+  background-position: -138px -54px;
+}
+.ztree li span.button.bottom_close {
+  background-position: -111px -54px;
+}
+.ztree li span.button.noline_open {
+  background-position: -138px -108px;
+}
+.ztree li span.button.noline_close {
+  background-position: -111px -108px;
+}
+.ztree li span.button.root_docu {
+  background: none;
+}
+.ztree li span.button.roots_docu {
+  background-position: -84px 0;
+}
+.ztree li span.button.center_docu {
+  background-position: -84px -27px;
+}
+.ztree li span.button.bottom_docu {
+  background-position: -84px -54px;
+}
+.ztree li span.button.noline_docu {
+  background: none;
 }
 .modalZtree {
   min-height: 300px;
@@ -778,6 +954,9 @@ div.timeSelectWrap {
 #topNav .navbar-static-side .progressWrap .progress .progress-bar-danger {
   background-color: #00a0e9;
 }
+#topNav .navbar-static-side .progressWrap .text-muted {
+  color: #9f9f9f;
+}
 #topNav .navbar-static-side .nav {
   position: relative;
   z-index: 10;
@@ -833,8 +1012,16 @@ div.timeSelectWrap {
 .dropdown-menu li {
   margin-right: 0!important;
 }
+.dropdown-menu.dropdown-alerts li {
+  border-bottom: 1px solid #eee;
+}
+.dropdown-menu.dropdown-alerts li a {
+  padding: 0 5px;
+  line-height: 36px;
+}
 .dropdown-menu.dropdown-user li {
   overflow: hidden;
+  border-bottom: 1px solid #eee;
 }
 .dropdown-menu.dropdown-user li a {
   padding: 5px 0!important;
@@ -930,9 +1117,34 @@ div.timeSelectWrap {
 .ngdialog-content .modal-header {
   padding: 0 0 15px 0;
 }
-.ngdialog-content .modal-body {
-  max-height: 450px;
-  overflow-y: auto;
+.ngdialog-content .modal-body .table-wrapper {
+  padding: 0;
+}
+.ngdialog-content .modal-body .form-group label {
+  margin-bottom: 0;
+  line-height: 34px;
+  text-align: left;
+  font-weight: 400;
+  text-align: right;
+}
+.ngdialog-content .modal-body .form-group .txt-grey {
+  line-height: 34px;
+}
+.ngdialog-content .modal-body .modalDetail {
+  font-size: 12px;
+}
+.ngdialog-content .modal-body .modalDetail .form_input,
+.ngdialog-content .modal-body .modalDetail .form_right {
+  line-height: 24px;
+}
+.ngdialog-content .modal-body .modalDetail .form-group {
+  margin-bottom: 0;
+}
+.ngdialog-content .modal-body .modalDetail .form-group label {
+  margin-bottom: 0;
+  line-height: 24px;
+  text-align: left;
+  font-weight: 400;
 }
 .ngdialog-content .modal-footer {
   border-top: none;

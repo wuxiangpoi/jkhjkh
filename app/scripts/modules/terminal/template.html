@@ -2,15 +2,37 @@
 	<div class="level2 clearfix">
 		<div class="tipBtnWrap" ng-if="perms(217)" class="dropdown" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event)>
 			<div class="tipDiv">选中正常状态下的终端才能进行此操作</div>
-			<button ng-class="{'disabled': idsNormal.length == 0}" type="button" data-toggle="dropdown" class="btn btn-primary">
+			<button ng-class="{'disabled': idsNormal.length == 0 || idsNormal.length != ids.length }" type="button" data-toggle="dropdown"
+			    class="btn btn-primary">
 				下发命令
 				<i class="fa fa-caret-down"></i>
 			</button>
-			<ul class="dropdown-menu dropdown-user">
+			<ul class="dropdown-menu dropdown-alerts">
+				<li>
+					<a href="javascript:void(0)" ng-click="sendCommand(2)">
+						<i class="fa fa-clock-o fa-fw"></i>
+						{{getRootDicName('terminal_cmd',2)}}</a>
+				</li>
+
+				<li>
+					<a href="javascript:void(0)" ng-click="sendCommand(3)">
+						<i class="fa fa-volume-up fa-fw"></i>
+						{{getRootDicName('terminal_cmd',3)}}</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" ng-click="sendCommand(4)">
+						<i class="fa fa-power-off fa-fw"></i>
+						{{getRootDicName('terminal_cmd',4)}}</a>
+				</li>
 				<li>
 					<a href="javascript:void(0)" ng-click="sendCommand(7)">
 						<i class="fa fa-camera fa-fw"></i>
-						终端截屏</a>
+						{{getRootDicName('terminal_cmd',7)}}</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" ng-click="sendCommand(8)">
+						<i class="fa fa-share fa-fw"></i>
+						{{getRootDicName('terminal_cmd',8)}}</a>
 				</li>
 			</ul>
 		</div>
@@ -33,7 +55,7 @@
 		</div>
 		<div ng-if="perms(214)" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event) class="tipBtnWrap">
 			<button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="cancelLeaf()" class="btn btn-primary">
-				设置分组
+				取消分组
 			</button>
 			<div class="tipDiv">请先选择终端</div>
 		</div>
@@ -48,7 +70,67 @@
 
 	<div class="table-wrapper">
 		<div class="tableHeader clearfix">
-
+			<div class="panel panel-default clearfix">
+				<div class="panelRow clearfix">
+					<div class="panel-left">组织机构</div>
+					<div class="panel-right">
+						<group-leaf-select></group-leaf-select>
+					</div>
+				</div>
+				<div class="panelRow clearfix">
+					<div class="panel-left">终端筛选</div>
+					<div class="panel-right">
+						<div class="panelSelectWrap">
+							<select class="form-control" ng-model="sp.op" ng-change="callServer(tableState)">
+								<option value="">系统类型</option>
+								<option value="1">Android</option>
+								<option value="2">Windows</option>
+							</select>
+						</div>
+						<div class="panelSelectWrap">
+							<select class="form-control" ng-model="sp.resolution" ng-change="callServer(tableState)">
+								<option value="">屏幕分辨率</option>
+								<option ng-repeat="t in userData.root_terminalReslotions" value="{{t}}">{{t}}</option>
+							</select>
+						</div>
+						<div class="panelSelectWrap">
+							<select class="form-control" ng-model="sp.city_no" ng-change="callServer(tableState)">
+								<option value="">所在城市</option>
+								<option ng-repeat="c in userData.root_citys" value="{{c.key}}">{{c.value}}</option>
+							</select>
+						</div>
+						<div class="panelSelectWrap">
+							<select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+								<option value="">网络状态</option>
+								<option ng-selected="init_status==1" value="1">在线</option>
+								<option ng-selected="init_status==2" value="2">离线</option>
+								<option ng-selected="init_status==3" value="3">异常</option>
+							</select>
+						</div>
+						<div class="panelSelectWrap">
+							<select class="form-control" ng-model="sp.hasProgram" ng-change="callServer(tableState)">
+								<option value="">节目状态</option>
+								<option value="1">有节目</option>
+								<option value="0">无节目</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="panelRow clearfix last">
+					<div class="panel-left">终端分组</div>
+					<div class="panel-right">
+						<span class="leafGroup" ng-class="{'current': sp.gid == ''}" ng-click="chooseLeaf('',$event)">全部分组</span>
+						<span class="leafGroup" ng-class="{'current': sp.gid == leaf.id}" ng-repeat="leaf in leafes">
+							<span class="leafName" ng-click="chooseLeaf(leaf.id,$event)">{{leaf.name}}</span>
+							<span class="leafEdit">
+								<input class="form-control" type="text" ng-model="leaf.name">
+							</span>
+							<i ng-if="perms(212)" ng-click="editLeaf(leaf,$event)" class="iconfont icon-bianji"></i>
+							<i ng-if="perms(212)" ng-click="delLeaf(leaf)" class="iconfont icon-shanchu"></i>
+						</span>
+					</div>
+				</div>
+			</div>
 		</div>
 		<table class="table" st-pipe="callServer" st-table="displayed">
 			<thead>
@@ -88,7 +170,7 @@
 						<div ng-if="row.programCounts == 0">
 							0
 						</div>
-						<div class="tdClick" ng-if="row.programCounts > 0" ng-click="programPlayManage()">
+						<div class="tdClick" ng-if="row.programCounts > 0" ng-click="showPrograms(row)">
 							{{row.programCounts}}
 						</div>
 					</td>
