@@ -52,7 +52,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                         cb(ngDialog, $scope)
                     }
                     $scope.cancel = function () {
-                        ngDialog.close()
+                        $scope.closeThisDialog();
                     }
 
                 }],
@@ -281,27 +281,31 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             var joinChar = imgUrl.indexOf('?') >= 0 ? '&' : '?';
             return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,' + size + ',w_' + size;
         },
-        showProgram: function (item) {
+        showProgram: function (item, detailType, cb) {
             var me = this;
-
             programService.getProgramById(item.pid, function (program) {
                 program.creator = item.creator;
                 program.status = item.status;
                 program.approveUid = item.approveUid;
                 program.approveUidFinal = item.approveUidFinal;
-                me.confirmDialog(750, '节目预览', program, "tpl/program_details.html", function (ngDialog, vm) {
-
+                program.detailType = detailType;
+                me.confirmDialog(750, '节目预览', program, "tpl/program_details.html", function (type,ngDialog, vm) {
+                    if (cb) {
+                        cb(type);
+                    }
                 }, function (vm) {
                     vm.program = program;
                 });
             });
 
         },
-        showMaterial: function (item, detailType) {
+        showMaterial: function (item, detailType, cb) {
             item.detailType = detailType;
             item.nUrl = baseService.dmbdOSSImageUrlResizeFilter(item.path, 400);
-            this.confirmDialog(750, '素材详情', item, "tpl/material_detail.html", function (ngDialog, vm) {
-
+            this.confirmDialog(750, '素材详情', item, "tpl/material_detail.html", function (type, ngDialog, vm) {
+                if (cb) {
+                    cb(type);
+                }
             }, function (vm) {
 
             });

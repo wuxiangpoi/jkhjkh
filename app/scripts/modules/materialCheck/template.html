@@ -30,7 +30,7 @@
             </thead>
             <tbody ng-show="!isLoading">
                 <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
-                    <td class="tdClick" style="min-width:160px;" ng-click="showMaterial(row)">
+                    <td class="tdClick" style="min-width:160px;" ng-click="showMaterial(row,2)">
                         <div style="position:relative;">
                             <div style="width:80px;position:absolute;top:10px;">
                                 <img ng-if="row.type == 0" src="img/loading.gif" style="width:80px;height:60px;" lazy-src="{{dmbdOSSImageUrlResizeFilter(row.path,100)}}">
@@ -52,7 +52,7 @@
                         {{row.createTime | formateTime}}
                     </td>
                     <td>
-                        <button ng-if="perms(51)" class="btn tableBtn" ng-click="materialCheck()">审核
+                        <button ng-if="perms(51)" class="btn tableBtn" ng-click="showMaterial(row,1)">审核
                         </button>
                     </td>
 

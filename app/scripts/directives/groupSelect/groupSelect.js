@@ -15,22 +15,34 @@ angular.module('sbAdminApp')
             $scope.currentLeaf.id = '';
             $scope.groupLeafes = [];
             $scope.treeId = 'group_tree_' + Date.parse(new Date());
-            if (attrs.initid) {
-                //baseService.initGroupTree($scope, 'group_tree_choose_modal', false, [],false, false,attrs.initid);				
-            } else {
-                //baseService.initGroupTree($scope, 'group_tree_choose_modal', false, [],false, false);
-            }
+            
 
             function getOrganizations() {
                 var zNodes = [];
-                for (var i = 0; i < $scope.root_organizations.length; i++) {
-                    zNodes.push({
-                        id: $scope.root_organizations[i].id,
-                        pId: $scope.root_organizations[i].pid,
-                        name: $scope.root_organizations[i].name,
-                        sort: $scope.root_organizations[i].sort
-                    });
+                
+                if (attrs.initid) {
+                    for (var i = 0; i < $scope.root_organizations.length; i++) {
+                        zNodes.push({
+                            id: $scope.root_organizations[i].id,
+                            pId: $scope.root_organizations[i].pid,
+                            name: $scope.root_organizations[i].name,
+                            sort: $scope.root_organizations[i].sort
+                        });
+                        if($scope.root_organizations[i].id == attrs.initid){
+                            $scope.currentGroup = $scope.root_organizations[i];			
+                        }
+                    }
+                }else{
+                    for (var i = 0; i < $scope.root_organizations.length; i++) {
+                        zNodes.push({
+                            id: $scope.root_organizations[i].id,
+                            pId: $scope.root_organizations[i].pid,
+                            name: $scope.root_organizations[i].name,
+                            sort: $scope.root_organizations[i].sort
+                        });
+                    }
                 }
+                
                 return zNodes;
             }
             $scope.ztreeSetting = {
@@ -41,16 +53,16 @@ angular.module('sbAdminApp')
                 selectedNodes: []
             }
             $scope.$emit('emitGroupLeaf',$scope.currentGroup,$scope.currentLeaf);
-            $scope.getLeafes = function (oid) {
-                if (attrs.requrl) {
-                    baseService.getJson(baseService.api.apiUrl + attrs.requrl, {
-                        oid: oid
-                    }, function (data) {
-                        $scope.groupLeafes = data;
-                    })
-                }
+            // $scope.getLeafes = function (oid) {
+            //     if (attrs.requrl) {
+            //         baseService.getJson(baseService.api.apiUrl + attrs.requrl, {
+            //             oid: oid
+            //         }, function (data) {
+            //             $scope.groupLeafes = data;
+            //         })
+            //     }
 
-            }
+            // }
             
             $scope.showMenu = function ($event) {
                 $event.stopPropagation();

@@ -4,55 +4,62 @@
 
 
 <div class="modal-body">
-    <form name="userForm" novalidate>
+    <form name="modalForm" novalidate>
 
-        <div class="form-group form-group-sm clearfix">
-            <label class="col-sm-3 form_right">登陆账号</label>
-            <div class="col-sm-9 form_input">
-                <input type="text" required class="form-control" name="account" ng-model="data.account" />
-                <div class="help-block" ng-messages="userForm.account.$error" ng-if="isShowMessage">
-                    <p ng-message="required">请输入登陆账号</p>
-                </div>
+        <div class="form-group clearfix">
+            <label class="col-sm-3 p0">登陆账号</label>
+            <div class="col-sm-9 pdr0">
+                <input type="text" required ng-pattern="/[a-zA-Z0-9]{3,15}/" class="form-control" placeholder="3-15个字母、数字" name="account" ng-model="data.account" />
+                <div class="help-block" ng-messages="modalForm.account.$error" ng-if="isShowMessage">
+                        <p ng-message="required">请输入登陆账号</p>
+                        <p ng-message="pattern">请输入3-15个字母、数字</p>
+                    </div>
             </div>
         </div>
-        <div class="form-group form-group-sm clearfix">
-            <label class="col-sm-3 form_right">账号名称</label>
-            <div class="col-sm-9 form_input">
-                <input type="text" required class="form-control" name="name" ng-model="data.name" />
-                <div class="help-block" ng-messages="userForm.name.$error" ng-if="isShowMessage">
-                    <p ng-message="required">请输入账号名称</p>
-                </div>
+        <div class="form-group clearfix">
+            <label class="col-sm-3 p0">账号名称</label>
+            <div class="col-sm-9 pdr0">
+                <input type="text" placeholder="真实姓名/所属部门" required ng-pattern="/([A-Za-z0-9]{4,20})|([\u4e00-\u9fa5]{2,10})|([\u4e00-\u9fa5][\w\W]{2})/" class="form-control" name="name" ng-model="data.name" />
+                <div class="help-block" ng-messages="modalForm.name.$error" ng-if="isShowMessage">
+                        <p ng-message="required">请输入账号名称</p>
+                        <p ng-message="pattern">请输入4-40个字符</p>
+                    </div>
             </div>
         </div>
-        <div ng-if="data.id == ''" class="form-group form-group-sm clearfix">
-            <label class="col-sm-3 form_right">登录密码</label>
-            <div class="col-sm-9 form_input">
-                <input type="text" placeholder="6-20个字母数字组合" ng-pattern="/(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$/" required class="form-control" name="password" ng-model="password" />
-                <div class="help-block" ng-messages="userForm.password.$error" ng-if="isShowMessage">
+        <div ng-if="data.id == ''" class="form-group clearfix">
+            <label class="col-sm-3 p0">登录密码</label>
+            <div class="col-sm-9 pdr0">
+                <input type="text" placeholder="6-20个字母数字组合" ng-pattern="/(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$/" required class="form-control"
+                    name="password" ng-model="data.password" />
+                <div class="help-block" ng-messages="modalForm.password.$error" ng-if="isShowMessage">
                     <p ng-message="required">请输入密码</p>
-                    <p ng-message="pattern">密码格式不正确</p>
+                    <p ng-message="pattern">请输入6-20个字母数字组合</p>
                 </div>
             </div>
         </div>
-        <div class="form-group form-group-sm clearfix">
-            <label class="col-sm-3 form_right">账户角色</label>
-            <div class="col-sm-9 form_input">
+        <div class="form-group clearfix">
+            <label class="col-sm-3 p0">账户角色</label>
+            <div class="col-sm-9 pdr0">
                 <select style="padding-left:0;" class="form-control" name="role" required ng-model="data.role">
                     <option value="">请选择角色</option>
-                    <option ng-repeat="r in roles" ng-selected="data.role==r.id" value="{{r.id}}">{{r.name}}</option>
+                    <option ng-show="r.id != 0" ng-repeat="r in roles" ng-selected="data.role==r.id" value="{{r.id}}">{{r.name}}</option>
                 </select>
-                <div class="help-block" ng-messages="userForm.role.$error" ng-if="isShowMessage">
+                <div class="help-block" ng-messages="modalForm.role.$error" ng-if="isShowMessage">
                     <p ng-message="required">请选择账户角色</p>
                 </div>
             </div>
         </div>
+        <div class="form-group clearfix" ng-show="data.role != 1">
+                <label class="col-sm-3 p0">所属组织机构</label>
+                <div class="col-sm-9 pdr0">
+                    <div class="groupWrap form">
+                        <group-leaf-select initid="{{data.oid}}"></group-leaf-select>
+                    </div>
+                </div>
+            </div>
     </form>
 
 
 
 </div>
-
-<div class="modal-footer">
-    <button class="btn btn-success" type="button" ng-click="modalConfirmSubmit()" id="form_modal_btn">确定</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
-</div>
+<div ng-include="'tpl/modal_footer.html'"></div>

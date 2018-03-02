@@ -46,7 +46,7 @@
 					</div>
 				</div>
 				<div class="panelRow clearfix">
-					<div class="panel-left">终端筛选</div>
+					<div class="panel-left">素材筛选</div>
 					<div class="panel-right">
 						<div class="panelSelectWrap">
 							<select class="form-control" ng-model="sp.type" ng-change="callServer(tableState)">
@@ -64,7 +64,7 @@
 					</div>
 				</div>
 				<div class="panelRow clearfix last">
-					<div class="panel-left">终端分组</div>
+					<div class="panel-left">素材分组</div>
 					<div class="panel-right">
 						<span class="leafGroup" ng-class="{'current': sp.gid == ''}" ng-click="chooseLeaf('',$event)">全部分组</span>
 						<span class="leafGroup" ng-class="{'current': sp.gid == leaf.id}" ng-repeat="leaf in leafes">

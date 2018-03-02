@@ -162,6 +162,21 @@
                         }
                     }
                 })
+                .state('dashboard.user', {
+                    url: '/user',
+                    controller: 'userCtrl',
+                    templateUrl: 'scripts/modules/user/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/user/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
                 .state('dashboard.materialCheck', {
                     url: '/materialCheck',
                     controller: 'materialCheckCtrl',

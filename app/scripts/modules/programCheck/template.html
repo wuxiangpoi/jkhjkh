@@ -1,14 +1,15 @@
 <div class="content-wrap" style="min-width:680px;">
-    <div class="tableHeader clearfix">
-        <div class="serchWrap fr">
-            <div class="fl txtInputWrap">
-                <input class="form-control" ng-model="sp.search" placeholder="节目名称">
-            </div>
-            <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
-        </div>
-
-    </div>
+    
     <div class="table-wrapper">
+            <div class="tableHeader clearfix">
+                    <div class="serchWrap fr">
+                        <div class="fl txtInputWrap">
+                            <input class="form-control" ng-model="sp.search" placeholder="节目名称">
+                        </div>
+                        <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
+                    </div>
+            
+                </div>
         <table class="table" st-pipe="callServer" st-table="displayed">
             <thead>
                 <tr>
@@ -22,7 +23,7 @@
             </thead>
             <tbody ng-show="!isLoading">
                 <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
-                    <td class="tdClick"  ng-click="showProgram(row)">
+                    <td class="tdClick"  ng-click="showProgram(row,2)">
                         {{row.name}}
                     </td>
                     <td>{{row.size | dmbdResourceSizeFilter}}</td>
@@ -35,9 +36,9 @@
                         {{row.status | programStatusTxt}}
                     </td>
                     <td>
-                        <button ng-if="row.status == 2  && perms(532)" class="btn tableBtn" ng-click="materialCheck()">审核
+                        <button ng-if="row.status == 2  && perms(532)" class="btn tableBtn" ng-click="showProgram(row,1)">审核
                         </button>
-                        <button ng-if="row.status == 6  && perms(533)" class="btn tableBtn" ng-click="materialCheck()">审核
+                        <button ng-if="row.status == 6  && perms(533)" class="btn tableBtn" ng-click="showProgram(row,1)">审核
                         </button>
                     </td>
 
