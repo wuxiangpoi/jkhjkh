@@ -13,7 +13,7 @@
                             return $ocLazyLoad.load({
                                 name: 'sbAdminApp',
                                 files: [
-                                    'css/login/style.css',
+                                    'css/login/style-6b1a11c730.css',
                                     'scripts/modules/login/index.js'
                                 ]
                             })
@@ -29,7 +29,7 @@
                             return $ocLazyLoad.load({
                                 name: 'sbAdminApp',
                                 files: [
-                                    'css/passwordFind/style.css',
+                                    'css/passwordFind/style-ed61f33c79.css',
                                     'scripts/modules/passwordFind/index.js'
                                 ]
                             })
@@ -79,7 +79,7 @@
                             return $ocLazyLoad.load({
                                 name: 'sbAdminApp',
                                 files: [
-                                    'css/home/style.css',
+                                    'css/home/style-7d29b47d9d.css',
                                     'scripts/modules/home/index.js'
                                 ]
                             })
@@ -143,7 +143,7 @@
                             return $ocLazyLoad.load({
                                 name: 'sbAdminApp',
                                 files: [
-                                    'css/group/style.css',
+                                    'css/group/style-856c714581.css',
                                     'scripts/modules/group/index.js'
                                 ]
                             })

@@ -14,6 +14,7 @@ angular.module('sbAdminApp')
 			$scope.currentLeaf = {};
 			$scope.currentLeaf.id = '';
 			$scope.sp.gid = '';
+			$scope.init_status = $stateParams.status;
 			$scope.callServer = function (tableState) {
 				baseService.initTable($scope, tableState, baseService.api.terminal + 'getTerminalPageList');
 			}

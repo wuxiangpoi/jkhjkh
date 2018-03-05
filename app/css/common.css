@@ -103,6 +103,15 @@
   -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+.tbxeditWrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 70px;
+  padding-left: 60px;
+}
 a:focus,
 a:hover,
 input:focus {
@@ -155,6 +164,7 @@ li {
 }
 .h34 {
   height: 34px;
+  vertical-align: middle;
 }
 .txt-left {
   text-align: left!important;
@@ -885,8 +895,12 @@ div.timeSelectWrap {
 #topNav .navbar-brand {
   padding: 5px 10px;
 }
+#topNav .navbar-header {
+  float: left;
+}
 #topNav .navbar-right {
   height: 70px;
+  float: right;
 }
 #topNav .navbar-right > li {
   top: 0;
@@ -979,7 +993,27 @@ div.timeSelectWrap {
   background: #24243e;
 }
 #topNav .navbar-static-side .nav li a {
-  transition: .3s;
+  transition-property: color;
+  -moz-transition-property: color;
+  /* Firefox 4 */
+  -webkit-transition-property: color;
+  /* Safari 和 Chrome */
+  -o-transition-property: color;
+  /* Opera */
+  transition-property: background;
+  -moz-transition-property: background;
+  /* Firefox 4 */
+  -webkit-transition-property: background;
+  /* Safari 和 Chrome */
+  -o-transition-property: background;
+  /* Opera */
+  transition-duration: .3s;
+  -moz-transition-duration: .3s;
+  /* Firefox 4 */
+  -webkit-transition-duration: .3s;
+  /* Safari 和 Chrome */
+  -o-transition-duration: .3s;
+  /* Opera */
   color: #fff;
   padding-left: 25px;
   padding-top: 8px;
@@ -998,28 +1032,69 @@ div.timeSelectWrap {
 }
 #topNav .navbar-static-side .nav li a.active {
   color: #00a0e9;
-  background: #2c2c4c;
 }
 #topNav .navbar-static-side .nav li a:hover {
   color: #00a0e9;
   background: #2c2c4c;
 }
+#topNav .navbar-static-side .nav li.firstNav a.active {
+  background: #2c2c4c;
+  padding-left: 21px;
+  border-left: 4px solid #00a0e9;
+}
+#topNav .navbar-static-side .nav li .indicator {
+  font-size: 10px;
+  background: #ff3e3e;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  display: inline-block;
+  margin-left: 15px;
+}
 #topNav .navbar-static-side .nav li .navSecondLevel {
   cursor: pointer;
+  position: relative;
 }
-#topNav .navbar-static-side .nav li .navSecondLevel.current {
+#topNav .navbar-static-side .nav li .navSecondLevel.active {
   background: #2c2c4c;
+  color: #fff;
 }
-#topNav .navbar-static-side .nav li .navSecondLevel.current .arrow::before {
+#topNav .navbar-static-side .nav li .navSecondLevel.active .arrow::before {
   content: "\f107";
 }
 #topNav .navbar-static-side .nav li .navSecondLevel + .nav-second-level {
   background: #0f0c29;
 }
 #topNav .navbar-static-side .nav li .navSecondLevel + .nav-second-level li a {
+  background: #0f0c29;
   font-size: 13px;
   padding-left: 90px;
   line-height: 24px;
+  opacity: .8;
+  transition-duration: .3s;
+  -moz-transition-duration: .3s;
+  /* Firefox 4 */
+  -webkit-transition-duration: .3s;
+  /* Safari 和 Chrome */
+  -o-transition-duration: .3s;
+  /* Opera */
+}
+#topNav .navbar-static-side .nav li .navSecondLevel + .nav-second-level li a:hover {
+  opacity: 1;
+  color: #00a0e9;
+  background: #0f0c29;
+}
+#topNav .navbar-static-side .nav li .navSecondLevel + .nav-second-level li a:active {
+  opacity: 1;
+  color: #00a0e9;
+  background: #0f0c29;
+}
+#topNav .navbar-static-side .nav li.current .navSecondLevel {
+  padding-left: 21px;
+  border-left: 4px solid #00a0e9;
 }
 .dropdown-menu {
   margin: 0;
@@ -1107,7 +1182,7 @@ div.timeSelectWrap {
   height: 20px;
 }
 .content-wrap {
-  margin: 90px 20px 0 270px;
+  margin: 90px 20px 20px 270px;
   min-height: 400px;
 }
 .content-wrap > .level2 {
@@ -1173,4 +1248,123 @@ div.timeSelectWrap {
   display: inline-block;
   line-height: 46px;
   padding: 0 48px;
+}
+#topNav .navbar-static-side.txeit {
+  width: 60px;
+}
+#topNav .navbar-static-side.txeit .navTle,
+#topNav .navbar-static-side.txeit .arrow {
+  display: none;
+}
+#topNav .navbar-static-side.txeit .indicator {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+#topNav .navbar-static-side.txeit .nav-second-level {
+  width: 120px;
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#topNav .navbar-static-side.txeit .iconfont {
+  margin-left: -5px;
+}
+#topNav .navbar-static-side.txeit .nav > li {
+  position: relative;
+}
+#topNav .navbar-static-side.txeit .nav > li:hover {
+  width: 180px;
+}
+#topNav .navbar-static-side.txeit .nav > li:hover .navTle {
+  display: inline-block;
+}
+#topNav .navbar-static-side.txeit .nav > li:hover .indicator {
+  top: 50%;
+  margin-top: -10px;
+  right: 20px;
+}
+#topNav .navbar-static-side.txeit .nav > li:hover .nav-second-level {
+  position: absolute;
+  left: 60px;
+  height: auto;
+  top: 48px;
+}
+#topNav .navbar-static-side.txeit .nav > li:hover .nav-second-level a {
+  width: 120px;
+  padding-left: 25px!important;
+}
+#topNav .navbar-static-side.txeit .nav > li:hover .nav-second-level .indicator {
+  top: 50%;
+  margin-top: -10px;
+  right: 10px;
+}
+#topNav .progressWrap {
+  display: none;
+}
+@media (max-width: 992px) {
+  #topNav .navbar-static-side {
+    width: 60px;
+  }
+  #topNav .navbar-static-side .navTle,
+  #topNav .navbar-static-side .arrow {
+    display: none;
+  }
+  #topNav .navbar-static-side .indicator {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  #topNav .navbar-static-side .nav-second-level {
+    width: 120px;
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  #topNav .navbar-static-side .iconfont {
+    margin-left: -5px;
+  }
+  #topNav .navbar-static-side .nav > li {
+    position: relative;
+  }
+  #topNav .navbar-static-side .nav > li:hover {
+    width: 180px;
+  }
+  #topNav .navbar-static-side .nav > li:hover .navTle {
+    display: inline-block;
+  }
+  #topNav .navbar-static-side .nav > li:hover .indicator {
+    top: 50%;
+    margin-top: -10px;
+    right: 20px;
+  }
+  #topNav .navbar-static-side .nav > li:hover .nav-second-level {
+    position: absolute;
+    left: 60px;
+    height: auto;
+    top: 48px;
+  }
+  #topNav .navbar-static-side .nav > li:hover .nav-second-level a {
+    width: 120px;
+    padding-left: 25px!important;
+  }
+  #topNav .navbar-static-side .nav > li:hover .nav-second-level .indicator {
+    top: 50%;
+    margin-top: -10px;
+    right: 10px;
+  }
+  #topNav .progressWrap {
+    display: none;
+  }
+  .content-wrap {
+    margin: 90px 20px 20px 75px;
+  }
+}
+@media (max-width: 500px) {
+  #topNav {
+    min-width: 420px;
+  }
+  #topNav .message {
+    display: none;
+  }
 }

@@ -100,6 +100,16 @@
   
 }
 
+.tbxeditWrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 70px;
+    padding-left: 60px;
+}
+
 a:focus,a:hover,input:focus {
   outline: none!important;
   }
@@ -163,6 +173,7 @@ li {
 
 .h34 {
   height: 34px;
+  vertical-align: middle;
 }
 
 .txt-left {
@@ -1025,8 +1036,12 @@ div.timeSelectWrap {
   .navbar-brand {
     padding: 5px 10px;
   }
+  .navbar-header {
+    float: left;
+  }
   .navbar-right {
     height: 70px;
+    float: right;
     & > li {
       top: 0;
       margin-right: 30px;
@@ -1121,7 +1136,18 @@ div.timeSelectWrap {
       background: #24243e;
       li {
         a {
-          transition: .3s;
+          transition-property:color;
+          -moz-transition-property: color; /* Firefox 4 */
+          -webkit-transition-property:color; /* Safari 和 Chrome */
+          -o-transition-property:color; /* Opera */ 
+          transition-property:background;
+          -moz-transition-property: background; /* Firefox 4 */
+          -webkit-transition-property:background; /* Safari 和 Chrome */
+          -o-transition-property:background; /* Opera */ 
+          transition-duration: .3s;
+          -moz-transition-duration: .3s; /* Firefox 4 */
+          -webkit-transition-duration: .3s; /* Safari 和 Chrome */
+          -o-transition-duration: .3s; /* Opera */
           color: #fff;
           padding-left: 25px;
           padding-top: 8px;
@@ -1139,17 +1165,37 @@ div.timeSelectWrap {
           }
           &.active {
             color: @main-color;
-            background: #2c2c4c;
           }
           &:hover {
             color: @main-color;
             background: #2c2c4c;
           }
         }
+        &.firstNav {
+          a.active {
+            background: #2c2c4c;
+            padding-left: 21px;
+            border-left: 4px solid #00a0e9;
+          }
+        }
+        .indicator {
+          font-size: 10px;
+          background: #ff3e3e;
+          color: #fff;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          line-height: 20px;
+          text-align: center;
+          display: inline-block;
+          margin-left: 15px;
+        }
         .navSecondLevel {
           cursor: pointer;
-          &.current {
+          position: relative;
+          &.active {
             background: #2c2c4c;
+            color: #fff;
             .arrow::before {
               content: "\f107";
             }
@@ -1158,11 +1204,33 @@ div.timeSelectWrap {
             background: #0f0c29;
             li {
               a {
+                background: #0f0c29;
                 font-size: 13px;
                 padding-left: 90px;
                 line-height: 24px;
+                opacity: .8;
+                transition-duration: .3s;
+                -moz-transition-duration: .3s; /* Firefox 4 */
+                -webkit-transition-duration: .3s; /* Safari 和 Chrome */
+                -o-transition-duration: .3s; /* Opera */
+                &:hover {
+                  opacity: 1;
+                  color: @main-color;
+                  background: #0f0c29;
+                }
+                &:active {
+                  opacity: 1;
+                  color: @main-color;
+                  background: #0f0c29;
+                }
               }
             }
+          }
+        }
+        &.current {
+          .navSecondLevel {
+            padding-left: 21px;
+            border-left: 4px solid #00a0e9;
           }
         }
       }
@@ -1265,7 +1333,7 @@ div.timeSelectWrap {
 }
 
 .content-wrap {
-    margin: 90px 20px 0 270px;
+    margin: 90px 20px 20px 270px;
     min-height: 400px;
     &>.level2 {
       margin-bottom: 20px;
@@ -1336,6 +1404,133 @@ div.timeSelectWrap {
       display: inline-block;
       line-height: 46px;
       padding: 0 48px;
+    }
+  }
+}
+#topNav {
+  .navbar-static-side.txeit {
+    width: 60px;
+    .navTle,.arrow {
+      display: none;
+    }
+    .indicator {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+    .nav-second-level {
+      width: 120px;
+      display: block;
+      height: 0;
+      overflow: hidden;
+    }
+    .iconfont {
+      margin-left: -5px;
+    }
+    .nav {
+      &>li {
+        position: relative;
+        &:hover {
+          width: 180px;
+          .navTle {
+            display: inline-block;
+          }
+          .indicator {
+            top: 50%;
+            margin-top: -10px;
+            right: 20px;
+          }
+          .nav-second-level {
+            position: absolute;
+            left: 60px;
+            height: auto;
+            top: 48px;
+            a {
+              width: 120px;
+              padding-left: 25px!important;
+            }
+            .indicator {
+              top: 50%;
+              margin-top: -10px;
+              right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .progressWrap {
+    display: none;
+  }
+}
+
+@media (max-width: 992px){
+  #topNav {
+    .navbar-static-side {
+      width: 60px;
+      .navTle,.arrow {
+        display: none;
+      }
+      .indicator {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+      }
+      .nav-second-level {
+        width: 120px;
+        display: block;
+        height: 0;
+        overflow: hidden;
+      }
+      .iconfont {
+        margin-left: -5px;
+      }
+      .nav {
+        &>li {
+          position: relative;
+          &:hover {
+            width: 180px;
+            .navTle {
+              display: inline-block;
+            }
+            .indicator {
+              top: 50%;
+              margin-top: -10px;
+              right: 20px;
+            }
+            .nav-second-level {
+              position: absolute;
+              left: 60px;
+              height: auto;
+              top: 48px;
+              a {
+                width: 120px;
+                padding-left: 25px!important;
+              }
+              .indicator {
+                top: 50%;
+                margin-top: -10px;
+                right: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .progressWrap {
+      display: none;
+    }
+  }
+  .content-wrap {
+    margin: 90px 20px 20px 75px;
+  }
+}
+
+@media (max-width: 500px) {
+  #topNav {
+    min-width: 420px;
+    .message {
+      display: none;
     }
   }
 }

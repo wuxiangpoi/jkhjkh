@@ -7,18 +7,75 @@
  * # adminPosHeader
  */
 angular.module('sbAdminApp')
-	.directive('headerBar', function (baseService, userService) {
+	.directive('headerBar', function ($location,baseService, userService, $state) {
 		return {
 			templateUrl: 'scripts/directives/headerBar/template.html' + baseService.verson,
 			restrict: 'E',
 			replace: true,
 			terminal: false,
-			controller: function ($scope, $rootScope,$state) {
+			controller: function ($scope, $rootScope, $state) {
+				$scope.collapseVar = 0;
+
 				var postData = {
 					password: '',
 					newPassword: '',
 					reNewPassword: ''
 				}
+				$scope.currentState = $state.current.name;
+
+				function checkPatch() {
+					if ($scope.currentState == 'dashboard.programAdd' || $scope.currentState == 'dashboard.programCopy' || $scope.currentState == 'dashboard.programEdit') {
+						$('.navbar-static-side').addClass('txeit');
+					} else {
+						$('.navbar-static-side').removeClass('txeit');
+					}
+					switch ($scope.currentState) {
+						case 'dashboard.home':
+							$scope.collapseVar = 0
+							break;
+
+						case 'dashboard.terminal':
+							$scope.collapseVar = 2
+							break;
+						case 'dashboard.material':
+							$scope.collapseVar = 41
+							break;
+						case 'dashboard.program':
+							$scope.collapseVar = 43
+							break;
+						case 'dashboard.materialCheck':
+							$scope.collapseVar = '5'
+							break;
+						case 'dashboard.programCheck':
+							$scope.collapseVar = '5'
+							break;
+						case 'dashboard.group':
+							$scope.collapseVar = 3
+							break;
+						case 'dashboard.user':
+							$scope.collapseVar = 3
+							break;
+						case 'dashboard.role':
+							$scope.collapseVar = 3
+							break;
+						case 'dashboard.auser':
+							$scope.collapseVar = 3
+							break;
+						case 'dashboard.terminalCommand':
+							$scope.collapseVar = 6
+							break;
+						case 'dashboard.programCommand':
+							$scope.collapseVar = 6
+							break;
+						case 'dashboard.led':
+							$scope.collapseVar = 7
+							break;
+						case 'dashboard.ledgram':
+							$scope.collapseVar = 7
+							break;
+					}
+				}
+				checkPatch();
 				$scope.colorArr = ['#00a0e9', '#ffb039', '#ff4040'];
 				baseService.getJson(baseService.api.auth + 'getUserMessage', {}, function (data) {
 					$rootScope.userMessage = [];
@@ -64,15 +121,35 @@ angular.module('sbAdminApp')
 				$scope.progressBar = {
 					width: $rootScope.userData.root_oss_percent + '%'
 				}
-				
-				$scope.collapseVar = 0;
+
 				$scope.check = function (x, $event) {
 					if (x == $scope.collapseVar)
-					  $scope.collapseVar = 0;
+						$scope.collapseVar = 0;
 					else {
-					  $scope.collapseVar = x;
+						$scope.collapseVar = x;
 					}
-				  };
+				};
+				$scope.$on('$stateChangeSuccess', function () {
+					$scope.currentState = $state.current.name;
+					
+					checkPatch();
+				});
+				$scope.checkRoute = function (x, $event) {
+					$scope.collapseVar = x;
+					if ($scope.currentState == 'dashboard.programAdd' || $scope.currentState == 'dashboard.programCopy' || $scope.currentState == 'dashboard.programEdit') {
+						$event.preventDefault();
+						baseService.confirm('提示', '当前节目未保存，是否离开当前页面？', function (ngDialog) {
+							ngDialog.close();
+							$location.path($event.currentTarget.href.split('#')[1]);
+						})
+					}
+				}
+			
+				$scope.goToDetail = function(item){
+					baseService.goToUrl('/dashboard/' + item.name)
+					$scope.collapseVar = 5;
+				}
+
 			}
 		}
 	});
