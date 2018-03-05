@@ -1,0 +1,24 @@
+<div class="modal-header">
+        <h4 class="modal-title">{{title}}</h4>
+    </div>
+    
+    
+    <div class="modal-body">
+        <form name="modalForm" novalidate>
+    
+            <div class="form-group clearfix">
+                <label class="col-sm-3 p0">亮度(1-16)</label>
+                <div class="col-sm-9 pdr0">
+                    <input type="text" placeholder="1-16数字" required ng-pattern="/^([0-9]|(1[0-6]))$/" class="form-control" name="cmdParams" ng-model="data.cmdParams" />
+                    <div class="help-block" ng-messages="modalForm.cmdParams.$error" ng-if="isShowMessage">
+                            <p ng-message="required">请输入亮度</p>
+                            <p ng-message="pattern">请输入1-16数字</p>
+                        </div>
+                </div>
+            </div>
+        </form>
+    
+    
+    
+    </div>
+    <div ng-include="'tpl/modal_footer.html'"></div>

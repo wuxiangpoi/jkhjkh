@@ -14,6 +14,7 @@ var app = angular.module('sbAdminApp', [
         'ui.bootstrap',
         'angularFileUpload',
         'moment-picker',
+        'uiSlider',
         'smart-table',
         'me-lazyload',
         'ngMessages',

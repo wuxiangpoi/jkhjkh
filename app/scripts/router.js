@@ -38,8 +38,8 @@
                 })
                 .state('help', {
                     url: '/help',
-                    controller: function($state){
-                        if($state.current.name == 'help'){
+                    controller: function ($state) {
+                        if ($state.current.name == 'help') {
                             $state.go('help.guide')
                         }
                     },
@@ -68,7 +68,7 @@
                 .state('dashboard', {
                     url: '/dashboard',
                     templateUrl: 'tpl/main.html'
-        
+
                 })
                 .state('dashboard.home', {
                     url: '/home',
@@ -177,6 +177,21 @@
                         }
                     }
                 })
+                .state('dashboard.auser', {
+                    url: '/auser',
+                    controller: 'auserCtrl',
+                    templateUrl: 'scripts/modules/auser/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/auser/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
                 .state('dashboard.materialCheck', {
                     url: '/materialCheck',
                     controller: 'materialCheckCtrl',
@@ -237,6 +252,51 @@
                         }
                     }
                 })
+                .state('dashboard.led', {
+                    url: '/led',
+                    controller: 'ledCtrl',
+                    templateUrl: 'scripts/modules/led/template.html'
+                    ,
+                    resolve: {
+                        loadMyFiles: function loadMyFiles($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/led/index.js'
+                                ]
+                            });
+                        }
+                    }
+                })
+                .state('dashboard.ledgram', {
+                    url: '/ledgram',
+                    controller: 'ledgramCtrl',
+                    templateUrl: 'scripts/modules/ledgram/template.html'
+                    ,
+                    resolve: {
+                        loadMyFiles: function loadMyFiles($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/ledgram/index.js',
+                                ]
+                            });
+                        }
+                    }
+                })
+                .state('dashboard.programAdd', { //  下面是编辑器相关
+                    url: '/programAdd/{gid}',
+                    templateUrl: 'TBXEditor/program/program_add.html',
+                    controller: 'programAddController'
+                }).state('dashboard.programEdit', {
+                    url: '/programEdit/{id}',
+                    templateUrl: 'TBXEditor/program/program_edit.html',
+                    controller: 'programEditController'
+                }).state('dashboard.programCopy', {
+                    url: '/programCopy/{id}',
+                    templateUrl: 'TBXEditor/program/program_copy.html',
+                    controller: 'programCopyController'
+                });
         });
 
 })(window, window.angular);

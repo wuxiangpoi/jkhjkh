@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+</div>
+
+
+<div class="modal-body">
+    <form name="modalForm" novalidate>
+
+        <div class="form-group clearfix" ng-if="data.id!=null">
+            <label class="col-sm-3 p0">网络ID</label>
+            <div class="col-sm-9 pdr0 lh34">
+                {{data.sn}}
+            </div>
+        </div>
+        <div class="form-group clearfix" ng-if="data.id==null">
+            <label class="col-sm-3 p0">终端网络编号</label>
+            <div class="col-sm-9 pdr0">
+                <input type="text" placeholder="终端网络编号" required class="form-control" name="sn" ng-model="data.sn" />
+                <div class="help-block" ng-messages="modalForm.sn.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请输入终端网络编号</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <label class="col-sm-3 p0">终端名称</label>
+            <div class="col-sm-9 pdr0">
+                <input type="text" placeholder="终端名称"  required class="form-control"
+                    name="name" ng-model="data.name" />
+                <div class="help-block" ng-messages="modalForm.name.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请输入终端名称</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <label class="col-sm-3 p0">终端型号</label>
+            <div class="col-sm-9 pdr0">
+                <select class="form-control" ng-model="data.model">
+                    <option value="BX-5M1">BX-5M1</option>
+                    <option value="BX-5M2">BX-5M2</option>
+                    <option value="BX-5M3">BX-5M3</option>
+                    <option value="BX-5M4">BX-5M4</option>
+                    <option value="BX-5MT">BX-5MT</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <label class="col-sm-3 p0">终端尺寸</label>
+            <div class="col-sm-9 pdr0">
+                <div class="col-sm-5 pdl0">
+                    <input type="text" name="width" required ng-pattern="/^\d*$/" class="form-control" ng-model="data.width" message="请输入正确数字"
+                    />
+                    <div class="help-block" ng-messages="modalForm.width.$error" ng-if="isShowMessage">
+                        <p ng-message="required">请输入终端宽度</p>
+                        <p ng-message="pattern">请输入正确尺寸</p>
+                    </div>
+                </div>
+                <div class="col-sm-5 pdl0">
+                    <input type="text" name="height" class="form-control" required ng-pattern="/^\d*$/" ng-model="data.height" message="请输入正确数字"
+                    />
+                    <div class="help-block" ng-messages="modalForm.height.$error" ng-if="isShowMessage">
+                        <p ng-message="required">请输入终端高度</p>
+                        <p ng-message="pattern">请输入正确尺寸</p>
+                    </div>
+                </div>
+                <div class="col-sm-2 p0 lh34">
+                    (宽*高)
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <label class="col-sm-3 p0">单双色</label>
+            <div class="col-sm-9 pdr0">
+                <select class="form-control" name="screenColor" ng-model="data.screenColor">
+                    <option value="1">单色</option>
+                    <option value="0">双色</option>
+                </select>
+
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <label class="col-sm-3 p0">地址</label>
+            <div class="col-sm-9 pdr0">
+                <input type="text" placeholder="终端地址" required class="form-control" name="addr" ng-model="data.addr" />
+                <div class="help-block" ng-messages="modalForm.addr.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请输入终端地址</p>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+</div>
+<div ng-include="'tpl/modal_footer.html'"></div>

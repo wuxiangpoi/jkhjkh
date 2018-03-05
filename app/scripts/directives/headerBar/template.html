@@ -80,12 +80,12 @@
 
                 </li>
                 <li ng-if="perms(41)">
-                    <a  ui-sref-active="active" ui-sref="dashboard.material" ng-click="checkRoute($event,41)">
+                    <a ui-sref-active="active" ui-sref="dashboard.material" ng-click="checkRoute($event,41)">
                         <i class="iconfont icon-neirongguanli"></i>
                         <span class="navTle">素材管理</span>
                     </a>
                 </li>
-                <li  ng-if="perms(43)" >
+                <li ng-if="perms(43)">
                     <a ui-sref-active="active" ui-sref="dashboard.program" ng-click="checkRoute($event,43)">
                         <i class="iconfont icon-jiemuguanli"></i>
                         <span class="navTle">节目管理</span>
@@ -168,6 +168,28 @@
                         <li ui-sref-active="active" ng-if="perms(62)">
                             <a ui-sref="dashboard.programCommand" ng-click="checkRoute($event)">
                                 <span class="navName">节目命令记录</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li ng-class="{active: collapseVar==9}">
+                    <a class="navSecondLevel" ng-click="check(9)">
+                        <i class="iconfont icon-wenzipingguanliicon"></i>
+                        <span class="navTle">文字屏管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level nav-sub" ng-class="{'collapse':collapseVar != 9}">
+                        <li ui-sref-active="active" ng-if="perms(71)">
+                            <a ui-sref="dashboard.led" ng-click="checkRoute($event)">
+                                <span class="navName">终端管理</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(72)">
+                            <a ui-sref="dashboard.ledgram" ng-click="checkRoute($event)">
+                                <span class="navName">内容管理</span>
                             </a>
                         </li>
 

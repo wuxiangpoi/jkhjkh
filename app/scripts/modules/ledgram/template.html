@@ -1,0 +1,47 @@
+<div class="content-wrap">
+    <div class="level2 clearfix">
+
+        <div class="tipBtnWrap">
+            <button ng-click="save()" class="btn btn-primary">
+                <i class="iconfont icon-tianjia-"></i>
+                添加节目
+            </button>
+        </div>
+        <div class="serchWrap fr">
+            <div class="fl txtInputWrap">
+                <input class="form-control" ng-model="sp.search" placeholder="节目名称">
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="callServer(tableState)">查询</button>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <div class="tableHeader clearfix">
+        </div>
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <thead>
+                <tr>
+                    <th>节目名称</th>
+                    <th>创建时间</th>
+                    <th>节目概况</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+                <tr ng-repeat="row in displayed">
+                    <td>{{row.name}}</td>
+                    <td>{{row.createTime | formateTime}}</td>
+                    <td>{{row.text}}</td>
+                    <td style="min-width:180px;">
+                        <div>
+                            <button ng-if="perms(722)" class="btn btn-primary tableBtn" ng-click="save(row)">编辑</button>
+                            <button ng-if="perms(724)" class="btn btn-primary tableBtn" ng-click="sendDown(row)">节目下发</button>
+                            <button ng-if="perms(723)" class="btn btn-primary tableBtn" ng-click="del(row,$index)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-include="'tpl/table.html'"></tbody>
+            <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+        </table>
+    </div>
+</div>
