@@ -1,63 +1,63 @@
 <div class="homePage">
     <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
+        <div class="col-lg-3 col-md-6 stats" ui-sref="dashboard.terminal({status:1})">
+            <div class="panel">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-comments fa-5x"></i>
+                            <i class="iconfont icon-zhengchang state_ok"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">26</div>
-                            <div>New Comments!</div>
+                            <div>正常终端</div>
+                            <div class="huge">{{ter_ok}}</div>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6 stats" ui-sref="dashboard.terminal({status:2})">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-tasks fa-5x"></i>
+                            <i class="iconfont icon-lixian state_offline"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">12</div>
-                            <div>New Tasks!</div>
+                            <div>离线终端</div>
+                            <div class="huge">{{ter_offline}}</div>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-yellow">
+        <div class="col-lg-3 col-md-6 stats" ui-sref="dashboard.terminal({status:1})">
+            <div class="panel">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-5x"></i>
+                            <i class="iconfont icon-yichang state_error"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">124</div>
-                            <div>New Orders!</div>
+                            <div>异常终端</div>
+                            <div class="huge">{{ter_noAct}}</div>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
+        <div class="col-lg-3 col-md-6 stats" ui-sref="dashboard.terminal">
+            <div class="panel">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-support fa-5x"></i>
+                            <i class="iconfont icon-suoyouzhongduan state_all"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">13</div>
-                            <div>Support Tickets!</div>
+                            <div>所有终端</div>
+                            <div class="huge">{{ter_all}}</div>
                         </div>
                     </div>
                 </div>

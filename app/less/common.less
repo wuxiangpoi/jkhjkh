@@ -33,6 +33,13 @@
   }
 }
 
+.btn-default {
+  &:hover {
+    background: #f9f9f9;
+    border: 1px solid #e2e3e7;
+  }
+}
+
 .btn-primary {
   background: @main-color;
   border: 1px solid @main-color;
@@ -42,8 +49,8 @@
     border: 1px solid @main-color;
   }
   &:hover {
-    background: #58cbff;
-    border: 1px solid #58cbff;
+    background: #20b8fe;
+    border: 1px solid #20b8fe;
   }
   .fa-spinner {
     position: absolute;
@@ -84,6 +91,13 @@
 
 .form-control {
   padding-left: 5px;
+  &:focus {
+    -webkit-box-shadow: inset 0 0px 2px #99e0ff;
+    box-shadow: inset 0 0px 2px #99e0ff;
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  }
+  
 }
 
 a:focus,a:hover,input:focus {
@@ -147,6 +161,10 @@ li {
   line-height: 34px;
 }
 
+.h34 {
+  height: 34px;
+}
+
 .txt-left {
   text-align: left!important;
 }
@@ -201,17 +219,6 @@ select {
 
 .moment-picker {
   z-index: 10001!important;
-}
-
-
-/* line 12, app/scss/common.scss */
-.bg-mediumseagreen {
-  background: mediumseagreen;
-}
-
-/* line 16, app/scss/common.scss */
-.bg-yellow {
-  background: #e8e855;
 }
 
 /* line 20, app/scss/common.scss */
@@ -483,7 +490,6 @@ div.timeSelectWrap {
             display: none;
             input {
               line-height: 32px;
-              border: 1px solid #ddd;
               width: 160px;
             }
           }
@@ -566,6 +572,9 @@ div.timeSelectWrap {
     border-radius: 6px;
     padding: 0 10px;
     line-height: 28px;
+    &:hover {
+      background: #f9f9f9;
+    }
   }
 }
 
@@ -1260,6 +1269,9 @@ div.timeSelectWrap {
     min-height: 400px;
     &>.level2 {
       margin-bottom: 20px;
+      .form-control {
+        background: transparent;
+      }
     }
 }
 

@@ -11,10 +11,10 @@ userService.factory('userService', ['baseService', function (baseService) {
                 cb(data)
             })
         },
-        updatePwd: function (postData, cb,vm) {
+        updatePwd: function (postData, cb) {
             baseService.postData(baseService.api.auth + 'updatePwd', postData, function (data) {
                 cb(data)
-            },vm)
+            })
         },
         logout: function () {
             baseService.postData(baseService.api.auth + 'logout', {}, function (data) {

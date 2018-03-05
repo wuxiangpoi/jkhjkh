@@ -50,7 +50,7 @@ angular.module('sbAdminApp')
 							userService.updatePwd(updpostData, function () {
 								ngDialog.close();
 								baseService.alert('修改成功', 'success');
-							},vm)
+							})
 						} else {
 							vm.isShowMessage = true;
 						}

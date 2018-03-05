@@ -21,6 +21,10 @@
 .btn:focus {
   outline: none!important;
 }
+.btn-default:hover {
+  background: #f9f9f9;
+  border: 1px solid #e2e3e7;
+}
 .btn-primary {
   background: #00a0e9;
   border: 1px solid #00a0e9;
@@ -31,8 +35,8 @@
   border: 1px solid #00a0e9;
 }
 .btn-primary:hover {
-  background: #58cbff;
-  border: 1px solid #58cbff;
+  background: #20b8fe;
+  border: 1px solid #20b8fe;
 }
 .btn-primary .fa-spinner {
   position: absolute;
@@ -93,6 +97,12 @@
 .form-control {
   padding-left: 5px;
 }
+.form-control:focus {
+  -webkit-box-shadow: inset 0 0px 2px #99e0ff;
+  box-shadow: inset 0 0px 2px #99e0ff;
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
 a:focus,
 a:hover,
 input:focus {
@@ -143,6 +153,9 @@ li {
 .lh34 {
   line-height: 34px;
 }
+.h34 {
+  height: 34px;
+}
 .txt-left {
   text-align: left!important;
 }
@@ -190,14 +203,6 @@ select {
 }
 .moment-picker {
   z-index: 10001!important;
-}
-/* line 12, app/scss/common.scss */
-.bg-mediumseagreen {
-  background: mediumseagreen;
-}
-/* line 16, app/scss/common.scss */
-.bg-yellow {
-  background: #e8e855;
 }
 /* line 20, app/scss/common.scss */
 .pointer {
@@ -439,7 +444,6 @@ div.timeSelectWrap {
 }
 .tableHeader .panel .panelRow .panel-right .leafGroup .leafEdit input {
   line-height: 32px;
-  border: 1px solid #ddd;
   width: 160px;
 }
 .tableHeader .panel .panelRow .panel-right .leafGroup.current {
@@ -512,6 +516,9 @@ div.timeSelectWrap {
   border-radius: 6px;
   padding: 0 10px;
   line-height: 28px;
+}
+.table-wrapper .tableBtn:hover {
+  background: #f9f9f9;
 }
 .pagination {
   margin: 10px 0!important;
@@ -1105,6 +1112,9 @@ div.timeSelectWrap {
 }
 .content-wrap > .level2 {
   margin-bottom: 20px;
+}
+.content-wrap > .level2 .form-control {
+  background: transparent;
 }
 .tipBtnWrap {
   display: inline-block;

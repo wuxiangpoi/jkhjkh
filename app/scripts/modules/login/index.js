@@ -29,13 +29,19 @@ angular.module('sbAdminApp')
                 userService.login(postData, function () {
                     userService.getUserSrc(function (userData) {
                         $rootScope.userData = userData;
+                        $rootScope.current_perms = userData.current_perms;
+                        for (var i = 0; i < userData.root_organizations.length; i++) {
+                            if (userData.root_organizations[i].pid == '') {
+                                $rootScope.rootGroup = userData.root_organizations[i];
+                            }
+                        }
                         baseService.goToUrl('/dashboard/home');
                         if ($scope.isRemembered) {
                             $.cookie('user_cookie', JSON.stringify({
                                 domain: $scope.domain,
                                 account: $scope.account,
                                 password: $scope.password
-                            }));
+                            }), { expires: 30 });
                         }else{
                             $.cookie('user_cookie', null);
                         }
