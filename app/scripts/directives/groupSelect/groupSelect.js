@@ -7,7 +7,7 @@
  * # adminPosHeader
  */
 angular.module('sbAdminApp')
-    .directive('groupLeafSelect', function ($rootScope,baseService) {
+    .directive('groupLeafSelect', function ($rootScope, baseService) {
         function link($scope, element, attrs) {
             $scope.root_organizations = $rootScope.userData.root_organizations;
             $scope.currentGroup = $rootScope.rootGroup;
@@ -16,6 +16,8 @@ angular.module('sbAdminApp')
             $scope.groupLeafes = [];
             $scope.treeId = 'group_tree_' + Date.parse(new Date());
             $scope.showLeaf = false;
+            $scope.showGroup = false;
+            $scope.showLeafes = false;
             $scope.getLeafes = function (oid) {
                 if (attrs.reqleafurl) {
                     $scope.showLeaf = true;
@@ -27,9 +29,10 @@ angular.module('sbAdminApp')
                 }
 
             }
+
             function getOrganizations() {
                 var zNodes = [];
-                
+
                 if (attrs.initid) {
                     for (var i = 0; i < $scope.root_organizations.length; i++) {
                         zNodes.push({
@@ -38,11 +41,11 @@ angular.module('sbAdminApp')
                             name: $scope.root_organizations[i].name,
                             sort: $scope.root_organizations[i].sort
                         });
-                        if($scope.root_organizations[i].id == attrs.initid){
-                            $scope.currentGroup = $scope.root_organizations[i];			
+                        if ($scope.root_organizations[i].id == attrs.initid) {
+                            $scope.currentGroup = $scope.root_organizations[i];
                         }
                     }
-                }else{
+                } else {
                     for (var i = 0; i < $scope.root_organizations.length; i++) {
                         zNodes.push({
                             id: $scope.root_organizations[i].id,
@@ -65,43 +68,55 @@ angular.module('sbAdminApp')
                 selectedNodes: []
             }
 
-            $scope.$emit('emitGroupLeaf',$scope.currentGroup,$scope.currentLeaf);
-            
-            
+            $scope.$emit('emitGroupLeaf', $scope.currentGroup, $scope.currentLeaf);
+
+
             $scope.showMenu = function ($event) {
+                
                 $event.stopPropagation();
                 var selectList = $($event.currentTarget).children('.diy_select_list');
-                if(selectList.css("display")=="none"){
-                    selectList.show();
-                    selectList.bind('click', function (e) {
-                        e.stopPropagation();
-                    })
+                $scope.showGroup = !$scope.showGroup;
+                $scope.showLeafes = false;
+                selectList.bind('click', function (e) {
+                    e.stopPropagation();
+                })
+                if($scope.showGroup){
                     $(document).bind('click', function () {
-                        selectList.hide();
+                        $scope.showLeafes = false;
+                        $scope.showGroup = false;
+                        $scope.$apply();
                     })
                 }else{
-                    selectList.hide();
-                    $(document).unbind("click"); 
+                    $(document).unbind('click');
                 }
+                
             }
 
-            $scope.$on('leafClick',function(e,data,event){
-                $(event.currentTarget).parents('.diy_select_list').hide();
-                if($scope.currentGroup.id != data.id){
+            $scope.$on('leafClick', function (e, data, event) {
+                $scope.showLeafes = false;
+                $scope.showGroup = false;
+                if ($scope.currentGroup.id != data.id) {
                     $scope.currentGroup = data;
-                    $scope.$emit('emitGroupLeaf',$scope.currentGroup);
+                    $scope.currentLeaf = {};
+                    $scope.currentLeaf.id = '';
+                    $scope.$emit('emitGroupLeaf', $scope.currentGroup, $scope.currentLeaf);
                     $scope.getLeafes($scope.currentGroup.id);
                     $scope.$apply();
                 }
             })
-
+            $scope.leafClick = function ($event,item) {
+                $event.stopPropagation();
+                $scope.showLeafes = false;
+                $scope.showGroup = false;
+                if(item.id != $scope.currentLeaf.id){
+                    $scope.currentLeaf = item;
+                    $scope.$emit('emitGroupLeaf', $scope.currentGroup, $scope.currentLeaf);
+                }
+            }
             $scope.showLeafMenu = function ($event) {
                 $event.stopPropagation();
-                $('.treeWrapLeaf').slideDown(50);
-                $($event.currentTarget).parent().siblings('.treeWrap').slideUp(50);
-                $('body').bind('click', function () {
-                    $('.treeWrapLeaf').slideUp(50);
-                })
+                $scope.showGroup = false;
+                $scope.showLeafes = !$scope.showLeafes;
             }
         }
         return {

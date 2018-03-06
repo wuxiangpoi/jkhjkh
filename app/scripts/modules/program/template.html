@@ -1,4 +1,4 @@
-<div class="content-wrap" style="min-width:720px;">
+<div class="content-wrap" style="min-width:780px;">
     <div class="level2 clearfix">
         <div ng-if="perms(432)" class="tipBtnWrap">
             <button ui-sref="dashboard.programAdd" class="btn btn-primary h34">
@@ -123,12 +123,12 @@
                             {{row.playTers}}
                         </div>
                     </td>
-                    <td style="{{row.status == 0 || ow.status == 4 || ow.status == 5 || ow.status == 7?'width:230px;':''}}">
+                    <td style="{{row.status == 0 || ow.status == 4 || ow.status == 5 || ow.status == 7?'width:230px;':'160px'}}">
                         <button ng-if="row.status == 0 || row.status == 4 || row.status == 5 || row.status == 7 && perms(435)" class="btn tableBtn"
                             ng-click="submitCheck(row)">提交审核
                         </button>
                         <button ng-if="row.status == 0 || row.status == 4 || row.status == 5 || row.status == 7 && perms(432)" class="btn tableBtn"
-                            ng-click="save(row)">编辑
+                            ng-click="saveEdit(row)">编辑
                         </button>
                         <button ng-if="row.status == 1 && perms(436)" class="btn tableBtn" ng-click="sendDown(row)">发布
                         </button>

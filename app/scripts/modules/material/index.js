@@ -2,7 +2,7 @@
 angular.module('sbAdminApp')
 	.controller(
 		'materialCtrl',
-		function ($scope, $rootScope, $stateParams, baseService, leafService) {
+		function ($scope, $rootScope, $stateParams, baseService, leafService, FileUploader) {
 			$scope.displayed = [];
 			$scope.sp = {};
 			$scope.tableState = {};
@@ -129,7 +129,7 @@ angular.module('sbAdminApp')
 			$scope.saveName = function (item) {
 				baseService.confirmDialog(540, '编辑', item, 'tpl/material_saveName.html', function (ngDialog, vm) {
 					if (vm.modalForm.$valid) {
-						
+
 						vm.isPosting = true;
 						baseService.postData(baseService.api.material + 'saveMaterial', {
 							id: item.id,
@@ -145,18 +145,131 @@ angular.module('sbAdminApp')
 					}
 				});
 			}
-			$scope.del = function(item){
-				baseService.confirm('删除素材', "确定删除素材：" + item.name + "?", function (ngDialog,vm) {
+			$scope.del = function (item) {
+				baseService.confirm('删除素材', "确定删除素材：" + item.name + "?", function (ngDialog, vm) {
 					vm.isPosting = true;
 					baseService.postData(baseService.api.material + 'delMaterial', {
 						id: item.id
 					}, function (item) {
 						ngDialog.close();
-						baseService.alert("删除成功");
+						baseService.alert("删除成功",'success');
 						$scope.callServer($scope.tableState);
 					});
 				});
 			}
+			$scope.save = function () {
+				baseService.confirmDialog(720, '添加素材', {}, 'tpl/material_save.html', function (ngDialog, vm) {
+					if (vm.uploader.queue.length) {
+						for (var i = 0; i < vm.uploader.queue.length; i++) {
+							vm.uploader.queue[i].oid = vm.currentGroup.id;
+							vm.uploader.queue[i].gid = vm.currentLeaf.id;
+							vm.uploader.queue[i].oName = $('#currentName').text();
+						}
+						vm.closeThisDialog();
+						$rootScope.$broadcast('callUploader', vm.uploader.queue);
+					} else {
+						baseService.alert('请先选择文件', 'warning', true);
+					}
+				}, function (vm) {
+
+					vm.sp = {};
+					vm.sp.oid = '';
+					vm.currentGroup = $rootScope.rootGroup;
+					vm.sp.oid = vm.currentGroup.id;
+					vm.$on('emitGroupLeaf', function (e, group, leaf) {
+						if (vm.sp.oid != group.id) {
+							vm.currentGroup = group;
+						}
+
+					});
+					var uploader = vm.uploader = new FileUploader({
+						url: 'http://dmbd4.oss-cn-hangzhou.aliyuncs.com'
+					});
+					
+					// FILTERS
+
+					uploader.filters.push({
+						name: 'customFilter',
+						fn: function fn(item /*{File|FileLikeObject}*/ , options) {
+
+							if (this.queue.length >= 10) {
+								baseService.alert('上传队列达到最大值10个', 'warining', true);
+								return false;
+							}
+
+							var ctype = item.name.substr(item.name.lastIndexOf('.') + 1).toLowerCase();
+							var type = ',' + ctype + ',';
+							var type = ',' + item.type.slice(item.type.lastIndexOf('/') + 1) + ',';
+							//var file_type = vm.data.type == '0' ? $rootScope.getRootDicNameStrs('image_format') : $rootScope.getRootDicNameStrs('video_format');
+							var imgfile_type = vm.imgfile_type = $rootScope.getRootDicNameStrs('image_format');
+							var videofile_type = vm.videofile_type = $rootScope.getRootDicNameStrs('video_format');
+							if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1) {
+								if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1) {
+									if (item.size > 10 * 1024 * 1024) {
+										baseService.alert('不得上传大于10Mb的图片', 'warning', true);
+									} else {
+										return true;
+									}
+								} else {
+									if (item.size > 500 * 1024 * 1024) {
+										baseService.alert('不得上传大于500Mb的视频', 'warning', true);
+									} else {
+										return true;
+									}
+								}
+							} else {
+								baseService.alert('上传的文件格式平台暂时不支持，目前支持的图片格式是:' + imgfile_type + '目前支持的图片格式是:' + videofile_type, 'warning', true);
+								return false;
+							}
+						}
+					});
+					uploader.onBeforeUploadItem = function (item) {
+						var imgfile_type = $rootScope.getRootDicNameStrs('image_format');
+						var videofile_type = $rootScope.getRootDicNameStrs('video_format');
+						var host = '';
+						var accessid = '';
+						var policyBase64 = '';
+						var signature = '';
+						var callbackbody = '';
+						var filename = '';
+						var key = '';
+						//	var	 expire = 0;
+						var token = '';
+						baseService.postData(baseService.api.material + 'addMaterial_getOssSignature', {
+							type: videofile_type.split(',').indexOf(item.file.type.split('/')[1]) == -1 ? 0 : 1
+						}, function (obj) {
+							host = obj['host']
+							policyBase64 = obj['policy']
+							accessid = obj['accessid']
+							signature = obj['signature']
+							//	expire =obj['expire']
+							callbackbody = obj['callback']
+							key = obj['key']
+							token = obj['token']
+						});
+		
+						//	$scope.uploader.url=host;
+						var filename = item.file.name;
+						if (item.file['desc']) {
+							filename = item.file.desc;
+						}
+						var new_multipart_params = {
+							'key': (key + item.file.name.substr(item.file.name.indexOf('.'))),
+							'policy': policyBase64,
+							'OSSAccessKeyId': accessid,
+							'success_action_status': '200', //让服务端返回200,不然，默认会返回204
+							'callback': callbackbody,
+							'signature': signature,
+							'x:fname': filename,
+							'x:type': videofile_type.split(',').indexOf(item.file.type.split('/')[1]) == -1 ? 0 : 1,
+							'x:gid': item.oid,
+							'x:opt': 0,
+							'x:token': token
+						};
+						item.formData = [new_multipart_params]; //上传前，添加描述文本
+					}
+				});
+			};
 			$scope.checkAll = function ($event) {
 				baseService.checkAll($event, $scope);
 			}

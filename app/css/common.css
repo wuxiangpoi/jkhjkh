@@ -164,6 +164,8 @@ li {
 }
 .h34 {
   height: 34px;
+}
+.h34 i {
   vertical-align: middle;
 }
 .txt-left {
@@ -179,8 +181,83 @@ li {
 .tdClick:hover {
   color: #00a0e9;
 }
+.fa-close:before {
+  content: '\00D7';
+}
 select {
   cursor: pointer;
+}
+/* 上传窗口 */
+.dialog-upload {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 530px;
+  background: #fff;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 0 5px #ccc;
+  -webkit-box-shadow: 0 0 5px #ccc;
+}
+.dialog-upload.dhide {
+  bottom: -270px;
+  display: block;
+}
+.dialog-upload-header {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 44px;
+  padding-left: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-right: 10px;
+}
+.dialog-upload-header .btnHead {
+  font-size: 20px;
+  color: #bbb;
+  vertical-align: -3px;
+  cursor: pointer;
+}
+.dialog-upload-header i.fa-minus {
+  border-top: 2px solid #ddd;
+  display: inline-block;
+  vertical-align: middle;
+  width: 12px;
+}
+.dialog-upload-header i.fa-minus::before,
+.dialog-upload-header i.fa-window-maximize::before {
+  display: none;
+}
+.dialog-upload-header .btnHead .fa-window-maximize {
+  width: 12px;
+  display: inline-block;
+  height: 12px;
+  border: 1px solid #bbb;
+  border-top: 2px solid #bbb;
+  vertical-align: middle;
+}
+.dialog-upload-content {
+  padding: 0 10px;
+  min-height: 270px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.dialog-upload-content .table > tbody > tr > td {
+  vertical-align: middle;
+}
+.dialog-upload-content .btn:focus {
+  box-shadow: none;
+}
+.dialog-upload-header .right span {
+  cursor: pointer;
+}
+.dialog-upload-content .pause {
+  display: inline-block;
+  font-size: 20px;
+  width: 10px;
+  height: 14px;
+  border-left: 2px solid #666;
+  border-right: 2px solid #666;
 }
 .vedioPre {
   position: absolute;
@@ -270,6 +347,7 @@ a.file {
   text-decoration: none;
   text-indent: 0;
   padding: 0 22px;
+  background: #00a0e9;
 }
 a.file input {
   position: absolute;
@@ -300,7 +378,10 @@ div.timeSelectWrap {
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
-  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   outline: none;
   opacity: 1;
   width: 100%;
@@ -340,7 +421,6 @@ div.timeSelectWrap {
   min-height: 250px;
   max-height: 280px;
   overflow: auto;
-  display: none;
 }
 .diy_select .diy_select_list > ul {
   padding: 0;
@@ -349,7 +429,7 @@ div.timeSelectWrap {
   background: url(../img/select_arrow.png) right center no-repeat;
 }
 .groupLeafSelect .groupSelect {
-  width: 240px;
+  width: 204px;
 }
 .groupLeafSelect .diy_select {
   width: 44%;
@@ -367,6 +447,9 @@ div.timeSelectWrap {
   cursor: pointer;
   background: #1e90ff;
   color: #fff;
+}
+.modalGroup .diy_select_list {
+  left: -84%;
 }
 .groupWrap.form {
   display: block;
@@ -1243,6 +1326,20 @@ div.timeSelectWrap {
 }
 .ngdialog-content .modal-body .form-group .txt-grey {
   line-height: 34px;
+}
+.ngdialog-content .modal-body .table {
+  margin-bottom: 0;
+}
+.ngdialog-content .modal-body .table th,
+.ngdialog-content .modal-body .table td {
+  font-size: 13px;
+  line-height: 30px!important;
+}
+.ngdialog-content .modal-body .panelSelectWrap {
+  margin-right: 10px;
+}
+.ngdialog-content .modal-body .panelSelectWrap.last {
+  margin-right: 0px;
 }
 .ngdialog-content .modal-body .modalDetail {
   font-size: 12px;

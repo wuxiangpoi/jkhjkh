@@ -46,6 +46,11 @@ var app = angular.module('sbAdminApp', [
             }
 
         });
+        $rootScope.formateDate = function (date) {
+            if (date) {
+                return date.toString().substring(0, 4) + '-' + date.toString().substring(4, 6) + '-' + date.toString().substring(6, 8);
+            }
+        }
         $rootScope.getRootDicName = function (key, did) {
             var ar = $rootScope.userData.root_dic[key];
             for (var i in ar) {
@@ -78,6 +83,20 @@ var app = angular.module('sbAdminApp', [
             var joinChar = imgUrl.indexOf('?') >= 0 ? '&' : '?';
             return imgUrl + joinChar + 'x-oss-process=image/resize,m_lfit,' + size + ',w_' + size;
         }
+        $rootScope.getRootDicNameStrs = function (key) {
+            var ar = $rootScope.userData.root_dic[key];
+            var s = '';
+            for (var i = 0; i < ar.length; i++) {
+                var _dic = ar[i];
+                s += "," + _dic.name;
+            }
+            if (s) {
+                s = s.substr(1);
+            }
+    
+            return s;
+            
+        }
     })
     .config(['$urlRouterProvider', '$locationProvider',
         function ($urlRouterProvider, $locationProvider) {
@@ -95,6 +114,5 @@ var app = angular.module('sbAdminApp', [
         });
     }])
     .run(['fileUploaderOptions', function (fileUploaderOptions) {
-        fileUploaderOptions.autoUpload = true;
-        fileUploaderOptions.url = "/imgapi/image/upload"
+        fileUploaderOptions.autoUpload = false;
     }]);

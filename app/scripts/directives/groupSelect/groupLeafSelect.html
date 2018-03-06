@@ -1,17 +1,17 @@
 <div class="groupSelect">
     <div class="diy_select" ng-click="showMenu($event)">
         <div class="diy_select_txt">{{currentGroup.name}}</div>
-        <div class="diy_select_list group_select">
+        <div class="diy_select_list group_select" ng-show="showGroup">
             <ul id="{{treeId}}" z-tree ztreeSetting="{{ztreeSetting}}" class="ztree"></ul>
         </div>
     </div>
 
-    <div class="diy_select" ng-click="showMenu($event)" ng-if="showLeaf">
+    <div class="diy_select" ng-click="showLeafMenu($event)" ng-if="showLeaf">
         <div class="diy_select_txt">全部分组</div>
-        <div class="diy_select_list">
+        <div class="diy_select_list" ng-show="showLeafes">
             <ul class="selectUl">
-                <li ng-click="leafClick()">全部分组</li>
-                <li ng-repeat="leaf in groupLeafes" ng-click="leafClick(leaf)">{{leaf.name}}</li>
+                <li ng-click="leafClick($event,{id:''})">全部分组</li>
+                <li ng-repeat="leaf in groupLeafes" ng-click="leafClick($event,leaf)">{{leaf.name}}</li>
             </ul>
         </div>
     </div>

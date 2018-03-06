@@ -136,19 +136,19 @@ gulp.task('revReplaceModule', ['revModuleJs', 'revModuleCss', 'revModuleHtml'], 
 });
 
 gulp.task('revModuleHtml', function () {
-    return gulp.src('./app/modules/**/*.html')
+    return gulp.src('./app/scripts/modules/**/*.html')
         .pipe($.rev())
-        .pipe(gulp.dest('dist/modules'))
+        .pipe(gulp.dest('dist/scripts/modules'))
         .pipe($.rev.manifest())
         .pipe(gulp.dest('app/temp/rev-html'));
 });
 
 gulp.task('revModuleJs', function () {
-    return gulp.src('./app/modules/**/*.js')
+    return gulp.src('./app/scripts/modules/**/*.js')
     .pipe($.ngAnnotate())
     .pipe($.uglify())
     .pipe($.rev())
-    .pipe(gulp.dest('dist/modules'))
+    .pipe(gulp.dest('dist/scripts/modules'))
     .pipe($.rev.manifest())
     .pipe(gulp.dest('app/temp/rev-js'));
 });
