@@ -194,7 +194,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             })
         },
         postData: function (url, params, cb, fcb, show) {
-            let me = this;
+            var me = this;
             $http.post(url, params, {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

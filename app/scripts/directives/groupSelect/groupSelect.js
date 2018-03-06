@@ -15,8 +15,18 @@ angular.module('sbAdminApp')
             $scope.currentLeaf.id = '';
             $scope.groupLeafes = [];
             $scope.treeId = 'group_tree_' + Date.parse(new Date());
-            
+            $scope.showLeaf = false;
+            $scope.getLeafes = function (oid) {
+                if (attrs.reqleafurl) {
+                    $scope.showLeaf = true;
+                    baseService.getJson(baseService.api.apiUrl + attrs.reqleafurl, {
+                        oid: oid
+                    }, function (data) {
+                        $scope.groupLeafes = data;
+                    })
+                }
 
+            }
             function getOrganizations() {
                 var zNodes = [];
                 
@@ -42,9 +52,11 @@ angular.module('sbAdminApp')
                         });
                     }
                 }
-                
+
                 return zNodes;
             }
+            $scope.getLeafes($scope.currentGroup.id);
+
             $scope.ztreeSetting = {
                 zNodes: getOrganizations(),
                 isSort: false,
@@ -52,17 +64,9 @@ angular.module('sbAdminApp')
                 isCheck: false,
                 selectedNodes: []
             }
-            $scope.$emit('emitGroupLeaf',$scope.currentGroup,$scope.currentLeaf);
-            // $scope.getLeafes = function (oid) {
-            //     if (attrs.requrl) {
-            //         baseService.getJson(baseService.api.apiUrl + attrs.requrl, {
-            //             oid: oid
-            //         }, function (data) {
-            //             $scope.groupLeafes = data;
-            //         })
-            //     }
 
-            // }
+            $scope.$emit('emitGroupLeaf',$scope.currentGroup,$scope.currentLeaf);
+            
             
             $scope.showMenu = function ($event) {
                 $event.stopPropagation();
@@ -86,6 +90,7 @@ angular.module('sbAdminApp')
                 if($scope.currentGroup.id != data.id){
                     $scope.currentGroup = data;
                     $scope.$emit('emitGroupLeaf',$scope.currentGroup);
+                    $scope.getLeafes($scope.currentGroup.id);
                     $scope.$apply();
                 }
             })

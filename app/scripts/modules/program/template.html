@@ -95,9 +95,9 @@
                     </th>
                     <th>节目名称</th>
                     <th>节目大小</th>
-                    <th>上传帐号</th>
-                    <th>上传时间</th>
                     <th>审核状态</th>
+                    <th>创建时间</th>
+                    <th>播放终端数</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -110,13 +110,18 @@
                         {{row.name}}
                     </td>
                     <td>{{row.size | dmbdResourceSizeFilter}}</td>
-                    <td>{{row.applyUid}}</td>
+                    <td>{{row.status | programStatusTxt}}</td>
 
                     <td>
                         {{row.createTime | formateTime}}
                     </td>
                     <td>
-                        {{row.status | programStatusTxt}}
+                        <div ng-if="row.playTers == 0">
+                            0
+                        </div>
+                        <div class="tdClick" ng-if="row.playTers > 0" ng-click="sendCommandStopProgram(row)">
+                            {{row.playTers}}
+                        </div>
                     </td>
                     <td style="{{row.status == 0 || ow.status == 4 || ow.status == 5 || ow.status == 7?'width:230px;':''}}">
                         <button ng-if="row.status == 0 || row.status == 4 || row.status == 5 || row.status == 7 && perms(435)" class="btn tableBtn"
