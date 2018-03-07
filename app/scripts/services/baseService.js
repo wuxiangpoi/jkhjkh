@@ -211,7 +211,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 if (data.code == 1) {
                     cb(data.content);
                 } else if (data.code == 2) {
-                    me.goToLogin();
+                    me.goToUrl('/login');
                     return false;
                 } else {
                     if (fcb) {
