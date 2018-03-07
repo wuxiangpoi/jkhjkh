@@ -12,7 +12,7 @@ sentencesService.factory('sentencesService', ['baseService', function (baseServi
                 if (r.test(con)) {
                     //var replaceCon = '<span class="sentences">' + sentence[i] + '</span>'
                     sentences.sentencesArr.push(sentence[i]);
-                    sentences.sentencesCon = con.replace(r, '*');
+                    sentences.sentencesCon = con.replace(r, '***');
                 }
             }
             return sentences;

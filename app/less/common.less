@@ -802,6 +802,13 @@ div.timeSelectWrap {
   li.active a:hover {
     background-color: @main-color;
   }
+  .ellipsis {
+    color: #c4c4c4;
+    &:hover {
+      background: #fff;
+      color: #c4c4c4;
+    }
+  }
 }
 
 .timeSelect {
@@ -1350,6 +1357,14 @@ div.timeSelectWrap {
           }
         }
         &.firstNav {
+          a {
+            background: #24243e;
+            &:hover {
+              color: @main-color;
+              background: #2c2c4c;
+            }
+          }
+          
           a.active {
             background: #2c2c4c;
             padding-left: 21px;
@@ -1648,10 +1663,11 @@ div.timeSelectWrap {
         }
       }
     }
+    .progressWrap {
+      display: none;
+    }
   }
-  .progressWrap {
-    display: none;
-  }
+  
 }
 
 @media (max-width: 992px){

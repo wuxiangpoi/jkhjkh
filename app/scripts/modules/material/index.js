@@ -128,7 +128,10 @@ angular.module('sbAdminApp')
 				});
 			}
 			$scope.saveName = function (item) {
-				baseService.confirmDialog(540, '编辑', item, 'tpl/material_saveName.html', function (ngDialog, vm) {
+				var modalData = {
+					name: item.name
+				}
+				baseService.confirmDialog(540, '编辑', modalData, 'tpl/material_saveName.html', function (ngDialog, vm) {
 					if (vm.modalForm.$valid) {
 
 						vm.isPosting = true;

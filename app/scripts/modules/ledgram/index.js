@@ -6,8 +6,8 @@
  * # MainCtrl
  * Controller of the sbAdminApp
  */
-angular.module('sbAdminApp', [])
-    .controller('ledgramCtrl', function ($scope, $rootScope, baseService) {
+angular.module('sbAdminApp', ['sentencesService'])
+    .controller('ledgramCtrl', function ($scope, $rootScope, baseService, sentencesService) {
         $scope.displayed = [];
         $scope.sp = {};
         $scope.tableState = {};
@@ -47,13 +47,18 @@ angular.module('sbAdminApp', [])
             baseService.confirmDialog(540, item ? '编辑' : '添加新节目', onData, 'tpl/led_savepogram.html', function (ngDialog, vm) {
                 vm.isShowMessage = false;
                 if (vm.modalForm.$valid) {
+                    if (sentencesService.checkCon(vm.data.text).sentencesArr.length) {
+                        vm.data.text = sentencesService.checkCon(vm.data.text).sentencesCon;
+                        baseService.alert('抱歉，您输入的内容包含被禁止的词汇，建议修改相关内容', 'warning', true);
+                    } else {
+                        vm.isPosting = true;
+                        baseService.postData(baseService.api.ledPage + 'saveLedPage', onData, function () {
+                            ngDialog.close();
+                            baseService.alert(item ? '修改成功' : '添加成功', 'success');
+                            $scope.callServer($scope.tableState);
+                        })
+                    }
 
-                    vm.isPosting = true;
-                    baseService.postData(baseService.api.ledPage + 'saveLedPage', onData, function () {
-                        ngDialog.close();
-                        baseService.alert(item ? '修改成功' : '添加成功', 'success');
-                        $scope.callServer($scope.tableState);
-                    })
                 } else {
                     vm.isShowMessage = true;
                 }
@@ -326,7 +331,7 @@ angular.module('sbAdminApp', [])
                 } else {
                     baseService.alert('请至少勾选一个节目再进行操作', 'warning', true);
                 }
-                
+
             }, function (vm) {
                 vm.displayed = [];
                 vm.sp = {};

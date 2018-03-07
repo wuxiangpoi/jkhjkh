@@ -125,15 +125,23 @@ angular.module('sbAdminApp')
 			}
 
 			$scope.save = function (item) {
-				baseService.confirmDialog(580, '编辑终端信息', item, 'tpl/terminal_save.html', function (ngDialog, vm) {
+				var modalData = {
+					name: item.name,
+					id: item.id,
+					city_no: item.city_no,
+					remark: item.remark,
+					cityName: '',
+					addr: item.addr
+				};
+				baseService.confirmDialog(580, '编辑终端信息', modalData, 'tpl/terminal_save.html', function (ngDialog, vm) {
 					if (vm.modalForm.$valid) {
 						var formData = {
-							name: item.name,
-							id: item.id,
-							city_no: item.city_no,
-							remark: item.remark,
+							name: vm.data.name,
+							id: vm.data.id,
+							city_no: vm.data.city_no,
+							remark: vm.data.remark,
 							cityName: '',
-							addr: item.addr
+							addr: vm.data.addr
 						}
 						vm.isPosting = true;
 						baseService.postData(baseService.api.terminal + 'modifyTerminalInfo', formData, function () {

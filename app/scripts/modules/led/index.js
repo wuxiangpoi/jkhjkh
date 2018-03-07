@@ -69,6 +69,8 @@ angular.module('sbAdminApp', [])
             })
         }
         $scope.playManage = function (item) {
+
+            
             baseService.getJson(baseService.api.led + 'getPlayLedPage', {
                 sn: item.sn
             }, function (data) {

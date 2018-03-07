@@ -715,6 +715,13 @@ div.timeSelectWrap {
 .pagination li.active a:hover {
   background-color: #00a0e9;
 }
+.pagination .ellipsis {
+  color: #c4c4c4;
+}
+.pagination .ellipsis:hover {
+  background: #fff;
+  color: #c4c4c4;
+}
 .timeSelect {
   width: 100%;
   line-height: 30px;
@@ -1187,6 +1194,13 @@ div.timeSelectWrap {
   color: #00a0e9;
   background: #2c2c4c;
 }
+#topNav .navbar-static-side .nav li.firstNav a {
+  background: #24243e;
+}
+#topNav .navbar-static-side .nav li.firstNav a:hover {
+  color: #00a0e9;
+  background: #2c2c4c;
+}
 #topNav .navbar-static-side .nav li.firstNav a.active {
   background: #2c2c4c;
   padding-left: 21px;
@@ -1461,7 +1475,7 @@ div.timeSelectWrap {
   margin-top: -10px;
   right: 10px;
 }
-#topNav .progressWrap {
+#topNav .navbar-static-side.txeit .progressWrap {
   display: none;
 }
 @media (max-width: 992px) {
