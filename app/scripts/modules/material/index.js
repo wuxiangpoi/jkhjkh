@@ -137,7 +137,7 @@ angular.module('sbAdminApp')
 						vm.isPosting = true;
 						baseService.postData(baseService.api.material + 'saveMaterial', {
 							id: item.id,
-							name: vm.data.name,
+							name: vm.data.name
 						}, function () {
 							ngDialog.close();
 							$scope.callServer($scope.tableState);
