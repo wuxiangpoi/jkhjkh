@@ -11,7 +11,7 @@
                 />
                 <img ng-if="data.width < data.height || data.width == data.height" src="img/loading.gif" style="width:auto;height:350px;display:block;min-width:200px;margin:0 auto;"
                     lazy-src="{{data.nUrl}}" />
-
+                <!-- <button style="position:absolute;top:0;right:0;" ng-click=imgPreview(data)>全屏</button> -->
             </div>
             <video ng-if="data.type==1" width="100%" height="100%" controls>
                 <source ng-src="{{data.path | play_url}}">

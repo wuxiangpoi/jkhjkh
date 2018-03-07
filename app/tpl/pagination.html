@@ -4,7 +4,7 @@
             <a ng-click="selectPage(1)"><i class="iconfont icon-dingye"></i></a>
         </li>
         <li>
-            <a ng-click="selectPage(currentPage - 1)"><i class="iconfont icon-xialajiantou"></i></a>
+            <a ng-click="selectPage(currentPage - 1)"><i class="fa fa-caret-left"></i></a>
         </li>
         <li ng-repeat="page in pages" ng-class="{active: page==currentPage}">
             <a ng-click="selectPage(page)">{{page}}</a>
@@ -17,7 +17,7 @@
         </li>
         <li>
             <a class="next" ng-click="selectPage(currentPage + 1)">
-                <i class="iconfont icon-xialajiantou"></i>
+                <i class="fa fa-caret-left"></i>
             </a>
         </li>
         <li class="last">

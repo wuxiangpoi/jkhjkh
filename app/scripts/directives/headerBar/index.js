@@ -149,7 +149,11 @@ angular.module('sbAdminApp')
 					baseService.goToUrl('/dashboard/' + item.name)
 					$scope.collapseVar = 5;
 				}
-
+				$rootScope.$on('needUpdatePwd', function(e,data){
+					if(data){
+						$scope.updatePwd();
+					}
+				});
 			}
 		}
 	});

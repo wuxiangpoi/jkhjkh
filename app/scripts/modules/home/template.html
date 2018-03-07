@@ -1,4 +1,10 @@
 <div class="homePage">
+    <div class="userTip clearfix" ng-if="domainMessage && domainMessage.length > 0" ng-repeat="dm in domainMessage">
+            <span class="fl">{{dm}}</span>
+            <div ng-click="closeThisTip($event)" class="fr" style="color:#c4c4c4;cursor:pointer;">
+                <i class="fa fa-close"></i>
+            </div>
+    </div>
     <div class="row">
         <div class="col-lg-3 col-md-6 stats" ui-sref="dashboard.terminal({status:1})">
             <div class="panel">

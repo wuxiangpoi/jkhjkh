@@ -26,7 +26,7 @@ angular.module('sbAdminApp')
                     account: $scope.account,
                     password: baseService.md5_pwd($scope.password)
                 }
-                userService.login(postData, function () {
+                userService.login(postData, function (pdata) {
                     userService.getUserSrc(function (userData) {
                         $rootScope.userData = userData;
                         $rootScope.current_perms = userData.current_perms;
@@ -44,6 +44,9 @@ angular.module('sbAdminApp')
                             }), { expires: 30 });
                         }else{
                             $.cookie('user_cookie', null);
+                        }
+                        if(pdata.needUpdatePwd){
+                            $rootScope.$broadcast('needUpdatePwd', pdata.needUpdatePwd);
                         }
                     });
                 })

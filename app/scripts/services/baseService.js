@@ -295,6 +295,9 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     }
                 }, function (vm) {
                     vm.program = program;
+                    vm.programPreview = function(program){
+                        $rootScope.$broadcast('callImg', program,2);
+                    }
                 });
             });
 
@@ -307,7 +310,9 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     cb(type);
                 }
             }, function (vm) {
-
+                vm.imgPreview = function(item){
+                    $rootScope.$broadcast('callImg', item,1);
+                }
             });
 
         }

@@ -26,6 +26,13 @@
 .homePage .huge {
   font-size: 32px;
 }
+.homePage .userTip {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  color: #ff3e3e;
+  border: 1px solid #ff3e3e;
+  background: #ffffcc;
+}
 .homePage .stats .panel {
   cursor: pointer;
 }

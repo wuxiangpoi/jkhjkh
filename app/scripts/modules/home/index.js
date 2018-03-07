@@ -14,6 +14,9 @@ angular.module('sbAdminApp')
 		$scope.ter_offline = 0;
 
 		$scope.ter_error = 0;
+		$scope.closeThisTip = function (e) {
+			$(e.currentTarget).parents('.userTip').remove();
+		}
 		var map = new BMap.Map("allmap");
 		var point = new BMap.Point(113.649644,34.75661);
 

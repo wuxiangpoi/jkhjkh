@@ -13,6 +13,7 @@ angular.module('sbAdminApp')
 			$scope.currentLeaf = {};
 			$scope.currentLeaf.id = '';
 			$scope.sp.gid = '';
+			
 			$scope.callServer = function (tableState) {
 				baseService.initTable($scope, tableState, baseService.api.material + 'getMaterialList');
 			}
@@ -152,7 +153,7 @@ angular.module('sbAdminApp')
 						id: item.id
 					}, function (item) {
 						ngDialog.close();
-						baseService.alert("删除成功",'success');
+						baseService.alert("删除成功", 'success');
 						$scope.callServer($scope.tableState);
 					});
 				});
@@ -166,7 +167,7 @@ angular.module('sbAdminApp')
 							vm.uploader.queue[i].oName = $('#currentName').text();
 						}
 						vm.closeThisDialog();
-						$rootScope.$broadcast('callUploader', vm.uploader.queue);
+						$rootScope.$broadcast('callUploader', vm.uploader);
 					} else {
 						baseService.alert('请先选择文件', 'warning', true);
 					}
@@ -185,10 +186,10 @@ angular.module('sbAdminApp')
 					var uploader = vm.uploader = new FileUploader({
 						url: 'http://dmbd4.oss-cn-hangzhou.aliyuncs.com'
 					});
-					
+
 					// FILTERS
 
-					uploader.filters.push({
+					vm.uploader.filters.push({
 						name: 'customFilter',
 						fn: function fn(item /*{File|FileLikeObject}*/ , options) {
 
@@ -223,7 +224,10 @@ angular.module('sbAdminApp')
 							}
 						}
 					});
-					uploader.onBeforeUploadItem = function (item) {
+					vm.uploader.onBeforeUploadItem = function (item) {
+						if(!item.formData.length){
+							item.cancel();
+						}
 						var imgfile_type = $rootScope.getRootDicNameStrs('image_format');
 						var videofile_type = $rootScope.getRootDicNameStrs('video_format');
 						var host = '';
@@ -246,27 +250,29 @@ angular.module('sbAdminApp')
 							callbackbody = obj['callback']
 							key = obj['key']
 							token = obj['token']
+							//	$scope.uploader.url=host;
+							var filename = item.file.name;
+							if (item.file['desc']) {
+								filename = item.file.desc;
+							}
+							var new_multipart_params = {
+								'key': (key + item.file.name.substr(item.file.name.indexOf('.'))),
+								'policy': policyBase64,
+								'OSSAccessKeyId': accessid,
+								'success_action_status': '200', //让服务端返回200,不然，默认会返回204
+								'callback': callbackbody,
+								'signature': signature,
+								'x:fname': filename,
+								'x:type': videofile_type.split(',').indexOf(item.file.type.split('/')[1]) == -1 ? 0 : 1,
+								'x:gid': item.oid,
+								'x:opt': 0,
+								'x:token': token
+							};
+							item.formData = [new_multipart_params]; //上传前，添加描述文本
+							item.upload();
 						});
-		
-						//	$scope.uploader.url=host;
-						var filename = item.file.name;
-						if (item.file['desc']) {
-							filename = item.file.desc;
-						}
-						var new_multipart_params = {
-							'key': (key + item.file.name.substr(item.file.name.indexOf('.'))),
-							'policy': policyBase64,
-							'OSSAccessKeyId': accessid,
-							'success_action_status': '200', //让服务端返回200,不然，默认会返回204
-							'callback': callbackbody,
-							'signature': signature,
-							'x:fname': filename,
-							'x:type': videofile_type.split(',').indexOf(item.file.type.split('/')[1]) == -1 ? 0 : 1,
-							'x:gid': item.oid,
-							'x:opt': 0,
-							'x:token': token
-						};
-						item.formData = [new_multipart_params]; //上传前，添加描述文本
+
+
 					}
 				});
 			};

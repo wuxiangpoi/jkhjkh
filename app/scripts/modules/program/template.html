@@ -110,7 +110,12 @@
                         {{row.name}}
                     </td>
                     <td>{{row.size | dmbdResourceSizeFilter}}</td>
-                    <td>{{row.status | programStatusTxt}}</td>
+                    <td>
+                            <div ng-if="row.status == 0 || row.status == 2 || row.status == 3 || row.status == 6">{{row.status | programStatusTxt}}</div>
+                            <div class="txt-green" ng-if="row.status == 1">{{row.status | programStatusTxt}}</div>
+                            <div class="txt-grey" ng-if="row.status == 4 || row.status == 5 || row.status == 7">{{row.status | programStatusTxt}}</div>
+                        
+                    </td>
 
                     <td>
                         {{row.createTime | formateTime}}

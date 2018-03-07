@@ -1,0 +1,14 @@
+<div class="image-view" ng-if="imgPreview">
+    <div class="imgWrap" ng-if="data.imgType == 1">
+        <span>
+            <img ng-style="imgStyle" ng-src="{{data.path}}" />
+        </span>
+    </div>
+    <div>
+        <dmbd-program-preview2 ng-if="data && data.imgType == 2" program-pixel-horizontal="data.pixelHorizontal" program-pixel-vertical="data.pixelVertical"
+            program-pages="data.pages" size="size" style="margin:0 auto;"></dmbd-program-preview2>
+    </div>
+    <a class="closePreview" ng-click="close()">
+        <i></i>
+    </a>
+</div>

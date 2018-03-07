@@ -24,10 +24,9 @@ angular.module('sbAdminApp')
                         } else {
                             $scope.isShowMessage = true;
                         }
-
                         break;
                     case 2:
-                        if ($scope.psdForm.$valid) {
+                        if ($scope.psd_form.$valid && postData.newPassword == postData.reNewPassword) {
                             baseService.postData(baseService.api.apiUrl + '/client/user/resetAdminPasswordByEmail', {
                                 email: $scope.data.email,
                                 code: $scope.data.yanz,

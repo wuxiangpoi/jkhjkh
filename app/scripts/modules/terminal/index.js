@@ -222,10 +222,6 @@ angular.module('sbAdminApp')
 								vm.isShowMessage = true;
 							}
 						}, function (vm) {
-							vm.start_h = 0;
-							vm.start_m = 0;
-							vm.end_h = 24;
-							vm.end_m = 0;
 							vm.selectH = [];
 							vm.selectM = [];
 							for (var i = 0; i < 25; i++) {
@@ -241,11 +237,11 @@ angular.module('sbAdminApp')
 								})
 							}
 							vm.checkTime = function () {
-								if (vm.start_h == 24) {
-									vm.start_m = 0;
+								if (vm.data.start_h == 24) {
+									vm.data.start_m = 0;
 								}
-								if (vm.end_h == 24) {
-									vm.end_m = 0;
+								if (vm.data.end_h == 24) {
+									vm.data.end_m = 0;
 								}
 
 							}
