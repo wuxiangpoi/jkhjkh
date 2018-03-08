@@ -127,6 +127,7 @@ angular.module('sbAdminApp')
 			$scope.save = function (item) {
 				var modalData = {
 					name: item.name,
+					no: item.no,
 					id: item.id,
 					city_no: item.city_no,
 					remark: item.remark,
