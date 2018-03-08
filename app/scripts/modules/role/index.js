@@ -100,7 +100,9 @@ angular.module('sbAdminApp', [])
                 }
 
             }, function (vm) {
-                vm.fids = item ? item.fids.split(',') : [];
+                if(!vm.fids){
+                    vm.fids = item ? item.fids.split(',') : [];
+                }
                 vm.checkPerms = function () {
                     getPerms(function () {
                         baseService.confirmDialog(540, '权限设置', {
@@ -124,7 +126,7 @@ angular.module('sbAdminApp', [])
                                 isSort: false,
                                 isSet: false,
                                 isCheck: true,
-                                selectedNodes: item ? item.fids.split(',') : []
+                                selectedNodes: vm.fids
                             }
                         })
                     })

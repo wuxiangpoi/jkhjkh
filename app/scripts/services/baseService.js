@@ -237,7 +237,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
         goToUrl: function (path) {
             $location.path(path);
         },
-        initTable: function ($scope, tableState, url) {
+        initTable: function ($scope, tableState, url,cb) {
             $scope.isLoading = true;
             $scope.tableState = tableState;
             var pagination = tableState.pagination;
@@ -250,6 +250,9 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 tableState.pagination.number = num;
                 tableState.pagination.numberOfPages = Math.ceil(result.recordsTotal / num);
                 $scope.isLoading = false;
+                if(cb){
+                    cb(result);
+                }
             })
         },
         checkAll: function ($event, vm) {
