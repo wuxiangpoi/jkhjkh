@@ -45,8 +45,8 @@
                         {{getRootDicName('terminal_cmd', row.cmdCode)}}
                     </td>
                     <td>
-                        <div class="txt-green" ng-if="row.status == 1">下发成功</div>
-                        <div class="txt-grey" ng-if="row.status == 2">下发失败</div>
+                        <div ng-if="row.status == 1">下发成功</div>
+                        <div class="tex-red" ng-if="row.status == 2">下发失败</div>
                         <div ng-if="row.status == 0">正在下发</div>
                     </td>
                     <td>
