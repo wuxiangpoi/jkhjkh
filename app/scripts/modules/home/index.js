@@ -29,7 +29,6 @@ angular.module('sbAdminApp')
 				var terArray = $scope.ters[i];
 				var tPoint = new BMap.Point(i.split(',')[0], i.split(',')[1]);
 				var marker = new BMap.Marker(tPoint); // 创建标注
-				map.addOverlay(marker); // 将标注添加到地图中
 				var content = [];
 				content.push("<h5 style='margin:5px 0;'>地址：" + terArray[0].addr + "</h5>");
 				var opts = {
@@ -62,7 +61,8 @@ angular.module('sbAdminApp')
 						$scope.ter_noAct = $scope.ter_noAct + 1;
 
 					} else if (ter.status == 1) {
-						content.push("<div>状态：正常</div>");
+						content.push("<div>状态：在线</div>");
+						// marker = new BMap.Marker(tPoint,{icon:new BMap.Icon("img/marker_blue_sprite.png", new BMap.Size(39,25))});
 						$scope.ter_ok = $scope.ter_ok + 1;
 					} else if (ter.status == 2) {
 						content.push("<div>状态：离线</div>");
@@ -73,6 +73,7 @@ angular.module('sbAdminApp')
 
 					}
 					content.push('</div>')
+					map.addOverlay(marker); // 将标注添加到地图中
 					addClickHandler(content.join(''), marker);
 				}
 

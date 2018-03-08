@@ -48,30 +48,35 @@ leafService.factory('leafService', ['baseService', function (baseService) {
                 leafes: leafes,
                 isSet: true
             };
-            baseService.confirmDialog(450, '设置分组', modalData, 'tpl/set_leafes.html', function (ngDialog, vm) {
-                var gids = '';
-                var boxes = $("input[name='ckLeafes']");
-                boxes.each(function () {
-                    if (this.checked) {
-                        gids += "," + $(this).attr('value');
+            if(leafes.length){
+                baseService.confirmDialog(450, '设置分组', modalData, 'tpl/set_leafes.html', function (ngDialog, vm) {
+                    var gids = '';
+                    var boxes = $("input[name='ckLeafes']");
+                    boxes.each(function () {
+                        if (this.checked) {
+                            gids += "," + $(this).attr('value');
+                        }
+    
+                    });
+                    if (!gids) {
+                        baseService.alert('请选择分组', 'warning', true);
+                        return;
                     }
-
-                });
-                if (!gids) {
-                    baseService.alert('请选择分组', 'warning', true);
-                    return;
-                }
-                vm.isPosting = true;
-                baseService.postData(url, {
-                    set: 1,
-                    oid: oid,
-                    gids: gids,
-                    rids: rids
-                }, function () {
-                    ngDialog.close();
-                    cb();
+                    vm.isPosting = true;
+                    baseService.postData(url, {
+                        set: 1,
+                        oid: oid,
+                        gids: gids,
+                        rids: rids
+                    }, function () {
+                        ngDialog.close();
+                        cb();
+                    })
                 })
-            })
+            }else{
+                baseService.alert('请先添加分组','warning');
+            }
+            
         },
         cancelLeaf: function(url,rids,currentLeaf,cb){
             var modalData = {
