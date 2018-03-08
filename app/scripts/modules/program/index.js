@@ -115,7 +115,6 @@ angular.module('sbAdminApp')
 				baseService.showProgram(item);
 			}
 			$scope.sendCommandStopProgram = function (item) {
-				item.info = '(仅显示登录账号权限范围内的终端)';
 				baseService.confirmDialog(720, '播放管理', item, "tpl/terminal_list_modal.html", function (ngDialog, vm) {
 					var s = vm.ids.join(',');
 					if (s.length) {

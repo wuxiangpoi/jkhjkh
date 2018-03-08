@@ -304,7 +304,6 @@ angular.module('sbAdminApp')
 			}
 
 			$scope.showPrograms = function (item) {
-				item.info = '(仅显示登录账号权限范围内的节目)';
 				baseService.confirmDialog(720, '播放管理', item, 'tpl/terminal_programPlay_list.html', function (ngDialog, vm) {
 					var s = '';
 					s = vm.ids.join(',');
