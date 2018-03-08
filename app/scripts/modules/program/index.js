@@ -163,6 +163,7 @@ angular.module('sbAdminApp')
 						baseService.checkAll($event, vm);
 					}
 					vm.checkThis = function (item, $event) {
+						item.id = item.tid;
 						baseService.checkThis(item, $event, vm);
 					}
 

@@ -334,6 +334,7 @@ angular.module('sbAdminApp')
 						baseService.checkAll($event, vm);
 					}
 					vm.checkThis = function (item, $event) {
+						item.id = item.pid;
 						baseService.checkThis(item, $event, vm);
 					}
 					vm.showPlay = function (item) {
