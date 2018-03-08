@@ -62,14 +62,16 @@ angular.module('sbAdminApp')
 
 					} else if (ter.status == 1) {
 						content.push("<div>状态：在线</div>");
-						// marker = new BMap.Marker(tPoint,{icon:new BMap.Icon("img/marker_blue_sprite.png", new BMap.Size(39,25))});
+						marker = new BMap.Marker(tPoint,{icon:new BMap.Icon("img/zaixian.png", new BMap.Size(20,25))});
 						$scope.ter_ok = $scope.ter_ok + 1;
 					} else if (ter.status == 2) {
 						content.push("<div>状态：离线</div>");
 						$scope.ter_offline = $scope.ter_offline + 1;
+						marker = new BMap.Marker(tPoint,{icon:new BMap.Icon("img/lixian.png", new BMap.Size(20,25))});						
 					} else if (ter.status == 3) {
 						content.push("<div>状态：异常</div>");
 						$scope.ter_error = $scope.ter_error + 1;
+						marker = new BMap.Marker(tPoint,{icon:new BMap.Icon("img/yichang.png", new BMap.Size(20,25))});						
 
 					}
 					content.push('</div>')
