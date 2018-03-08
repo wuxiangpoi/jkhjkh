@@ -227,6 +227,11 @@ angular.module('sbAdminApp')
 							}
 						}
 					});
+
+					vm.uploader.onAfterAddingFile = function(fileItem) {
+						fileItem.file.desc = fileItem.file.name;
+					};
+
 					vm.uploader.onBeforeUploadItem = function (item) {
 						if(!item.formData.length){
 							item.cancel();
