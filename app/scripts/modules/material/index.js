@@ -222,14 +222,16 @@ angular.module('sbAdminApp')
 									}
 								}
 							} else {
-								baseService.alert('上传的文件格式平台暂时不支持，目前支持的图片格式是:' + imgfile_type + '目前支持的图片格式是:' + videofile_type, 'warning', true);
+								baseService.confirmAlert('提示', '上传的文件格式平台暂时不支持，目前支持的图片格式是:' + imgfile_type + '，目前支持的视频格式是:' + videofile_type, 'warning');
 								return false;
 							}
 						}
 					});
 
 					vm.uploader.onAfterAddingFile = function(fileItem) {
-						fileItem.file.desc = fileItem.file.name;
+						var fileName = fileItem.file.name.split('.');
+						fileName.pop();
+						fileItem.file.desc = fileName.join(',');
 					};
 
 					vm.uploader.onBeforeUploadItem = function (item) {

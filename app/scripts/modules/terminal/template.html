@@ -61,7 +61,7 @@
 		</div>
 		<div class="serchWrap fr">
 			<div class="fl txtInputWrap">
-				<input class="form-control" ng-model="sp.search" placeholder="终端名称/终端编号">
+				<input class="form-control" ng-keyup="myKeyup($event,callServer,tableState)" ng-model="sp.search" placeholder="终端名称/终端编号">
 			</div>
 			<button type="button" class="btn btn-primary" ng-click="callServer(tableState)">查询</button>
 			<button type="button" class="btn btn-primary" ng-click="exportExcel()">导出</button>

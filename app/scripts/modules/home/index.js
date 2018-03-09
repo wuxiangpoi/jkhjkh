@@ -19,9 +19,12 @@ angular.module('sbAdminApp')
 		}
 		var map = new BMap.Map("allmap");
 		var point = new BMap.Point(113.649644,34.75661);
-
-		map.centerAndZoom(point, 6);
+		var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+		var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+		map.centerAndZoom(point, 5);
 		map.enableScrollWheelZoom(true);
+		map.addControl(top_left_control);        
+		map.addControl(top_left_navigation);
 		baseService.getJson(baseService.api.terminal + 'getAllTerminalInfoForMap', {}, function (data) {
 			$scope.ters = data;
 

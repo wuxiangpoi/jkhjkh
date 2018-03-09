@@ -11,7 +11,7 @@
                     </div>
                     <div class="serchWrap fr">
                         <div class="fl txtInputWrap">
-                            <input class="form-control" ng-model="sp.search" placeholder="素材名称">
+                            <input class="form-control" ng-keyup="myKeyup($event,callServer,tableState)" ng-model="sp.search" placeholder="素材名称">
                         </div>
                         <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
                     </div>

@@ -30,6 +30,7 @@ angular.module('sbAdminApp')
                     userService.getUserSrc(function (userData) {
                         $rootScope.userData = userData;
                         $rootScope.current_perms = userData.current_perms;
+                        $rootScope.rootGroup = userData.root_organizations[0];
                         for (var i = 0; i < userData.root_organizations.length; i++) {
                             if (userData.root_organizations[i].pid == '') {
                                 $rootScope.rootGroup = userData.root_organizations[i];
@@ -54,5 +55,11 @@ angular.module('sbAdminApp')
                 $scope.isShowMessage = true;
             }
         }
+        $scope.myKeyup = function(e){
+            var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+                $scope.login();
+            }
+        };
     });
 // JavaScript Document

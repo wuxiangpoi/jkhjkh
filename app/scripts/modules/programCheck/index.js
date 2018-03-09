@@ -6,7 +6,7 @@ angular.module('sbAdminApp')
             $scope.sp = {};
             $scope.tableState = {};
             $scope.callServer = function (tableState) {
-                baseService.initTable($scope, tableState, baseService.api.program + 'getProgramCheckList',function(data){
+                baseService.initTable($scope, tableState, baseService.api.program + 'getCheckProgramList',function(data){
                     $rootScope.programCheckCounts = data.recordsTotal;
                 });
             }

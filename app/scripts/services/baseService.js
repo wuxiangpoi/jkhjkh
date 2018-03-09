@@ -1,7 +1,7 @@
 var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
-    var apiUrl = 'http://47.92.116.16:9090';
-    var verson = '?_v1.8';
+    var apiUrl = '';
+    var verson = '?_v1.9';
     var baseService = {
         verson: verson,
         api: {
@@ -124,13 +124,13 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     $scope.tInfo = tInfo;
                     $scope.link = link;
                     $scope.modalConfirmSubmit = function () {
-                        ngDialog.close();
+                        $scope.closeThisDialog();
                         if (cb) {
                             cb();
                         }
                     }
                     $scope.cancel = function () {
-                        ngDialog.close();
+                        $scope.closeThisDialog();
                     }
 
                 }],

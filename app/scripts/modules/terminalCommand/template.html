@@ -12,10 +12,10 @@
             </div>
             <div class="serchWrap fr">
                 <div class="fl txtInputWrap">
-                    <input class="form-control" ng-model="sp.user" placeholder="用户账号/名称">
+                    <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.user" placeholder="用户账号/名称">
                 </div>
                 <div class="fl txtInputWrap">
-                    <input class="form-control" ng-model="sp.terminal" placeholder="终端编号/名称">
+                    <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.terminal" placeholder="终端编号/名称">
                 </div>
                 <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
             </div>

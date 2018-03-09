@@ -36,12 +36,14 @@ var app = angular.module('sbAdminApp', [
                     userService.getUserSrc(function (userData) {
                         $rootScope.userData = userData;
                         $rootScope.current_perms = userData.current_perms;
+                        $rootScope.rootGroup = userData.root_organizations[0];
                         for (var i = 0; i < userData.root_organizations.length; i++) {
                             if (userData.root_organizations[i].pid == '') {
                                 $rootScope.rootGroup = userData.root_organizations[i];
                             }
                         }
-                        $state.go(toState.name,toParams);
+
+                        $state.go(toState.name, toParams);
                     });
                 }
             }
@@ -69,11 +71,11 @@ var app = angular.module('sbAdminApp', [
         $rootScope.getCityName = function (cno) {
             for (var i in $rootScope.userData.root_citys) {
                 if ($rootScope.userData.root_citys.hasOwnProperty(i)) {
-    
+
                     if (cno == $rootScope.userData.root_citys[i].key) {
                         return $rootScope.userData.root_citys[i].value;
                     }
-    
+
                 }
             }
         }
@@ -94,10 +96,16 @@ var app = angular.module('sbAdminApp', [
             if (s) {
                 s = s.substr(1);
             }
-    
+
             return s;
-            
+
         }
+        $rootScope.myKeyup = function(e,click,params){
+            var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+                click(params);
+            }
+        };
     })
     .config(['$urlRouterProvider', '$locationProvider',
         function ($urlRouterProvider, $locationProvider) {
