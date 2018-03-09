@@ -1,7 +1,7 @@
 var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
     var apiUrl = 'http://47.92.116.16:9090';
-    var verson = '?_v1.7';
+    var verson = '?_v1.8';
     var baseService = {
         verson: verson,
         api: {
@@ -237,7 +237,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
         goToUrl: function (path) {
             $location.path(path);
         },
-        initTable: function ($scope, tableState, url,cb) {
+        initTable: function ($scope, tableState, url, cb) {
             $scope.isLoading = true;
             $scope.tableState = tableState;
             var pagination = tableState.pagination;
@@ -248,10 +248,10 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 $scope.displayed = result.data;
                 num = num || $rootScope.paginationNumber[0];
                 tableState.pagination.number = num;
-                tableState.pagination.totalItemCount = result.recordsTotal;                
+                tableState.pagination.totalItemCount = result.recordsTotal;
                 tableState.pagination.numberOfPages = Math.ceil(result.recordsTotal / num);
                 $scope.isLoading = false;
-                if(cb){
+                if (cb) {
                     cb(result);
                 }
             })
@@ -293,14 +293,14 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 program.approveUid = item.approveUid;
                 program.approveUidFinal = item.approveUidFinal;
                 program.detailType = detailType;
-                me.confirmDialog(750, '节目预览', program, "tpl/program_details.html", function (type,ngDialog, vm) {
+                me.confirmDialog(750, '节目预览', program, "tpl/program_details.html", function (type, ngDialog, vm) {
                     if (cb) {
                         cb(type);
                     }
                 }, function (vm) {
                     vm.program = program;
-                    vm.programPreview = function(program){
-                        $rootScope.$broadcast('callImg', program,2);
+                    vm.programPreview = function (program) {
+                        $rootScope.$broadcast('callImg', program, 2);
                     }
                 });
             });
@@ -314,8 +314,8 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     cb(type);
                 }
             }, function (vm) {
-                vm.imgPreview = function(item){
-                    $rootScope.$broadcast('callImg', item,1);
+                vm.imgPreview = function (item) {
+                    $rootScope.$broadcast('callImg', item, 1);
                 }
             });
 

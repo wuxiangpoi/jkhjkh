@@ -1,7 +1,7 @@
 <div class="image-view" ng-if="imgPreview">
     <div class="imgWrap" ng-if="data.imgType == 1">
         <span>
-            <img ng-style="imgStyle" ng-src="{{data.path}}" />
+            <img ng-style="imgStyle" src="img/loading.gif" lazy-src="{{data.path}}" />
         </span>
     </div>
     <div>

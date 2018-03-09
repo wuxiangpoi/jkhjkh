@@ -15,7 +15,7 @@ angular.module('sbAdminApp')
 			$scope.currentLeaf.id = '';
 			$scope.sp.gid = '';
 			$scope.init_status = $stateParams.status;
-			if($stateParams.status){
+			if ($stateParams.status) {
 				$scope.sp.status = $stateParams.status;
 			}
 			$scope.callServer = function (tableState) {
@@ -333,11 +333,22 @@ angular.module('sbAdminApp')
 						baseService.initTable(vm, tableState, baseService.api.terminal + 'getTerminalProgramPlayPageByTid');
 					}
 					vm.checkAll = function ($event) {
-						baseService.checkAll($event, vm);
+						vm.ids = [];
+						if ($($event.currentTarget).is(':checked')) {
+							for (var i = 0; i < vm.displayed.length; i++) {
+								vm.ids.push(vm.displayed[i].pid)
+							}
+						} else {
+							vm.ids = [];
+						}
 					}
 					vm.checkThis = function (item, $event) {
-						item.id = item.pid;
-						baseService.checkThis(item, $event, vm);
+						if ($($event.currentTarget).is(':checked')) {
+							vm.ids.push(item.pid);
+
+						} else {
+							vm.ids = baseService.removeAry(vm.ids, item.pid);
+						}
 					}
 					vm.showPlay = function (item) {
 						baseService.showProgram(item);

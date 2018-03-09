@@ -159,11 +159,22 @@ angular.module('sbAdminApp')
 
 					});
 					vm.checkAll = function ($event) {
-						baseService.checkAll($event, vm);
+						vm.ids = [];
+						if ($($event.currentTarget).is(':checked')) {
+							for (var i = 0; i < vm.displayed.length; i++) {
+								vm.ids.push(vm.displayed[i].tid)
+							}
+						} else {
+							vm.ids = [];
+						}
 					}
 					vm.checkThis = function (item, $event) {
-						item.id = item.tid;
-						baseService.checkThis(item, $event, vm);
+						if ($($event.currentTarget).is(':checked')) {
+							vm.ids.push(item.tid);
+
+						} else {
+							vm.ids = baseService.removeAry(vm.ids, item.tid);
+						}
 					}
 
 				})
