@@ -6,7 +6,7 @@
                 <select ng-init="10" ng-options="p for p in paginationNumber" ng-model="sp.length" ng-change="callServer(tableState)">
                 </select>
             </span>
-            条
+            条 共{{tableState.pagination.totalItemCount}}条
         </div>
         <div class="fr" st-pagination="" st-template="tpl/pagination.html" st-items-by-page="sp.length"></div>
     </td>

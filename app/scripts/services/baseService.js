@@ -1,7 +1,7 @@
 var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
     var apiUrl = 'http://47.92.116.16:9090';
-    var verson = '?_v1.56';
+    var verson = '?_v1.7';
     var baseService = {
         verson: verson,
         api: {
@@ -248,6 +248,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 $scope.displayed = result.data;
                 num = num || $rootScope.paginationNumber[0];
                 tableState.pagination.number = num;
+                tableState.pagination.totalItemCount = result.recordsTotal;                
                 tableState.pagination.numberOfPages = Math.ceil(result.recordsTotal / num);
                 $scope.isLoading = false;
                 if(cb){
