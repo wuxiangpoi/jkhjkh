@@ -14,7 +14,7 @@
 		<table class="table" st-pipe="callServer" st-table="displayed">
 			<thead>
 				<tr>
-					<th>
+					<th class="checkBoxTable">
 						<input ng-checked="ids.length == displayed.length && displayed.length != 0" ng-click="checkAll($event)" type="checkbox">
 					</th>
 					<th>节目名称</th>
@@ -26,7 +26,7 @@
 			</thead>
 			<tbody ng-show="!isLoading">
 				<tr ng-repeat="row in displayed" class="{{$index%2 == 0?'odd':'even'}}">
-					<td>
+					<td class="checkBoxTable">
 						<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.pid) != -1" type="checkbox">
 					</td>
 					<td class="tdClick" ng-click="showPlay(row)">{{row.name}}</td>

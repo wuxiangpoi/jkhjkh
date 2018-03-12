@@ -657,6 +657,11 @@ div.timeSelectWrap {
   padding: 0 8px!important;
   line-height: 38px!important;
 }
+.table-wrapper th.checkBoxTable,
+.table-wrapper td.checkBoxTable {
+  width: 30px;
+  padding-right: 0!important;
+}
 .table-wrapper th input[type="checkbox"],
 .table-wrapper td input[type="checkbox"] {
   width: 18px;
