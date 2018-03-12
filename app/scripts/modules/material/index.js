@@ -78,7 +78,7 @@ angular.module('sbAdminApp')
 				var oVal = editInput.val();
 				parent.addClass('edit');
 				editInput.focus();
-				editInput.blur(function () {
+				function edit() {
 					var nVal = editInput.val();
 					if (nVal == '' || nVal == oVal) {
 						editInput.val(oVal);
@@ -91,15 +91,24 @@ angular.module('sbAdminApp')
 						}, function () {
 							parent.removeClass('edit');
 							$scope.getGroups($scope.currentGroup.id);
-							baseService.alert('修改成功', 'success', true);
 						}, function () {
 							leafName.text(oVal);
 							editInput.val(oVal);
 							parent.removeClass('edit');
 						})
 					}
+				}
+				editInput.blur(function () {
+					edit();
 				})
-
+				editInput.bind("keydown", function (e) {
+					// 兼容FF和IE和Opera    
+					var theEvent = e || window.event;
+					var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+					if (code == 13) {
+						edit();
+					}
+				});
 			}
 			$scope.delLeaf = function (item) {
 				leafService.delLeaf(baseService.api.material + 'optGroupDel', item, function () {

@@ -1,7 +1,7 @@
 var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
-    var apiUrl = '';
-    var verson = '?_v1.9';
+    var apiUrl = 'http://47.92.116.16:9090';
+    var verson = '?_v1.8';
     var baseService = {
         verson: verson,
         api: {
@@ -21,7 +21,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             organization: apiUrl + '/api/organization/',
             terminalReport: apiUrl + '/api/terminalReport/',
             installUser: apiUrl + '/api/installUser/',
-            schedule: apiUrl + '/client/schedule/'
+            schedule: apiUrl + '/api/schedule/'
         },
         md5_pwd: function (pwd) {
             var hexDigits = ['0', '1', '2', '3', '4', '5', '6', '7',
