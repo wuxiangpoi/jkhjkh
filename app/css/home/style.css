@@ -25,7 +25,6 @@
   padding: 90px 20px 128px 270px;
 }
 .homePage .huge {
-  text-align: right;
   font-size: 32px;
 }
 .homePage .userTip {
@@ -37,6 +36,9 @@
 }
 .homePage .stats .panel {
   cursor: pointer;
+}
+.homePage .stats .panel .panel-heading {
+  padding: 10px 0;
 }
 .homePage .stats .panel .iconfont {
   font-size: 64px;
