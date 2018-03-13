@@ -190,7 +190,6 @@ angular.module('sbAdminApp')
 				})
 			}
 			$scope.sendDown = function (item) {
-				item.info = '(请选择与节目分辨率一致的终端下发，以免节目播放变形)'
 				baseService.confirmDialog(820, '发布', item, "tpl/terminal_list_set_modal.html", function (ngDialog, vm) {
 					var s = vm.ids.join(',');
 					if (s.length) {

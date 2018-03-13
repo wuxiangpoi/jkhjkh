@@ -108,7 +108,6 @@ controller('groupCtrl', function ($scope, $rootScope, baseService) {
                 name: treeNode.name
             }, function (res) {
                 $scope.root_organizations = $rootScope.userData.root_organizations = res;
-                baseService.alert('修改成功', 'success', true);
             }, function (msg) {
                 treeNode.name = oVal;
                 zTree.editName(treeNode);
