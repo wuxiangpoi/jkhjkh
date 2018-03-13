@@ -96,8 +96,8 @@ angular.module('sbAdminApp')
 					$rootScope.domainMessage = data.domainMessage;
 				})
 				$scope.updatePwd = function () {
-					baseService.confirmDialog(540, '修改密码', postData, 'tpl/update_password.html', function (ngDialog, vm) {
-						if (vm.modalForm.$valid && postData.newPassword == postData.reNewPassword) {
+					baseService.confirmDialog(540, '修改密码', {}, 'tpl/update_password.html', function (ngDialog, vm) {
+						if (vm.modalForm.$valid && vm.data.newPassword == vm.data.reNewPassword) {
 							var updpostData = {
 								password: baseService.md5_pwd(vm.data.password),
 								newPassword: baseService.md5_pwd(vm.data.newPassword),

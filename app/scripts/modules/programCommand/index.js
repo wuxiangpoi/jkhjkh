@@ -9,6 +9,7 @@ angular.module('sbAdminApp')
                 baseService.initTable($scope, tableState, baseService.api.programCmd + 'getProgramCmdPageList');
             }
             $scope.showProgram = function (item) {
+                item.pStatus = 1;
                 baseService.showProgram(item);
             }
             

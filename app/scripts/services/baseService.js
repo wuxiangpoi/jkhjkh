@@ -92,6 +92,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             ngDialog.open({
                 template: 'tpl/alert.html' + verson,
                 closeByEscape: false,
+                appendClassName: 'no-overlay',
                 controller: ['$scope', function ($scope) {
                     $scope.type = type;
                     $scope.info = info;
@@ -289,7 +290,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             var me = this;
             programService.getProgramById(item.pid, function (program) {
                 program.creator = item.creator;
-                program.status = item.status;
+                program.status = item.pStatus?item.pStatus:item.status;
                 program.approveUid = item.approveUid;
                 program.approveUidFinal = item.approveUidFinal;
                 program.detailType = detailType;

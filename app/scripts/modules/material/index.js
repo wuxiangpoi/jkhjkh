@@ -122,7 +122,7 @@ angular.module('sbAdminApp')
 
 			}
 			$scope.showMaterial = function (item) {
-				baseService.showMaterial(item, 2);
+				baseService.showMaterial(item, 1);
 			}
 			$scope.submitCheck = function (item) {
 				baseService.confirm('提交审核', '是否提交审核？', function (ngDialog, vm) {

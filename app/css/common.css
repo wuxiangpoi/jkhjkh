@@ -1380,6 +1380,12 @@ div.timeSelectWrap {
   white-space: nowrap;
   display: none;
 }
+.ngdialog.no-overlay {
+  background: none;
+}
+.ngdialog.no-overlay .ngdialog-overlay {
+  display: none;
+}
 .ngdialog-content .modal-header {
   padding: 0 0 15px 0;
 }

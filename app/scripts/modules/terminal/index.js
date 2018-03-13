@@ -153,7 +153,7 @@ angular.module('sbAdminApp')
 							name: vm.data.name,
 							id: vm.data.id,
 							city_no: vm.data.city_no,
-							remark: vm.data.remark,
+							remark: vm.data.remark?vm.data.remark:'',
 							cityName: '',
 							addr: vm.data.addr
 						}
