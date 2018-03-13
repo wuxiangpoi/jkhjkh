@@ -150,6 +150,19 @@
     background: url("../assets/default_video_icon.png") no-repeat scroll center center / 100% 100% border-box border-box;
 }
 
+.qmedia-editor-page .type-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 10em;
+    color: #b9d9f6;
+}
+
 /* 拖动部分样式 */
 .qmedia-editor-page .editor-element-dragger {
     /*position: absolute;*/

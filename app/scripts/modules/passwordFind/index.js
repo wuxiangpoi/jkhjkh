@@ -26,11 +26,11 @@ angular.module('sbAdminApp')
                         }
                         break;
                     case 2:
-                        if ($scope.psd_form.$valid && postData.newPassword == postData.reNewPassword) {
+                        if ($scope.psd_form.$valid && $scope.data.newPassword == $scope.data.newPassword1) {
                             baseService.postData(baseService.api.apiUrl + '/client/user/resetAdminPasswordByEmail', {
                                 email: $scope.data.email,
                                 code: $scope.data.yanz,
-                                newPassword: $rootScope.md5_pwd($scope.data.newPassword)
+                                newPassword: baseService.md5_pwd($scope.data.newPassword)
                             }, function () {
                                 $scope.step += 1;
                             })

@@ -1298,4 +1298,81 @@
         };
     });
 
+
+    //流媒体属性编辑
+    app.directive('editorFormStreamMedia', function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            templateUrl: currentScriptFolder + 'editorFormStreamMedia.html',
+            scope: {
+                data: '=',
+                commit: '&'
+            },
+            controller: ['$scope', function ($scope) {
+
+                var watcher = $scope.$watch('data.url', function (newVal) {
+                    $scope.url = newVal;
+                });
+
+                //销毁时移除事件
+                $scope.$on('$destroy', function () {
+                    watcher();//清除监视
+                });
+
+                $scope.onBlur = function (url) {
+                    var data = $scope.data;
+                    var oldUrl = data.url;
+                    $scope.commit({
+                        undo: function () {
+                            data.url = oldUrl;
+                            $scope.url = oldUrl;
+                        },
+                        redo: function () {
+                            data.url = url;
+                            $scope.url = url;
+                        }
+                    });
+                };
+
+
+                (function () {
+
+                    function isWin64() {
+                        var agent = navigator.userAgent.toLowerCase();
+                        return (agent.indexOf("win64") >= 0 || agent.indexOf("wow64") >= 0)
+                    }
+
+                    function isWindows() {
+                        var platform = navigator.platform;
+                        return (platform === "Win32")
+                            || (platform === "Windows");
+                    }
+
+                    function isMacOS() {
+                        var platform = navigator.platform;
+                        return (platform === "Mac68K")
+                            || (platform === "MacPPC")
+                            || (platform === "Macintosh")
+                            || (platform === "MacIntel");
+                    }
+
+                    if (isWindows()) {
+                        if (isWin64()) {
+                            $scope.downloadurl = 'http://cdn-public.q-media.cn/vlc_x64.zip';
+                        } else {
+                            $scope.downloadurl = 'http://cdn-public.q-media.cn/vlc_x86.zip';
+                        }
+                    } else if (isMacOS()) {
+                        $scope.downloadurl = 'http://cdn-public.q-media.cn/vlc.dmg';
+                    } else {
+                        $scope.downloadurl = '';
+                    }
+
+                })();
+
+            }]
+        };
+    });
+
 })(angular.module('qmedia.editor'));

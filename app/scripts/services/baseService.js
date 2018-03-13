@@ -1,7 +1,7 @@
 var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
     var apiUrl = 'http://47.92.116.16:9090';
-    var verson = '?_v2.04';
+    var verson = '?_v2.010';
     var baseService = {
         verson: verson,
         api: {
@@ -49,7 +49,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     $scope.info = info
                     $scope.title = title
                     $scope.modalConfirmSubmit = function () {
-                        cb(ngDialog, $scope)
+                        cb(ngDialog, $scope);
                     }
                     $scope.cancel = function () {
                         $scope.closeThisDialog();
@@ -69,7 +69,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     $scope.data = data
                     $scope.title = title
                     if (beforeOpen) {
-                        beforeOpen($scope)
+                        beforeOpen($scope);
                     }
 
                     $scope.modalConfirmSubmit = function (type) {
@@ -81,7 +81,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
 
                     }
                     $scope.cancel = function () {
-                        $scope.closeThisDialog()
+                        $scope.closeThisDialog();
                     }
 
                 }],
@@ -98,14 +98,14 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     $scope.info = info;
                     if (disappear) {
                         setTimeout(function () {
-                            $scope.closeThisDialog()
+                            $scope.closeThisDialog();
                             if (cb) {
-                                cb()
+                                cb();
                             }
                         }, 1000)
                     } else {
                         setTimeout(function () {
-                            ngDialog.close()
+                            ngDialog.close();
                         }, 1000)
                     }
 

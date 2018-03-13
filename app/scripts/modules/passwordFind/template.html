@@ -33,7 +33,7 @@
             <div class="find-form">
                 <div class="row" ng-show="step == 1">
                     <form id="mailForm" name="mailForm" novalidate>
-                        <label class="col-sm-12">关联邮箱{{data.email}}</label>
+                        <label class="col-sm-12">关联邮箱</label>
                         <div class="col-sm-12">
                             <input type="text" required ng-pattern="/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/" class="form-control" name="email"
                                 ng-model="data.email" />
@@ -70,8 +70,8 @@
                         </div>
                         <label class="col-sm-12">确认密码</label>
                         <div class="col-sm-12">
-                            <input type="password" class="form-control" name="reNewPassword" ng-model="data.newPassword" />
-                            <div class="help-block" ng-if="isShowMessage && psd_form.newPassword != psd_form.reNewPassword">
+                            <input type="password" class="form-control" name="newPassword" ng-model="data.newPassword" />
+                            <div class="help-block" ng-if="isShowMessage && data.newPassword1 != data.newPassword">
                                 <p>两次输入密码不一致</p>
                             </div>
                         </div>

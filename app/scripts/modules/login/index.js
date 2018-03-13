@@ -30,6 +30,7 @@ angular.module('sbAdminApp')
                     userService.getUserSrc(function (userData) {
                         $rootScope.userData = userData;
                         $rootScope.current_perms = userData.current_perms;
+                        $rootScope.root_programReslotions = userData.root_programReslotions;
                         $rootScope.rootGroup = userData.root_organizations[0];
                         for (var i = 0; i < userData.root_organizations.length; i++) {
                             if (userData.root_organizations[i].pid == '') {

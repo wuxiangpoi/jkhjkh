@@ -462,6 +462,16 @@
                 program.duration = content.duration;
                 program.createTime = content.createTime;
 
+                //属性补全
+                program.applyTime = content.applyTime;
+                program.applyUid = content.applyUid;
+                program.approveTimeFinal = content.approveTimeFinal;
+                program.approveUidFinal = content.approveUidFinal;
+                program.createTime = content.createTime;
+                program.creator = content.creator;
+                program.playTers = content.playTers;
+                program.status = content.status;
+
                 var paths = getResourcePathsFromPages(program.pages);//提炼出资源标识符
                 //dmbdRest.post('../api/material/getMaterialCdnUrl', {
                 //    paths: angular.toJson(paths)

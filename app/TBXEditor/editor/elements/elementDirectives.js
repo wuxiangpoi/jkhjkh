@@ -1017,6 +1017,7 @@
                     videoDOM.classList.add('editor-element-video-fill');
                     videoDOM.setAttribute('preload', 'auto');
                     videoDOM.muted = scope.data.isMuted;
+                    videoDOM.volume = 0.7;
                     return videoDOM;
                 }
 
@@ -1105,6 +1106,19 @@
             restrict: 'E',
             replace: true,
             templateUrl: currentScriptFolder + 'editorElementWebview.html',
+            scope: {
+                data: '='
+            }
+        };
+    });
+
+
+    //流媒体视图
+    app.directive('editorElementStreamMedia', function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            templateUrl: currentScriptFolder + 'editorElementStreamMedia.html',
             scope: {
                 data: '='
             }

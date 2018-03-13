@@ -1007,6 +1007,30 @@
                         }
                     });
                 };
+
+                //添加流媒体
+                $scope.setStreamMediaElement = function () {
+                    var width = 40;
+                    var height = 30 * $scope.pixelHorizontal / $scope.pixelVertical;
+                    doSomething({
+                        "ver": 1,
+                        "type": 1000,
+                        "data": {
+                            "ver": 1,
+                            "url": ""
+                        },
+                        "layout": {
+                            "ver": 1,
+                            "left": 30,
+                            "top": 35,
+                            "width": width,
+                            "height": height,
+                            "zIndex": computeZIndex(),
+                            "rotate": 0
+                        }
+                    });
+                };
+                
             }]
         };
     });
