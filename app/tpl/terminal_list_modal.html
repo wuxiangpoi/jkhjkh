@@ -14,11 +14,11 @@
             </div>
             <div class="clearfix">
                 <div class="clearfix">
-                    <div class="fl lh34">选择下发终端：</div>
+                    <div class="fl lh34">选择终端：</div>
                     <div class="fl">
                         <div class="panelSelectWrap">
                             <select class="form-control" ng-model="sp.resolution" ng-change="callServer(tableState)">
-                                <option value="">节目分辨率</option>
+                                <option value="">分辨率</option>
                                 <option ng-repeat="t in userData.root_programReslotions" value="{{t}}">{{t}}</option>
                             </select>
                         </div>
