@@ -128,7 +128,7 @@
                             {{row.playTers}}
                         </div>
                     </td>
-                    <td style="{{row.status == 0 || ow.status == 4 || ow.status == 5 || ow.status == 7?'width:230px;':'160px'}}">
+                    <td style="{{row.status == 0 || ow.status == 4 || ow.status == 5 || ow.status == 7?'min-width:180px;':'120px'}}">
                         <button ng-if="[0,4,5,7].indexOf(row.status) != -1 && perms(435)" class="btn tableBtn"
                             ng-click="submitCheck(row)">提交审核
                         </button>
