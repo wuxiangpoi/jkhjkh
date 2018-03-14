@@ -473,12 +473,18 @@ div.timeSelectWrap {
   background: url(../img/select_arrow.png) right center no-repeat;
 }
 .groupLeafSelect .groupSelect {
-  width: 204px;
+  width: 232px;
 }
 .groupLeafSelect .diy_select {
   width: 44%;
   display: inline-block;
   margin-right: 10px;
+}
+.groupLeafSelect .diy_select .diy_select_txt {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
 }
 .groupLeafSelect .diy_select_list .selectUl {
   margin-bottom: 0;
@@ -586,7 +592,7 @@ div.timeSelectWrap {
   display: inline-block;
 }
 .tableHeader .panel .panelRow .panel-right .leafGroup {
-  padding: 5px;
+  padding-left: 5px;
   display: inline-block;
   cursor: pointer;
   margin-right: 15px;

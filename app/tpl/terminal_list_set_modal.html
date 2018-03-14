@@ -89,9 +89,11 @@
                     </div>
                     <div class="fl">
                         <div class="panelSelectWrap last">
-                            <select class="form-control" ng-model="sp.resolution" ng-change="callServer(tableState)">
-                                <option value="">屏幕分辨率</option>
-                                <option ng-repeat="t in userData.root_terminalReslotions" value="{{t}}">{{t}}</option>
+                            <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+                                <option value="">网络状态</option>
+                                <option value="1">在线</option>
+                                <option value="2">离线</option>
+                                <option value="3">异常</option>
                             </select>
                         </div>
                     </div>

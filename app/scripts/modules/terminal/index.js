@@ -158,7 +158,8 @@ angular.module('sbAdminApp')
 							addr: vm.data.addr
 						}
 						vm.isPosting = true;
-						baseService.postData(baseService.api.terminal + 'modifyTerminalInfo', formData, function () {
+						baseService.postData(baseService.api.terminal + 'modifyTerminalInfo', formData, function (data) {
+							$rootScope.userData.root_citys = data;
 							ngDialog.close();
 							$scope.callServer($scope.tableState);
 							baseService.alert(item ? '修改成功' : '添加成功', 'success');

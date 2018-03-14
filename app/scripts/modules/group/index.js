@@ -81,7 +81,7 @@ controller('groupCtrl', function ($scope, $rootScope, baseService) {
                         name: vm.name,
                         id: newId
                     });
-                }, vm)
+                })
             } else {
                 vm.isShowMessage = true;
             }

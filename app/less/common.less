@@ -505,6 +505,7 @@ div.timeSelectWrap {
   display: inline-block;
   width: 100%;
   line-height: 34px;
+  
   .diy_select_txt{
     cursor: pointer;
     padding: 0 20px 0 5px;
@@ -537,12 +538,19 @@ div.timeSelectWrap {
 
 .groupLeafSelect {
   .groupSelect {
-    width: 204px;
+    width: 232px;
   }
   .diy_select {
     width: 44%;
     display: inline-block;
     margin-right: 10px;
+    .diy_select_txt {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+    }
+    
   }
   .diy_select_list {
     .selectUl {
@@ -665,7 +673,7 @@ div.timeSelectWrap {
       .panel-right {
         display: inline-block;
         .leafGroup {
-          padding: 5px;
+          padding-left: 5px;
           display: inline-block;
           cursor: pointer;
           margin-right: 15px;
