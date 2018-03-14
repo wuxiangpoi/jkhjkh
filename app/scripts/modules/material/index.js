@@ -288,7 +288,7 @@ angular.module('sbAdminApp')
 								'x:token': token
 							};
 							item.formData = [new_multipart_params]; //上传前，添加描述文本
-							//item.upload();
+							item.upload();
 						});
 
 
