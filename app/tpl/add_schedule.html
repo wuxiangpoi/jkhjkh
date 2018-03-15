@@ -1,0 +1,35 @@
+<div ng-include="'tpl/modal_header.html'"></div>
+
+<div class="modal-body">
+    <form name="modalForm" novalidate>
+        <div class="form-group clearfix">
+            <label class="col-sm-4 p0">播放日期</label>
+            <div class="col-sm-8 row pdr0">
+                <div class="col-sm-5 p0">
+                    <input type="radio" style="position:absolute;z-index:-1;opacity:0;">
+                    <div class="timeSelectWrap" locale="zh-cn" change="formDate(newValue, oldValue,'startDate')" start-view="month" moment-picker=""
+                        min-date="today" today="true" format="YYYY-MM-DD">
+                        <span ng-class="{'text-muted': !data.startDate}" style="margin-left:0;">
+                            {{ formateDate(data.startDate) || '起始日期' }}
+                        </span>
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="hidden" name="startDate" ng-model="data.startDate">
+                </div>
+                <span class="col-sm-1 p0" style="line-height:30px;margin:0 5px;text-align:center;">至</span>
+                <div class="col-sm-5 p0">
+                    <div class="timeSelectWrap" locale="zh-cn" change="formDate(newValue, oldValue,'endDate')" start-view="month" moment-picker=""
+                        min-date="today" today="true" format="YYYY-MM-DD" start-date="data.endDate">
+                        <span ng-class="{'text-muted': !data.endDate}" style="margin-left:0;">
+                            {{ formateDate(data.endDate) || '截止日期' }}
+                        </span>
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="hidden" name="endDate" required ng-model="data.endDate">
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div ng-include="'tpl/modal_footer.html'"></div>

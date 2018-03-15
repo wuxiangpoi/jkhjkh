@@ -12,6 +12,7 @@ angular.module('sbAdminApp')
 			$scope.currentLeaf.id = '';
 			$scope.sp.gid = '';
 			$scope.tableState = {};
+			$scope.playData = {};
 			$scope.callServer = function (tableState) {
 				baseService.initTable($scope, tableState, baseService.api.program + 'getProgramList');
 			}
@@ -22,7 +23,6 @@ angular.module('sbAdminApp')
 			}
 			$scope.initPage = function () {
 				$scope.callServer($scope.tableState);
-				$scope.ids = [];
 			}
 
 			$scope.$on('emitGroupLeaf', function (e, group) {
@@ -40,7 +40,6 @@ angular.module('sbAdminApp')
 				item.pid = item.id;
 				baseService.showProgram(item);
 			}
-			$scope.playData = {};
 			var dataXlist = [];
 			var dataPlaylist = [];
 			for (var i = 0; i < 12; i++) {
@@ -196,6 +195,22 @@ angular.module('sbAdminApp')
 					data: dataPlaylist
 				}]
 			};
-			$scope.playData = playData;
+			$scope.add = function (item) {
+				baseService.confirmDialog(540, '添加排期', {}, "tpl/add_schedule.html", function (ngDialog, vm) {
+					if (vm.modalForm.$valid) {
+						vm.isPosting = true;
+						baseService.postData(baseService.api.installUser + 'resetInstallUserPassword', {
+							
+						}, function () {
+							ngDialog.close();
+							baseService.alert('修改成功', 'success');
+							$scope.callServer($scope.tableState);
+						})
+					} else {
+						vm.isShowMessage = true;
+					}
+				})
+			}
+
 		}
 	)

@@ -171,6 +171,9 @@ li {
 .h34 i {
   vertical-align: middle;
 }
+.txt-center {
+  text-align: center;
+}
 .txt-left {
   text-align: left!important;
 }

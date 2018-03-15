@@ -107,6 +107,14 @@ var app = angular.module('sbAdminApp', [
                 click(params);
             }
         };
+        $rootScope.isEmptyObject = function(data){
+            if($.isEmptyObject(data)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
     })
     .config(['$urlRouterProvider', '$locationProvider',
         function ($urlRouterProvider, $locationProvider) {

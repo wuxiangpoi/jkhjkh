@@ -35,8 +35,9 @@
                 <tbody ng-include="'tpl/table.html'"></tbody>
             </table>
         </div>
-        <div class="col-sm-8">
-            <div style="min-height:380px;" e-chart e-data="{{playData}}"></div>
+        <div class="col-sm-8" >
+            <div class="txt-center" style="line-height:380px;" ng-show="isEmptyObject(playData)">请从左侧选择节目添加~</div>
+            <div ng-show="!isEmptyObject(playData)" style="min-height:380px;" e-chart e-data="{{playData}}"></div>
         </div>
     </div>
     
