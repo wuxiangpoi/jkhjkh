@@ -107,6 +107,18 @@ var app = angular.module('sbAdminApp', [
                 click(params);
             }
         };
+        $rootScope.goTostate = function(state,params,perm){
+            if(perm){
+                
+                if($rootScope.perms(perm)){
+                    $state.go(state,params);
+                }else{
+                    return;
+                }
+            }else{
+                $state.go(state,params);
+            }
+        }
         $rootScope.isEmptyObject = function(data){
             if($.isEmptyObject(data)){
                 return true;
