@@ -91,6 +91,12 @@
                         <span class="navTle">节目管理</span>
                     </a>
                 </li>
+                <li class="firstNav">
+                    <a ui-sref-active="active" ui-sref="dashboard.schedule" ng-click="checkRoute(9,$event)">
+                        <i class="iconfont icon-jiemuguanli"></i>
+                        <span class="navTle">排期管理</span>
+                    </a>
+                </li>
                 <li ng-if="perms(5)" ng-class="{current: currentState=='dashboard.materialCheck' || currentState=='dashboard.programCheck'}">
                     <a class="navSecondLevel" ng-click="check(5)" ng-class="{active: collapseVar==5}">
                         <i class="iconfont icon-shenheguanli"></i>

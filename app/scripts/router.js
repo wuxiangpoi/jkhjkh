@@ -150,6 +150,36 @@
                         }
                     }
                 })
+                .state('dashboard.schedule', {
+                    url: '/schedule',
+                    controller: 'scheduleCtrl',
+                    templateUrl: 'scripts/modules/schedule/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/schedule/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
+                .state('dashboard.scheduleCreate', {
+                    url: '/scheduleCreate',
+                    controller: 'scheduleCreateCtrl',
+                    templateUrl: 'scripts/modules/scheduleCreate/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/scheduleCreate/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
                 .state('dashboard.role', {
                     url: '/role',
                     controller: 'roleCtrl',

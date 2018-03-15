@@ -1,0 +1,43 @@
+<div class="content-wrap" style="min-width:780px;">
+    <div class="level2 clearfix">
+        <button ng-if="!isSort" class="iconBtn btn btn-primary" ng-click="sort()">
+            <i class="fa fa-angle-left"></i>返回
+        </button>
+    </div>
+    <div>
+        <div class="table-wrapper col-sm-4">
+            <div class="tableHeader clearfix">
+    
+            </div>
+            <table class="table" st-pipe="callServer" st-table="displayed">
+                <thead>
+                    <tr>
+                        <th>节目名称</th>
+                        <th>时长</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody ng-show="!isLoading">
+                    <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
+                        <td class="tdClick" ng-click="showProgram(row)">
+                            {{row.name}}
+                        </td>                    
+                        <td>
+                            {{row.duration + 's'}}
+                        </td>
+                        <td>
+                            <button class="btn tableBtn" ng-click="add(row)">添加
+                            </button>
+                        </td>
+    
+                    </tr>
+                </tbody>
+                <tbody ng-include="'tpl/table.html'"></tbody>
+            </table>
+        </div>
+        <div class="col-sm-8">
+            <div style="min-height:380px;" e-chart e-data="{{playData}}"></div>
+        </div>
+    </div>
+    
+</div>
