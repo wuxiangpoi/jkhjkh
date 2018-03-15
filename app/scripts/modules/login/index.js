@@ -47,9 +47,7 @@ angular.module('sbAdminApp')
                         }else{
                             $.cookie('user_cookie', null);
                         }
-                        if(pdata.needUpdatePwd){
-                            $rootScope.$broadcast('needUpdatePwd', pdata.needUpdatePwd);
-                        }
+                        
                     });
                 })
             } else {
