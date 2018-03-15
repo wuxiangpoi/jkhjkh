@@ -205,13 +205,9 @@ angular.module('sbAdminApp')
 				baseService.confirmDialog(540, '添加排期', {}, "tpl/add_schedule.html", function (ngDialog, vm) {
 					if (vm.modalForm.$valid) {
 						ngDialog.close();
-						$scope.dataXlist.push({
-							value: '啊啊啊啊啊啊啊啊'
-						});
-						$scope.dataPlaylist.push({
-							value: '',
-							name: item.name
-						});
+						var interval = 5*24*60*60*1000;
+						console.log(interval)
+						console.log(Date.parse(vm.data.startDate.substring(0,4) + '/' + vm.data.startDate.substring(4,6) + '/' + vm.data.startDate.substring(6,8)))
 						for (var i = 0; i < 12; i++) {
 							$scope.dataXlist.push({
 								value: '啊啊啊啊啊啊啊啊'
