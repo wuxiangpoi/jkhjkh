@@ -103,6 +103,12 @@
   -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+.form-radio {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin: 0!important;
+}
 .tbxeditWrapper {
   position: absolute;
   left: 0;
@@ -192,6 +198,45 @@ li {
 }
 select {
   cursor: pointer;
+}
+.instructionWrap {
+  position: relative;
+}
+.instructionWrap .iconTip {
+  color: #444;
+  cursor: pointer;
+  font-size: 18px;
+}
+.instructionWrap .dropdown-tip {
+  padding: 5px;
+  font-size: 12px;
+  line-height: 18px;
+  min-width: 250px;
+}
+.instructionWrap .dropdown-tip::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 5px;
+  padding: 0;
+  border-bottom: 12px solid #ccc;
+  border-top: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+.instructionWrap .dropdown-tip::after {
+  content: '';
+  position: absolute;
+  top: -19px;
+  left: 5px;
+  padding: 0;
+  border-bottom: 12px solid #fff;
+  border-top: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+.instructionWrap .dropdown-tip p {
+  margin: 0 0 5px;
 }
 /* 上传窗口 */
 .dialog-upload {

@@ -36,8 +36,8 @@
             </table>
         </div>
         <div class="col-sm-8" >
-            <div class="txt-center" style="line-height:380px;" ng-show="isEmptyObject(playData)">请从左侧选择节目添加~</div>
-            <div ng-show="!isEmptyObject(playData)" style="min-height:380px;" e-chart e-data="{{playData}}"></div>
+            <div class="txt-center" style="line-height:380px;" ng-show="!dataXlist.length">请从左侧选择节目添加~</div>
+            <div ng-show="dataXlist.length > 0" style="min-height:380px;" e-chart e-data="{{playData}}"></div>
         </div>
     </div>
     

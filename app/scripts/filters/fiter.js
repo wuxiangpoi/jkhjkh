@@ -1,4 +1,9 @@
 (function (app, ng) {
+    app.filter('to_trusted', ['$sce', function ($sce) {
+        return function (text) {
+            return $sce.trustAsHtml(text);
+        };
+    }]);
     //OSS图片裁减
     app.filter('formateTime', function ($filter) {
         return function (date) {

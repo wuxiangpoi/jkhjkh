@@ -13,6 +13,8 @@ angular.module('sbAdminApp')
 			$scope.sp.gid = '';
 			$scope.tableState = {};
 			$scope.playData = {};
+			$scope.dataXlist = [];
+			$scope.dataPlaylist = [];
 			$scope.callServer = function (tableState) {
 				baseService.initTable($scope, tableState, baseService.api.program + 'getProgramList');
 			}
@@ -40,21 +42,25 @@ angular.module('sbAdminApp')
 				item.pid = item.id;
 				baseService.showProgram(item);
 			}
-			var dataXlist = [];
-			var dataPlaylist = [];
-			for (var i = 0; i < 12; i++) {
-				dataXlist.push({
-					value: '啊啊啊啊啊啊啊啊'
-				});
-				dataPlaylist.push({
-					value: '',
-					name: ''
-				});
+
+			function initChart() {
+				var dataXlist = [];
+				var dataPlaylist = [];
+				for (var i = 0; i < 12; i++) {
+					dataXlist.push({
+						value: '啊啊啊啊啊啊啊啊'
+					});
+					dataPlaylist.push({
+						value: '',
+						name: ''
+					});
+				}
+				for (var j = 0; j < 12; j++) {
+					dataPlaylist[j].name = 'kgkh';
+					dataPlaylist[j].value = 6;
+				}
 			}
-			for (var j = 0; j < 12; j++) {
-				dataPlaylist[j].name = 'kgkh';
-				dataPlaylist[j].value = 6;
-			}
+
 			var playData = {
 				tooltip: {
 					trigger: 'item'
@@ -109,7 +115,7 @@ angular.module('sbAdminApp')
 				yAxis: {
 					type: 'category',
 					inverse: true,
-					data: dataXlist,
+					data: [],
 					axisTick: {
 						show: true,
 						length: 100,
@@ -192,22 +198,94 @@ angular.module('sbAdminApp')
 						extraCssText: 'box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);'
 
 					},
-					data: dataPlaylist
+					data: []
 				}]
 			};
 			$scope.add = function (item) {
 				baseService.confirmDialog(540, '添加排期', {}, "tpl/add_schedule.html", function (ngDialog, vm) {
 					if (vm.modalForm.$valid) {
-						vm.isPosting = true;
-						baseService.postData(baseService.api.installUser + 'resetInstallUserPassword', {
-							
-						}, function () {
-							ngDialog.close();
-							baseService.alert('修改成功', 'success');
-							$scope.callServer($scope.tableState);
-						})
+						ngDialog.close();
+						$scope.dataXlist.push({
+							value: '啊啊啊啊啊啊啊啊'
+						});
+						$scope.dataPlaylist.push({
+							value: '',
+							name: item.name
+						});
+						for (var i = 0; i < 12; i++) {
+							$scope.dataXlist.push({
+								value: '啊啊啊啊啊啊啊啊'
+							});
+							$scope.dataPlaylist.push({
+								value: '',
+								name: ''
+							});
+						}
+						for (var j = 0; j < 12; j++) {
+							$scope.dataPlaylist[j].name = item.name;
+							$scope.dataPlaylist[j].value = 6;
+						}
+						playData.yAxis.data = $scope.dataXlist;
+						playData.series[1].data = $scope.dataPlaylist;
+						$scope.playData = playData;
 					} else {
 						vm.isShowMessage = true;
+					}
+				}, function (vm) {
+					function getMonthNum(month) {
+						if (month < 10) {
+							return '0' + month.toString();
+						} else {
+							return month.toString();
+						}
+					}
+					var now = new Date();
+					var nowYear = now.getFullYear();
+					var nowMonth = now.getMonth() + 1;
+					var nowDate = now.getDate();
+					vm.instructions = '<p>1、如果排期中只有全天轮播，则每个节目轮流播放。</p>';
+					vm.instructions += '<p>2、如果排期中只有按次数轮播，则按时段按最少播放次数比例轮流播放；如：节目A播5次，节目B播10次，则节目B每播2次，节目A播1次。</p>';
+					vm.instructions += '<p>3、如果排期中包含二种播放方式，则优先按次数轮播，有剩余时间再播放全天轮播节目。</p>';
+					vm.start_h = 0;
+					vm.start_m = 0;
+					vm.end_h = 24;
+					vm.end_m = 0;
+					vm.showTip = false;
+					vm.selectH = [];
+					vm.selectM = [];
+
+					var day = new Date();
+					vm.today = day.getFullYear() + '-' + baseService.formateDay(day.getMonth() + 1) + baseService.formateDay(day.getDate());
+					for (var i = 0; i < 25; i++) {
+						vm.selectH.push({
+							name: i + '时',
+							value: i
+						})
+					}
+					for (var i = 0; i < 60; i++) {
+						vm.selectM.push({
+							name: i + '分',
+							value: i
+						})
+					}
+					vm.data.startDate = nowYear.toString() + getMonthNum(nowMonth) + getMonthNum(nowDate.toString());
+					vm.data.endDate = (nowYear + 1).toString() + getMonthNum(nowMonth) + getMonthNum(nowDate.toString());
+					vm.playType = 0;
+					vm.formDate = function (n, o, attr) {
+						vm.data[attr] = n._i.split('-').join('');
+					}
+					vm.checkTime = function () {
+						if (vm.start_h == 24) {
+							vm.start_m = 0;
+						}
+						if (vm.end_h == 24) {
+							vm.end_m = 0;
+						}
+						if (parseFloat(vm.end_h + vm.end_m / 60) <= parseFloat(vm.start_h + vm.start_m / 60)) {
+							vm.showTip = true;
+						} else {
+							vm.showTip = false;
+						}
 					}
 				})
 			}

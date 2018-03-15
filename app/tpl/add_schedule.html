@@ -3,8 +3,8 @@
 <div class="modal-body">
     <form name="modalForm" novalidate>
         <div class="form-group clearfix">
-            <label class="col-sm-4 p0">播放日期</label>
-            <div class="col-sm-8 row pdr0">
+            <label class="col-sm-3 p0">播放日期</label>
+            <div class="col-sm-9">
                 <div class="col-sm-5 p0">
                     <input type="radio" style="position:absolute;z-index:-1;opacity:0;">
                     <div class="timeSelectWrap" locale="zh-cn" change="formDate(newValue, oldValue,'startDate')" start-view="month" moment-picker=""
@@ -29,7 +29,66 @@
                 </div>
             </div>
         </div>
+        <div class="form-group clearfix">
+            <label class="col-sm-3 p0">播放方式</label>
+            <div class="col-sm-9">
+                <div class="col-sm-5 p0">
+                    <input type="radio" ng-value=0 ng-model="playType" class="form-radio" name="playType" id="byAll">
+                    <label for="byAll">全天轮播</label>
+                </div>
+                <div class="col-sm-5 p0">
+                    <input type="radio" ng-value=1 ng-model="playType" class="form-radio" name="playType" id="byTime">
+                    <label for="byTime">按次数轮播</label>
+                </div>
+                <div class="col-sm-2 lh34 txt-center">
+                    <div e-instructions instructions="{{instructions}}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix" ng-if="playType == 1">
+            <label class="col-sm-3 p0">播放时间</label>
+            <div class="col-sm-9">
+                <div class="col-sm-5 p0">
+                    <div class="col-sm-6 p0" style="padding-right:1px;">
+                        <select class="form-control" ng-options="h.value as h.name for h in selectH" ng-init="start_h=0" ng-model="start_h" style="padding:0;height:30px;"
+                            ng-change="checkTime()">
+                        </select>
+                    </div>
+                    <div class="col-sm-6 p0" style="padding-left:1px;">
+                        <select ng-options="m.value as m.name for m in selectM" ng-init="start_m=0" class="form-control" ng-change="checkTime()"
+                            ng-model="start_m" ng-disabled="start_h == 24" id="start_m" style="padding:0;height:30px;">
+                        </select>
+                    </div>
 
+                </div>
+                <span class="col-sm-1 p0" style="line-height:30px;text-align:center;margin:0 5px;">至</span>
+                <div class="col-sm-5 p0">
+                    <div class="col-sm-6 p0" style="padding-right:1px;">
+                        <select ng-options="h.value as h.name for h in selectH" ng-init="end_h=24" ng-change="checkTime()" class="form-control" ng-model="end_h"
+                            id="end_h" style="padding:0;height:30px;">
+                        </select>
+                    </div>
+                    <div class="col-sm-6 p0" style="padding-left:1px;">
+                        <select ng-options="m.value as m.name for m in selectM" ng-init="end_m=0" ng-change="checkTime()" class="form-control" ng-disabled="end_h == 24"
+                            ng-model="end_m" id="end_m" style="padding:0;height:30px;">
+                            <option ng-selected="i == end_m" ng-repeat="i in 60 | range" value="{{i}}">{{i}}分</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix" ng-if="playType == 1">
+            <label class="col-sm-3 p0">最少播放次数</label>
+            <div class="col-sm-3">
+                <select style="padding-left:0;" class="form-control">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <div class="col-sm-5 p0 txt-grey" style="font-size:12px;line-height:18px;">
+                (如果选择的播放时间有空闲，将按节目播放次数比例轮播)
+            </div>
+        </div>
     </form>
 </div>
 <div ng-include="'tpl/modal_footer.html'"></div>
