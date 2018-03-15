@@ -7,7 +7,7 @@
             </div>
     </div>
     <div class="row">
-        <div class="col-lg-3 col-md-6 stats" ui-sref="dashboard.terminal({status:1})">
+        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{status:1},21)">
             <div class="panel">
                 <div class="panel-heading">
                     <div class="clearfix" style="text-align:center;">
@@ -23,7 +23,7 @@
 
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 stats" ui-sref="dashboard.terminal({status:2})">
+        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{status:2},21)">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <div class="clearfix" style="text-align:center;">
@@ -39,7 +39,7 @@
 
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 stats" ui-sref="dashboard.terminal({status:3})">
+        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{status:3},21)">
             <div class="panel">
                 <div class="panel-heading">
                     <div class="clearfix" style="text-align:center;">
@@ -55,7 +55,7 @@
 
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 stats" ui-sref="dashboard.terminal">
+        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{},21)">
             <div class="panel">
                 <div class="panel-heading">
                     <div class="clearfix" style="text-align:center;">
