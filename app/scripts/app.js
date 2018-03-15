@@ -25,6 +25,7 @@ var app = angular.module('sbAdminApp', [
         'qmedia.editor'
     ]).run(function ($rootScope, $state, $location, $stateParams, $filter, ngDialog, baseService, userService) {
         $rootScope.paginationNumber = [10, 15, 20, 30, 50, 100];
+        
         $rootScope.$on('$stateChangeSuccess', function () {
             window.scrollTo(0, 0);
         });
@@ -107,6 +108,18 @@ var app = angular.module('sbAdminApp', [
                 click(params);
             }
         };
+        $rootScope.goTostate = function(state,params,perm){
+            if(perm){
+                
+                if($rootScope.perms(perm)){
+                    $state.go(state,params);
+                }else{
+                    return;
+                }
+            }else{
+                $state.go(state,params);
+            }
+        }
     })
     .config(['$urlRouterProvider', '$locationProvider',
         function ($urlRouterProvider, $locationProvider) {

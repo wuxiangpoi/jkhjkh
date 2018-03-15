@@ -14,6 +14,7 @@ angular.module('sbAdminApp')
 			$scope.ter_offline = 0;
 
 			$scope.ter_error = 0;
+			
 			$scope.closeThisTip = function (e) {
 				$(e.currentTarget).parents('.userTip').remove();
 			}
