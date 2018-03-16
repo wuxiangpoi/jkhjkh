@@ -235,6 +235,15 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             }
             return nArr;
         },
+        removeAryId: function (aObj, val) {
+            var nArr = [];
+            for (var i = 0; i < aObj.length; i++) {
+                if (aObj[i].id != val) {
+                    nArr.push(aObj[i]);
+                }
+            }
+            return nArr;
+        },
         goToUrl: function (path) {
             $location.path(path);
         },
@@ -280,6 +289,26 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 return '0' + day.toString();
             } else {
                 return day.toString();
+            }
+        },
+        formateDayTime: function (date) {
+            return Date.parse(date.substring(0,4) + '/' + date.substring(4,6) + '/' + date.substring(6,8));
+        },
+        getFirstorLastDay: function getLastDay(date, type) {
+            var now = new Date(date);
+            var year = now.getFullYear();
+            var month = now.getMonth();
+            var ft = new Date(year, month - 1, '01');
+            ft.setDate(1);
+            ft.setMonth(ft.getMonth() + 1);
+            var dt = new Date(year, month - 1, '01');
+            dt.setDate(1);
+            dt.setMonth(dt.getMonth() + 2);
+            var cdt = new Date(dt.getTime() - 1000 * 60 * 60 * 24);
+            if(type){
+                return ft;
+            }else{
+                return cdt;
             }
         },
         dmbdOSSImageUrlResizeFilter: function (imgUrl, size) {

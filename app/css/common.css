@@ -168,6 +168,9 @@ li {
 .bg-red {
   background: red;
 }
+.bg-white {
+  background: #fff;
+}
 .lh34 {
   line-height: 34px;
 }
@@ -732,6 +735,9 @@ div.timeSelectWrap {
   border-radius: 6px;
   padding: 0 10px;
   line-height: 28px;
+}
+.table-wrapper .tableBtn.disabled {
+  color: #9f9f9f;
 }
 .table-wrapper .tableBtn:hover {
   background: #f9f9f9;
