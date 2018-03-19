@@ -6,12 +6,12 @@
 <div class="modal-body">
     <div class="row">
         <div class="col-sm-8">
-            <div ng-if="data.type==0">
+            <div ng-if="data.type==0" class="positionR">
                 <img ng-if="data.width > data.height" src="img/loading.gif" style="width:100%;height:350px;display:block;" lazy-src="{{data.nUrl}}"
                 />
                 <img ng-if="data.width < data.height || data.width == data.height" src="img/loading.gif" style="width:auto;height:350px;display:block;min-width:200px;margin:0 auto;"
                     lazy-src="{{data.nUrl}}" />
-                <!-- <button style="position:absolute;top:0;right:0;" ng-click=imgPreview(data)>全屏</button> -->
+                <button class="fullScreenBtn" ng-click=imgPreview(data)><i class="fa fa-arrows-alt"></i></button>
             </div>
             <video ng-if="data.type==1" width="100%" height="100%" controls>
                 <source ng-src="{{data.path | play_url}}">

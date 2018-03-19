@@ -4,7 +4,10 @@
             <i class="fa fa-angle-left"></i>返回
         </button>
     </div>
-    <div style="position:relative;" class="clearfix">
+    <div style="position:relative;" class="clearfix bg-white">
+        <div style="padding:0 20px;" class="txt-grey">
+            <h5>新建排期</h5>
+        </div>
         <div class="table-wrapper col-sm-4">
             <div class="tableHeader clearfix">
 
@@ -35,19 +38,24 @@
                 <tbody ng-include="'tpl/table.html'"></tbody>
             </table>
         </div>
-        <div class="col-sm-8 bg-white">
+        <div class="col-sm-8 bg-white" style="padding:10px;">
             <div class="txt-center" style="line-height:380px;" ng-show="!playList.length">请从左侧选择节目添加~</div>
             <div ng-show="playList.length > 0" style="position:relative;">
                 <div class="clearfix" style="width:100px;position:absolute;left:0;top:8px;padding-left:4px;z-index:2;">
-                    <div style="font-size:14px; color:#9f9f9f;">节目排期</div>
-                    <div class="clearfix" style="line-height:30px;" ng-repeat="item in playList">
+                    <div style="font-size:14px; color:#9f9f9f;height:24px;">节目排期</div>
+                    <div class="clearfix" style="line-height:29px;" ng-repeat="item in playList">
                         <div class="fl ellipsTXt" ng-click="showPlay(item)" style="width:80px;font-size:12px;padding-left:4px;cursor:pointer;">{{item.name}}</div>
                         <div class="fr" style="color:#c4c4c4;cursor:pointer;" ng-click="del(item)">
                             <i class="fa fa-close"></i>
                         </div>
                     </div>
                 </div>
-                <div class="fl" ng-style="chartStyle" e-chart>
+                <div ng-style="chartStyle" e-chart></div>
+                <div class="txt-center">
+                    <button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="modalConfirmSubmit()">保存
+                        <i class="fa fa-spinner"></i>
+                    </button>
+                    <button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
                 </div>
             </div>
         </div>

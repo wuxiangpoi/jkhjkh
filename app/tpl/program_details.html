@@ -3,11 +3,11 @@
 
 	<div class="row modalDetail">
 		<div class="col-sm-8">
-			<div class="previewWrap">
-				<dmbd-program-preview2 ng-if="program" program-pixel-horizontal="program.pixelHorizontal" program-pixel-vertical="program.pixelVertical"
-					program-pages="program.pages" size="450"></dmbd-program-preview2>
-                <!-- <button style="position:absolute;top:0;right:0;" ng-click=programPreview(program)>全屏</button> -->
-			</div>
+				<div class="previewWrap positionR">
+						<dmbd-program-preview2 ng-if="program" program-pixel-horizontal="program.pixelHorizontal" program-pixel-vertical="program.pixelVertical"
+							program-pages="program.pages" size="450"></dmbd-program-preview2>
+							<button class="fullScreenBtn" ng-click=programPreview(program)><i class="fa fa-arrows-alt"></i></button>
+						</div>
 		</div>
 		<div class="col-sm-4 pdr0">
 			<div style="height:40px;" ng-if="program.pages.length > 1"></div>

@@ -174,6 +174,7 @@
                             return $ocLazyLoad.load({
                                 name: 'sbAdminApp',
                                 files: [
+                                    'css/scheduleCreate/style.css',
                                     'scripts/modules/scheduleCreate/index.js'
                                 ]
                             })

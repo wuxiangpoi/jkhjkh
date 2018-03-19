@@ -40,38 +40,35 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                             }else{
                                 var date = new Date(value);
                                 var mon = '';
-                                if(index == 0){
-                                    mon = date.getMonth() + 1;
-                                }else{
-                                    mon = date.getMonth() + 2;
-                                    if(mon > 12){
-                                        mon = 1;
+                                if(date.getDate() == 1){
+                                    mon = date.getMonth() + 1 + '月';
+                                    if(date.getMonth() + 1 == 1){
+                                        mon = [(date.getFullYear()) + '年', mon].join('');
                                     }
                                 }
-                                var texts = [(date.getMonth() + 1), date.getDate()];
-    
                                 return mon;
                             }
                             // 格式化成月/日，只在第一个刻度显示年份
                             
                         },
-                        color: '#24243e',
-                        margin: 20
+                        showMinLabel: true,
+                        showMaxLabel: true,
+                        color: '#24243e'
                     },
                     axisLine: {
                         lineStyle: {
                             color: '#e2e3e6'
-                        }
+                        },
                     },
                     axisTick: {
-                        show: true,
+                        show: false,
                         length: 16,
                         lineStyle: {
                             color: '#e2e3e6'
                         }
                     },
                     splitLine: {
-                        show: true,
+                        show: false,
                         lineStyle: {
                             color: '#e2e3e6'
                         }
@@ -172,8 +169,8 @@ chartService.factory('chartService', ['baseService', function (baseService) {
             };
             var interval, dateInterval;
             var intervalDay = 5 * 24 * 60 * 60 * 1000;
-            var intervalMon = 30 * 24 * 60 * 60 * 1000;
-            var minLen = 15;
+            var intervalMon = 30.5 * 24 * 60 * 60 * 1000;
+            var minLen = 12;
             var chartData = {};
             var dataXlist = [];
             var startDatelist = [];
@@ -216,12 +213,12 @@ chartService.factory('chartService', ['baseService', function (baseService) {
             if (dateInterval > intervalMon) {
                 interval = intervalMon;
                 chartData.minDate = Date.parse(baseService.getFirstorLastDay(chartData.minDate,true));
-                chartData.maxDate = chartData.minDate + intervalMon*Math.ceil(dateInterval/intervalMon);
+                chartData.maxDate = chartData.minDate + intervalMon*(Math.ceil(dateInterval/intervalMon) + 1);
             } else {
                 interval = intervalDay;
                 chartData.maxDate = chartData.maxDate + intervalDay;
             }
-            playData.xAxis.interval = interval;
+            playData.xAxis.interval = 24 * 60 * 60 * 1000;
             playData.yAxis.data = dataXlist;
             playData.series[0].data = startDatelist;
             playData.series[1].data = endDatelist;

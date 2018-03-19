@@ -33,6 +33,25 @@
   }
 }
 
+.fullScreenBtn {
+  position:absolute;
+  top:0;
+  right:0;
+  background: #000;
+  border: none;
+  padding: 4px 7px;
+  opacity: 0.6;
+  transition: .3s;
+  outline: none;
+  .fa {
+    color: #fff;
+    font-size: 24px;
+  }
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .btn-default {
   &:hover {
     background: #f9f9f9;
@@ -234,7 +253,7 @@ select {
     padding: 5px;
     font-size: 12px;
     line-height: 18px;
-    min-width: 250px;
+    min-width: 252px;
     &::before {
       content: '';
       position: absolute;
@@ -485,7 +504,7 @@ div.timeSelectWrap {
   position: relative;
   height: 30px;
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
   border-radius: 3px;
   border: 1px solid #ccc;
