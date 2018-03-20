@@ -8,14 +8,15 @@
         <div class="txt-grey">
             <h5 class="mart0">新建排期</h5>
         </div>
-        <form name="modalForm" novalidate id="scheduleNameForm">
+        <form name="scheduleNameForm" novalidate id="scheduleNameForm">
             <div class="form-group clearfix">
                 <div class="col-2" style="max-width:60px;">排期名称</div>
                 <div class="col-4" style="max-width:300px;">
-                    <input class="form-control dibik" ng-model="scheduleName" placeholder="排期名称">
+                    <input class="form-control dibik" name="scheduleName" ng-model="scheduleName" placeholder="排期名称" required ng-pattern="/([A-Za-z0-9]{2,20})|([\u4e00-\u9fa5]{2,10})|([\u4e00-\u9fa5][\w\W]{2})/">
                 </div>
-                <div class="col-6 help-block tex-red">
-                    cdsfs
+                <div class="col-6 help-block tex-red" ng-messages="scheduleNameForm.scheduleName.$error">
+                    <p ng-message="required">请输入排期名称</p>
+                    <p ng-message="pattern">请输入2-40个字符</p>
                 </div>
             </div>
         </form>

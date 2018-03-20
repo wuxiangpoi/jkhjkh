@@ -159,7 +159,8 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                         },
                         formatter: function(data){
                             console.log(data.data)
-                            return '<span style="color:#000;font-size:16px;">' + data.data.name + '</span><br /><span style="width:10px;height:10px;border-radius:50%;background:#08a9d6;display:inline-block;margin-right:4px;"></span><span style="color:#08a9d6;font-size:12px;">播放时长</span><span style="color:#54e3c5;"> {c}小时</span>'
+                            var playDate = '';
+                            return '<span style="color:#000;font-size:16px;">' + data.data.name + '</span><br /><span style="width:10px;height:10px;border-radius:50%;background:#08a9d6;display:inline-block;margin-right:4px;"></span><span style="color:#08a9d6;font-size:12px;">播放日期</span><span style="color:#54e3c5;"> {c}小时</span>'
                         },
                         extraCssText: 'box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);'
 
