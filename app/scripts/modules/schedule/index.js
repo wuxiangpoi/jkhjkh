@@ -6,7 +6,7 @@ angular.module('sbAdminApp')
 			$scope.sp = {};
 			$scope.tableState = {};
 			$scope.callServer = function (tableState) {
-				baseService.initTable($scope, tableState, baseService.api.program + 'getProgramList');
+				baseService.initTable($scope, tableState, baseService.api.programSchedule + 'getProgramSchedulePageList');
 			}
 			
 		}

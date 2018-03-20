@@ -156,11 +156,34 @@ li {
 .nowrap {
   white-space: nowrap;
 }
+.col-2 {
+  display: inline-block;
+  width: 20%;
+}
+.col-3 {
+  display: inline-block;
+  width: 30%;
+}
+.col-4 {
+  display: inline-block;
+  width: 40%;
+}
+.col-5 {
+  display: inline-block;
+  width: 50%;
+}
+.col-6 {
+  display: inline-block;
+  width: 50%;
+}
 .dibik {
   display: inline-block;
 }
 .dibk {
   display: block;
+}
+.mart0 {
+  margin-top: 0;
 }
 .martr20 {
   margin-right: 20px;
@@ -759,6 +782,23 @@ div.timeSelectWrap {
 }
 .table-wrapper .tableBtn:hover {
   background: #f9f9f9;
+}
+.table-wrapper.mid-table {
+  background: #f6f7fa;
+}
+.table-wrapper.mid-table table {
+  border-top: 0;
+}
+.table-wrapper.mid-table table > thead {
+  background: #dbdcdf;
+}
+.table-wrapper.mid-table table > thead th {
+  border-bottom: 0;
+  font-weight: 400;
+  color: #9f9f9f;
+}
+.table-wrapper.mid-table table > tbody td {
+  border-top: 0;
 }
 .pagination {
   margin: 10px 0!important;

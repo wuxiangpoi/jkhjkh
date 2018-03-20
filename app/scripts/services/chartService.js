@@ -169,7 +169,7 @@ chartService.factory('chartService', ['baseService', function (baseService) {
             };
             var interval, dateInterval;
             var intervalDay = 5 * 24 * 60 * 60 * 1000;
-            var intervalMon = 30.5 * 24 * 60 * 60 * 1000;
+            var intervalMon = 30 * 24 * 60 * 60 * 1000;
             var minLen = 12;
             var chartData = {};
             var dataXlist = [];
@@ -211,14 +211,14 @@ chartService.factory('chartService', ['baseService', function (baseService) {
             }
             dateInterval = chartData.maxDate - chartData.minDate;
             if (dateInterval > intervalMon) {
-                interval = intervalMon;
+                interval = 24 * 60 * 60 * 1000;
                 chartData.minDate = Date.parse(baseService.getFirstorLastDay(chartData.minDate,true));
                 chartData.maxDate = chartData.minDate + intervalMon*(Math.ceil(dateInterval/intervalMon) + 1);
             } else {
                 interval = intervalDay;
                 chartData.maxDate = chartData.maxDate + intervalDay;
             }
-            playData.xAxis.interval = 24 * 60 * 60 * 1000;
+            playData.xAxis.interval = interval;
             playData.yAxis.data = dataXlist;
             playData.series[0].data = startDatelist;
             playData.series[1].data = endDatelist;

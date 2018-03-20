@@ -158,12 +158,41 @@ li {
   white-space:nowrap; 
 }
 
+.col-2 {
+  display: inline-block;
+  width: 20%;
+}
+
+.col-3 {
+  display: inline-block;
+  width: 30%;
+}
+
+.col-4 {
+  display: inline-block;
+  width: 40%;
+}
+
+.col-5 {
+  display: inline-block;
+  width: 50%;
+}
+
+.col-6 {
+  display: inline-block;
+  width: 50%;
+}
+
 .dibik {
   display: inline-block;
 }
 
 .dibk {
   display: block;
+}
+
+.mart0 {
+  margin-top: 0;
 }
 
 .martr20 {
@@ -851,6 +880,23 @@ div.timeSelectWrap {
     }
     &:hover {
       background: #f9f9f9;
+    }
+  }
+  &.mid-table {
+    background: #f6f7fa;
+    table {
+      border-top: 0;
+    }
+    table > thead {
+      background: #dbdcdf;
+    }
+    table > thead th {
+      border-bottom: 0;
+      font-weight: 400;
+      color: @grey;
+    }
+    table > tbody td {
+      border-top: 0;
     }
   }
 }

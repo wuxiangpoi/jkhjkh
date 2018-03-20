@@ -11,18 +11,14 @@ angular.module('sbAdminApp', ['chartService'])
 			$scope.currentLeaf = {};
 			$scope.currentLeaf.id = '';
 			$scope.sp.gid = '';
-			$scope.sp.length = 10;
+			$scope.sp.status = 1;
 			$scope.tableState = {};
 			$scope.playList = [];
 			$scope.playListId = [];
 			$scope.callServer = function (tableState) {
 				baseService.initTable($scope, tableState, baseService.api.program + 'getProgramList');
 			}
-			$scope.getGroups = function (oid) {
-				leafService.getLeafes(baseService.api.program + 'getProgramGroups', oid, function (data) {
-					$scope.leafes = data;
-				})
-			}
+
 			$scope.initPage = function () {
 				$scope.callServer($scope.tableState);
 			}
@@ -33,11 +29,9 @@ angular.module('sbAdminApp', ['chartService'])
 					$scope.sp.oid = group.id;
 					$scope.sp.gid = '';
 					$scope.initPage();
-					$scope.getGroups($scope.sp.oid);
 				}
 
 			});
-			$scope.getGroups($scope.currentGroup.id);
 			$scope.showProgram = function (item) {
 				item.pid = item.id;
 				baseService.showProgram(item);
@@ -45,19 +39,23 @@ angular.module('sbAdminApp', ['chartService'])
 			$scope.add = function (item) {
 				baseService.confirmDialog(540, '添加排期', {}, "tpl/add_schedule.html", function (ngDialog, vm) {
 					if (vm.modalForm.$valid) {
-						// if(){
-
-						// }else{
-
-						// }
 						ngDialog.close();
 						var chartItem = {
 							id: item.id,
 							name: item.name,
-							playType: vm.playType,
+							size: item.size,
+							materials: item.materials,
+							duration: item.duration,
+							content: item.content,
 							startDate: vm.data.startDate,
-							endDate: vm.data.endDate
+							endDate: vm.data.endDate,
+							stype: vm.stype
 						};
+						if(vm.stype == 1){
+							chartItem.startTime = vm.data.startTime;
+							chartItem.endTime = vm.data.endTime;
+							chartItem.plays = vm.data.plays;
+						}
 						$scope.playListId.push(chartItem.id);
 						$scope.playList.push(chartItem);
 						var minLen = 12;
@@ -70,7 +68,7 @@ angular.module('sbAdminApp', ['chartService'])
 							'position': 'relative'
 						}
 						$scope.$broadcast('broadcastData', chartService.initChartSchedule($scope.playList));
-						
+
 					} else {
 						vm.isShowMessage = true;
 					}
@@ -113,7 +111,7 @@ angular.module('sbAdminApp', ['chartService'])
 					}
 					vm.data.startDate = nowYear.toString() + getMonthNum(nowMonth) + getMonthNum(nowDate.toString());
 					vm.data.endDate = (nowYear + 1).toString() + getMonthNum(nowMonth) + getMonthNum(nowDate.toString());
-					vm.playType = 0;
+					vm.stype = 0;
 					vm.formDate = function (n, o, attr) {
 						vm.data[attr] = n._i.split('-').join('');
 					}
@@ -131,6 +129,9 @@ angular.module('sbAdminApp', ['chartService'])
 						}
 					}
 				})
+			}
+			$scope.saveSchedule = function(){
+
 			}
 			$scope.del = function (item) {
 				$scope.playList = baseService.removeAryId($scope.playList, item.id);

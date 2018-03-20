@@ -21,7 +21,8 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             organization: apiUrl + '/api/organization/',
             terminalReport: apiUrl + '/api/terminalReport/',
             installUser: apiUrl + '/api/installUser/',
-            schedule: apiUrl + '/api/schedule/'
+            schedule: apiUrl + '/api/schedule/',
+            programSchedule: apiUrl + '/api/programSchedule/'
         },
         md5_pwd: function (pwd) {
             var hexDigits = ['0', '1', '2', '3', '4', '5', '6', '7',
