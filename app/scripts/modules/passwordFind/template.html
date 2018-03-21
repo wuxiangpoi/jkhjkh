@@ -61,17 +61,16 @@
                     <form id="psd_form" name="psd_form" novalidate>
                         <label class="col-sm-12">新密码</label>
                         <div class="col-sm-12">
-                            <input type="password" class="form-control" name="newPassword1" ng-pattern="/(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$/"
+                            <input type="password" placeholder="6-16位，数字、字母组合" class="form-control" name="newPassword1" ng-pattern="/(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$/"
                                 required ng-model="data.newPassword1" />
                             <div class="help-block" ng-messages="psd_form.newPassword1.$error" ng-if="isShowMessage">
                                 <p ng-message="required">请输入密码</p>
-                                <p ng-message="required">新密码6~16位，至少包含数字、字母、符号中的两种</p>
-                            </div>
+                                <p ng-message="required">6-16位，数字、字母组合</p>                            </div>
                         </div>
                         <label class="col-sm-12">确认密码</label>
                         <div class="col-sm-12">
                             <input type="password" class="form-control" name="newPassword" ng-model="data.newPassword" />
-                            <div class="help-block" ng-if="isShowMessage && data.newPassword1 != data.newPassword">
+                            <div class="help-block" ng-if="isShowMessage && data.newPassword1 && data.newPassword1 != data.newPassword">
                                 <p>两次输入密码不一致</p>
                             </div>
                         </div>

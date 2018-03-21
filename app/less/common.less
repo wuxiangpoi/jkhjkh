@@ -31,6 +31,10 @@
   &:focus {
     outline: none!important;
   }
+  &.midBtn {
+    padding: 0 48px;
+    line-height: 48px;
+  }
 }
 
 .fullScreenBtn {
@@ -456,6 +460,10 @@ select {
 /* line 32, app/scss/common.scss */
 .p0 {
   padding: 0;
+}
+
+.m0 {
+  margin: 0;
 }
 
 /* line 36, app/scss/common.scss */
@@ -884,8 +892,10 @@ div.timeSelectWrap {
   }
   &.mid-table {
     background: #f6f7fa;
+    min-width: 320px;
     table {
       border-top: 0;
+      margin-bottom: 0;
     }
     table > thead {
       background: #dbdcdf;
@@ -898,13 +908,35 @@ div.timeSelectWrap {
     table > tbody td {
       border-top: 0;
     }
+    .pagination {
+      li {
+        a {
+          background: #f6f7fa;
+          border-radius: 50%;
+          margin-left: 2px!important;
+        }
+        a:hover {
+          background: #ddd;
+          color: #fff;
+        }
+        &.active {
+          a {
+            background: @main-color;
+          }
+        }
+        .ellipsis {
+          background: none;
+        }
+      }
+      
+    }
   }
 }
 
 
 // 分页样式
 .pagination {
-  margin: 10px 0!important;
+  margin: 5px 0!important;
   a {
     width: 26px;
     height: 26px;

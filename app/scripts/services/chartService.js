@@ -20,7 +20,7 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                 grid: {
                     top: '0%',
                     left: '0%',
-                    right: '4%',
+                    right: '2%',
                     bottom: '3%',
                     containLabel: true
                 },
@@ -32,28 +32,30 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                     position: 'top',
                     axisLabel: {
                         formatter: function (value, index) {
-                            if(playData.xAxis.interval == intervalDay){
+                            if (playData.xAxis.interval == intervalDay) {
                                 var date = new Date(value);
-                                var texts = [(date.getMonth() + 1), date.getDate()];
-    
-                                return texts.join('/');
-                            }else{
+                                var texts = [(date.getMonth() + 1), date.getDate()].join('/');
+                                return ['', texts].join('\n');
+                            } else {
                                 var date = new Date(value);
                                 var mon = '';
-                                if(date.getDate() == 1){
-                                    mon = date.getMonth() + 1 + '月';
-                                    if(date.getMonth() + 1 == 1){
-                                        mon = [(date.getFullYear()) + '年', mon].join('');
+                                if (date.getDate() == 1) {
+                                    monTxt = date.getMonth() + 1 + '月';
+                                    mon = ['', monTxt].join('\n');
+                                    if (date.getMonth() + 1 == 1) {
+                                        mon = [(date.getFullYear()) + '年', monTxt].join('\n');
                                     }
                                 }
                                 return mon;
                             }
                             // 格式化成月/日，只在第一个刻度显示年份
-                            
+
                         },
+                        fontSize: 12,
                         showMinLabel: true,
                         showMaxLabel: true,
                         color: '#24243e'
+                        
                     },
                     axisLine: {
                         lineStyle: {
@@ -157,10 +159,17 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                         textStyle: {
                             color: '#000'
                         },
-                        formatter: function(data){
-                            console.log(data.data)
-                            var playDate = '';
-                            return '<span style="color:#000;font-size:16px;">' + data.data.name + '</span><br /><span style="width:10px;height:10px;border-radius:50%;background:#08a9d6;display:inline-block;margin-right:4px;"></span><span style="color:#08a9d6;font-size:12px;">播放日期</span><span style="color:#54e3c5;"> {c}小时</span>'
+                        formatter: function (data) {
+                            var playData = data.data.playData;
+                            var min_max = playData.startDate + '-' + playData.endDate;
+                            var period = playData.stype == 1 ? playData.startTime + '-' + playData.endTime : '全天';
+                            var str = '<span style="color:#000;font-size:16px;">' + data.data.name + '</span><br />'
+                            str += '<span style="font-size:13px;">播放日期</span><span style="font-size:12px;"> ' + min_max + '</span><br />'
+                            str += '<span style="font-size:13px;">播放时段</span><span style="font-size:12px;"> ' + period + '</span><br />'
+                            if (playData.stype == 1) {
+                                str += '<span style="font-size:13px;">播放次数</span><span style="font-size:12px;"> ' + playData.plays + '次</span>'
+                            }
+                            return str;
                         },
                         extraCssText: 'box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);'
 
@@ -171,7 +180,7 @@ chartService.factory('chartService', ['baseService', function (baseService) {
             var interval, dateInterval;
             var intervalDay = 5 * 24 * 60 * 60 * 1000;
             var intervalMon = 30 * 24 * 60 * 60 * 1000;
-            var minLen = 12;
+            var minLen = 15;
             var chartData = {};
             var dataXlist = [];
             var startDatelist = [];
@@ -180,7 +189,7 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                 chartData.minDate = baseService.formateDayTime(playList[0].startDate);
                 chartData.maxDate = baseService.formateDayTime(playList[0].endDate);
             }
-            if(playList.length > minLen){
+            if (playList.length > minLen) {
                 minLen = playList.length;
             }
             for (var j = 0; j < minLen; j++) {
@@ -196,13 +205,12 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                     name: ''
                 });
             }
-            
+
             for (var i = 0; i < playList.length; i++) {
-                startDatelist[i].name = playList[i].name;
                 startDatelist[i].value = baseService.formateDayTime(playList[i].startDate);
                 endDatelist[i].name = playList[i].name;
-                endDatelist[i].value = baseService.formateDayTime(playList[i].endDate)-baseService.formateDayTime(playList[i].startDate);
-                
+                endDatelist[i].value = baseService.formateDayTime(playList[i].endDate) - baseService.formateDayTime(playList[i].startDate);
+                endDatelist[i].playData = playList[i];
                 if (baseService.formateDayTime(playList[i].startDate) < chartData.minDate) {
                     chartData.minDate = baseService.formateDayTime(playList[i].startDate);
                 }
@@ -213,10 +221,11 @@ chartService.factory('chartService', ['baseService', function (baseService) {
             dateInterval = chartData.maxDate - chartData.minDate;
             if (dateInterval > intervalMon) {
                 interval = 24 * 60 * 60 * 1000;
-                chartData.minDate = Date.parse(baseService.getFirstorLastDay(chartData.minDate,true));
-                chartData.maxDate = chartData.minDate + intervalMon*(Math.ceil(dateInterval/intervalMon) + 1);
+                chartData.minDate = Date.parse(baseService.getFirstorLastDay(chartData.minDate, true));
+                chartData.maxDate = chartData.minDate + intervalMon * (Math.ceil(dateInterval / intervalMon) + 1);
             } else {
                 interval = intervalDay;
+                chartData.minDate = chartData.minDate - intervalDay;
                 chartData.maxDate = chartData.maxDate + intervalDay;
             }
             playData.xAxis.interval = interval;
@@ -225,7 +234,6 @@ chartService.factory('chartService', ['baseService', function (baseService) {
             playData.series[1].data = endDatelist;
             playData.xAxis.min = chartData.minDate;
             playData.xAxis.max = chartData.maxDate;
-            console.log(playData)
             return playData;
         }
     };

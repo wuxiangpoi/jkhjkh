@@ -11,15 +11,15 @@
         <li class="dropdown message">
             <a class="dropdown-toggle positionR" data-toggle="dropdown">
                 <i class="fa fa-bell fa-fw"></i>
-                <span ng-if="materialCheckCounts + programCheckCounts > 0" class="indicator">
-                    {{materialCheckCounts + programCheckCounts}}
+                <span ng-if="materialCheckCounts + programCheckCounts + programScheduleCheckCounts> 0" class="indicator">
+                    {{materialCheckCounts + programCheckCounts + programScheduleCheckCounts}}
                 </span>
             </a>
             <ul class="dropdown-menu dropdown-message">
                 <li>
                     <h6 class="dropdown-header clearfix">
                         <span class="fl">新通知</span>
-                        <span class="fr">{{materialCheckCounts + programCheckCounts}}</span>
+                        <span class="fr">{{materialCheckCounts + programCheckCounts + programScheduleCheckCounts}}</span>
                         </span>
                     </h6>
                     <div class="dropdownItemWrap">
@@ -28,7 +28,15 @@
                                 <i class="{{tip.name == 'materialCheck'?'iconfont icon-neirongguanli':'iconfont icon-jiemuguanli'}}"></i>
                             </span>
                             <span class="messageRight fl" style="line-height:48px;">
-                                您有{{tip.value}}个{{tip.name == 'materialCheck'?'素材':'节目'}}待审核
+                                <span ng-if="tip.name == 'materialCheck'">
+                                    您有{{tip.value}}个素材待审核
+                                </span>
+                                <span ng-if="tip.name == 'programCheck'">
+                                    您有{{tip.value}}个节目待审核
+                                </span>
+                                <span ng-if="tip.name == 'scheduleCheck'">
+                                    您有{{tip.value}}个排期待审核
+                                </span>
                             </span>
                         </div>
                     </div>
@@ -97,7 +105,7 @@
                         <span class="navTle">排期管理</span>
                     </a>
                 </li>
-                <li ng-if="perms(5)" ng-class="{current: currentState=='dashboard.materialCheck' || currentState=='dashboard.programCheck'}">
+                <li ng-if="perms(5)" ng-class="{current: currentState=='dashboard.materialCheck' || currentState=='dashboard.programCheck' || currentState=='dashboard.scheduleCheck'}">
                     <a class="navSecondLevel" ng-click="check(5)" ng-class="{active: collapseVar==5}">
                         <i class="iconfont icon-shenheguanli"></i>
                         <span class="navTle">审核管理</span>
@@ -108,20 +116,28 @@
 
                     </a>
                     <ul class="nav nav-second-level" ng-class="{collapse: collapseVar!=5}">
-                        <li ng-if="perms(51)" ng-if="materialCheck">
+                        <li ng-if="perms(51)">
                             <a ui-sref="dashboard.materialCheck" ui-sref-active="active" ng-click="checkRoute(5,$event)">
                                 <span class="navName">素材审核</span>
-                                <span ng-if="materialCheckCounts > 0" id="materialCheckCount" class="indicator">
+                                <span ng-if="materialCheckCounts > 0" class="indicator">
                                     {{materialCheckCounts}}
                                 </span>
                             </a>
 
                         </li>
-                        <li ng-if="perms(53)" ng-if="programCheck">
+                        <li ng-if="perms(53)">
                             <a ui-sref="dashboard.programCheck" ui-sref-active="active" ng-click="checkRoute(5,$event)">
                                 <span class="navName">节目审核</span>
-                                <span ng-if="programCheckCounts > 0" id="programCheckCounts" class="indicator">
+                                <span ng-if="programCheckCounts > 0" class="indicator">
                                     {{programCheckCounts}}
+                                </span>
+                            </a>
+                        </li>
+                        <li ng-if="perms(54)">
+                            <a ui-sref="dashboard.scheduleCheck" ui-sref-active="active" ng-click="checkRoute(5,$event)">
+                                <span class="navName">排期审核</span>
+                                <span ng-if="programScheduleCheckCounts > 0" class="indicator">
+                                    {{programScheduleCheckCounts}}
                                 </span>
                             </a>
                         </li>
@@ -129,7 +145,7 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li ng-if="perms(3)" ng-class="{current: currentState=='dashboard.group' || currentState=='dashboard.user' || currentState=='dashboard.role' || currentState=='dashboard.auser'}">
-                    <a class="navSecondLevel" ng-click="check(3)"  ng-class="{active: collapseVar==3}">
+                    <a class="navSecondLevel" ng-click="check(3)" ng-class="{active: collapseVar==3}">
                         <i class="iconfont icon-zhanghuguanli"></i>
                         <span class="navTle">账户管理</span>
                         <span class="fa arrow"></span>
@@ -159,14 +175,14 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li ng-if="perms(6)" ng-class="{current: currentState=='dashboard.terminalCommand' || currentState=='dashboard.programCommand'}">
-                    <a class="navSecondLevel" ng-click="check(6)"  ng-class="{active: collapseVar==6}">
+                    <a class="navSecondLevel" ng-click="check(6)" ng-class="{active: collapseVar==6}">
                         <i class="iconfont icon-rizhiguanli"></i>
                         <span class="navTle">日志记录</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level nav-sub" ng-class="{'collapse':collapseVar != 6}">
                         <li ui-sref-active="active" ng-if="perms(61)">
-                            <a ui-sref="dashboard.terminalCommand" ui-sref-active="active"  ng-click="checkRoute(6,$event)">
+                            <a ui-sref="dashboard.terminalCommand" ui-sref-active="active" ng-click="checkRoute(6,$event)">
                                 <span class="navName">终端命令记录</span>
                             </a>
                         </li>
@@ -181,19 +197,19 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li ng-if="perms(71) || perms(72)" ng-class="{current: currentState=='dashboard.led' || currentState=='dashboard.ledgram'}">
-                    <a class="navSecondLevel" ng-click="check(7)"  ng-class="{active: collapseVar==7}">
+                    <a class="navSecondLevel" ng-click="check(7)" ng-class="{active: collapseVar==7}">
                         <i class="iconfont icon-wenzipingguanliicon"></i>
                         <span class="navTle">文字屏管理</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level nav-sub" ng-class="{'collapse':collapseVar != 7}">
                         <li ui-sref-active="active" ng-if="perms(71)">
-                            <a ui-sref="dashboard.led" ui-sref-active="active"  ng-click="checkRoute(7,$event)">
+                            <a ui-sref="dashboard.led" ui-sref-active="active" ng-click="checkRoute(7,$event)">
                                 <span class="navName">终端管理</span>
                             </a>
                         </li>
                         <li ui-sref-active="active" ng-if="perms(72)">
-                            <a ui-sref="dashboard.ledgram" ui-sref-active="active"  ng-click="checkRoute(7,$event)">
+                            <a ui-sref="dashboard.ledgram" ui-sref-active="active" ng-click="checkRoute(7,$event)">
                                 <span class="navName">内容管理</span>
                             </a>
                         </li>

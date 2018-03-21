@@ -1,6 +1,7 @@
 var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
-    var apiUrl = 'http://47.92.116.16:9090';
+    var apiUrl = 'http://192.168.1.100:8080';
+    //var apiUrl = 'http://47.92.116.16:9090';
     var verson = '?_v2.032';
     var baseService = {
         verson: verson,
@@ -293,7 +294,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             }
         },
         formateDayTime: function (date) {
-            return Date.parse(date.substring(0,4) + '/' + date.substring(4,6) + '/' + date.substring(6,8));
+            return Date.parse(date.substring(0, 4) + '/' + date.substring(4, 6) + '/' + date.substring(6, 8));
         },
         getFirstorLastDay: function getLastDay(date, type) {
             var now = new Date(date);
@@ -306,9 +307,9 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             dt.setDate(1);
             dt.setMonth(dt.getMonth() + 2);
             var cdt = new Date(dt.getTime() - 1000 * 60 * 60 * 24);
-            if(type){
+            if (type) {
                 return ft;
-            }else{
+            } else {
                 return cdt;
             }
         },
@@ -320,7 +321,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             var me = this;
             programService.getProgramById(item.pid, function (program) {
                 program.creator = item.creator;
-                program.status = item.pStatus?item.pStatus:item.status;
+                program.status = item.pStatus ? item.pStatus : item.status;
                 program.approveUid = item.approveUid;
                 program.approveUidFinal = item.approveUidFinal;
                 program.detailType = detailType;
@@ -336,6 +337,47 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 });
             });
 
+        },
+        showSchedule: function (item, detailType, chartService,cb) {
+            var me = this;
+            this.postData(this.api.programSchedule + 'getProgramScheduleById', {
+                id: item.id
+            }, function (schedule) {
+                console.log(schedule)
+                schedule.detailType = detailType;
+                me.confirmDialog(750, '排期详情', schedule, "tpl/schedule_details.html", function (type, ngDialog, vm) {
+                    if (cb) {
+                        cb(type);
+                    }
+                }, function (vm) {
+                    vm.playList = [];
+                    for(var i = 0; i < schedule.programs.length;i ++){
+                        var chartItem = {
+							id: schedule.programs[i].id,
+							name: schedule.programs[i].name,
+							size: schedule.programs[i].size,
+							materials: schedule.programs[i].materials,
+							duration: schedule.programs[i].duration,
+							content: schedule.programs[i].content,
+							startDate: schedule.programs[i].startDate.toString(),
+							endDate: schedule.programs[i].endDate.toString(),
+							stype: vm.stype
+						};
+						if(vm.stype == 1){
+							chartItem.startTime = schedule.programs[i].startTime;
+							chartItem.endTime = schedule.programs[i].endTime;
+							chartItem.plays = schedule.programs[i].plays;
+                        }
+                        vm.playList.push(chartItem);
+                        vm.chartStyle = {
+							'width': '100%',
+							'height': '390px',
+							'position': 'relative'
+						}
+                    }
+                    vm.eoption = chartService.initChartSchedule(vm.playList);
+                });
+            })
         },
         showMaterial: function (item, detailType, cb) {
             item.detailType = detailType;

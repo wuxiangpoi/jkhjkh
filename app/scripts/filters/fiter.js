@@ -59,6 +59,35 @@
             return finalName.join('>');
         }
     });
+    app.filter('scheduleStatusTxt', function () {
+        var scheduleStatus = [{
+                name: '待提交审核',
+                val: 0
+            },
+            {
+                name: '审核通过',
+                val: 1
+            },
+            {
+                name: '审核中',
+                val: 2
+            },
+            {
+                name: '审核不通过',
+                val: 4
+            }
+
+        ];
+        return function (status) {
+            var statusTxt = '';
+            for (var i = 0; i < scheduleStatus.length; i++) {
+                if (scheduleStatus[i].val == status) {
+                    statusTxt = scheduleStatus[i].name;
+                }
+            }
+            return statusTxt;
+        };
+    });
     app.filter('programStatusTxt', function () {
         var programStatus = [{
                 name: '待提交审核',

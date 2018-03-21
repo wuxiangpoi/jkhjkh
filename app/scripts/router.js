@@ -166,7 +166,7 @@
                     }
                 })
                 .state('dashboard.scheduleCreate', {
-                    url: '/scheduleCreate',
+                    url: '/scheduleCreate/{id}',
                     controller: 'scheduleCreateCtrl',
                     templateUrl: 'scripts/modules/scheduleCreate/template.html',
                     resolve: {
@@ -251,6 +251,21 @@
                                 name: 'sbAdminApp',
                                 files: [
                                     'scripts/modules/programCheck/index.js'
+                                ]
+                            })
+                        }
+                    }
+                })
+                .state('dashboard.scheduleCheck', {
+                    url: '/scheduleCheck',
+                    controller: 'scheduleCheckCtrl',
+                    templateUrl: 'scripts/modules/scheduleCheck/template.html',
+                    resolve: {
+                        loadMyFiles: function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/scheduleCheck/index.js'
                                 ]
                             })
                         }

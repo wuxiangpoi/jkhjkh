@@ -7,7 +7,7 @@
  * # adminPosHeader
  */
 angular.module('sbAdminApp')
-	.directive('headerBar', function ($location,baseService, userService, $state) {
+	.directive('headerBar', function ($location, baseService, userService, $state) {
 		return {
 			templateUrl: 'scripts/directives/headerBar/template.html' + baseService.verson,
 			restrict: 'E',
@@ -49,6 +49,9 @@ angular.module('sbAdminApp')
 						case 'dashboard.programCheck':
 							$scope.collapseVar = '5'
 							break;
+						case 'dashboard.scheduleCheck':
+							$scope.collapseVar = '5'
+							break;
 						case 'dashboard.group':
 							$scope.collapseVar = 3
 							break;
@@ -81,6 +84,7 @@ angular.module('sbAdminApp')
 					$rootScope.userMessage = [];
 					$rootScope.materialCheckCounts = data.materialCheckCounts
 					$rootScope.programCheckCounts = data.programCheckCounts
+					$rootScope.programScheduleCheckCounts = data.programScheduleCheckCounts
 					if (data.materialCheckCounts && data.materialCheckCounts != 0) {
 						$rootScope.userMessage.push({
 							name: 'materialCheck',
@@ -91,6 +95,12 @@ angular.module('sbAdminApp')
 						$rootScope.userMessage.push({
 							name: 'programCheck',
 							value: data.programCheckCounts
+						});
+					}
+					if (data.programScheduleCheckCounts && data.programScheduleCheckCounts != 0) {
+						$rootScope.userMessage.push({
+							name: 'scheduleCheck',
+							value: data.programScheduleCheckCounts
 						});
 					}
 					$rootScope.domainMessage = data.domainMessage;
@@ -131,7 +141,7 @@ angular.module('sbAdminApp')
 				};
 				$scope.$on('$stateChangeSuccess', function () {
 					$scope.currentState = $state.current.name;
-					
+
 					checkPatch();
 				});
 				$scope.checkRoute = function (x, $event) {
@@ -144,12 +154,12 @@ angular.module('sbAdminApp')
 						})
 					}
 				}
-			
-				$scope.goToDetail = function(item){
+
+				$scope.goToDetail = function (item) {
 					baseService.goToUrl('/dashboard/' + item.name)
 					$scope.collapseVar = 5;
 				}
-				
+
 			}
 		}
 	});

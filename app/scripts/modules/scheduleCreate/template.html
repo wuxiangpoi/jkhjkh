@@ -14,16 +14,22 @@
                 <div class="col-4" style="max-width:300px;">
                     <input class="form-control dibik" name="scheduleName" ng-model="scheduleName" placeholder="排期名称" required ng-pattern="/([A-Za-z0-9]{2,20})|([\u4e00-\u9fa5]{2,10})|([\u4e00-\u9fa5][\w\W]{2})/">
                 </div>
-                <div class="col-6 help-block tex-red" ng-messages="scheduleNameForm.scheduleName.$error">
-                    <p ng-message="required">请输入排期名称</p>
-                    <p ng-message="pattern">请输入2-40个字符</p>
+                <div class="col-6 tex-red" ng-messages="scheduleNameForm.scheduleName.$error" ng-if="isShowMessage">
+                    <p class="m0" ng-message="required">请输入排期名称</p>
+                    <p class="m0" ng-message="pattern">请输入2-40个字符</p>
                 </div>
             </div>
         </form>
         <div class="table-wrapper col-sm-4 mid-table">
             <div class="clearfix">
-                <div class="clearfix groupLeafSelect">
+                <div class="clearfix groupLeafSelect fl">
                     <group-leaf-select reqleafurl="{{'/api/program/getProgramGroups'}}"></group-leaf-select>
+                </div>
+                <div class="panelSelectWrap">
+                    <select class="form-control" ng-model="sp.resolution" ng-change="callServer(tableState)">
+                        <option value="">分辨率</option>
+                        <option ng-repeat="t in userData.root_programReslotions" value="{{t}}">{{t}}</option>
+                    </select>
                 </div>
             </div>
             <table class="table" st-pipe="callServer" st-table="displayed">
@@ -34,7 +40,7 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody ng-show="!isLoading">
+                <tbody class="content" ng-show="!isLoading">
                     <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
                         <td class="tdClick" ng-click="showProgram(row)">
                             {{row.name}}
@@ -43,34 +49,36 @@
                             {{row.duration + 's'}}
                         </td>
                         <td>
-                            <button class="btn tableBtn" ng-class="{'disabled': playListId.indexOf(row.id) != -1 || playListId.length > 100}" ng-click="add(row)">添加
+                            <button class="btn tableBtn" ng-class="{'disabled': playListId.length > 100 || playListId.indexOf(row.id) != -1 }"  ng-click="add(row)">添加
                             </button>
                         </td>
 
                     </tr>
                 </tbody>
                 <tbody ng-include="'tpl/table.html'"></tbody>
+                <tfoot ng-show="!isLoading" ng-include="'tpl/mid_table_footer.html'"></tfoot>
             </table>
         </div>
         <div class="col-sm-8 bg-white" style="padding:10px;">
             <div class="txt-center" style="line-height:380px;" ng-show="!playList.length">请从左侧选择节目添加~</div>
-            <div ng-show="playList.length > 0" style="position:relative;">
-                <div class="clearfix" style="width:100px;position:absolute;left:0;top:-2px;padding-left:4px;z-index:2;">
+            <div ng-show="playList.length > 0" style="position:relative;height:480px;margin-top:-12px;overflow-x:hidden;overflow-y: auto;">
+                <div class="clearfix" style="width:100px;position:absolute;left:0;top:7px;padding-left:4px;z-index:2;">
                     <div style="font-size:14px; color:#9f9f9f;height:24px;">节目排期</div>
-                    <div class="clearfix" style="line-height:30px;" ng-repeat="item in playList">
+                    <div class="clearfix" style="line-height:29px;" ng-repeat="item in playList">
                         <div class="fl ellipsTXt" ng-click="showPlay(item)" style="width:80px;font-size:12px;padding-left:4px;cursor:pointer;">{{item.name}}</div>
                         <div class="fr" style="color:#c4c4c4;cursor:pointer;" ng-click="del(item)">
                             <i class="fa fa-close"></i>
                         </div>
                     </div>
                 </div>
-                <div ng-style="chartStyle" e-chart></div>
-                <div class="txt-center">
-                    <button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="saveSchedule()">保存
-                        <i class="fa fa-spinner"></i>
-                    </button>
-                    <button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
-                </div>
+                <div e-chart eoption="eoption" ng-style="chartStyle"></div>
+                
+            </div>
+            <div class="txt-center" ng-show="playList.length > 0">
+                <button ng-if="perms(442)" class="btn btn-primary midBtn" ng-class="{'disabled': isPosting}" type="button" ng-click="saveSchedule()">保存
+                    <i class="fa fa-spinner"></i>
+                </button>
+                <button class="btn btn-default midBtn" type="button" ui-sref="dashboard.schedule">返回</button>
             </div>
         </div>
     </div>

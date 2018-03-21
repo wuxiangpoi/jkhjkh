@@ -8,7 +8,7 @@
                 <div class="col-sm-5 p0">
                     <input type="radio" style="position:absolute;z-index:-1;opacity:0;">
                     <div class="timeSelectWrap" locale="zh-cn" change="formDate(newValue, oldValue,'startDate')" start-view="month" moment-picker=""
-                        min-date="today" today="true" format="YYYY-MM-DD">
+                        min-date="today" max-date="maxDate" today="true" format="YYYY-MM-DD">
                         <span ng-class="{'text-muted': !data.startDate}" style="margin-left:0;">
                             {{ formateDate(data.startDate) || '起始日期' }}
                         </span>
@@ -19,13 +19,16 @@
                 <span class="col-sm-1 p0" style="line-height:30px;margin:0 5px;text-align:center;">至</span>
                 <div class="col-sm-5 p0">
                     <div class="timeSelectWrap" locale="zh-cn" change="formDate(newValue, oldValue,'endDate')" start-view="month" moment-picker=""
-                        min-date="today" today="true" format="YYYY-MM-DD" start-date="data.endDate">
+                        min-date="today" max-date="maxDate" today="true" format="YYYY-MM-DD" start-date="data.endDate">
                         <span ng-class="{'text-muted': !data.endDate}" style="margin-left:0;">
                             {{ formateDate(data.endDate) || '截止日期' }}
                         </span>
                         <i class="fa fa-calendar"></i>
                     </div>
                     <input type="hidden" name="endDate" required ng-model="data.endDate">
+                </div>
+                <div class="help-block col-sm-12" ng-if="data.endDate < data.startDate && isShowMessage">
+                    <p class="row">结束日期必须大于开始日期</p>
                 </div>
             </div>
         </div>
@@ -45,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group clearfix" ng-if="stype == 1">
+        <div class="form-group clearfix" ng-show="stype == 1">
             <label class="col-sm-3 p0">播放时间</label>
             <div class="col-sm-9">
                 <div class="col-sm-5 p0">
@@ -76,6 +79,9 @@
                     </div>
 
                 </div>
+                <div class="help-block col-sm-12" ng-if="showTip && isShowMessage">
+                    <p class="row">结束时间必须大于开始时间</p>
+                </div>
             </div>
         </div>
         <div class="form-group clearfix" ng-if="stype == 1">
@@ -88,6 +94,9 @@
                         <option value="15">15次</option>
                         <option value="20">20次</option>
                     </select>
+                    <div class="help-block" ng-messages="modalForm.plays.$error" ng-if="isShowMessage">
+                        <p ng-message="required">请选择播放次数</p>
+                    </div>
             </div>
             <div class="col-sm-5 p0 txt-grey" style="font-size:12px;line-height:18px;">
                 (如果选择的播放时间有空闲，将按节目播放次数比例轮播)

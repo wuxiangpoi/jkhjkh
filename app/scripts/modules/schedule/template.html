@@ -1,6 +1,6 @@
 <div class="content-wrap" style="min-width:780px;">
     <div class="level2 clearfix">
-        <div ng-if="perms(432)" class="tipBtnWrap">
+        <div ng-if="perms(442)" class="tipBtnWrap">
             <button ui-sref="dashboard.scheduleCreate" class="btn btn-primary h34">
                 <i class="iconfont icon-tianjia-"></i>
                 添加排期
@@ -22,7 +22,6 @@
             <thead>
                 <tr>
                     <th>排期名称</th>
-                    <th>排期时间</th>
                     <th>创建账号</th>
                     <th>创建时间</th>
                     <th>发布终端数</th>
@@ -32,15 +31,11 @@
             </thead>
             <tbody ng-show="!isLoading">
                 <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
-                    <td class="tdClick" ng-click="showProgram(row)">
+                    <td class="tdClick" ng-click="showSchedule(row)">
                         {{row.name}}
                     </td>
-                    <td>{{row.size | dmbdResourceSizeFilter}}</td>
                     <td>
-                            <div class="txt-grey" ng-if="row.status == 0">{{row.status | programStatusTxt}}</div>
-                            <div ng-if="row.status == 1 || row.status == 2 || row.status == 3 || row.status == 6">{{row.status | programStatusTxt}}</div>
-                            <div class="tex-red" ng-if="row.status == 4 || row.status == 5 || row.status == 7">{{row.status | programStatusTxt}}</div>
-                        
+                        {{row.creator}}
                     </td>
 
                     <td>
@@ -55,21 +50,23 @@
                         </div>
                     </td>
                     <td>
-                        {{row.createTime | formateTime}}
+                            <div class="txt-grey" ng-if="row.status == 0">{{row.status | scheduleStatusTxt}}</div>
+                            <div ng-if="row.status == 1 || row.status == 2">{{row.status | scheduleStatusTxt}}</div>
+                            <div class="tex-red" ng-if="row.status == 4">{{row.status | scheduleStatusTxt}}</div>
                     </td>
-                    <td style="{{row.status == 0 || ow.status == 4 || ow.status == 5 || ow.status == 7?'width:230px;':'160px'}}">
-                        <button ng-if="row.status == 0 || row.status == 4 || row.status == 5 || row.status == 7 && perms(435)" class="btn tableBtn"
+                    <td style="{{row.status == 0 || row.status == 4 ?'width:230px;':'160px'}}">
+                        <button ng-if="[0,4].indexOf(row.status) != -1 && perms(444)" class="btn tableBtn"
                             ng-click="submitCheck(row)">提交审核
                         </button>
-                        <button ng-if="row.status == 0 || row.status == 4 || row.status == 5 || row.status == 7 && perms(432)" class="btn tableBtn"
-                            ng-click="saveEdit(row)">编辑
+                        <button ng-if="[0,4].indexOf(row.status) != -1 && perms(442)" class="btn tableBtn"
+                            ng-click="saveAs(row)">修改
                         </button>
-                        <button ng-if="row.status == 1 && perms(436)" class="btn tableBtn" ng-click="sendDown(row)">发布
+                        <button ng-if="row.status == 1" class="btn tableBtn" ng-click="sendDown(row)">发布
                         </button>
-                        <button ng-if="row.status == 1 || row.status == 2 || row.status == 3 || row.status == 6 && perms(432)" class="btn tableBtn"
+                        <button ng-if="row.status == 1" class="btn tableBtn"
                             ng-click="saveAs(row)">另存为
                         </button>
-                        <button ng-if="row.status == 0 || row.status == 4 || row.status == 5 || row.status == 7 && perms(432)" class="btn tableBtn"
+                        <button ng-if="[0,4].indexOf(row.status) != -1 && perms(443)" class="btn tableBtn"
                             ng-click="del(row)">删除
                         </button>
                     </td>

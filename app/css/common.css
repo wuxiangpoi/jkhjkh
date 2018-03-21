@@ -21,6 +21,10 @@
 .btn:focus {
   outline: none!important;
 }
+.btn.midBtn {
+  padding: 0 48px;
+  line-height: 48px;
+}
 .fullScreenBtn {
   position: absolute;
   top: 0;
@@ -405,6 +409,9 @@ select {
 .p0 {
   padding: 0;
 }
+.m0 {
+  margin: 0;
+}
 /* line 36, app/scss/common.scss */
 .pl10 {
   padding-left: 10px;
@@ -785,9 +792,11 @@ div.timeSelectWrap {
 }
 .table-wrapper.mid-table {
   background: #f6f7fa;
+  min-width: 320px;
 }
 .table-wrapper.mid-table table {
   border-top: 0;
+  margin-bottom: 0;
 }
 .table-wrapper.mid-table table > thead {
   background: #dbdcdf;
@@ -800,8 +809,23 @@ div.timeSelectWrap {
 .table-wrapper.mid-table table > tbody td {
   border-top: 0;
 }
+.table-wrapper.mid-table .pagination li a {
+  background: #f6f7fa;
+  border-radius: 50%;
+  margin-left: 2px!important;
+}
+.table-wrapper.mid-table .pagination li a:hover {
+  background: #ddd;
+  color: #fff;
+}
+.table-wrapper.mid-table .pagination li.active a {
+  background: #00a0e9;
+}
+.table-wrapper.mid-table .pagination li .ellipsis {
+  background: none;
+}
 .pagination {
-  margin: 10px 0!important;
+  margin: 5px 0!important;
 }
 .pagination a {
   width: 26px;
