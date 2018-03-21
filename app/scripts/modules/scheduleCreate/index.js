@@ -76,7 +76,7 @@ angular.module('sbAdminApp', ['chartService'])
 					height: minLen * 30 + 30 + 'px',
 					width: '100%'
 				}
-				$scope.eoption = chartService.initChartSchedule($scope.playList);
+				$scope.eoption = chartService.initChartSchedule($scope.playList,minLen);
 				setTimeout(function(){  
 					$scope.$apply();//必需手动进行脏值检测,否则数据无法刷新到界面  
 				},1); 
@@ -261,6 +261,7 @@ angular.module('sbAdminApp', ['chartService'])
 					baseService.confirm('提示', "确定保存排期：" + $scope.scheduleName + "?", function (ngDialog, vm) {
 						vm.isPosting = true;
 						baseService.postData(baseService.api.programSchedule + 'saveProgramSchedule', {
+							id: $stateParams.id? $stateParams.id: '',
 							name: $scope.scheduleName,
 							programs: JSON.stringify($scope.playList)
 						}, function (data) {

@@ -1,7 +1,7 @@
 var chartService = angular.module('chartService', []);
 chartService.factory('chartService', ['baseService', function (baseService) {
     var chartService = {
-        initChartSchedule: function (playList) {
+        initChartSchedule: function (playList,mLen) {
             var playData = {
                 tooltip: {
                     trigger: 'item'
@@ -161,11 +161,11 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                         },
                         formatter: function (data) {
                             var playData = data.data.playData;
-                            var min_max = playData.startDate + '-' + playData.endDate;
+                            var min_max = baseService.formateDayTxt(playData.startDate) + '-' + baseService.formateDayTxt(playData.endDate);
                             var period = playData.stype == 1 ? playData.startTime + '-' + playData.endTime : '全天';
                             var str = '<span style="color:#000;font-size:16px;">' + data.data.name + '</span><br />'
-                            str += '<span style="font-size:13px;">播放日期</span><span style="font-size:12px;"> ' + min_max + '</span><br />'
-                            str += '<span style="font-size:13px;">播放时段</span><span style="font-size:12px;"> ' + period + '</span><br />'
+                            str += '<span style="font-size:13px;">播放日期</span><span style="font-size:12px;color:#9f9f9f;"> ' + min_max + '</span><br />'
+                            str += '<span style="font-size:13px;">播放时段</span><span style="font-size:12px;color:#9f9f9f;"> ' + period + '</span><br />'
                             if (playData.stype == 1) {
                                 str += '<span style="font-size:13px;">播放次数</span><span style="font-size:12px;"> ' + playData.plays + '次</span>'
                             }
@@ -180,7 +180,7 @@ chartService.factory('chartService', ['baseService', function (baseService) {
             var interval, dateInterval;
             var intervalDay = 5 * 24 * 60 * 60 * 1000;
             var intervalMon = 30 * 24 * 60 * 60 * 1000;
-            var minLen = 15;
+            var minLen = mLen;
             var chartData = {};
             var dataXlist = [];
             var startDatelist = [];

@@ -103,13 +103,13 @@ angular.module('sbAdminApp')
                         if (data.height > windowHeight) {
                             $scope.imgStyle = {
                                 width: 'auto',
-                                height: '100%',
+                                height: windowHeight,
                                 verticalAlign: 'middle'
                             }
                         } else {
                             $scope.imgStyle = {
                                 width: 'auto',
-                                height: data.height,
+                                height: '100%',
                                 verticalAlign: 'middle'
                             }
                         }

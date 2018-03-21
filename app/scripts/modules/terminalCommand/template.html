@@ -4,7 +4,7 @@
         <div class="tableHeader clearfix">
             <div class="selectWrap">
                 <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
-                    <option value="">下发状态</option>
+                    <option value="">命令状态</option>
                     <option value="0">正在下发</option>
                     <option value="1">下发成功</option>
                     <option value="2">下发失败</option>
@@ -27,9 +27,8 @@
                     <th>终端编号</th>
                     <th>终端名称</th>
                     <th>用户账号</th>
-                    <th>命令代码</th>
                     <th>命令名称</th>
-                    <th>下发状态</th>
+                    <th>命令状态</th>
                     <th>下发时间</th>
                 </tr>
             </thead>
@@ -38,9 +37,6 @@
                     <td>{{row.terNo}}</td>
                     <td>{{row.terName}}</td>
                     <td>{{row.userAccount}}</td>
-                    <td>
-                        {{row.cmdCode}}
-                    </td>
                     <td>
                         {{getRootDicName('terminal_cmd', row.cmdCode)}}
                     </td>

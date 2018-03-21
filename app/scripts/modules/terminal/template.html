@@ -120,6 +120,7 @@
 					<div class="panel-left">终端分组</div>
 					<div class="panel-right">
 						<span class="leafGroup" ng-class="{'current': sp.gid == ''}" ng-click="chooseLeaf('',$event)">全部分组</span>
+						<span class="leafGroup" ng-class="{'current': sp.gid == ''}" ng-click="chooseLeaf('',$event)">未分组</span>
 						<span class="leafGroup" ng-class="{'current': sp.gid == leaf.id}" ng-repeat="leaf in leafes">
 							<span class="leafName" ng-click="chooseLeaf(leaf.id,$event)">{{leaf.name}}</span>
 							<span class="leafEdit">

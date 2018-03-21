@@ -1,4 +1,4 @@
-<div class="content-wrap" style="min-width:780px;">
+<div class="content-wrap" style="min-width:960px;">
     <div class="level2 clearfix">
         <button ng-if="!isSort" class="iconBtn btn btn-primary" ui-sref="dashboard.schedule">
             <i class="fa fa-angle-left"></i>返回
@@ -20,12 +20,12 @@
                 </div>
             </div>
         </form>
-        <div class="table-wrapper col-sm-4 mid-table">
+        <div class="table-wrapper col-35 mid-table">
             <div class="clearfix">
                 <div class="clearfix groupLeafSelect fl">
                     <group-leaf-select reqleafurl="{{'/api/program/getProgramGroups'}}"></group-leaf-select>
                 </div>
-                <div class="panelSelectWrap">
+                <div class="panelSelectWrap" style="margin-right:0;">
                     <select class="form-control" ng-model="sp.resolution" ng-change="callServer(tableState)">
                         <option value="">分辨率</option>
                         <option ng-repeat="t in userData.root_programReslotions" value="{{t}}">{{t}}</option>
@@ -59,9 +59,9 @@
                 <tfoot ng-show="!isLoading" ng-include="'tpl/mid_table_footer.html'"></tfoot>
             </table>
         </div>
-        <div class="col-sm-8 bg-white" style="padding:10px;">
-            <div class="txt-center" style="line-height:380px;" ng-show="!playList.length">请从左侧选择节目添加~</div>
-            <div ng-show="playList.length > 0" style="position:relative;height:480px;margin-top:-12px;overflow-x:hidden;overflow-y: auto;">
+        <div class="col-65 bg-white" style="padding:10px;">
+            <div class="txt-center txt-grey" style="line-height:380px;" ng-show="!playList.length">请从左侧选择节目添加~</div>
+            <div ng-show="playList.length > 0" style="position:relative;height:480px;margin-top:-12px;overflow-y: auto;overflow-x:hidden;">
                 <div class="clearfix" style="width:100px;position:absolute;left:0;top:7px;padding-left:4px;z-index:2;">
                     <div style="font-size:14px; color:#9f9f9f;height:24px;">节目排期</div>
                     <div class="clearfix" style="line-height:29px;" ng-repeat="item in playList">
@@ -74,7 +74,7 @@
                 <div e-chart eoption="eoption" ng-style="chartStyle"></div>
                 
             </div>
-            <div class="txt-center" ng-show="playList.length > 0">
+            <div class="txt-center mart20" ng-show="playList.length > 0">
                 <button ng-if="perms(442)" class="btn btn-primary midBtn" ng-class="{'disabled': isPosting}" type="button" ng-click="saveSchedule()">保存
                     <i class="fa fa-spinner"></i>
                 </button>

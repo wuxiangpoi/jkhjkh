@@ -161,24 +161,32 @@ li {
   white-space: nowrap;
 }
 .col-2 {
-  display: inline-block;
+  float: left;
   width: 20%;
 }
 .col-3 {
-  display: inline-block;
+  float: left;
   width: 30%;
 }
+.col-35 {
+  float: left;
+  width: 35%;
+}
 .col-4 {
-  display: inline-block;
+  float: left;
   width: 40%;
 }
 .col-5 {
-  display: inline-block;
+  float: left;
   width: 50%;
 }
 .col-6 {
-  display: inline-block;
+  float: left;
   width: 50%;
+}
+.col-65 {
+  float: left;
+  width: 65%;
 }
 .dibik {
   display: inline-block;
@@ -188,6 +196,9 @@ li {
 }
 .mart0 {
   margin-top: 0;
+}
+.mart20 {
+  margin-top: 20px;
 }
 .martr20 {
   margin-right: 20px;

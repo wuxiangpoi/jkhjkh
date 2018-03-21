@@ -296,6 +296,9 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
         formateDayTime: function (date) {
             return Date.parse(date.substring(0, 4) + '/' + date.substring(4, 6) + '/' + date.substring(6, 8));
         },
+        formateDayTxt: function (date) {
+            return date.substring(0, 4) + '年' + date.substring(4, 6) + '月' + date.substring(6, 8) + '日';
+        },
         getFirstorLastDay: function getLastDay(date, type) {
             var now = new Date(date);
             var year = now.getFullYear();
@@ -338,12 +341,11 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             });
 
         },
-        showSchedule: function (item, detailType, chartService,cb) {
+        showSchedule: function (item, detailType, chartService, cb) {
             var me = this;
             this.postData(this.api.programSchedule + 'getProgramScheduleById', {
                 id: item.id
             }, function (schedule) {
-                console.log(schedule)
                 schedule.detailType = detailType;
                 me.confirmDialog(750, '排期详情', schedule, "tpl/schedule_details.html", function (type, ngDialog, vm) {
                     if (cb) {
@@ -351,31 +353,34 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     }
                 }, function (vm) {
                     vm.playList = [];
-                    for(var i = 0; i < schedule.programs.length;i ++){
+                    for (var i = 0; i < schedule.programs.length; i++) {
                         var chartItem = {
-							id: schedule.programs[i].id,
-							name: schedule.programs[i].name,
-							size: schedule.programs[i].size,
-							materials: schedule.programs[i].materials,
-							duration: schedule.programs[i].duration,
-							content: schedule.programs[i].content,
-							startDate: schedule.programs[i].startDate.toString(),
-							endDate: schedule.programs[i].endDate.toString(),
-							stype: vm.stype
-						};
-						if(vm.stype == 1){
-							chartItem.startTime = schedule.programs[i].startTime;
-							chartItem.endTime = schedule.programs[i].endTime;
-							chartItem.plays = schedule.programs[i].plays;
+                            id: schedule.programs[i].id,
+                            name: schedule.programs[i].name,
+                            size: schedule.programs[i].size,
+                            materials: schedule.programs[i].materials,
+                            duration: schedule.programs[i].duration,
+                            content: schedule.programs[i].content,
+                            startDate: schedule.programs[i].startDate.toString(),
+                            endDate: schedule.programs[i].endDate.toString(),
+                            stype: vm.stype
+                        };
+                        if (vm.stype == 1) {
+                            chartItem.startTime = schedule.programs[i].startTime;
+                            chartItem.endTime = schedule.programs[i].endTime;
+                            chartItem.plays = schedule.programs[i].plays;
                         }
                         vm.playList.push(chartItem);
+                        var minLen = 12;
+                        if (vm.playList.length > minLen) {
+                            minLen = vm.playList.length;
+                        }
                         vm.chartStyle = {
-							'width': '100%',
-							'height': '390px',
-							'position': 'relative'
-						}
+                            height: minLen * 30 + 30 + 'px',
+                            width: '100%'
+                        }
                     }
-                    vm.eoption = chartService.initChartSchedule(vm.playList);
+                    vm.eoption = chartService.initChartSchedule(vm.playList,minLen);
                 });
             })
         },
