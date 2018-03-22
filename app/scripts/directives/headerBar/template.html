@@ -25,7 +25,9 @@
                     <div class="dropdownItemWrap">
                         <div ng-repeat="tip in userMessage" ng-click="goToDetail(tip)" class="dropdown-item clearfix">
                             <span class="messageLeft fl" ng-style="{'background-color':'{{colorArr[$index%3]}}'}">
-                                <i class="{{tip.name == 'materialCheck'?'iconfont icon-neirongguanli':'iconfont icon-jiemuguanli'}}"></i>
+                                <i ng-if="tip.name == 'materialCheck'" class="iconfont icon-neirongguanli"></i>
+                                <i ng-if="tip.name == 'programCheck'" class="iconfont icon-jiemuguanli"></i>
+                                <i ng-if="tip.name == 'scheduleCheck'" class="iconfont icon-paiqiguanli"></i>
                             </span>
                             <span class="messageRight fl" style="line-height:48px;">
                                 <span ng-if="tip.name == 'materialCheck'">
@@ -101,7 +103,7 @@
                 </li>
                 <li class="firstNav" ng-if="perms(44)">
                     <a ui-sref-active="active" ui-sref="dashboard.schedule" ng-click="checkRoute(9,$event)">
-                        <i class="iconfont icon-jiemuguanli"></i>
+                        <i class="iconfont icon-paiqiguanli"></i>
                         <span class="navTle">排期管理</span>
                     </a>
                 </li>
@@ -110,7 +112,7 @@
                         <i class="iconfont icon-shenheguanli"></i>
                         <span class="navTle">审核管理</span>
                         <span id="mpTotal" ng-if="materialCheckCounts + programCheckCounts > 0" class="indicator">
-                            {{materialCheckCounts + programCheckCounts}}
+                            {{materialCheckCounts + programCheckCounts + programScheduleCheckCounts}}
                         </span>
                         <span class="fa arrow"></span>
 

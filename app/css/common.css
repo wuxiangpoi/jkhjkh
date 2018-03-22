@@ -1591,6 +1591,7 @@ div.timeSelectWrap {
 .ngdialog-content .modal-footer {
   border-top: none;
   text-align: center;
+  padding: 0 15px 15px 15px;
 }
 .ngdialog-content .modal-footer .btn {
   display: inline-block;
