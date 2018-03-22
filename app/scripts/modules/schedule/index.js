@@ -1,7 +1,7 @@
 'use strict';
-angular.module('sbAdminApp',['chartService'])
+angular.module('sbAdminApp', ['chartService'])
 	.controller('scheduleCtrl',
-		function ($scope, $rootScope, $state, baseService, leafService,chartService) {
+		function ($scope, $rootScope, $state, baseService, leafService, chartService) {
 			$scope.displayed = [];
 			$scope.sp = {};
 			$scope.tableState = {};
@@ -9,7 +9,7 @@ angular.module('sbAdminApp',['chartService'])
 				baseService.initTable($scope, tableState, baseService.api.programSchedule + 'getProgramSchedulePageList');
 			}
 			$scope.showSchedule = function (item) {
-				baseService.showSchedule(item,2,chartService);
+				baseService.showSchedule(item, 2, chartService);
 			}
 			$scope.del = function (item) {
 				baseService.confirm('删除', "确定删除排期：" + item.name + "?", function (ngDialog, vm) {
@@ -41,6 +41,155 @@ angular.module('sbAdminApp',['chartService'])
 				$state.go('dashboard.scheduleCreate', {
 					id: item.id
 				});
+			}
+			$scope.sendDown = function (item) {
+				baseService.confirmDialog(720, '排期发布', item, 'tpl/terminal_schedule.html', function (ngDialog, vm) {
+					var s = '';
+					s = vm.ids.join(',');
+					if (s.length) {
+						baseService.confirm('节目操作', "确定在选中的终端上发布排期?", function (ngDialog, vm1) {
+							vm1.isPosting = true;
+							baseService.postData(baseService.api.program + 'programManage_sendCommand_StopPlayByPids', {
+									tid: item.id,
+									type: 0, // 0停播  1 下发
+									pids: s
+								},
+								function (data) {
+									ngDialog.close();
+									baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，将停播此节目，同时不显示在终端列表中~', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
+								});
+						})
+					} else {
+						baseService.alert('请至少勾选一个设备再进行操作', 'warning', true);
+					}
+				}, function (vm) {
+					vm.displayed = [];
+					vm.sp = {};
+					vm.ids = [];
+					vm.currentGroup = $rootScope.rootGroup;
+					vm.sp.oid = vm.currentGroup.id;
+					vm.currentLeaf = {};
+					vm.currentLeaf.id = '';
+					vm.sp.gid = '';
+					vm.tableState = {};
+					vm.callServer = function (tableState) {
+						baseService.initTable(vm, tableState, baseService.api.program + 'getProgramPlayPageByPid');
+					}
+					vm.$on('emitGroupLeaf', function (e, group, leaf) {
+						if (vm.sp.oid != group.id || vm.sp.gid != leaf.id) {
+							vm.currentGroup = group;
+							vm.sp.oid = group.id;
+							vm.sp.gid = leaf.id;
+							vm.callServer(vm.tableState);
+						}
+
+					});
+					vm.checkAll = function ($event) {
+						vm.ids = [];
+						if ($($event.currentTarget).is(':checked')) {
+							for (var i = 0; i < vm.displayed.length; i++) {
+								vm.ids.push(vm.displayed[i].pid)
+							}
+						} else {
+							vm.ids = [];
+						}
+					}
+					vm.checkThis = function (item, $event) {
+						if ($($event.currentTarget).is(':checked')) {
+							vm.ids.push(item.pid);
+
+						} else {
+							vm.ids = baseService.removeAry(vm.ids, item.pid);
+						}
+					}
+					vm.showPlay = function (item) {
+						baseService.showProgram(item);
+					}
+				})
+			}
+			$scope.sendCommandStopProgram = function (item) {
+				baseService.confirmDialog(720, '播放管理', item, 'tpl/terminal_schedulePlay.html', function (ngDialog, vm) {
+					var s = '';
+					s = vm.ids.join(',');
+					if (s.length) {
+						baseService.confirm('节目操作', "确定在该设备上停播选中节目?", function (ngDialog, vm1) {
+							vm1.isPosting = true;
+							baseService.postData(baseService.api.program + 'programManage_sendCommand_StopPlayByPids', {
+									tid: item.id,
+									type: 0, // 0停播  1 下发
+									pids: s
+								},
+								function (data) {
+									ngDialog.close();
+									baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，将停播此节目，同时不显示在终端列表中~', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
+								});
+						})
+					} else {
+						baseService.alert('请至少勾选一个节目再进行操作', 'warning', true);
+					}
+				}, function (vm) {
+					vm.displayed = [];
+					vm.sp = {};
+					vm.ids = [];
+					vm.currentGroup = $rootScope.rootGroup;
+					vm.sp.oid = vm.currentGroup.id;
+					vm.currentLeaf = {};
+					vm.currentLeaf.id = '';
+					vm.sp.gid = '';
+					vm.tableState = {};
+					vm.showType = 0;
+					vm.callUrl = baseService.api.terminal + 'getTerminalPageList';
+					vm.callServer = function (tableState) {
+						baseService.initTable(vm, tableState, vm.callUrl);
+					}
+					vm.initTable = function () {
+						switch (vm.showType) {
+							case 0:
+								vm.callUrl = baseService.api.terminal + 'getTerminalPageList';
+								break;
+							case 1:
+								vm.callUrl = baseService.api.terminal + 'getTerminalPageList';
+								break;
+						}
+						vm.currentGroup = $rootScope.rootGroup;
+						vm.sp.oid = vm.currentGroup.id;
+						vm.currentLeaf = {};
+						vm.currentLeaf.id = '';
+						vm.sp.gid = '';
+						vm.callServer(vm.tableState);
+					}
+					vm.$on('emitGroupLeaf', function (e, group, leaf) {
+						if (vm.sp.oid != group.id || vm.sp.gid != leaf.id) {
+							vm.currentGroup = group;
+							vm.sp.oid = group.id;
+							vm.sp.gid = leaf.id;
+							vm.callServer(vm.tableState);
+						}
+
+					});
+					vm.checkAll = function ($event) {
+						vm.ids = [];
+						if ($($event.currentTarget).is(':checked')) {
+							for (var i = 0; i < vm.displayed.length; i++) {
+								vm.ids.push(vm.displayed[i].pid)
+							}
+						} else {
+							vm.ids = [];
+						}
+					}
+					vm.checkThis = function (item, $event) {
+						if ($($event.currentTarget).is(':checked')) {
+							vm.ids.push(item.pid);
+
+						} else {
+							vm.ids = baseService.removeAry(vm.ids, item.pid);
+						}
+					}
+					vm.switchTab = function (type) {
+						vm.showType = type;
+						vm.initTable();
+					}
+				})
 			}
 		}
 	)

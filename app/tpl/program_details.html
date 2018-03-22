@@ -6,7 +6,7 @@
 				<div class="previewWrap positionR">
 						<dmbd-program-preview2 ng-if="program" program-pixel-horizontal="program.pixelHorizontal" program-pixel-vertical="program.pixelVertical"
 							program-pages="program.pages" size="450"></dmbd-program-preview2>
-							<button class="fullScreenBtn" ng-click=programPreview(program)><i class="fa fa-arrows-alt"></i></button>
+							<button class="fullScreenBtn" ng-class="{'top40': program.pages.length > 1 }" ng-click=programPreview(program)><i class="fa fa-arrows-alt"></i></button>
 						</div>
 		</div>
 		<div class="col-sm-4 pdr0">

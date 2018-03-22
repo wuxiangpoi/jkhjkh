@@ -16,7 +16,15 @@
 
     <div class="table-wrapper">
         <div class="tableHeader clearfix">
-            
+            <div class="selectWrap">
+                <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+                    <option value="">审核状态</option>
+                    <option value="1">待提交审核</option>
+                    <option value="2">审核中</option>
+                    <option value="4">审核不通过</option>
+                    <option value="1">审核通过</option>
+                </select>
+            </div>
         </div>
         <table class="table" st-pipe="callServer" st-table="displayed">
             <thead>
@@ -42,7 +50,7 @@
                         {{row.createTime | formateTime}}
                     </td>
                     <td>
-                        <div ng-if="row.playTers == 0">
+                        <div ng-if="row.playTers == 0" ng-click="sendCommandStopProgram(row)">
                             0
                         </div>
                         <div class="tdClick" ng-if="row.playTers > 0" ng-click="sendCommandStopProgram(row)">

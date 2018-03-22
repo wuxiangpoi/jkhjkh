@@ -1,0 +1,70 @@
+<div ng-include="'tpl/modal_header.html'"></div>
+<div class="modal-body">
+
+	<div class="table-wrapper row">
+		<div class="tableHeader clearfix" style="margin-bottom:0px;">
+            <div class="clearfix">
+
+                <div class="col-sm-6 ellipsTXt p0">
+                    排期名称：{{data.name}}
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="clearfix">
+                    <div class="fl lh34">选择终端：</div>
+                    <div class="fl">
+                        <div class="panelSelectWrap">
+                            <select class="form-control" ng-model="sp.resolution" ng-change="callServer(tableState)">
+                                <option value="">分辨率</option>
+                                <option ng-repeat="t in userData.root_programReslotions" value="{{t}}">{{t}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <div class="clearfix groupLeafSelect">
+                            <group-leaf-select reqleafurl="{{'/api/terminal/getTerminalGroups'}}"></group-leaf-select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+		<table class="table" st-pipe="callServer" st-table="displayed">
+			<thead>
+				<tr>
+					<th class="checkBoxTable">
+						<input ng-checked="ids.length == displayed.length && displayed.length != 0" ng-click="checkAll($event)" type="checkbox">
+					</th>
+					<th>终端编号</th>
+					<th>终端名称</th>
+					<th>分辨率</th>
+					<th>网络状态</th>
+				</tr>
+			</thead>
+			<tbody ng-show="!isLoading">
+				<tr ng-repeat="row in displayed" class="{{$index%2 == 0?'odd':'even'}}">
+					<td class="checkBoxTable">
+						<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.pid) != -1" type="checkbox">
+					</td>
+					<td class="tdClick" ng-click="showPlay(row)">{{row.no}}</td>
+					<td>{{row.name}}</td>
+					<td>{{row.resolution}}</td>
+					<td>
+						<div class="txt-red" ng-if="row.status == 0">未激活</div>
+						<div class="txt-green" ng-if="row.status == 1">在线</div>
+						<div class="txt-grey" ng-if="row.status == 2">离线</div>
+						<div class="txt-red" ng-if="row.status == 3">异常</div>
+					</td>
+				</tr>
+			</tbody>
+			<tbody ng-include="'tpl/table.html'"></tbody>
+			<tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+		</table>
+	</div>
+</div>
+<div class="modal-footer" ng-if="perms(436)">
+	<button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="modalConfirmSubmit()">发布
+		<i class="fa fa-spinner"></i>
+	</button>
+	<button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
+</div>
