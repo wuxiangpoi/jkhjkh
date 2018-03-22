@@ -1,14 +1,15 @@
-<div class="content-wrap" style="min-width:740px;">
+<div class="content-wrap" style="min-width:800px;">
 
     <div class="table-wrapper">
         <div class="tableHeader clearfix">
             <div class="selectWrap" style="margin-right:5px;">
                 <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
                     <option value="">命令状态</option>
+                    <option value="">等待终端上线</option>
                     <option value="1">下发成功</option>
                     <option value="2">下发失败</option>
                     <option value="3">正在下发</option>
-                    <option value="4">取消</option>
+                    <option value="4">已取消</option>
                 </select>
             </div>
             <div class="selectWrap">
@@ -35,7 +36,7 @@
         <table class="table" st-pipe="callServer" st-table="displayed">
             <thead>
                 <tr>
-                    <th>节目名称</th>
+                    <th>节目/排期名称</th>
                     <th>终端编号</th>
                     <th>终端名称</th>
                     <th>用户账号</th>

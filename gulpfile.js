@@ -162,7 +162,11 @@ gulp.task('revModuleCss', ['buildLess'], function () {
     .pipe(gulp.dest('app/temp/rev-css'));
 });
 
-
+gulp.task('copyModuleCss', ['buildLess'], function () {
+    return gulp.src('./app/modules/**/*.css')
+        .pipe($.cssnano())
+        .pipe(gulp.dest('dist/modules'))
+});
 
 gulp.task('tpls', function () {
     return gulp.src('./app/tpl/*.html')
@@ -230,5 +234,5 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build', ['clean'], function () {
-    runSequence('changEnv', 'copyJs', 'copyJsfile','revReplaceModule', 'tpls','copyOther','copyHtmlDirective', 'copyImage', 'copyFonts', 'finalTask', 'cleanTemp');
+    runSequence('changEnv', 'copyJs','copyModuleCss', 'copyJsfile','revReplaceModule', 'tpls','copyOther','copyHtmlDirective', 'copyImage', 'copyFonts', 'finalTask', 'cleanTemp');
 });
