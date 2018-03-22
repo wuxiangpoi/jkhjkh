@@ -300,6 +300,17 @@ select {
 .instructionWrap .dropdown-tip p {
   margin: 0 0 5px;
 }
+ul.activity-timeline > li:after {
+  content: "";
+  display: block;
+  border-left: 1px solid #eaeaea;
+  width: 1px;
+  height: 100px;
+  position: absolute;
+  top: 5px;
+  left: 16px;
+  z-index: -1;
+}
 /* 上传窗口 */
 .dialog-upload {
   position: fixed;
