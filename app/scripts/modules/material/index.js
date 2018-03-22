@@ -7,13 +7,14 @@ angular.module('sbAdminApp')
 			$scope.sp = {};
 			$scope.tableState = {};
 			$scope.ids = [];
+			$scope.idsNoSubmitCheck = [];
 			$scope.leafes = [];
 			$scope.currentGroup = $rootScope.rootGroup;
 			$scope.sp.oid = $scope.currentGroup.id;
 			$scope.currentLeaf = {};
 			$scope.currentLeaf.id = '';
 			$scope.sp.gid = '';
-			
+
 			$scope.callServer = function (tableState) {
 				baseService.initTable($scope, tableState, baseService.api.material + 'getMaterialList');
 			}
@@ -78,6 +79,7 @@ angular.module('sbAdminApp')
 				var oVal = editInput.val();
 				parent.addClass('edit');
 				editInput.focus();
+
 				function edit() {
 					var nVal = editInput.val();
 					if (nVal == '' || nVal == oVal) {
@@ -127,13 +129,29 @@ angular.module('sbAdminApp')
 			$scope.submitCheck = function (item) {
 				baseService.confirm('提交审核', '是否提交审核？', function (ngDialog, vm) {
 					vm.isPosting = true;
-					baseService.postData(baseService.api.material + 'sumbmitCheck', {
-						id: item.id
-					}, function (data) {
+					var s = '';
+					if (item) {
+						s = item.id;
+					} else {
+						s = $scope.idsNoSubmitCheck.length ? $scope.idsNoSubmitCheck.join(',') : ''
+					}
+					if (s == '') {
 						ngDialog.close();
 						baseService.alert('提交成功', 'success');
-						$scope.callServer($scope.tableState);
-					});
+						$scope.ids = [];
+						$scope.idsNoSubmitCheck = [];
+					} else {
+						baseService.postData(baseService.api.material + 'sumbmitCheck', {
+							id: s
+						}, function (data) {
+							ngDialog.close();
+							baseService.alert('提交成功', 'success');
+							$scope.callServer($scope.tableState);
+							$scope.ids = [];
+							$scope.idsNoSubmitCheck = [];
+						});
+					}
+
 				});
 			}
 			$scope.saveName = function (item) {
@@ -237,14 +255,14 @@ angular.module('sbAdminApp')
 						}
 					});
 
-					vm.uploader.onAfterAddingFile = function(fileItem) {
+					vm.uploader.onAfterAddingFile = function (fileItem) {
 						var fileName = fileItem.file.name.split('.');
 						fileName.pop();
 						fileItem.file.desc = fileName.join(',');
 					};
 
 					vm.uploader.onBeforeUploadItem = function (item) {
-						if(!item.formData.length){
+						if (!item.formData.length) {
 							item.cancel();
 						}
 						var imgfile_type = $rootScope.getRootDicNameStrs('image_format');
@@ -296,10 +314,30 @@ angular.module('sbAdminApp')
 				});
 			};
 			$scope.checkAll = function ($event) {
-				baseService.checkAll($event, $scope);
+				$scope.ids = [];
+				$scope.idsNoSubmitCheck = [];
+				if ($($event.currentTarget).is(':checked')) {
+					for (var i = 0; i < $scope.displayed.length; i++) {
+						$scope.ids.push($scope.displayed[i].id)
+						if ($scope.displayed[i].status == 0) {
+							$scope.idsNoSubmitCheck.push($scope.displayed[i].id)
+						}
+					}
+				} else {
+					$scope.ids = [];
+					$scope.idsNoSubmitCheck = [];
+				}
 			}
 			$scope.checkThis = function (item, $event) {
-				baseService.checkThis(item, $event, $scope);
+				if ($($event.currentTarget).is(':checked')) {
+					$scope.ids.push(item.id);
+					if (item.status == 1) {
+						$scope.idsNoSubmitCheck.push(item.id);
+					}
+				} else {
+					$scope.ids = baseService.removeAry($scope.ids, item.id);
+					$scope.idsNoSubmitCheck = baseService.removeAry($scope.idsNoSubmitCheck, item.id);
+				}
 			}
 
 			$scope.showTip = function ($event) {

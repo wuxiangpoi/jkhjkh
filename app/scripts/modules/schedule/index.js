@@ -73,7 +73,7 @@ angular.module('sbAdminApp', ['chartService'])
 					vm.sp.gid = '';
 					vm.tableState = {};
 					vm.callServer = function (tableState) {
-						baseService.initTable(vm, tableState, baseService.api.program + 'getProgramPlayPageByPid');
+						baseService.initTable(vm, tableState, baseService.api.terminal + 'getTerminalPageList');
 					}
 					vm.$on('emitGroupLeaf', function (e, group, leaf) {
 						if (vm.sp.oid != group.id || vm.sp.gid != leaf.id) {
