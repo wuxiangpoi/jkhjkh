@@ -6,17 +6,18 @@
  * # MainCtrl
  * Controller of the sbAdminApp
  */
-angular.module('sbAdminApp')
-		.controller('homeCtrl', ['$scope', '$rootScope', 'baseService', function ($scope, $rootScope, baseService) {
-			$scope.ter_all = 0;
-			$scope.ter_ok = 0;
-			$scope.ter_noAct = 0;
-			$scope.ter_offline = 0;
+angular.module('sbAdminApp', [])
+	.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'baseService', function ($scope, $window, $rootScope, baseService) {
+		$scope.ter_all = 0;
+		$scope.ter_ok = 0;
+		$scope.ter_noAct = 0;
+		$scope.ter_offline = 0;
 
-			$scope.ter_error = 0;
-			$scope.closeThisTip = function (e) {
-				$(e.currentTarget).parents('.userTip').remove();
-			}
+		$scope.ter_error = 0;
+		$scope.closeThisTip = function (e) {
+			$(e.currentTarget).parents('.userTip').remove();
+		}
+		$scope.initPage = function () {
 			var map = new BMap.Map("allmap");
 			var point = new BMap.Point(113.649644, 34.75661);
 			var top_left_control = new BMap.ScaleControl({
@@ -93,7 +94,17 @@ angular.module('sbAdminApp')
 				}
 
 			});
+		}
+		
+		
+		if(BMap.Map){
+			$scope.initPage();
+		}else{
+			$window.baiduMapLoaded = function () {
+				$scope.initPage();
+			}
+		}
 
 
-		}]);
-		// JavaScript Document
+	}]);
+// JavaScript Document

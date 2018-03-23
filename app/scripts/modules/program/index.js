@@ -156,8 +156,30 @@ angular.module('sbAdminApp')
 					vm.sp.gid = '';
 					vm.sp.pid = item.id;
 					vm.tableState = {};
+					vm.showType = 0;
+					vm.callUrl = baseService.api.program + 'getProgramPlayPageByPid';
 					vm.callServer = function (tableState) {
-						baseService.initTable(vm, tableState, baseService.api.program + 'getProgramPlayPageByPid');
+						baseService.initTable(vm, tableState, vm.callUrl);
+					}
+					vm.initTable = function () {
+						switch (vm.showType) {
+							case 0:
+								vm.callUrl = baseService.api.program + 'getProgramPlayPageByPid';
+								break;
+							case 1:
+								vm.callUrl = baseService.api.program + 'getProgramPlayPageByPid';
+								break;
+						}
+						vm.currentGroup = $rootScope.rootGroup;
+						vm.sp.oid = vm.currentGroup.id;
+						vm.currentLeaf = {};
+						vm.currentLeaf.id = '';
+						vm.sp.gid = '';
+						vm.callServer(vm.tableState);
+					}
+					vm.switchTab = function (type) {
+						vm.showType = type;
+						vm.initTable();
 					}
 					vm.$on('emitGroupLeaf', function (e, group, leaf) {
 						if (vm.sp.oid != group.id || vm.sp.gid != leaf.id) {

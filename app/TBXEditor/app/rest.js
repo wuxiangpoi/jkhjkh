@@ -28,7 +28,7 @@
 
     app.service('dmbdRest', ['$http', '$state', function ($http, $state) {
 
-        var host = 'http://192.168.1.100:8080/';
+        var host = 'http://192.168.1.101:8080/';
 
         //var host = currentScriptFolder + '../';
 

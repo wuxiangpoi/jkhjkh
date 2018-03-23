@@ -340,8 +340,25 @@ angular.module('sbAdminApp')
 					vm.sp.tid = item.id;
 					vm.tableState = {};
 					vm.ids = [];
+					vm.showType = 0;
+					vm.callUrl = baseService.api.terminal + 'getTerminalProgramPlayPageByTid';
 					vm.callServer = function (tableState) {
-						baseService.initTable(vm, tableState, baseService.api.terminal + 'getTerminalProgramPlayPageByTid');
+						baseService.initTable(vm, tableState, vm.callUrl);
+					}
+					vm.initTable = function () {
+						switch (vm.showType) {
+							case 0:
+								vm.callUrl = baseService.api.terminal + 'getTerminalProgramPlayPageByTid';
+								break;
+							case 1:
+								vm.callUrl = baseService.api.terminal + 'getTerminalProgramPlayPageByTid';
+								break;
+						}
+						vm.callServer(vm.tableState);
+					}
+					vm.switchTab = function (type) {
+						vm.showType = type;
+						vm.initTable();
 					}
 					vm.checkAll = function ($event) {
 						vm.ids = [];

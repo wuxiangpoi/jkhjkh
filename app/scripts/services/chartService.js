@@ -64,7 +64,7 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                     },
                     axisTick: {
                         show: false,
-                        length: 16,
+                        length: 8,
                         lineStyle: {
                             color: '#e2e3e6'
                         }
