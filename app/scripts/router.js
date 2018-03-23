@@ -80,10 +80,8 @@
                                 name: 'sbAdminApp',
                                 files: [
                                     'css/home/style.css',
-                                    "http://api.map.baidu.com/api?v=2.0&ak=hWot28fmyYXe1AMOfBfHoMMfSlnVnkeb&callback=baiduMapLoaded",
-                                    // "http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js",
-                                    // "http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js",
-                                    'scripts/modules/home/index.js'                                ]
+                                    'scripts/modules/home/index.js'
+                                    ]
                             })
                         }
                     }

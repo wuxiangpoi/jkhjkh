@@ -17,6 +17,9 @@ angular.module('sbAdminApp', [])
 		$scope.closeThisTip = function (e) {
 			$(e.currentTarget).parents('.userTip').remove();
 		}
+		var script = document.createElement("script");
+		script.src = "http://api.map.baidu.com/api?v=2.0&ak=hWot28fmyYXe1AMOfBfHoMMfSlnVnkeb&callback=baiduMapLoaded";
+		document.body.appendChild(script);
 		$scope.initPage = function () {
 			var map = new BMap.Map("allmap");
 			var point = new BMap.Point(113.649644, 34.75661);
@@ -95,14 +98,9 @@ angular.module('sbAdminApp', [])
 
 			});
 		}
-		
-		
-		if(BMap.Map){
+
+		$window.baiduMapLoaded = function () {
 			$scope.initPage();
-		}else{
-			$window.baiduMapLoaded = function () {
-				$scope.initPage();
-			}
 		}
 
 
