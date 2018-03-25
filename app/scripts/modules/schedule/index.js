@@ -49,15 +49,14 @@ angular.module('sbAdminApp', ['chartService'])
 					if (s.length) {
 						baseService.confirm('节目操作', "确定在选中的终端上发布排期?", function (ngDialog, vm1) {
 							vm1.isPosting = true;
-							baseService.postData(baseService.api.program + 'programManage_sendCommand_StopPlayByPids', {
-									tid: item.id,
-									type: 0, // 0停播  1 下发
-									pids: s
+							baseService.postData(baseService.api.programSchedule + 'scheduleManage_sendCommand', {
+									pid: item.id,
+									type: 1, // 0停播  1 下发
+									tids: s
 								},
 								function (data) {
 									ngDialog.close();
-									baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，将停播此节目，同时不显示在终端列表中~', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
-								});
+									baseService.alert('下发成功', 'success', true);								});
 						})
 					} else {
 						baseService.alert('请至少勾选一个设备再进行操作', 'warning', true);
@@ -73,7 +72,7 @@ angular.module('sbAdminApp', ['chartService'])
 					vm.sp.gid = '';
 					vm.tableState = {};
 					vm.callServer = function (tableState) {
-						baseService.initTable(vm, tableState, baseService.api.terminal + 'getTerminalPageList');
+						baseService.initTable(vm, tableState, baseService.api.programSchedule + 'scheduleManage_getAllOkTerminalList');
 					}
 					vm.$on('emitGroupLeaf', function (e, group, leaf) {
 						if (vm.sp.oid != group.id || vm.sp.gid != leaf.id) {
@@ -88,7 +87,7 @@ angular.module('sbAdminApp', ['chartService'])
 						vm.ids = [];
 						if ($($event.currentTarget).is(':checked')) {
 							for (var i = 0; i < vm.displayed.length; i++) {
-								vm.ids.push(vm.displayed[i].pid)
+								vm.ids.push(vm.displayed[i].id)
 							}
 						} else {
 							vm.ids = [];
@@ -96,10 +95,10 @@ angular.module('sbAdminApp', ['chartService'])
 					}
 					vm.checkThis = function (item, $event) {
 						if ($($event.currentTarget).is(':checked')) {
-							vm.ids.push(item.pid);
+							vm.ids.push(item.id);
 
 						} else {
-							vm.ids = baseService.removeAry(vm.ids, item.pid);
+							vm.ids = baseService.removeAry(vm.ids, item.id);
 						}
 					}
 					vm.showPlay = function (item) {
@@ -138,6 +137,7 @@ angular.module('sbAdminApp', ['chartService'])
 					vm.sp.gid = '';
 					vm.tableState = {};
 					vm.showType = 0;
+					vm.sp.pid = item.id;
 					vm.callUrl = baseService.api.terminal + 'getTerminalPageList';
 					vm.callServer = function (tableState) {
 						baseService.initTable(vm, tableState, vm.callUrl);
@@ -171,7 +171,7 @@ angular.module('sbAdminApp', ['chartService'])
 						vm.ids = [];
 						if ($($event.currentTarget).is(':checked')) {
 							for (var i = 0; i < vm.displayed.length; i++) {
-								vm.ids.push(vm.displayed[i].pid)
+								vm.ids.push(vm.displayed[i].id)
 							}
 						} else {
 							vm.ids = [];
@@ -179,10 +179,10 @@ angular.module('sbAdminApp', ['chartService'])
 					}
 					vm.checkThis = function (item, $event) {
 						if ($($event.currentTarget).is(':checked')) {
-							vm.ids.push(item.pid);
+							vm.ids.push(item.id);
 
 						} else {
-							vm.ids = baseService.removeAry(vm.ids, item.pid);
+							vm.ids = baseService.removeAry(vm.ids, item.id);
 						}
 					}
 					vm.switchTab = function (type) {

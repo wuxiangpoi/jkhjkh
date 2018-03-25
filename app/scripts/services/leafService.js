@@ -18,9 +18,9 @@ leafService.factory('leafService', ['baseService', function (baseService) {
                     }, function () {
                         ngDialog.close();
                         cb();
-                    }, function (info) {
-                        ngDialog.close();
-                        baseService.alert(info, 'warning');
+                    },function(msg){
+                        vm.isPosting = false;
+                        baseService.alert(msg, 'warning',true)
                     })
                 } else {
                     vm.isShowMessage = true;

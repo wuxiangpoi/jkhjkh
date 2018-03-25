@@ -1,22 +1,22 @@
-<div class="content-wrap" style="min-width:800px;">
+<div class="content-wrap" style="min-width:830px;">
 
     <div class="table-wrapper">
         <div class="tableHeader clearfix">
             <div class="selectWrap" style="margin-right:5px;">
                 <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
                     <option value="">命令状态</option>
-                    <option value="">等待终端上线</option>
+                    <option value="3">等待终端上线</option>
                     <option value="1">下发成功</option>
                     <option value="2">下发失败</option>
-                    <option value="3">正在下发</option>
+                    <option value="5">正在下发</option>
                     <option value="4">已取消</option>
                 </select>
             </div>
             <div class="selectWrap">
-                <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+                <select class="form-control" ng-model="sp.cmdCode" ng-change="callServer(tableState)">
                     <option value="">类型</option>
-                    <option value="1">节目</option>
-                    <option value="2">排期</option>
+                    <option value="22">节目</option>
+                    <option value="24">排期</option>
                 </select>
             </div>
             <div class="serchWrap fr">
@@ -47,19 +47,21 @@
             </thead>
             <tbody ng-show="!isLoading">
                 <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
-                    <td class="tdClick" ng-click="showProgram(row)">{{row.programName}}</td>
+                    <td class="tdClick" ng-click="showProgramOrSchedule(row)">{{row.programName}}</td>
                     <td>{{row.terNo}}</td>
                     <td>{{row.terName}}</td>
                     <td>{{row.userAccount}}</td>
                     <td>
-                        {{getRootDicName('terminal_cmd', row.cmdCode)}}
+                        {{row.cmdCode | cmdCodeTxt}}
                     </td>
                     <td>
                         <div ng-if="row.status == 1">下发成功</div>
                         <div class="tex-red" ng-if="row.status == 2">下发失败</div>
-                        <div ng-if="row.status == 3">正在下发</div>
+                        <div ng-if="row.status == 3">等待终端上线</div>
+                        <div ng-if="row.status == 4">已取消</div>
+                        <div ng-if="row.status == 5">正在下载</div>
                     </td>
-                    <td>
+                    <td class="createTimeTd">
                         {{row.sendTime | formateTime}}
                     </td>
                 </tr>

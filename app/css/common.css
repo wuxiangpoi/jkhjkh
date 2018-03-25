@@ -321,6 +321,7 @@ ul.activity-timeline > li:after {
   border-radius: 4px 4px 0 0;
   box-shadow: 0 0 5px #ccc;
   -webkit-box-shadow: 0 0 5px #ccc;
+  z-index: 10;
 }
 .dialog-upload.dhide {
   bottom: -270px;
@@ -692,6 +693,9 @@ div.timeSelectWrap {
 }
 .panelSelectWrap select:focus {
   box-shadow: none;
+}
+.createTimeTd {
+  width: 180px;
 }
 .tableHeader {
   margin-bottom: 20px;

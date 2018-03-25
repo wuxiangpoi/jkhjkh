@@ -1,6 +1,6 @@
 var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
-    var apiUrl = 'http://192.168.1.101:8080';
+    var apiUrl = 'http://192.168.1.100:8080';
     //var apiUrl = 'http://47.92.116.16:9090';
     var verson = '?_v2.1';
     var baseService = {

@@ -73,7 +73,7 @@
 				<tbody ng-show="!isLoading">
 					<tr ng-repeat="row in displayed" class="{{$index%2 == 0?'odd':'even'}}">
 						<td ng-if="showType == 0" class="checkBoxTable">
-							<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.pid) != -1" type="checkbox">
+							<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
 						</td>
 						<td>{{row.no}}</td>
 						<td>{{row.name}}</td>
@@ -95,7 +95,7 @@
 		
 	</div>
 </div>
-<div class="modal-footer" ng-if="perms(436) && showType == 0">
+<div class="modal-footer" ng-if="perms(445) && showType == 0">
 	<button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="modalConfirmSubmit()">停播
 		<i class="fa fa-spinner"></i>
 	</button>

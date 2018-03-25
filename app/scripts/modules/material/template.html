@@ -124,7 +124,7 @@
 						<div ng-if="row.status == 1 || row.status == 2 || row.status == 3 || row.status == 6 || row.status == 7">{{row.status | materialStatusTxt}}</div>
 						<div class="tex-red" ng-if="row.status == 4 || row.status == 5">{{row.status | materialStatusTxt}}</div>
 					</td>
-					<td>
+					<td class="createTimeTd">
 						{{row.createTime | formateTime}}
 					</td>
 					<td style="{{row.status < 2?'width:225px;':'width:100px;'}}">

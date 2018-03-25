@@ -42,8 +42,8 @@
                         ng-model="data.end_m" ng-disabled="data.end_h == 24">
                     </select>
                 </div>
-                <div class="col-sm-12 help-block">
-                    <p>开机和关机时间一致表示全天工作</p>
+                <div class="col-sm-12 help-block" ng-if="data.end_h*60 + data.end_m < data.start_h*60 + data.start_m && isShowMessage">
+                    <p>关机时间需大于开机时间</p>
                 </div>
             </div>
 

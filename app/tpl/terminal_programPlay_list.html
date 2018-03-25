@@ -13,9 +13,11 @@
 		</div>
 		<div style="border-bottom:1px solid #ddd;">
 			<ul class="nav nav-tabs tacleNav">
-				<li ng-class="{'active': showType == 0 }" ng-click="switchTab(0)"><a>发布成功</a>
+				<li ng-class="{'active': showType == 0 }" ng-click="switchTab(0)">
+					<a>发布成功</a>
 				</li>
-				<li ng-class="{'active': showType == 1 }" ng-click="switchTab(1)"><a>正在处理</a>
+				<li ng-class="{'active': showType == 1 }" ng-click="switchTab(1)">
+					<a>正在处理</a>
 				</li>
 			</ul>
 			<table class="table" st-pipe="callServer" st-table="displayed">
@@ -35,20 +37,37 @@
 						<td ng-if="showType == 0" class="checkBoxTable">
 							<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.pid) != -1" type="checkbox">
 						</td>
-						<td class="tdClick" ng-click="showPlay(row)">{{row.name}}</td>
-						<td style="width:248px;">{{row.startDate | formateDate}}至{{row.endDate | formateDate}} {{row.startTime | formateMinate}}至{{row.endTime | formateMinate}}</td>
-						<td ng-if="showType == 1">发布成功</td>
-						<td>发布成功</td>
+						<td class="tdClick" ng-click="showProgramOrSchedule(row)">{{row.name}}</td>
+						<td style="width:248px;">
+							<div ng-if="showType == 0">
+								<div ng-if="!row.stype && row.stype != 1">
+									{{row.startDate | formateDate}}至{{row.endDate | formateDate}} {{row.startTime | formateMinate}}至{{row.endTime | formateMinate}}
+								</div>
+							</div>
+							<div ng-if="showType == 1 && [21,22].indexOf(row.cmdCode) != -1">
+								{{row.startDate | formateDate}}至{{row.endDate | formateDate}} {{row.startTime | formateMinate}}至{{row.endTime | formateMinate}}
+							</div>
+						</td>
+						<td ng-if="showType == 1">
+							{{row.cmdCode | cmdCodeTxt}}
+						</td>
+						<td>
+							<div ng-if="row.status == 1 || showType == 0">下发成功</div>
+							<div class="tex-red" ng-if="row.status == 2">下发失败</div>
+							<div ng-if="row.status == 3">等待终端上线</div>
+							<div ng-if="row.status == 4">已取消</div>
+							<div ng-if="row.status == 5">正在下载</div>
+						</td>
 					</tr>
 				</tbody>
 				<tbody ng-include="'tpl/table.html'"></tbody>
 				<tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
 			</table>
 		</div>
-		
+
 	</div>
 </div>
-<div class="modal-footer" ng-if="perms(436) && showType == 0">
+<div class="modal-footer" ng-if="checkPerms && showType == 0">
 	<button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="modalConfirmSubmit()">停播
 		<i class="fa fa-spinner"></i>
 	</button>

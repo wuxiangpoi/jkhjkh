@@ -12,12 +12,20 @@
     });
     app.filter('formateDate', function () {
         return function (date) {
-            return date.toString().substring(0, 4) + '-' + date.toString().substring(4, 6) + '-' + date.toString().substring(6, 8);
+            if(date){
+                return date.toString().substring(0, 4) + '-' + date.toString().substring(4, 6) + '-' + date.toString().substring(6, 8);
+            }else{
+                return ''
+            }
         }
     });
     app.filter('formateMinate', function () {
         return function (date) {
-            return date.substring(0, 5);
+            if(date){
+                return date.substring(0, 5);
+            }else{
+                return ''
+            }
         }
     });
     //OSS图片裁减
@@ -83,6 +91,35 @@
             for (var i = 0; i < scheduleStatus.length; i++) {
                 if (scheduleStatus[i].val == status) {
                     statusTxt = scheduleStatus[i].name;
+                }
+            }
+            return statusTxt;
+        };
+    });
+    app.filter('cmdCodeTxt', function () {
+        var cmdCodeStatus = [{
+                name: '节目下发',
+                val: 21
+            },
+            {
+                name: '节目停播',
+                val: 22
+            },
+            {
+                name: '排期下发',
+                val: 24
+            },
+            {
+                name: '排期停播',
+                val: 25
+            }
+
+        ];
+        return function (status) {
+            var statusTxt = '';
+            for (var i = 0; i < cmdCodeStatus.length; i++) {
+                if (cmdCodeStatus[i].val == status) {
+                    statusTxt = cmdCodeStatus[i].name;
                 }
             }
             return statusTxt;

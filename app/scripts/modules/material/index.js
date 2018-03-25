@@ -169,6 +169,9 @@ angular.module('sbAdminApp')
 							ngDialog.close();
 							$scope.callServer($scope.tableState);
 							baseService.alert(item ? '修改成功' : '添加成功', 'success');
+						},function(msg){
+							vm.isPosting = false;
+							baseService.alert(msg, 'warning',true)
 						})
 
 					} else {
