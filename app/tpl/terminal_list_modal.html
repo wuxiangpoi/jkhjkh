@@ -72,10 +72,18 @@
                         <td>{{row.terminalNo || row.terNo}}</td>
                         <td>{{row.terminalName || row.terName}}</td>
                         <td>
-                            <div class="txt-red" ng-if="row.terminalStatus == 0 || row.status == 0">未激活</div>
-                            <div class="txt-green" ng-if="row.terminalStatus == 1 || row.status == 1">在线</div>
-                            <div class="txt-grey" ng-if="row.terminalStatus == 2 || row.status == 2">离线</div>
-                            <div class="tex-red" ng-if="row.terminalStatus == 3 || row.status == 3">异常</div>
+                                <div ng-if="showType == 0">
+                                        <div class="txt-red" ng-if="row.status == 0">未激活</div>
+                                        <div class="txt-green" ng-if="row.status == 1">在线</div>
+                                        <div class="txt-grey" ng-if="row.status == 2">离线</div>
+                                        <div class="txt-red" ng-if="row.status == 3">异常</div>
+                                </div>
+                                <div ng-if="showType == 1">
+                                        <div class="txt-red" ng-if="row.terminalStatus == 0">未激活</div>
+                                        <div class="txt-green" ng-if="row.terminalStatus == 1">在线</div>
+                                        <div class="txt-grey" ng-if="row.terminalStatus == 2">离线</div>
+                                        <div class="txt-red" ng-if="row.terminalStatus == 3">异常</div>
+                                </div>
                         </td>
                         <td ng-if="showType == 1">{{row.cmdCode | cmdCodeTxt}}</td>
                         <td>

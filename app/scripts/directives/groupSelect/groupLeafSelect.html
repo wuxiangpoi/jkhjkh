@@ -7,7 +7,7 @@
     </div>
 
     <div class="diy_select" ng-click="showLeafMenu($event)" ng-if="showLeaf">
-        <div class="diy_select_txt">全部分组</div>
+        <div class="diy_select_txt">{{currentLeaf.name?currentLeaf.name:'全部分组'}}</div>
         <div class="diy_select_list" ng-show="showLeafes">
             <ul class="selectUl">
                 <li ng-click="leafClick($event,{id:''})">全部分组</li>
