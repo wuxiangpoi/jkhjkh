@@ -56,9 +56,12 @@
                     </td>
                     <td>
                         <div ng-if="row.status == 1">下发成功</div>
-                        <div class="tex-red" ng-if="row.status == 2">下发失败</div>
+                        <div ng-if="row.status == 2">
+                            <div class="tex-red">下发失败</div>
+                            <div class="tdTipTxt">{{'原因是：' + row.errorMessage}}</div>
+                        </div>
                         <div ng-if="row.status == 3">等待终端上线</div>
-                        <div ng-if="row.status == 4">已取消</div>
+                        <div class="txt-grey" ng-if="row.status == 4">已取消</div>
                         <div ng-if="row.status == 5">正在下载</div>
                     </td>
                     <td class="createTimeTd">

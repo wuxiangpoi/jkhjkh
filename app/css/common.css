@@ -233,6 +233,9 @@ li {
 .lh34 {
   line-height: 34px;
 }
+.s-txt {
+  font-size: 12px;
+}
 .h34 {
   height: 34px;
 }
@@ -798,6 +801,11 @@ div.timeSelectWrap {
 .table-wrapper td.checkBoxTable {
   width: 30px;
   padding-right: 0!important;
+}
+.table-wrapper th .tdTipTxt,
+.table-wrapper td .tdTipTxt {
+  font-size: 12px;
+  margin-top: -16px;
 }
 .table-wrapper th input[type="checkbox"],
 .table-wrapper td input[type="checkbox"] {

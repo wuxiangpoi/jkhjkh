@@ -163,16 +163,18 @@ angular.module('sbAdminApp')
 					vm.callUrl = baseService.api.program + 'getProgramPlayPageByPid';
 					vm.callServer = function (tableState) {
 						baseService.initTable(vm, tableState, vm.callUrl, function (result) {
-							if (!result.data[0].stype || result.data[0].stype == 0) {
-								if ($rootScope.perms(436)) {
-									vm.checkPerms = true;
+							if(result){
+								if (!result.data[0].stype || result.data[0].stype == 0) {
+									if ($rootScope.perms(436)) {
+										vm.checkPerms = true;
+									}
+									vm.programOrSchedule = 0;
+								} else {
+									if ($rootScope.perms(445)) {
+										vm.checkPerms = true;
+									}
+									vm.programOrSchedule = 1;
 								}
-								vm.programOrSchedule = 0;
-							} else {
-								if ($rootScope.perms(445)) {
-									vm.checkPerms = true;
-								}
-								vm.programOrSchedule = 1;
 							}
 						});
 					}
@@ -182,6 +184,7 @@ angular.module('sbAdminApp')
 								vm.callUrl = baseService.api.program + 'getProgramPlayPageByPid';
 								break;
 							case 1:
+								vm.sp.status = '';
 								vm.callUrl = baseService.api.program + 'getProgramCommandPengdingPageByPid';
 								break;
 						}
@@ -223,7 +226,6 @@ angular.module('sbAdminApp')
 							vm.ids = baseService.removeAry(vm.ids, item.tid);
 						}
 					}
-
 				})
 			}
 			$scope.sendDown = function (item) {

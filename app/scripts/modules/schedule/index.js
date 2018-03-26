@@ -138,17 +138,17 @@ angular.module('sbAdminApp', ['chartService'])
 					vm.tableState = {};
 					vm.showType = 0;
 					vm.sp.pid = item.id;
-					vm.callUrl = baseService.api.terminal + 'getTerminalPageList';
+					vm.callUrl = baseService.api.programSchedule + 'getProgramSchedulePlayPageByPid';
 					vm.callServer = function (tableState) {
 						baseService.initTable(vm, tableState, vm.callUrl);
 					}
 					vm.initTable = function () {
 						switch (vm.showType) {
 							case 0:
-								vm.callUrl = baseService.api.terminal + 'getTerminalPageList';
+								vm.callUrl = baseService.api.programSchedule + 'getProgramSchedulePlayPageByPid';
 								break;
 							case 1:
-								vm.callUrl = baseService.api.terminal + 'getTerminalPageList';
+								vm.callUrl = baseService.api.programSchedule + 'getProgramScheduleCommandPengdingPageByPid';
 								break;
 						}
 						vm.currentGroup = $rootScope.rootGroup;

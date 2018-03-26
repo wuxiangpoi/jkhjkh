@@ -64,10 +64,9 @@
 						</th>
 						<th>终端编号</th>
 						<th>终端名称</th>
-						<th>分辨率</th>
 						<th>网络状态</th>
 						<th ng-if="showType == 1">命令名称</th>
-						<th ng-if="showType == 1">排期状态</th>
+						<th>排期状态</th>
 					</tr>
 				</thead>
 				<tbody ng-show="!isLoading">
@@ -75,17 +74,22 @@
 						<td ng-if="showType == 0" class="checkBoxTable">
 							<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
 						</td>
-						<td>{{row.no}}</td>
-						<td>{{row.name}}</td>
-						<td>{{row.resolution}}</td>
+						<td>{{row.no || row.terminalNo}}</td>
+						<td>{{row.name || row.terminalName}}</td>
 						<td>
-							<div class="txt-red" ng-if="row.status == 0">未激活</div>
-							<div class="txt-green" ng-if="row.status == 1">在线</div>
-							<div class="txt-grey" ng-if="row.status == 2">离线</div>
-							<div class="txt-red" ng-if="row.status == 3">异常</div>
+							<div class="txt-red" ng-if="row.status == 0 || row.terminalStatus == 0">未激活</div>
+							<div class="txt-green" ng-if="row.status == 1  || row.terminalStatus == 1">在线</div>
+							<div class="txt-grey" ng-if="row.status == 2  || row.terminalStatus == 2">离线</div>
+							<div class="txt-red" ng-if="row.status == 3  || row.terminalStatus == 3">异常</div>
 						</td>
 						<td ng-if="showType == 1">{{row.name}}</td>
-						<td ng-if="showType == 1">{{row.resolution}}</td>
+						<td>
+								<div ng-if="row.status == 1 || showType == 0">下发成功</div>
+								<div class="tex-red" ng-if="row.status == 2">下发失败</div>
+								<div ng-if="row.status == 3">等待终端上线</div>
+								<div ng-if="row.status == 4">已取消</div>
+								<div ng-if="row.status == 5">正在下载</div>
+						</td>
 					</tr>
 				</tbody>
 				<tbody ng-include="'tpl/table.html'"></tbody>

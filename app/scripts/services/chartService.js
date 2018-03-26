@@ -40,7 +40,7 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                                 var date = new Date(value);
                                 var mon = '';
                                 if (date.getDate() == 1) {
-                                    monTxt = date.getMonth() + 1 + '月';
+                                    var monTxt = date.getMonth() + 1 + '月';
                                     mon = ['', monTxt].join('\n');
                                     if (date.getMonth() + 1 == 1) {
                                         mon = [(date.getFullYear()) + '年', monTxt].join('\n');

@@ -1,8 +1,8 @@
 'use strict';
-angular.module('sbAdminApp')
+angular.module('sbAdminApp',['chartService'])
 	.controller(
 		'terminalCtrl',
-		function ($scope, $rootScope, $stateParams, baseService, leafService) {
+		function ($scope, $rootScope, $stateParams, baseService, leafService,chartService) {
 			$scope.displayed = [];
 			$scope.sp = {};
 			$scope.tableState = {};
@@ -353,17 +353,20 @@ angular.module('sbAdminApp')
 					vm.callUrl = baseService.api.terminal + 'getTerminalProgramPlayPageByTid';
 					vm.callServer = function (tableState) {
 						baseService.initTable(vm, tableState, vm.callUrl, function (result) {
-							if (!result.data[0].stype || result.data[0].stype == 0) {
-								if ($rootScope.perms(436)) {
-									vm.checkPerms = true;
+							if(result){
+								if (!result.data[0].stype || result.data[0].stype == 0) {
+									if ($rootScope.perms(436)) {
+										vm.checkPerms = true;
+									}
+									vm.programOrSchedule = 0;
+								} else {
+									if ($rootScope.perms(445)) {
+										vm.checkPerms = true;
+									}
+									vm.programOrSchedule = 1;
 								}
-								vm.programOrSchedule = 0;
-							} else {
-								if ($rootScope.perms(445)) {
-									vm.checkPerms = true;
-								}
-								vm.programOrSchedule = 1;
 							}
+							
 						});
 					}
 					vm.initTable = function () {
@@ -400,23 +403,14 @@ angular.module('sbAdminApp')
 						}
 					}
 					vm.showProgramOrSchedule = function (item) {
-						if (vm.showType == 0) {
-							if (item.stype && item.stype == 1) {
-								item.id = item.pid;
-								baseService.showSchedule(item, 2, chartService);
-							} else {
-								baseService.showProgram(item);
-							}
-						} else {
-							if (item.cmdCode == 21 || item.cmdCode == 22) {
-								baseService.showProgram(item);
-							} else {
-								item.id = item.pid;
-								baseService.showSchedule(item, 2, chartService);
-							}
+						if(item.cmdCode == 21 || item.cmdCode == 22){
+							item.pStatus = 1;
+							baseService.showProgram(item);
+						}else{
+							item.id = item.pid;
+							baseService.showSchedule(item, 2, chartService);
 						}
-
-
+						
 					}
 				})
 			}
