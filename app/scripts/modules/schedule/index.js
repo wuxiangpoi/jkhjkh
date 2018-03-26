@@ -148,6 +148,7 @@ angular.module('sbAdminApp', ['chartService'])
 								vm.callUrl = baseService.api.programSchedule + 'getProgramSchedulePlayPageByPid';
 								break;
 							case 1:
+								vm.sp.status = '';
 								vm.callUrl = baseService.api.programSchedule + 'getProgramScheduleCommandPengdingPageByPid';
 								break;
 						}
