@@ -129,8 +129,8 @@ angular.module('sbAdminApp')
 					var s = vm.ids.join(',');
 					if (s.length) {
 						vm.isPosting = true;
-						var postUrl = vm.programOrSchedule == 0?'programManage_sendCommand':'programManage_sendCommand_StopPlayByPids'
-						baseService.postData(baseService.api.program + postUrl, {
+						var postUrl = vm.programOrSchedule == 0?'/api/program/programManage_sendCommand':'/api/programSchedule/programManage_sendCommand_StopPlayByPids'
+						baseService.postData(baseService.api.apiUrl + postUrl, {
 								tids: s,
 								type: 0, // 0停播  1 下发
 								pid: item.id,
