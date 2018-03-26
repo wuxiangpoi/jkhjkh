@@ -143,12 +143,13 @@ angular.module('sbAdminApp', ['chartService'])
 						baseService.initTable(vm, tableState, vm.callUrl);
 					}
 					vm.initTable = function () {
+						vm.sp.status = '';
+						vm.sp.resolution = '';
 						switch (vm.showType) {
 							case 0:
 								vm.callUrl = baseService.api.programSchedule + 'getProgramSchedulePlayPageByPid';
 								break;
 							case 1:
-								vm.sp.status = '';
 								vm.callUrl = baseService.api.programSchedule + 'getProgramScheduleCommandPengdingPageByPid';
 								break;
 						}

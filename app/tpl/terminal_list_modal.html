@@ -33,17 +33,6 @@
                             </select>
                         </div>
                     </div>
-                    <div class="fl" ng-if="showType == 1">
-                        <div class="panelSelectWrap">
-                            <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
-                                <option value="">节目状态</option>
-                                <option value="2">发布失败</option>
-                                <option value="3">等待终端上线</option>
-                                <option value="4">已取消</option>
-                                <option value="5">正在下载</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="fl">
                         <div class="clearfix groupLeafSelect">
                             <group-leaf-select reqleafurl="{{'/api/terminal/getTerminalGroups'}}"></group-leaf-select>

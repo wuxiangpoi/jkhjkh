@@ -179,12 +179,13 @@ angular.module('sbAdminApp')
 						});
 					}
 					vm.initTable = function () {
+						vm.sp.resolution = '';
+						vm.sp.status = '';
 						switch (vm.showType) {
 							case 0:
 								vm.callUrl = baseService.api.program + 'getProgramPlayPageByPid';
 								break;
 							case 1:
-								vm.sp.status = '';
 								vm.callUrl = baseService.api.program + 'getProgramCommandPengdingPageByPid';
 								break;
 						}
