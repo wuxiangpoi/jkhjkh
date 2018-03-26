@@ -327,8 +327,8 @@ angular.module('sbAdminApp',['chartService'])
 					if (s.length) {
 						baseService.confirm('节目操作', "确定在该设备上停播选中" + typeTxt + "?", function (ngDialog, vm1) {
 							vm1.isPosting = true;
-							var postUrl = vm.programOrSchedule == 0?'programManage_sendCommand_StopPlayByPids':'programManage_sendCommand_StopPlayByPids'
-							baseService.postData(baseService.api.program + postUrl, {
+							var postUrl = vm.programOrSchedule == 0?'/api/program/programManage_sendCommand_StopPlayByPids':'/api/programSchedule/scheduleManage_sendCommand'
+							baseService.postData(baseService.api.apiUrl + postUrl, {
 									tid: item.id,
 									type: 0, // 0停播  1 下发
 									pids: s
