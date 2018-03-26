@@ -789,7 +789,6 @@ div.timeSelectWrap {
 .table-wrapper td {
   font-size: 14px;
   vertical-align: middle!important;
-  max-width: 100px;
   white-space: nowrap;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
@@ -806,6 +805,10 @@ div.timeSelectWrap {
 .table-wrapper td .tdTipTxt {
   font-size: 12px;
   margin-top: -16px;
+}
+.table-wrapper th.ellipsisTd,
+.table-wrapper td.ellipsisTd {
+  max-width: 160px;
 }
 .table-wrapper th input[type="checkbox"],
 .table-wrapper td input[type="checkbox"] {

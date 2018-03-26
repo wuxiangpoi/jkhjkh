@@ -39,7 +39,7 @@
             </thead>
             <tbody ng-show="!isLoading">
                 <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
-                    <td class="tdClick" ng-click="showSchedule(row)">
+                    <td class="tdClick ellipsisTd" ng-click="showSchedule(row)">
                         {{row.name}}
                     </td>
                     <td>

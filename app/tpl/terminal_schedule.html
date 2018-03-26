@@ -47,7 +47,7 @@
 						<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
 					</td>
 					<td>{{row.no}}</td>
-					<td>{{row.name}}</td>
+					<td class="ellipsisTd">{{row.name}}</td>
 					<td>{{row.resolution}}</td>
 					<td>
 						<div class="txt-red" ng-if="row.status == 0">未激活</div>

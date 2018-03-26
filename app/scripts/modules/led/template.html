@@ -75,14 +75,14 @@
                         <input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
                     </td>
                     <td>{{row.sn}}</td>
-                    <td>{{row.name}}</td>
+                    <td class="ellipsisTd">{{row.name}}</td>
                     <td>{{row.model}}</td>
                     <td>{{row.width + "*" + row.height}}</td>
                     <td>
                         <div ng-if="row.screenColor == 1">单色</div>
                         <div ng-if="row.enabled != 0">双色</div>
                     </td>
-                    <td>{{row.addr}}</td>
+                    <td class="ellipsisTd">{{row.addr}}</td>
                     <td style="min-width:180px;">
                         <div>
                             <button ng-if="perms(712)" class="btn btn-primary tableBtn" ng-click="save(row)">编辑</button>

@@ -58,7 +58,7 @@
                 <tr ng-repeat="row in displayed">
                     <td>{{row.account}}</td>
                     <td>{{row.name}}</td>
-                    <td>{{row.oid | getOrganizations}}</td>
+                    <td class="ellipsisTd">{{row.oid | getOrganizations}}</td>
                     <td>{{row.roleName}}</td>
                     <td>
                         <div ng-if="row.enabled == 1" class="txt-green">激活</div>

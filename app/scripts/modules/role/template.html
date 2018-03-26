@@ -17,7 +17,7 @@
             </thead>
             <tbody ng-show="!isLoading">
                 <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
-                    <td>{{row.name}}</td>
+                    <td class="ellipsisTd">{{row.name}}</td>
                     <td>{{row.remark}}</td>
                     <td style="min-width:180px;">
                         <div>

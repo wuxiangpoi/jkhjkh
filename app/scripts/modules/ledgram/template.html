@@ -28,7 +28,7 @@
             </thead>
             <tbody ng-show="!isLoading">
                 <tr ng-repeat="row in displayed">
-                    <td>{{row.name}}</td>
+                    <td class="ellipsisTd">{{row.name}}</td>
                     <td class="createTimeTd">{{row.createTime | formateTime}}</td>
                     <td>{{row.text}}</td>
                     <td style="min-width:180px;">

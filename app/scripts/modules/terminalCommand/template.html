@@ -35,7 +35,7 @@
             <tbody ng-show="!isLoading">
                 <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
                     <td>{{row.terNo}}</td>
-                    <td>{{row.terName}}</td>
+                    <td class="ellipsisTd">{{row.terName}}</td>
                     <td>{{row.userAccount}}</td>
                     <td>
                         {{getRootDicName('terminal_cmd', row.cmdCode)}}
