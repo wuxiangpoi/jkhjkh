@@ -163,7 +163,7 @@ angular.module('sbAdminApp')
 					vm.callUrl = baseService.api.program + 'getProgramPlayPageByPid';
 					vm.callServer = function (tableState) {
 						baseService.initTable(vm, tableState, vm.callUrl, function (result) {
-							if(result){
+							if(result.data[0]){
 								if (!result.data[0].stype || result.data[0].stype == 0) {
 									if ($rootScope.perms(436)) {
 										vm.checkPerms = true;

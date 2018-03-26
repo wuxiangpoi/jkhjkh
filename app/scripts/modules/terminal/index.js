@@ -353,7 +353,7 @@ angular.module('sbAdminApp',['chartService'])
 					vm.callUrl = baseService.api.terminal + 'getTerminalProgramPlayPageByTid';
 					vm.callServer = function (tableState) {
 						baseService.initTable(vm, tableState, vm.callUrl, function (result) {
-							if(result){
+							if(result.data[0]){
 								if (!result.data[0].stype || result.data[0].stype == 0) {
 									if ($rootScope.perms(436)) {
 										vm.checkPerms = true;
@@ -403,12 +403,13 @@ angular.module('sbAdminApp',['chartService'])
 						}
 					}
 					vm.showProgramOrSchedule = function (item) {
-						if(item.cmdCode == 21 || item.cmdCode == 22){
-							item.pStatus = 1;
-							baseService.showProgram(item);
-						}else{
+						if(item.stype && item.stype == 1){
 							item.id = item.pid;
 							baseService.showSchedule(item, 2, chartService);
+							
+						}else{
+							item.pStatus = 1;
+							baseService.showProgram(item);
 						}
 						
 					}
