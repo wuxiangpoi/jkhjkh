@@ -127,8 +127,8 @@
 					<td class="createTimeTd">
 						{{row.createTime | formateTime}}
 					</td>
-					<td style="{{row.status < 2?'width:225px;':'width:100px;'}}">
-						<button ng-if="[0,4,5,7].indexOf(row.status) != -1 && perms(418)" class="btn tableBtn"
+					<td style="{{row.status < 6?'width:225px;':'width:100px;'}}">
+						<button ng-if="[0,4,5].indexOf(row.status) != -1 && perms(418)" class="btn tableBtn"
 						    ng-click="submitCheck(row)">提交审核
 						</button>
 						<button ng-if="[0,1,2,3,7].indexOf(row.status) != -1 && perms(413)"

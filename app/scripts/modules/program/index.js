@@ -143,7 +143,7 @@ angular.module('sbAdminApp')
 							postData = {
 								tids: s,
 								type: 0, // 0停播  1 下发
-								pid: item.id,
+								pid: item.id
 							};
 						}
 						baseService.postData(baseService.api.apiUrl + postUrl, postData,

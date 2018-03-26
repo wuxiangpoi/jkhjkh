@@ -56,7 +56,8 @@ angular.module('sbAdminApp', ['chartService'])
 								},
 								function (data) {
 									ngDialog.close();
-									baseService.alert('下发成功', 'success', true);								});
+									baseService.alert('下发成功', 'success', true);
+								});
 						})
 					} else {
 						baseService.alert('请至少勾选一个设备再进行操作', 'warning', true);
@@ -113,14 +114,14 @@ angular.module('sbAdminApp', ['chartService'])
 					if (s.length) {
 						baseService.confirm('节目操作', "确定在该设备上停播选中节目?", function (ngDialog, vm1) {
 							vm1.isPosting = true;
-							baseService.postData(baseService.api.program + 'programManage_sendCommand_StopPlayByPids', {
-									tid: item.id,
+							baseService.postData(baseService.api.programSchedule + 'scheduleManage_sendCommand', {
+									tids: s,
 									type: 0, // 0停播  1 下发
-									pids: s
+									pid: item.id
 								},
 								function (data) {
 									ngDialog.close();
-									baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，将停播此节目，同时不显示在终端列表中~', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
+									baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，将停播此排期，同时不显示在终端列表中~', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
 								});
 						})
 					} else {
@@ -188,11 +189,11 @@ angular.module('sbAdminApp', ['chartService'])
 						}
 					}
 					vm.switchTab = function (type) {
-						if(vm.showType != type){
+						if (vm.showType != type) {
 							vm.showType = type;
 							vm.initTable();
-						}						
-						
+						}
+
 					}
 				})
 			}

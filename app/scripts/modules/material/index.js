@@ -334,7 +334,7 @@ angular.module('sbAdminApp')
 			$scope.checkThis = function (item, $event) {
 				if ($($event.currentTarget).is(':checked')) {
 					$scope.ids.push(item.id);
-					if (item.status == 1) {
+					if (item.status == 0) {
 						$scope.idsNoSubmitCheck.push(item.id);
 					}
 				} else {
