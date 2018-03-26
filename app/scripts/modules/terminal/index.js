@@ -1,8 +1,8 @@
 'use strict';
-angular.module('sbAdminApp',['chartService'])
+angular.module('sbAdminApp', ['chartService'])
 	.controller(
 		'terminalCtrl',
-		function ($scope, $rootScope, $stateParams, baseService, leafService,chartService) {
+		function ($scope, $rootScope, $stateParams, baseService, leafService, chartService) {
 			$scope.displayed = [];
 			$scope.sp = {};
 			$scope.tableState = {};
@@ -323,19 +323,29 @@ angular.module('sbAdminApp',['chartService'])
 				baseService.confirmDialog(720, '播放管理', item, 'tpl/terminal_programPlay_list.html', function (ngDialog, vm) {
 					var s = '';
 					s = vm.ids.join(',');
-					var typeTxt =  vm.programOrSchedule == 0?'节目':'排期';
+					var typeTxt = vm.programOrSchedule == 0 ? '节目' : '排期';
 					if (s.length) {
 						baseService.confirm('节目操作', "确定在该设备上停播选中" + typeTxt + "?", function (ngDialog, vm1) {
 							vm1.isPosting = true;
-							var postUrl = vm.programOrSchedule == 0?'/api/program/programManage_sendCommand_StopPlayByPids':'/api/programSchedule/scheduleManage_sendCommand'
-							baseService.postData(baseService.api.apiUrl + postUrl, {
+							var postUrl = vm.programOrSchedule == 0 ? '/api/program/programManage_sendCommand_StopPlayByPids' : '/api/programSchedule/scheduleManage_sendCommand'
+							var postData = {};
+							if (vm.programOrSchedule == 0) {
+								postData = {
 									tid: item.id,
 									type: 0, // 0停播  1 下发
 									pids: s
-								},
+								};
+							} else {
+								postData = {
+									tids: item.id,
+									type: 0, // 0停播  1 下发
+									pid: s
+								};
+							}
+							baseService.postData(baseService.api.apiUrl + postUrl, postData,
 								function (data) {
 									ngDialog.close();
-									baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，将停播此节目，同时不显示在终端列表中~', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
+									baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，将停播此' + typeTxt + '，同时不显示在终端列表中~', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
 								});
 						})
 					} else {
@@ -353,7 +363,7 @@ angular.module('sbAdminApp',['chartService'])
 					vm.callUrl = baseService.api.terminal + 'getTerminalProgramPlayPageByTid';
 					vm.callServer = function (tableState) {
 						baseService.initTable(vm, tableState, vm.callUrl, function (result) {
-							if(result.data[0]){
+							if (result.data[0]) {
 								if (!result.data[0].stype || result.data[0].stype == 0) {
 									if ($rootScope.perms(436)) {
 										vm.checkPerms = true;
@@ -366,7 +376,7 @@ angular.module('sbAdminApp',['chartService'])
 									vm.programOrSchedule = 1;
 								}
 							}
-							
+
 						});
 					}
 					vm.initTable = function () {
@@ -378,11 +388,15 @@ angular.module('sbAdminApp',['chartService'])
 								vm.callUrl = baseService.api.terminal + 'getTerminalProgramCommandPengdingPageByTid';
 								break;
 						}
+						
 						vm.callServer(vm.tableState);
 					}
 					vm.switchTab = function (type) {
-						vm.showType = type;
-						vm.initTable();
+						if(vm.showType != type){
+							vm.showType = type;
+							vm.initTable();
+						}						
+						
 					}
 					vm.checkAll = function ($event) {
 						vm.ids = [];
@@ -403,15 +417,15 @@ angular.module('sbAdminApp',['chartService'])
 						}
 					}
 					vm.showProgramOrSchedule = function (item) {
-						if(item.stype && item.stype == 1){
+						if (item.stype && item.stype == 1) {
 							item.id = item.pid;
 							baseService.showSchedule(item, 2, chartService);
-							
-						}else{
+
+						} else {
 							item.pStatus = 1;
 							baseService.showProgram(item);
 						}
-						
+
 					}
 				})
 			}

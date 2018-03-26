@@ -323,10 +323,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
         showProgram: function (item, detailType, cb) {
             var me = this;
             programService.getProgramById(item.pid, function (program) {
-                program.creator = item.creator;
                 program.status = item.pStatus ? item.pStatus : item.status;
-                program.approveUid = item.approveUid;
-                program.approveUidFinal = item.approveUidFinal;
                 program.detailType = detailType;
                 me.confirmDialog(750, '节目预览', program, "tpl/program_details.html", function (type, ngDialog, vm) {
                     if (cb) {

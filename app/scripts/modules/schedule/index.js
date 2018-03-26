@@ -188,8 +188,11 @@ angular.module('sbAdminApp', ['chartService'])
 						}
 					}
 					vm.switchTab = function (type) {
-						vm.showType = type;
-						vm.initTable();
+						if(vm.showType != type){
+							vm.showType = type;
+							vm.initTable();
+						}						
+						
 					}
 				})
 			}

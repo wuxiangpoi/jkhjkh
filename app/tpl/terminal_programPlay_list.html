@@ -44,8 +44,9 @@
 									{{row.startDate | formateDate}}至{{row.endDate | formateDate}} {{row.startTime | formateMinate}}至{{row.endTime | formateMinate}}
 								</div>
 							</div>
-							<div ng-if="showType == 1 && [21,22].indexOf(row.cmdCode) != -1">
-								{{row.startDate | formateDate}}至{{row.endDate | formateDate}} {{row.startTime | formateMinate}}至{{row.endTime | formateMinate}}
+							<div ng-if="showType == 1 && [21].indexOf(row.cmdCode) != -1">
+								{{row.message.split(',')[0].split('-')[0] | formateDate}}至{{row.message.split(',')[0].split('-')[1] | formateDate}} {{row.message.split(',')[1].split('-')[0]
+                                | formateMinate}}至{{row.message.split(',')[1].split('-')[1] | formateMinate}}
 							</div>
 						</td>
 						<td ng-if="showType == 1">

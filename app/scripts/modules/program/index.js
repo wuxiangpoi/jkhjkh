@@ -129,14 +129,24 @@ angular.module('sbAdminApp')
 					var s = vm.ids.join(',');
 					if (s.length) {
 						vm.isPosting = true;
-						var postUrl = vm.programOrSchedule == 0?'/api/program/programManage_sendCommand':'/api/programSchedule/programManage_sendCommand_StopPlayByPids'
-						baseService.postData(baseService.api.apiUrl + postUrl, {
+						var postUrl = vm.programOrSchedule == 0?'/api/program/programManage_sendCommand':'/api/programSchedule/scheduleManage_sendCommand'
+						var postData = {};
+						if(vm.programOrSchedule == 0){
+							postData = {
 								tids: s,
 								type: 0, // 0停播  1 下发
 								pid: item.id,
 								oid: item.oid,
 								gid: item.gid
-							},
+							};
+						}else{
+							postData = {
+								tids: s,
+								type: 0, // 0停播  1 下发
+								pid: item.id,
+							};
+						}
+						baseService.postData(baseService.api.apiUrl + postUrl, postData,
 							function (data) {
 								ngDialog.close();
 								baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，将停播此节目，同时不显示在终端列表中~', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
@@ -197,8 +207,11 @@ angular.module('sbAdminApp')
 						vm.callServer(vm.tableState);
 					}
 					vm.switchTab = function (type) {
-						vm.showType = type;
-						vm.initTable();
+						if(vm.showType != type){
+							vm.showType = type;
+							vm.initTable();
+						}						
+						
 					}
 					vm.$on('emitGroupLeaf', function (e, group, leaf) {
 						if (vm.sp.oid != group.id || vm.sp.gid != leaf.id) {
