@@ -37,7 +37,7 @@
 						<td ng-if="showType == 0" class="checkBoxTable">
 							<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.pid) != -1" type="checkbox">
 						</td>
-						<td class="tdClick ellipsisTd" ng-click="showProgramOrSchedule(row)">{{row.name || row.programName}}</td>
+						<td class="tdClick ellipsisTd" title="{{row.name || row.programName}}" ng-click="showProgramOrSchedule(row)">{{row.name || row.programName}}</td>
 						<td style="width:248px;">
 							<div ng-if="showType == 0">
 								<div ng-if="!row.stype && row.stype != 1">

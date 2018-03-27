@@ -149,7 +149,7 @@ angular.module('sbAdminApp')
 						baseService.postData(baseService.api.apiUrl + postUrl, postData,
 							function (data) {
 								ngDialog.close();
-								baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，将停播此节目，同时不显示在终端列表中~', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
+								baseService.alert('操作成功', 'success',true);
 							});
 					} else {
 						baseService.alert('请至少勾选一个终端再进行操作', 'warning', true);

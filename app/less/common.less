@@ -529,6 +529,40 @@ html,body {
   background: #f1f2f5;
 }
 
+.chartLend {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  .lendItem {
+    display: inline-block;
+    i {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      background:#00b0e2; /* 一些不支持背景渐变的浏览器 */  
+      background:-moz-linear-gradient(left, #00b0e2, #3fd3ff);  
+      background:-webkit-linear-gradient(left, #00b0e2, #3fd3ff);  
+      background:-o-linear-gradient(left, #00b0e2, #3fd3ff);
+      vertical-align: middle;
+      margin: 0 10px;
+      &.times {
+        background:#84fab0; /* 一些不支持背景渐变的浏览器 */  
+        background:-moz-linear-gradient(left, #84fab0, #8fd3f4);  
+        background:-webkit-linear-gradient(left, #84fab0, #8fd3f4);  
+        background:-o-linear-gradient(left, #84fab0, #8fd3f4);
+      }
+    }
+  }
+  &.ngLend {
+    .lendItem {
+      font-size: 12px;
+      i {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+}
 /* line 53, app/scss/common.scss */
 .w160 {
   width: 160px;

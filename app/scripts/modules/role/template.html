@@ -18,7 +18,7 @@
             <tbody ng-show="!isLoading">
                 <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
                     <td class="ellipsisTd">{{row.name}}</td>
-                    <td>{{row.remark}}</td>
+                    <td title="{{row.remark}}">{{row.remark}}</td>
                     <td style="min-width:180px;">
                         <div>
                             <button class="btn btn-primary tableBtn" ng-click="checkPerms(row)">查看权限</button>

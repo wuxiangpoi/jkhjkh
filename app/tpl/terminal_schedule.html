@@ -20,6 +20,16 @@
                             </select>
                         </div>
 					</div>
+					<div class="fl">
+						<div class="panelSelectWrap">
+							<select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+								<option value="">网络状态</option>
+								<option value="1">在线</option>
+								<option value="2">离线</option>
+								<option value="3">异常</option>
+							</select>
+						</div>
+					</div>
                     <div class="fl">
                         <div class="clearfix groupLeafSelect">
                             <group-leaf-select reqleafurl="{{'/api/terminal/getTerminalGroups'}}"></group-leaf-select>
@@ -47,7 +57,7 @@
 						<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
 					</td>
 					<td>{{row.no}}</td>
-					<td class="ellipsisTd">{{row.name}}</td>
+					<td class="ellipsisTd" title="{{row.name}}">{{row.name}}</td>
 					<td>{{row.resolution}}</td>
 					<td>
 						<div class="txt-red" ng-if="row.status == 0">未激活</div>

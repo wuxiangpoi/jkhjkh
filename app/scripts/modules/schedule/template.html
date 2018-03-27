@@ -50,10 +50,7 @@
                         {{row.createTime | formateTime}}
                     </td>
                     <td>
-                        <div ng-if="row.playTers == 0">
-                            0
-                        </div>
-                        <div class="tdClick" ng-if="row.playTers > 0" ng-click="sendCommandStopProgram(row)">
+                        <div class="tdClick" ng-click="sendCommandStopProgram(row)">
                             {{row.playTers}}
                         </div>
                     </td>

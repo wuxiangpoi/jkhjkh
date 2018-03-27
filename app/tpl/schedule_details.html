@@ -2,10 +2,14 @@
 <div class="modal-body">
 	<div class="table-wrapper row">
 		<div class="tableHeader clearfix">
-			<div class="clearfix">
-				<div class="col-sm-6 ellipsTXt p0"  style="margin-bottom:5px;">
+			<div class="clearfix plr">
+				<div class="col-sm-6 ellipsTXt p0"  style="margin-bottom:10px;">
 					排期名称：{{data.name}}
 				</div>
+				<div class="chartLend ngLend">
+                    <span class="lendItem"><i></i>全天播放</span>
+                    <span class="lendItem"><i class="times"></i>次数播放</span>
+                </div>
 			</div>
 
 		</div>
@@ -14,7 +18,7 @@
 		<div class="clearfix" style="width:100px;position:absolute;left:0;top:7px;padding-left:4px;z-index:2;">
 			<div style="font-size:14px; color:#9f9f9f;height:24px;">节目排期</div>
 			<div class="clearfix" style="line-height:29px;" ng-repeat="item in playList">
-				<div class="fl ellipsTXt" ng-click="showPlay(item)" style="width:80px;font-size:12px;padding-left:4px;cursor:pointer;">{{item.name}}</div>
+				<div class="fl ellipsTXt" title="{{item.name}}" ng-click="showPlay(item)" style="width:80px;font-size:12px;padding-left:4px;cursor:pointer;">{{item.name}}</div>
 			</div>
 		</div>
 		<div class="row" ng-style="chartStyle" e-chart eoption="eoption"></div>

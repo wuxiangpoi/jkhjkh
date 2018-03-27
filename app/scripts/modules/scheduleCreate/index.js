@@ -83,15 +83,17 @@ angular.module('sbAdminApp', ['chartService'])
 			}
 
 			function checkCross(chartItem) {
-				function cross(a, b, c, d) {
-					if (c >= a && c < b) {
-						return true;
-					} else if (d > a && d <= b) {
-						return true;
-					} else if (c < a && d > b) {
-						return true;
-					} else {
+				function cross(a1, a2, b1, b2) {
+					if(b2 <= a1){
 						return false;
+					}else if(b2 > a1 && b1 >= a2){
+						return false;
+					}else if(b1 >= a2){
+						return false;
+					}else if(b1 < a2 && b2 <= a1){
+						return false;
+					}else{
+						return true;
 					}
 				}
 				var result = {

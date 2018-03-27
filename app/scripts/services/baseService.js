@@ -360,9 +360,9 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                             content: schedule.programs[i].content,
                             startDate: schedule.programs[i].startDate.toString(),
                             endDate: schedule.programs[i].endDate.toString(),
-                            stype: vm.stype
+                            stype: schedule.programs[i].stype
                         };
-                        if (vm.stype == 1) {
+                        if (schedule.programs[i].stype == 1) {
                             chartItem.startTime = schedule.programs[i].startTime;
                             chartItem.endTime = schedule.programs[i].endTime;
                             chartItem.plays = schedule.programs[i].plays;

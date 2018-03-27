@@ -30,7 +30,7 @@
                 <tr ng-repeat="row in displayed">
                     <td class="ellipsisTd">{{row.name}}</td>
                     <td class="createTimeTd">{{row.createTime | formateTime}}</td>
-                    <td>{{row.text}}</td>
+                    <td title="{{row.text}}">{{row.text}}</td>
                     <td style="min-width:180px;">
                         <div>
                             <button ng-if="perms(722)" class="btn btn-primary tableBtn" ng-click="save(row)">编辑</button>

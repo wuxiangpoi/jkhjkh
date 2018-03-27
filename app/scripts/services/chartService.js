@@ -211,6 +211,20 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                 endDatelist[i].name = playList[i].name;
                 endDatelist[i].value = baseService.formateDayTime(playList[i].endDate) - baseService.formateDayTime(playList[i].startDate);
                 endDatelist[i].playData = playList[i];
+
+                if(playList[i].stype == 1){
+                    endDatelist[i].itemStyle = {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                offset: 0,
+                                color: '#84fab0'
+                            }, {
+                                offset: 1,
+                                color: '#8fd3f4'
+                            }])
+                        }
+                    }
+                }
                 if (baseService.formateDayTime(playList[i].startDate) < chartData.minDate) {
                     chartData.minDate = baseService.formateDayTime(playList[i].startDate);
                 }

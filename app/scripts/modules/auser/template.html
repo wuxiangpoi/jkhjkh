@@ -32,7 +32,7 @@
                 <tr ng-repeat="row in displayed">
                     <td>{{row.phone}}</td>
                     <td>{{row.name}}</td>
-                    <td class="ellipsisTd">{{row.oid | getOrganizations}}</td>
+                    <td class="ellipsisTd" title="{{row.oid | getOrganizations}}">{{row.oid | getOrganizations}}</td>
                     <td style="min-width:180px;">
                         <div ng-if="!row.role || row.role != '0'">
                             <button class="btn tableBtn" ng-click="save(row)">编辑</button>

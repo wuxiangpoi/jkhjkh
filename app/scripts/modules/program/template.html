@@ -106,7 +106,7 @@
                     <td class="checkBoxTable">
                         <input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
                     </td>
-                    <td class="tdClick ellipsisTd" ng-click="showProgram(row)">
+                    <td class="tdClick ellipsisTd" title="{{row.name}}" ng-click="showProgram(row)">
                         {{row.name}}
                     </td>
                     <td>{{row.size | dmbdResourceSizeFilter}}</td>
@@ -121,10 +121,7 @@
                         {{row.createTime | formateTime}}
                     </td>
                     <td>
-                        <div ng-if="row.playTers == 0">
-                            0
-                        </div>
-                        <div class="tdClick" ng-if="row.playTers > 0" ng-click="sendCommandStopProgram(row)">
+                        <div class="tdClick" ng-click="sendCommandStopProgram(row)">
                             {{row.playTers}}
                         </div>
                     </td>

@@ -70,7 +70,7 @@
                             <input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.tid) != -1" type="checkbox">
                         </td>
                         <td>{{row.terminalNo || row.terNo}}</td>
-                        <td class="ellipsisTd">{{row.terminalName || row.terName}}</td>
+                        <td class="ellipsisTd" title="{{row.terminalName || row.terName}}">{{row.terminalName || row.terName}}</td>
                         <td>
 
                             <div class="txt-red" ng-if="row.terminalStatus == 0">未激活</div>
