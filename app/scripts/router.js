@@ -166,7 +166,7 @@
                     }
                 })
                 .state('dashboard.scheduleCreate', {
-                    url: '/scheduleCreate/{id}',
+                    url: '/scheduleCreate/{id}/{type}',
                     controller: 'scheduleCreateCtrl',
                     templateUrl: 'scripts/modules/scheduleCreate/template.html',
                     resolve: {

@@ -142,7 +142,7 @@ angular.module('sbAdminApp', ['chartService'])
 									}
 
 								} else {
-									if (cross(chartItem.sTime, chartItem.eTime, $scope.playList[i].sTime, $scope.playList[i].sTime)) {
+									if (cross(chartItem.sTime, chartItem.eTime, $scope.playList[i].sTime, $scope.playList[i].eTime)) {
 										if (cross(chartItem.startDate, chartItem.endDate, $scope.playList[i].startDate, $scope.playList[i].endDate)) {
 											var crossItem = $scope.playList[i];
 											crossItem.msg = {
@@ -263,7 +263,7 @@ angular.module('sbAdminApp', ['chartService'])
 					baseService.confirm('提示', "确定保存排期：" + $scope.scheduleName + "?", function (ngDialog, vm) {
 						vm.isPosting = true;
 						baseService.postData(baseService.api.programSchedule + 'saveProgramSchedule', {
-							id: $stateParams.id? $stateParams.id: '',
+							id: $stateParams.type != 'saveAs' && $stateParams.id? $stateParams.id: '',
 							name: $scope.scheduleName,
 							programs: JSON.stringify($scope.playList)
 						}, function (data) {

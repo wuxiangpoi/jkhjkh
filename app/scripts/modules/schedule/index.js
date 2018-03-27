@@ -37,9 +37,15 @@ angular.module('sbAdminApp', ['chartService'])
 
 
 			}
-			$scope.saveAs = function (item) {
+			$scope.edit = function (item) {
 				$state.go('dashboard.scheduleCreate', {
 					id: item.id
+				});
+			}
+			$scope.saveAs = function (item) {
+				$state.go('dashboard.scheduleCreate', {
+					id: item.id,
+					type: 'saveAs'
 				});
 			}
 			$scope.sendDown = function (item) {

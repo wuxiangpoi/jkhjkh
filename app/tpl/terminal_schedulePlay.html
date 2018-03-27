@@ -66,8 +66,8 @@
 						<td ng-if="showType == 0" class="checkBoxTable">
 							<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
 						</td>
-						<td>{{row.no || row.terNo}}</td>
-						<td class="ellipsisTd" title="{{row.name || row.terName}}">{{row.name || row.terName}}</td>
+						<td>{{row.no || row.terNo || row.terminalNo}}</td>
+						<td class="ellipsisTd" title="{{row.name || row.terName || row.terminalName}}">{{row.name || row.terName || row.terminalName}}</td>
 						<td>
 
 							<div class="txt-red" ng-if="row.terminalStatus == 0">未激活</div>
