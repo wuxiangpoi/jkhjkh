@@ -53,11 +53,11 @@ angular.module('sbAdminApp', ['chartService'])
 				$scope.callServer($scope.tableState);
 			}
 
-			$scope.$on('emitGroupLeaf', function (e, group) {
-				if ($scope.sp.oid != group.id) {
+			$scope.$on('emitGroupLeaf', function (e, group,leaf) {
+				if ($scope.sp.oid != group.id || $scope.sp.gid != leaf.id) {
 					$scope.currentGroup = group;
 					$scope.sp.oid = group.id;
-					$scope.sp.gid = '';
+					$scope.sp.gid = leaf.id;
 					$scope.initPage();
 				}
 

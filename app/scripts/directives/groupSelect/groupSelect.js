@@ -110,6 +110,7 @@ angular.module('sbAdminApp')
                 $scope.showGroup = false;
                 if(item.id != $scope.currentLeaf.id){
                     $scope.currentLeaf = item;
+                    console.log($scope.currentLeaf)
                     $scope.$emit('emitGroupLeaf', $scope.currentGroup, $scope.currentLeaf);
                     // setTimeout(function(){  
                     //     $scope.$apply();//必需手动进行脏值检测,否则数据无法刷新到界面  
