@@ -22,6 +22,8 @@
             var apiUrl = '../api/material/getMaterialList4editor';
             return dmbdRest.get(apiUrl, {
                 type: 0,
+                oid: data.oid,
+                gid: data.gid,
                 search: data.search,
                 start: data.pageSize * data.pageIndex,
                 length: data.pageSize

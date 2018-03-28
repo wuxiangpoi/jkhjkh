@@ -1,8 +1,0 @@
-<div ng-switch="data.ver" class="editor-element-full">
-    <div ng-switch-when="1" class="editor-element-full editor-element-table">
-        <div ng-style="{'font-size':data.size/10+'em','white-space':data.isMultiple?'normal':'nowrap','text-align':data.horizontalAlign,'vertical-align':data.verticalAlign}">
-            <span style="white-space: pre;"
-                  ng-style="{'font-family':(data.font|editorFontFamilyFilter),'color':'rgb('+data.color.r+','+data.color.g+','+data.color.b+')'}">{{data.value}}</span>
-        </div>
-    </div>
-</div>

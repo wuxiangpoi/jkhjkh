@@ -10,6 +10,9 @@
                         <label>待选择图片（{{recordCount}}）</label>
                     </div>
                     <div class="right-query">
+                        <group-leaf-select class="group-leaf-select"
+                                           reqleafurl="{{'/api/material/getMaterialGroups'}}">
+                        </group-leaf-select>
                         <input type="text" ng-model="search" placeholder="图片名称">
                         <button ng-click="doQuery()">查询</button>
                     </div>

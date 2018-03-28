@@ -54,7 +54,7 @@
     }]);
 
     //新增节目控制器
-    app.controller('programAddController', ['$scope', '$rootScope', '$state', '$stateParams', 'dialogService', 'programService', 'templateService', function ($scope, $rootScope, $state, $stateParams, dialogService, programService, templateService) {
+    app.controller('programAddController', ['$scope', '$rootScope', '$state', '$stateParams', 'dialogService', 'programService', 'templateService', 'editorTestService', function ($scope, $rootScope, $state, $stateParams, dialogService, programService, templateService, editorTestService) {
 
         $scope.program = {
             pixelHorizontal: 1920,
@@ -79,27 +79,36 @@
             $scope.$broadcast('auto-selected-template', template);
         });
 
-        $scope.addSingleTemplate = function (callback) {
+        //选取单个模板
+        $scope.$on('on-select-single-page', function (e, callback) {
             var emptyRates = [{
                 pixelHorizontal: $scope.program.pixelHorizontal,
                 pixelVertical: $scope.program.pixelVertical
             }];
             dialogService.openSingleTemplateSelectDialog(emptyRates, callback);
-        };
+        });
 
         $scope.selectPixel = dialogService.openPixelSelectorDialog;
 
         //选取单个图片
-        $scope.selectSingleImage = dialogService.openSingleImageSelectDialog;
+        $scope.$on('on-select-single-image', function (e, image, callback) {
+            dialogService.openSingleImageSelectDialog(image, callback);
+        });
 
         //选取多个图片
-        $scope.selectMultipleImage = dialogService.openMultipleImageSelectDialog;
+        $scope.$on('on-select-multiple-image', function (e, images, callback) {
+            dialogService.openMultipleImageSelectDialog(images, callback);
+        });
 
         //选取单个视频
-        $scope.selectSingleVideo = dialogService.openSingleVideoSelectDialog;
+        $scope.$on('on-select-single-video', function (e, video, callback) {
+            dialogService.openSingleVideoSelectDialog(video, callback);
+        });
 
         //选取多个视频
-        $scope.selectMultipleVideo = dialogService.openMultipleVideoSelectDialog;
+        $scope.$on('on-select-multiple-video', function (e, videos, callback) {
+            dialogService.openMultipleVideoSelectDialog(videos, callback);
+        });
 
         //预览
         $scope.goPreview = dialogService.openProgramPreviewDialog;
@@ -117,13 +126,13 @@
                 return;
             }
 
-            var sensitiveWord = programService.getFirstSensitiveWord(pages);
+            var sensitiveWord = editorTestService.getFirstSensitiveWord(pages);
             if (sensitiveWord !== null) {//存在敏感词
                 layer.alert('抱歉，你的文字中包含有被禁止的词汇（' + sensitiveWord + '），建议你修改相关内容');
                 return;
             }
 
-            if (programService.testAnyElementIsEmpty(pages)) {//有任何一个元素内容为空
+            if (editorTestService.testAnyElementIsEmpty(pages)) {//有任何一个元素内容为空
                 layer.confirm('当前节目存在无内容控件，是否继续保存？', {
                     btn: ['保存', '取消']
                 }, function () {
@@ -169,7 +178,7 @@
                 return;
             }
 
-            var sensitiveWord = programService.getFirstSensitiveWord([page]);
+            var sensitiveWord = editorTestService.getFirstSensitiveWord([page]);
             if (sensitiveWord !== null) {//存在敏感词
                 layer.alert('抱歉，你的文字中包含有被禁止的词汇（' + sensitiveWord + '），建议你修改相关内容');
                 return;
@@ -195,7 +204,7 @@
     }]);
 
     //修改节目控制器
-    app.controller('programEditController', ['$scope', '$rootScope', '$state', '$stateParams', 'dialogService', 'programService', 'templateService', function ($scope, $rootScope, $state, $stateParams, dialogService, programService, templateService) {
+    app.controller('programEditController', ['$scope', '$rootScope', '$state', '$stateParams', 'dialogService', 'programService', 'templateService', 'editorTestService', function ($scope, $rootScope, $state, $stateParams, dialogService, programService, templateService, editorTestService) {
 
         var pid = $stateParams.id;//节目ID
 
@@ -203,28 +212,36 @@
             $scope.program = program;
         });
 
-        //选取模板
-        $scope.addSingleTemplate = function (callback) {
+        //选取单个模板
+        $scope.$on('on-select-single-page', function (e, callback) {
             var emptyRates = [{
                 pixelHorizontal: $scope.program.pixelHorizontal,
                 pixelVertical: $scope.program.pixelVertical
             }];
             dialogService.openSingleTemplateSelectDialog(emptyRates, callback);
-        };
+        });
 
         $scope.selectPixel = dialogService.openPixelSelectorDialog;
 
         //选取单个图片
-        $scope.selectSingleImage = dialogService.openSingleImageSelectDialog;
+        $scope.$on('on-select-single-image', function (e, image, callback) {
+            dialogService.openSingleImageSelectDialog(image, callback);
+        });
 
         //选取多个图片
-        $scope.selectMultipleImage = dialogService.openMultipleImageSelectDialog;
+        $scope.$on('on-select-multiple-image', function (e, images, callback) {
+            dialogService.openMultipleImageSelectDialog(images, callback);
+        });
 
         //选取单个视频
-        $scope.selectSingleVideo = dialogService.openSingleVideoSelectDialog;
+        $scope.$on('on-select-single-video', function (e, video, callback) {
+            dialogService.openSingleVideoSelectDialog(video, callback);
+        });
 
         //选取多个视频
-        $scope.selectMultipleVideo = dialogService.openMultipleVideoSelectDialog;
+        $scope.$on('on-select-multiple-video', function (e, videos, callback) {
+            dialogService.openMultipleVideoSelectDialog(videos, callback);
+        });
 
         //预览
         $scope.goPreview = dialogService.openProgramPreviewDialog;
@@ -242,13 +259,13 @@
                 return;
             }
 
-            var sensitiveWord = programService.getFirstSensitiveWord(pages);
+            var sensitiveWord = editorTestService.getFirstSensitiveWord(pages);
             if (sensitiveWord !== null) {//存在敏感词
                 layer.alert('抱歉，你的文字中包含有被禁止的词汇（' + sensitiveWord + '），建议你修改相关内容');
                 return;
             }
 
-            if (programService.testAnyElementIsEmpty(pages)) {//有任何一个元素内容为空
+            if (editorTestService.testAnyElementIsEmpty(pages)) {//有任何一个元素内容为空
                 layer.confirm('当前节目存在无内容控件，是否继续保存？', {
                     btn: ['保存', '取消']
                 }, function () {
@@ -295,7 +312,7 @@
                 return;
             }
 
-            var sensitiveWord = programService.getFirstSensitiveWord([page]);
+            var sensitiveWord = editorTestService.getFirstSensitiveWord([page]);
             if (sensitiveWord !== null) {//存在敏感词
                 layer.alert('抱歉，你的文字中包含有被禁止的词汇（' + sensitiveWord + '），建议你修改相关内容');
                 return;
@@ -322,7 +339,7 @@
 
 
     //复制节目控制器
-    app.controller('programCopyController', ['$scope', '$rootScope', '$state', '$stateParams', 'dialogService', 'programService', 'templateService', function ($scope, $rootScope, $state, $stateParams, dialogService, programService, templateService) {
+    app.controller('programCopyController', ['$scope', '$rootScope', '$state', '$stateParams', 'dialogService', 'programService', 'templateService', 'editorTestService', function ($scope, $rootScope, $state, $stateParams, dialogService, programService, templateService, editorTestService) {
 
         var pid = $stateParams.id;//节目ID
 
@@ -330,28 +347,36 @@
             $scope.program = program;
         });
 
-        //选取模板
-        $scope.addSingleTemplate = function (callback) {
+        //选取单个模板
+        $scope.$on('on-select-single-page', function (e, callback) {
             var emptyRates = [{
                 pixelHorizontal: $scope.program.pixelHorizontal,
                 pixelVertical: $scope.program.pixelVertical
             }];
             dialogService.openSingleTemplateSelectDialog(emptyRates, callback);
-        };
+        });
 
         $scope.selectPixel = dialogService.openPixelSelectorDialog;
 
         //选取单个图片
-        $scope.selectSingleImage = dialogService.openSingleImageSelectDialog;
+        $scope.$on('on-select-single-image', function (e, image, callback) {
+            dialogService.openSingleImageSelectDialog(image, callback);
+        });
 
         //选取多个图片
-        $scope.selectMultipleImage = dialogService.openMultipleImageSelectDialog;
+        $scope.$on('on-select-multiple-image', function (e, images, callback) {
+            dialogService.openMultipleImageSelectDialog(images, callback);
+        });
 
         //选取单个视频
-        $scope.selectSingleVideo = dialogService.openSingleVideoSelectDialog;
+        $scope.$on('on-select-single-video', function (e, video, callback) {
+            dialogService.openSingleVideoSelectDialog(video, callback);
+        });
 
         //选取多个视频
-        $scope.selectMultipleVideo = dialogService.openMultipleVideoSelectDialog;
+        $scope.$on('on-select-multiple-video', function (e, videos, callback) {
+            dialogService.openMultipleVideoSelectDialog(videos, callback);
+        });
 
         //预览
         $scope.goPreview = dialogService.openProgramPreviewDialog;
@@ -369,13 +394,13 @@
                 return;
             }
 
-            var sensitiveWord = programService.getFirstSensitiveWord(pages);
+            var sensitiveWord = editorTestService.getFirstSensitiveWord(pages);
             if (sensitiveWord !== null) {//存在敏感词
                 layer.alert('抱歉，你的文字中包含有被禁止的词汇（' + sensitiveWord + '），建议你修改相关内容');
                 return;
             }
 
-            if (programService.testAnyElementIsEmpty(pages)) {//有任何一个元素内容为空
+            if (editorTestService.testAnyElementIsEmpty(pages)) {//有任何一个元素内容为空
                 layer.confirm('当前节目存在无内容控件，是否继续保存？', {
                     btn: ['保存', '取消']
                 }, function () {
@@ -421,7 +446,7 @@
                 return;
             }
 
-            var sensitiveWord = programService.getFirstSensitiveWord([page]);
+            var sensitiveWord = editorTestService.getFirstSensitiveWord([page]);
             if (sensitiveWord !== null) {//存在敏感词
                 layer.alert('抱歉，你的文字中包含有被禁止的词汇（' + sensitiveWord + '），建议你修改相关内容');
                 return;

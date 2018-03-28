@@ -58,7 +58,7 @@
                         <div ng-if="row.status == 1">下发成功</div>
                         <div ng-if="row.status == 2">
                             <div class="tex-red">下发失败</div>
-                            <div class="tdTipTxt">{{'原因是：' + row.errorMessage}}</div>
+                            <div class="tdTipTxt" title="{{'原因是：' + row.errorMessage}}">{{'原因是：' + row.errorMessage}}</div>
                         </div>
                         <div ng-if="row.status == 3">等待终端上线</div>
                         <div class="txt-grey" ng-if="row.status == 4">已取消</div>

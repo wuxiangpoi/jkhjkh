@@ -1,6 +1,6 @@
 (function (app) {
 
-    app.service('templateService', ['dmbdRest', 'programService', 'dmbdOSSImageUrlResizeFilterFilter', '$q', function (dmbdRest, programService, dmbdOSSImageUrlResizeFilter, $q) {
+    app.service('templateService', ['dmbdRest', 'editorResourceService', function (dmbdRest, editorResourceService) {
 
         //获取公共模板列表
         this.getCommonTemplateList = function (data, success) {
@@ -16,14 +16,14 @@
                     var template = item;
                     templates.push(template);
 
-                    var paths = programService.getResourcePathsFromPages([template.page]);//提炼出资源标识符
+                    var paths = editorResourceService.getResourcePathsFromPages([template.page]);//提炼出资源标识符
                     paths.forEach(function (path) {
                         allPaths.push(path);
                     });
                 });
 
                 allPaths = allPaths.unique();//去重复
-                
+
                 if (allPaths.length === 0) {
                     success(templates, content.recordsTotal);
                 } else {
@@ -31,7 +31,7 @@
                         paths: angular.toJson(allPaths)
                     }, function (pathMaps) {
                         templates.forEach(function (template) {
-                            programService.setResourceInfoToPages([template.page], allPaths, pathMaps, dmbdOSSImageUrlResizeFilter);
+                            editorResourceService.setResourcePropertyWithoutPathToPages([template.page], pathMaps);
 
                             template.pixelHorizontal = template.pixelHorizontal || 1920;
                             template.pixelVertical = template.pixelVertical || 1080;
@@ -64,7 +64,7 @@
                     };
                     templates.push(template);
 
-                    var paths = programService.getResourcePathsFromPages([template.page]);//提炼出资源标识符
+                    var paths = editorResourceService.getResourcePathsFromPages([template.page]);//提炼出资源标识符
                     paths.forEach(function (path) {
                         allPaths.push(path);
                     });
@@ -79,7 +79,7 @@
                         paths: angular.toJson(allPaths)
                     }, function (pathMaps) {
                         templates.forEach(function (template) {
-                            programService.setResourceInfoToPages([template.page], allPaths, pathMaps, dmbdOSSImageUrlResizeFilter);
+                            editorResourceService.setResourcePropertyWithoutPathToPages([template.page], pathMaps);
 
                             template.pixelHorizontal = template.pixelHorizontal || 1920;
                             template.pixelVertical = template.pixelVertical || 1080;
@@ -97,7 +97,7 @@
         this.addTemplate = function (data, success) {
             data = angular.copy(data);//深度克隆对象，防止原始数据被更改
             var apiUrl = '../api/template/saveTemplate';
-            programService.deleteResourceUrlsFromPages([data.page]);
+            editorResourceService.deleteResourcePropertyWithoutPathFromPages([data.page]);
             return dmbdRest.post(apiUrl, {
                 name: data.name,
                 pixelHorizontal: data.pixelHorizontal,

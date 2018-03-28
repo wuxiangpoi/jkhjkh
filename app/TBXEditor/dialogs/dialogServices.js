@@ -8,7 +8,7 @@
         return currentPath.substring(0, index + 1);
     })();
 
-    app.service('dialogService', ['ngDialog', 'programService', function (ngDialog, programService) {
+    app.service('dialogService', ['ngDialog', 'programService', 'editorTestService', function (ngDialog, programService, editorTestService) {
 
         function bindScope($scope, pixelHorizontal, pixelVertical, pages) {
             //屏幕比例
@@ -72,7 +72,7 @@
                 return;
             }
 
-            var sensitiveWord = programService.getFirstSensitiveWord(pages);
+            var sensitiveWord = editorTestService.getFirstSensitiveWord(pages);
             if (sensitiveWord !== null) {//存在敏感词
                 layer.alert('抱歉，你的文字中包含有被禁止的词汇（' + sensitiveWord + '），建议你修改相关内容');
                 return;
@@ -160,7 +160,7 @@
                 template: currentScriptFolder + 'programSave.html',
                 className: 'ngdialog-theme-default',
                 width: '600px',
-                controller: ['$scope', 'programService', '$rootScope', '$http', function ($scope, programService, $rootScope, $http) {
+                controller: ['$scope', 'editorResourceService', function ($scope, editorResourceService) {
 
                     $scope.name = args.name || '';
                     $scope.pages = args.pages;
@@ -175,43 +175,9 @@
                             return total_time;
                         };
 
-                        //获取资源总数及大小
-                        var resources = [];
-                        programService.handleResourcesFromPages(args.pages, function (image) {
-                            switch (image.ver) {
-                                case 1:
-                                    resources.push({
-                                        path: image.path,
-                                        size: image.size
-                                    });
-                                    break;
-                                default :
-                                    break;
-                            }
-                        }, function (video) {
-                            switch (video.ver) {
-                                case 1:
-                                    resources.push({
-                                        path: video.path,
-                                        size: video.size
-                                    });
-                                    break;
-                                default :
-                                    break;
-                            }
-                        });
-                        //去重复
-                        resources = resources.unique(function (item) {
-                            return item.path;
-                        });
-                        $scope.resourceCount = resources.length;
-                        $scope.resourceSize = (function () {
-                            var totalSize = 0;
-                            resources.forEach(function (item) {
-                                totalSize += item.size;
-                            });
-                            return totalSize;
-                        })();
+                        $scope.resourceCount = editorResourceService.getResourceCountFromPages(args.pages);
+                        $scope.resourceSize = editorResourceService.getResourceTotalSizeFromPages(args.pages);
+
                     })();
                     (function () {
                         //console.log(args.pages);
@@ -292,7 +258,7 @@
                 template: currentScriptFolder + 'templateSave.html',
                 className: 'ngdialog-theme-default',
                 width: '600px',
-                controller: ['$scope', 'programService', function ($scope, programService) {
+                controller: ['$scope', 'editorResourceService', function ($scope, editorResourceService) {
 
                     $scope.name = args.name || '';
                     $scope.page = args.page;
@@ -301,42 +267,8 @@
 
                     (function () {
                         //获取资源总数及大小
-                        var resources = [];
-                        programService.handleResourcesFromPages([args.page], function (image) {
-                            switch (image.ver) {
-                                case 1:
-                                    resources.push({
-                                        path: image.path,
-                                        size: image.size
-                                    });
-                                    break;
-                                default :
-                                    break;
-                            }
-                        }, function (video) {
-                            switch (video.ver) {
-                                case 1:
-                                    resources.push({
-                                        path: video.path,
-                                        size: video.size
-                                    });
-                                    break;
-                                default :
-                                    break;
-                            }
-                        });
-                        //去重复
-                        resources = resources.unique(function (item) {
-                            return item.path;
-                        });
-                        $scope.resourceCount = resources.length;
-                        $scope.resourceSize = (function () {
-                            var totalSize = 0;
-                            resources.forEach(function (item) {
-                                totalSize += item.size;
-                            });
-                            return totalSize;
-                        })();
+                        $scope.resourceCount = editorResourceService.getResourceCountFromPages([args.page]);
+                        $scope.resourceSize = editorResourceService.getResourceTotalSizeFromPages([args.page]);
                     })();
 
                     (function () {
@@ -571,7 +503,19 @@
                 template: currentScriptFolder + 'multipleImageSelect.html',
                 className: 'ngdialog-theme-default',
                 width: '1200px',
-                controller: ['$scope', 'imageService', function ($scope, imageService) {
+                controller: ['$scope', '$rootScope', 'imageService', function ($scope, $rootScope, imageService) {
+
+                    var oid = $rootScope.rootGroup.id;
+                    var gid = null;
+
+                    (function () {
+                        $scope.$on('emitGroupLeaf', function (e, group, leaf) {
+                            oid = group.id;
+                            if (leaf) {
+                                gid = leaf.id;
+                            }
+                        });
+                    })();
 
                     //右侧拖拽效果参数
                     (function () {
@@ -597,10 +541,13 @@
                         //执行翻页动作
                         function doPaging(pageIndex) {
                             var data = {
+                                oid: oid || '',
+                                gid: gid || '',
                                 search: $scope.search.trim(),
                                 pageSize: $scope.pageSize,
                                 pageIndex: pageIndex
                             };
+                            console.log(data);
                             //获取数据
                             imageService.getImageList(data, function (data, recordCount) {
                                 $scope.recordCount = recordCount;
