@@ -417,14 +417,26 @@ angular.module('sbAdminApp', ['chartService'])
 						}
 					}
 					vm.showProgramOrSchedule = function (item) {
-						if (item.stype && item.stype == 1) {
-							item.id = item.pid;
-							baseService.showSchedule(item, 2, chartService);
-
-						} else {
-							item.pStatus = 1;
-							baseService.showProgram(item);
+						if(vm.showType == 1){
+							if (item.cmdCode == 24 || item.cmdCode == 25) {
+								item.id = item.pid;
+								baseService.showSchedule(item, 2, chartService);
+	
+							} else {
+								item.pStatus = 1;
+								baseService.showProgram(item);
+							}
+						}else{
+							if (item.stype && item.stype == 1) {
+								item.id = item.pid;
+								baseService.showSchedule(item, 2, chartService);
+	
+							} else {
+								item.pStatus = 1;
+								baseService.showProgram(item);
+							}
 						}
+						
 
 					}
 				})

@@ -64,7 +64,7 @@
 				<tbody ng-show="!isLoading">
 					<tr ng-repeat="row in displayed" class="{{$index%2 == 0?'odd':'even'}}">
 						<td ng-if="showType == 0" class="checkBoxTable">
-							<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
+							<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.tid) != -1" type="checkbox">
 						</td>
 						<td>{{row.no || row.terNo || row.terminalNo}}</td>
 						<td class="ellipsisTd" title="{{row.name || row.terName || row.terminalName}}">{{row.name || row.terName || row.terminalName}}</td>

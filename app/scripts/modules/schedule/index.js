@@ -180,7 +180,7 @@ angular.module('sbAdminApp', ['chartService'])
 						vm.ids = [];
 						if ($($event.currentTarget).is(':checked')) {
 							for (var i = 0; i < vm.displayed.length; i++) {
-								vm.ids.push(vm.displayed[i].id)
+								vm.ids.push(vm.displayed[i].tid)
 							}
 						} else {
 							vm.ids = [];
@@ -188,10 +188,10 @@ angular.module('sbAdminApp', ['chartService'])
 					}
 					vm.checkThis = function (item, $event) {
 						if ($($event.currentTarget).is(':checked')) {
-							vm.ids.push(item.id);
+							vm.ids.push(item.tid);
 
 						} else {
-							vm.ids = baseService.removeAry(vm.ids, item.id);
+							vm.ids = baseService.removeAry(vm.ids, item.tid);
 						}
 					}
 					vm.switchTab = function (type) {
