@@ -1,4 +1,4 @@
-<div class="content-wrap" style="min-width:820px;">
+<div class="content-wrap" style="min-width:860px;">
 	<div class="level2 clearfix">
 		<div ng-if="perms(412)" class="tipBtnWrap">
 			<button ng-click="save()" class="btn btn-primary h34">
@@ -134,7 +134,7 @@
 						<button ng-if="[0,1,2,3,7].indexOf(row.status) != -1 && perms(413)"
 						    class="btn tableBtn" ng-click="saveName(row)">修改名称
 						</button>
-						<button ng-if="[0,1,4,5,6].indexOf(row.status) != -1 && perms(414)" class="btn tableBtn"
+						<button ng-if="[0,4,5,6].indexOf(row.status) != -1 && perms(414)" class="btn tableBtn"
 						    ng-click="del(row)">删除
 						</button>
 					</td>

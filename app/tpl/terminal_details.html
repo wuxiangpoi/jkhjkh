@@ -31,9 +31,7 @@
 					<div class="form-group clearfix" ng-if="data.terminal_time!=null">
 						<label class="col-sm-4 p0">终端时间</label>
 						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.terminal_time | date : 'yyyy-MM-dd HH:mm:ss'}}
-		
-		
+							{{data.terminal_time | date : 'yyyy-MM-dd HH:mm:ss'}}		
 						</div>
 					</div>
 					<div class="form-group clearfix">
@@ -42,7 +40,7 @@
 							{{data.name}}
 						</div>
 					</div>
-					<div class="form-group clearfix">
+					<div class="form-group clearfix" ng-if="data.oid">
 						<label class="col-sm-4 p0">所属组织机构</label>
 						<div class="col-sm-8 pdr0 txt-grey ellipsTXt">
 							{{data.oid | getOrganizations}}

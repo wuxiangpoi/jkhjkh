@@ -160,7 +160,6 @@ angular.module('sbAdminApp')
 				}
 				baseService.confirmDialog(540, '编辑', modalData, 'tpl/material_saveName.html', function (ngDialog, vm) {
 					if (vm.modalForm.$valid) {
-
 						vm.isPosting = true;
 						baseService.postData(baseService.api.material + 'saveMaterial', {
 							id: item.id,
@@ -169,9 +168,9 @@ angular.module('sbAdminApp')
 							ngDialog.close();
 							$scope.callServer($scope.tableState);
 							baseService.alert(item ? '修改成功' : '添加成功', 'success');
-						},function(msg){
+						}, function (msg) {
 							vm.isPosting = false;
-							baseService.alert(msg, 'warning',true)
+							baseService.alert(msg, 'warning', true)
 						})
 
 					} else {
@@ -194,13 +193,27 @@ angular.module('sbAdminApp')
 			$scope.save = function () {
 				baseService.confirmDialog(720, '添加素材', {}, 'tpl/material_save.html', function (ngDialog, vm) {
 					if (vm.uploader.queue.length) {
+						var filenameArray = [];
 						for (var i = 0; i < vm.uploader.queue.length; i++) {
 							vm.uploader.queue[i].oid = vm.currentGroup.id;
 							vm.uploader.queue[i].gid = vm.currentLeaf.id;
-							vm.uploader.queue[i].oName = $('#currentName').text();
+							filenameArray.push(vm.uploader.queue[i].file.desc);
 						}
-						vm.closeThisDialog();
-						$rootScope.$broadcast('callUploader', vm.uploader);
+						baseService.postData(baseService.api.material + 'addMaterial_checkUpload', {
+							filenameArray: JSON.stringify(filenameArray)
+						}, function (res) {
+							if (res.length) {
+								for(var i = 0;i < res.length;i ++){
+									vm.uploader.queue[res[i].index].message = res[i].message;
+									vm.uploader.queue[res[i].index].oname = res[i].name;
+								}
+							} else {
+								vm.closeThisDialog();
+								$rootScope.$broadcast('callUploader', vm.uploader);
+							}
+						})
+
+
 					} else {
 						baseService.alert('请先选择文件', 'warning', true);
 					}
