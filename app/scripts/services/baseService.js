@@ -1,8 +1,8 @@
 var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
     // var apiUrl = 'http://192.168.1.100:8080';
-    var apiUrl = 'http://47.92.116.16:9090';
-    var verson = '?_v2.188';
+    var apiUrl = '';
+    var verson = '?_v2.1888';
     var baseService = {
         verson: verson,
         api: {
@@ -379,6 +379,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                     }
                     vm.showProgram = function (item) {
                         item.pid = item.id;
+                        item.pStatus = 1;
                         me.showProgram(item);
                     }
                     vm.eoption = chartService.initChartSchedule(vm.playList,minLen);
