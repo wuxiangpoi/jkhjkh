@@ -82,7 +82,10 @@
                         <td>
                             <div ng-if="row.status == 1 || showType == 0">下发成功</div>
                             <div class="tex-red" ng-if="row.status == 2">下发失败</div>
-                            <div ng-if="row.status == 3">等待终端上线</div>
+                            <div ng-if="row.status == 3">
+                                    <div ng-if="row.terminalStatus == 1">等待终端执行</div>
+                                    <div ng-if="row.terminalStatus == 2">等待终端上线</div>                                
+                            </div>
                             <div ng-if="row.status == 4">已取消</div>
                             <div ng-if="row.status == 5">正在下载</div>
                         </td>

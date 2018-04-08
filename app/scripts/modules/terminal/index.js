@@ -319,7 +319,7 @@ angular.module('sbAdminApp', ['chartService'])
 				}
 			}
 
-			$scope.showPrograms = function (item) {
+			$scope.showPrograms = function (item,index) {
 				baseService.confirmDialog(720, '播放管理', item, 'tpl/terminal_programPlay_list.html', function (ngDialog, vm) {
 					var s = '';
 					s = vm.ids.join(',');
@@ -376,7 +376,7 @@ angular.module('sbAdminApp', ['chartService'])
 									vm.programOrSchedule = 1;
 								}
 							}
-
+							$scope.displayed[index].programCounts = result.recordsTotal;
 						});
 					}
 					vm.initTable = function () {

@@ -6,7 +6,7 @@
             <div class="clearfix">
 
                 <div class="col-sm-6 ellipsTXt p0">
-                    排期名称：{{data.name}}
+                    排期名称：{{data.name}} <span class="tex-red" ng-if="data.expired">[已过期]</span>
                 </div>
             </div>
             <div class="clearfix">
@@ -72,7 +72,7 @@
 		</table>
 	</div>
 </div>
-<div class="modal-footer" ng-if="perms(445)">
+<div class="modal-footer" ng-if="perms(445) && !data.expired">
 	<button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="modalConfirmSubmit()">发布
 		<i class="fa fa-spinner"></i>
 	</button>

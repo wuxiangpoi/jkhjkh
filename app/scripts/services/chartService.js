@@ -239,7 +239,7 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                 chartData.maxDate = chartData.minDate + intervalMon * (Math.ceil(dateInterval / intervalMon) + 1);
             } else {
                 interval = intervalDay;
-                chartData.minDate = chartData.minDate - intervalDay;
+                chartData.minDate = chartData.minDate;
                 chartData.maxDate = chartData.maxDate + intervalDay;
             }
             playData.xAxis.interval = interval;

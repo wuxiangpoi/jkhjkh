@@ -124,7 +124,7 @@ angular.module('sbAdminApp')
 				item.pid = item.id;
 				baseService.showProgram(item);
 			}
-			$scope.sendCommandStopProgram = function (item) {
+			$scope.sendCommandStopProgram = function (item,index) {
 				baseService.confirmDialog(720, '播放管理', item, "tpl/terminal_list_modal.html", function (ngDialog, vm) {
 					var s = vm.ids.join(',');
 					if (s.length) {
@@ -186,6 +186,7 @@ angular.module('sbAdminApp')
 									vm.programOrSchedule = 1;
 								}
 							}
+							$scope.displayed[index].playTers = result.recordsTotal;
 						});
 					}
 					vm.initTable = function () {
@@ -263,7 +264,7 @@ angular.module('sbAdminApp')
 									endDate: $rootScope.formateDate(vm.data.endDate)
 								}, function () {
 									ngDialog.close();
-									baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，节目方能在终端管理->节目数量查看', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
+									baseService.alert('发布成功', 'success',true);
 									vm.callServer(vm.tableState);
 								})
 							}

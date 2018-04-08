@@ -572,6 +572,9 @@ div.timeSelectWrap {
   background: #000;
   z-index: 100000;
 }
+.image-view .page-nav {
+  background: #fff;
+}
 .image-view .imgWrap {
   position: absolute;
   width: 100%;
