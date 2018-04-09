@@ -53,7 +53,7 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                         },
                         fontSize: 12,
                         showMinLabel: true,
-                        showMaxLabel: true,
+                        showMaxLabel: false,
                         color: '#24243e'
                         
                     },
@@ -209,7 +209,7 @@ chartService.factory('chartService', ['baseService', function (baseService) {
             for (var i = 0; i < playList.length; i++) {
                 startDatelist[i].value = baseService.formateDayTime(playList[i].startDate);
                 endDatelist[i].name = playList[i].name;
-                endDatelist[i].value = baseService.formateDayTime(playList[i].endDate) - baseService.formateDayTime(playList[i].startDate);
+                endDatelist[i].value = baseService.formateDayTime(playList[i].endDate) - baseService.formateDayTime(playList[i].startDate) + intervalDay/5;
                 endDatelist[i].playData = playList[i];
 
                 if(playList[i].stype == 1){

@@ -107,7 +107,7 @@ angular.module('sbAdminApp', ['chartService'])
 			}
 
 			function checkCross(chartItem) {
-				function cross(a1, a2, b1, b2,type) {
+				function cross(a1, a2, b1, b2, type) {
 					if (b2 <= a1) {
 						return false;
 					} else if (b2 > a1 && b1 >= a2) {
@@ -117,9 +117,9 @@ angular.module('sbAdminApp', ['chartService'])
 					} else if (b1 < a2 && b2 <= a1) {
 						return false;
 					} else if (b1 == a1 && b2 == a2) {
-						if(type == 'date'){
+						if (type == 'date') {
 							return true;
-						}else{
+						} else {
 							return false;
 						}
 					} else {
@@ -144,8 +144,8 @@ angular.module('sbAdminApp', ['chartService'])
 
 						for (var i = 0; i < $scope.playList.length; i++) {
 							if ($scope.playList[i].stype == 1) {
-								if (cross(chartItem.sTime, chartItem.eTime, $scope.playList[i].sTime, $scope.playList[i].eTime),'time') {
-									if (cross(chartItem.startDate, chartItem.endDate, $scope.playList[i].startDate, $scope.playList[i].endDate),'date') {
+								if (cross(chartItem.sTime, chartItem.eTime, $scope.playList[i].sTime, $scope.playList[i].eTime, 'time')) {
+									if (cross(chartItem.startDate, chartItem.endDate, $scope.playList[i].startDate, $scope.playList[i].endDate, 'date')) {
 										var crossItem = $scope.playList[i];
 										crossItem.msg = {
 											type: 3,
@@ -211,7 +211,7 @@ angular.module('sbAdminApp', ['chartService'])
 			}
 			$scope.add = function (item) {
 				baseService.confirmDialog(540, '添加排期', {}, "tpl/add_schedule.html", function (ngDialog, vm) {
-					if (vm.modalForm.$valid && !vm.showTip && vm.data.endDate > vm.data.startDate) {
+					if (vm.modalForm.$valid && !vm.showTip && vm.data.endDate >= vm.data.startDate) {
 						var chartItem = {
 							id: item.id,
 							name: item.name,
@@ -313,12 +313,15 @@ angular.module('sbAdminApp', ['chartService'])
 
 			}
 			$scope.del = function (item) {
-				var len = (baseService.formateDayTime(item.endDate) - baseService.formateDayTime(item.startDate)) / oneDay;
-				for (var i = 0; i <= len; i++) {
-					dateMap[baseService.formateDayTime(item.startDate) + i * oneDay][item.timeSel] = {
-						minuteRemain: dateMap[baseService.formateDayTime(item.startDate) + i * oneDay][item.timeSel].minuteRemain + item.duration * item.plays
+				if (item.stype == 1) {
+					var len = (baseService.formateDayTime(item.endDate) - baseService.formateDayTime(item.startDate)) / oneDay;
+					for (var i = 0; i <= len; i++) {
+						dateMap[baseService.formateDayTime(item.startDate) + i * oneDay][item.timeSel] = {
+							minuteRemain: dateMap[baseService.formateDayTime(item.startDate) + i * oneDay][item.timeSel].minuteRemain + item.duration * item.plays
+						}
 					}
 				}
+
 				$scope.playList = baseService.removeAryId($scope.playList, item.id);
 				$scope.playListId = baseService.removeAry($scope.playListId, item.id);
 				initChartSchedule();

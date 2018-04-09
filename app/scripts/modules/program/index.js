@@ -255,13 +255,13 @@ angular.module('sbAdminApp')
 								baseService.postData(baseService.api.program + 'programManage_sendCommand', {
 									tids: s,
 									type: 1,
-									pid: item.id,
-									start_h: vm.start_h,
-									start_m: vm.start_m,
-									end_h: vm.end_h,
-									end_m: vm.end_m,
-									startDate: $rootScope.formateDate(vm.data.startDate),
-									endDate: $rootScope.formateDate(vm.data.endDate)
+									pid: item.id
+									// start_h: vm.start_h,
+									// start_m: vm.start_m,
+									// end_h: vm.end_h,
+									// end_m: vm.end_m,
+									// startDate: $rootScope.formateDate(vm.data.startDate),
+									// endDate: $rootScope.formateDate(vm.data.endDate)
 								}, function () {
 									ngDialog.close();
 									baseService.alert('发布成功', 'success',true);

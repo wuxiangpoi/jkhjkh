@@ -27,8 +27,8 @@
                     </div>
                     <input type="hidden" name="endDate" required ng-model="data.endDate">
                 </div>
-                <div class="help-block col-sm-12" ng-if="data.startDate >= data.endDate && isShowMessage">
-                    <p class="row">结束日期必须大于开始日期</p>
+                <div class="help-block col-sm-12" ng-if="data.startDate > data.endDate && isShowMessage">
+                    <p class="row">结束日期必须大于等于开始日期</p>
                 </div>
             </div>
         </div>
