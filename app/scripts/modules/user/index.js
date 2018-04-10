@@ -39,7 +39,7 @@ angular.module('sbAdminApp', [])
                 role: item ? item.role : '',
                 oid: item ? item.oid : ''
             }
-            baseService.confirmDialog(540, item ? '编辑帐号' : '添加帐号', postData, 'tpl/user_save.html', function (ngDialog, vm) {
+            baseService.confirmDialog(540, item ? '编辑账号' : '添加账号', postData, 'tpl/user_save.html', function (ngDialog, vm) {
                 vm.isShowMessage = false;
                 if (vm.modalForm.$valid) {
                     var onData = {
@@ -93,7 +93,7 @@ angular.module('sbAdminApp', [])
             })
         }
         $scope.changeStatus = function (item) {
-            baseService.confirm(item.enabled == 0 ? '解禁账户' : '禁用账户', '您确定' + (item.enabled == 0 ? '解禁' : '禁用') + '账户：' + item.name + '?', function (ngDialog, vm) {
+            baseService.confirm(item.enabled == 0 ? '解禁账号' : '禁用账号', '您确定' + (item.enabled == 0 ? '解禁' : '禁用') + '账户：' + item.name + '?', function (ngDialog, vm) {
                 vm.isPosting = true;
                 baseService.postData(baseService.api.user + 'setUserEnable', {
                     uid: item.id,

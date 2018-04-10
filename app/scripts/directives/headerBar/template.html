@@ -111,7 +111,7 @@
                     <a class="navSecondLevel" ng-click="check(5)" ng-class="{active: collapseVar==5}">
                         <i class="iconfont icon-shenheguanli"></i>
                         <span class="navTle">审核管理</span>
-                        <span id="mpTotal" ng-if="materialCheckCounts + programCheckCounts > 0" class="indicator">
+                        <span id="mpTotal" ng-if="materialCheckCounts + programCheckCounts + programScheduleCheckCounts > 0" class="indicator">
                             {{materialCheckCounts + programCheckCounts + programScheduleCheckCounts}}
                         </span>
                         <span class="fa arrow"></span>

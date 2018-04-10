@@ -167,7 +167,7 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                             str += '<span style="font-size:13px;">播放日期</span><span style="font-size:12px;color:#9f9f9f;"> ' + min_max + '</span><br />'
                             str += '<span style="font-size:13px;">播放时段</span><span style="font-size:12px;color:#9f9f9f;"> ' + period + '</span><br />'
                             if (playData.stype == 1) {
-                                str += '<span style="font-size:13px;">播放次数</span><span style="font-size:12px;"> ' + playData.plays + '次</span>'
+                                str += '<span style="font-size:13px;">播放次数</span><span style="font-size:12px;color:#9f9f9f;"> ' + playData.plays + '次</span>'
                             }
                             return str;
                         },

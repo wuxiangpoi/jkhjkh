@@ -92,7 +92,7 @@
 
 	</div>
 </div>
-<div class="modal-footer" ng-if="perms(445) && showType == 0">
+<div class="modal-footer" ng-if="perms(445) && showType == 0 && displayed.length">
 	<button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="modalConfirmSubmit()">停播
 		<i class="fa fa-spinner"></i>
 	</button>

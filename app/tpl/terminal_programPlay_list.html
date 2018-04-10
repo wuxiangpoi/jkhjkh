@@ -27,7 +27,7 @@
 							<input ng-checked="ids.length == displayed.length && displayed.length != 0" ng-click="checkAll($event)" type="checkbox">
 						</th>
 						<th>类型</th>
-						<th>节目/排期名称</th>
+						<th>名称</th>
 						<!-- <th>播放时间</th> -->
 						<th ng-if="showType == 1">命令名称</th>
 						<th ng-if="showType == 1">状态</th>
@@ -70,7 +70,10 @@
 						<td ng-if="showType == 1">
 							<div ng-if="row.status == 1 || showType == 0">下发成功</div>
 							<div class="tex-red" ng-if="row.status == 2">下发失败</div>
-							<div ng-if="row.status == 3">等待终端上线</div>
+							<div ng-if="row.status == 3">
+									<div ng-if="data.status == 1">等待终端执行</div>
+                                    <div ng-if="data.status == 2">等待终端上线</div>
+							</div>
 							<div ng-if="row.status == 4">已取消</div>
 							<div ng-if="row.status == 5">正在下载</div>
 						</td>
@@ -83,7 +86,7 @@
 
 	</div>
 </div>
-<div class="modal-footer" ng-if="checkPerms && showType == 0">
+<div class="modal-footer" ng-if="checkPerms && showType == 0 && displayed.length">
 	<button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="modalConfirmSubmit()">停播
 		<i class="fa fa-spinner"></i>
 	</button>

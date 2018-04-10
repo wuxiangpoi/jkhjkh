@@ -2,7 +2,7 @@ var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
     // var apiUrl = 'http://192.168.1.100:8080';
     var apiUrl = 'http://47.92.116.16:9090';
-    var verson = '?_v2.191';
+    var verson = '?_v2.199';
     var baseService = {
         verson: verson,
         api: {
@@ -293,8 +293,12 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 return day.toString();
             }
         },
-        formateDayTime: function (date) {
-            return Date.parse(date.substring(0, 4) + '-' + date.substring(4, 6) + '-' + date.substring(6, 8));
+        formateDayTime: function (date,type) {
+            if(type == 'date'){
+                return date.substring(0, 4) + '-' + date.substring(4, 6) + '-' + date.substring(6, 8);
+            }else{
+                return Date.parse(date.substring(0, 4) + '-' + date.substring(4, 6) + '-' + date.substring(6, 8));
+            }
         },
         formateDayTxt: function (date) {
             return date.substring(0, 4) + '年' + date.substring(4, 6) + '月' + date.substring(6, 8) + '日';

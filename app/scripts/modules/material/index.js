@@ -56,6 +56,7 @@ angular.module('sbAdminApp')
 			$scope.chooseLeaf = function (id, $event) {
 				$scope.currentLeaf.id = id;
 				$scope.sp.gid = id;
+				$scope.tableState.pagination.start = 0;
 				$scope.initPage();
 			}
 			$scope.setLeaf = function () {
@@ -309,7 +310,7 @@ angular.module('sbAdminApp')
 								filename = item.file.desc;
 							}
 							var new_multipart_params = {
-								'key': (key + item.file.name.substr(item.file.name.indexOf('.'))),
+								'key': (key + item.file.name.substr(item.file.name.lastIndexOf('.'))),
 								'policy': policyBase64,
 								'OSSAccessKeyId': accessid,
 								'success_action_status': '200', //让服务端返回200,不然，默认会返回204

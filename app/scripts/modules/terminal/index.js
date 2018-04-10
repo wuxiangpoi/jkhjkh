@@ -59,6 +59,7 @@ angular.module('sbAdminApp', ['chartService'])
 			$scope.chooseLeaf = function (id, $event) {
 				$scope.currentLeaf.id = id;
 				$scope.sp.gid = id;
+				$scope.tableState.pagination.start = 0;
 				$scope.initPage();
 			}
 			$scope.setLeaf = function () {
@@ -345,7 +346,7 @@ angular.module('sbAdminApp', ['chartService'])
 							baseService.postData(baseService.api.apiUrl + postUrl, postData,
 								function (data) {
 									ngDialog.close();
-									baseService.confirmAlert('信息提示', '操作成功', 'success', '终端命令执行成功后，将停播此' + typeTxt + '，同时不显示在终端列表中~', '离线终端需上线后再执行命令，半小时内重复命令为您自动过滤')
+									baseService.alert('操作成功', 'success',true)
 								});
 						})
 					} else {
@@ -365,18 +366,20 @@ angular.module('sbAdminApp', ['chartService'])
 						baseService.initTable(vm, tableState, vm.callUrl, function (result) {
 							if (result.data[0]) {
 								if (!result.data[0].stype || result.data[0].stype == 0) {
-									if ($rootScope.perms(436)) {
+									if ($rootScope.perms(217)) {
 										vm.checkPerms = true;
 									}
 									vm.programOrSchedule = 0;
 								} else {
-									if ($rootScope.perms(445)) {
+									if ($rootScope.perms(217)) {
 										vm.checkPerms = true;
 									}
 									vm.programOrSchedule = 1;
 								}
 							}
-							$scope.displayed[index].programCounts = result.recordsTotal;
+							if(vm.callUrl == baseService.api.terminal + 'getTerminalProgramPlayPageByTid'){
+								$scope.displayed[index].programCounts = result.recordsTotal;
+							}
 						});
 					}
 					vm.initTable = function () {

@@ -131,7 +131,7 @@ angular.module('sbAdminApp', ['chartService'])
 								});
 						})
 					} else {
-						baseService.alert('请至少勾选一个节目再进行操作', 'warning', true);
+						baseService.alert('请至少勾选一个终端再进行操作', 'warning', true);
 					}
 				}, function (vm) {
 					vm.displayed = [];

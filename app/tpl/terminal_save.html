@@ -12,10 +12,10 @@
 
 			<label class="col-sm-3 p0">终端名称</label>
 			<div class="col-sm-9 pdr0">
-				<input type="text" class="form-control" ng-maxlength="20" name="name" required ng-model="data.name" />
+				<input type="text" class="form-control" ng-maxlength="30" name="name" required ng-model="data.name" />
 				<div class="help-block" ng-messages="modalForm.name.$error" ng-if="isShowMessage">
 					<p ng-message="required">请输入终端名称</p>
-					<p ng-message="maxlength">不能超过20个字符</p>
+					<p ng-message="maxlength">不能超过30个字符</p>
 				</div>
 			</div>
 		</div>

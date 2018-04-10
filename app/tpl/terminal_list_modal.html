@@ -60,8 +60,8 @@
                         <th>终端名称</th>
                         <th>网络状态</th>
                         <th ng-if="showType == 1">命令名称</th>
-                        <th>节目状态</th>
-                        <th>播放时间</th>
+                        <th ng-if="showType == 1">节目状态</th>
+                        <!-- <th>播放时间</th> -->
                     </tr>
                 </thead>
                 <tbody ng-show="!isLoading">
@@ -79,7 +79,7 @@
                             <div class="txt-red" ng-if="row.terminalStatus == 3">异常</div>
                         </td>
                         <td ng-if="showType == 1">{{row.cmdCode | cmdCodeTxt}}</td>
-                        <td>
+                        <td ng-if="showType == 1">
                             <div ng-if="row.status == 1 || showType == 0">下发成功</div>
                             <div class="tex-red" ng-if="row.status == 2">下发失败</div>
                             <div ng-if="row.status == 3">
@@ -89,7 +89,7 @@
                             <div ng-if="row.status == 4">已取消</div>
                             <div ng-if="row.status == 5">正在下载</div>
                         </td>
-                        <td style="width:248px;">
+                        <!-- <td style="width:248px;">
                             <div ng-if="showType == 0">
                                 <div ng-if="!row.stype && row.stype != 1">
                                     {{row.startDate | formateDate}}至{{row.endDate | formateDate}} {{row.startTime | formateMinate}}至{{row.endTime | formateMinate}}
@@ -99,7 +99,7 @@
                                 {{row.message.split(',')[0].split('-')[0] | formateDate}}至{{row.message.split(',')[0].split('-')[1] | formateDate}} {{row.message.split(',')[1].split('-')[0]
                                 | formateMinate}}至{{row.message.split(',')[1].split('-')[1] | formateMinate}}
                             </div>
-                        </td>
+                        </td> -->
                     </tr>
                 </tbody>
                 <tbody ng-include="'tpl/table.html'"></tbody>
@@ -109,7 +109,7 @@
 
     </div>
 </div>
-<div class="modal-footer" ng-if="checkPerms && showType == 0">
+<div class="modal-footer" ng-if="checkPerms && showType == 0 && displayed.length">
     <button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="modalConfirmSubmit()">停播
         <i class="fa fa-spinner"></i>
     </button>

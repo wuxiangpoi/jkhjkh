@@ -53,6 +53,7 @@ angular.module('sbAdminApp')
 			$scope.chooseLeaf = function (id, $event) {
 				$scope.currentLeaf.id = id;
 				$scope.sp.gid = id;
+				$scope.tableState.pagination.start = 0;
 				$scope.initPage();
 			}
 			$scope.setLeaf = function () {
@@ -186,7 +187,9 @@ angular.module('sbAdminApp')
 									vm.programOrSchedule = 1;
 								}
 							}
-							$scope.displayed[index].playTers = result.recordsTotal;
+							if(vm.callUrl == baseService.api.program + 'getProgramPlayPageByPid'){
+								$scope.displayed[index].playTers = result.recordsTotal;
+							}
 						});
 					}
 					vm.initTable = function () {
