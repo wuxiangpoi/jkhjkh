@@ -35,7 +35,7 @@ angular.module('sbAdminApp', [])
                 name: item ? item.name : '',
                 oid: item ? item.oid : ''
             }
-            baseService.confirmDialog(540, item ? '编辑帐号' : '添加帐号', postData, 'tpl/auser_save.html', function (ngDialog, vm) {
+            baseService.confirmDialog(540, item ? '编辑账号' : '添加账号', postData, 'tpl/auser_save.html', function (ngDialog, vm) {
                 vm.isShowMessage = false;
                 if (vm.modalForm.$valid) {
                     var onData = {
