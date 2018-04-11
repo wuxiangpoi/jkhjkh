@@ -1,7 +1,7 @@
 <div class="content-wrap" style="min-width:760px;">
 	<div class="level2 clearfix">
 		<div class="tipBtnWrap" ng-if="perms(217)" class="dropdown" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event)>
-			<div class="tipDiv">选中正常状态下的终端才能进行此操作</div>
+			<div class="tipDiv">选中在线终端才能进行此操作</div>
 			<button ng-class="{'disabled': idsNormal.length == 0 || idsNormal.length != ids.length }" type="button" data-toggle="dropdown"
 			    class="btn btn-primary h34">
 				下发命令

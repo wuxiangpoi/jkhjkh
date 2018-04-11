@@ -369,17 +369,21 @@ angular.module('sbAdminApp', ['chartService'])
 									if ($rootScope.perms(217)) {
 										vm.checkPerms = true;
 									}
+									if(vm.callUrl == baseService.api.terminal + 'getTerminalProgramPlayPageByTid'){
+										$scope.displayed[index].programCounts = result.recordsTotal;
+									}
 									vm.programOrSchedule = 0;
 								} else {
 									if ($rootScope.perms(217)) {
 										vm.checkPerms = true;
 									}
 									vm.programOrSchedule = 1;
+									if(vm.callUrl == baseService.api.terminal + 'getTerminalProgramPlayPageByTid'){
+										$scope.displayed[index].programCounts = result.data[0].programCounts;
+									}
 								}
 							}
-							if(vm.callUrl == baseService.api.terminal + 'getTerminalProgramPlayPageByTid'){
-								$scope.displayed[index].programCounts = result.recordsTotal;
-							}
+							
 						});
 					}
 					vm.initTable = function () {

@@ -93,7 +93,7 @@ angular.module('sbAdminApp', [])
             })
         }
         $scope.changeStatus = function (item) {
-            baseService.confirm(item.enabled == 0 ? '解禁账号' : '禁用账号', '您确定' + (item.enabled == 0 ? '解禁' : '禁用') + '账户：' + item.name + '?', function (ngDialog, vm) {
+            baseService.confirm(item.enabled == 0 ? '解禁账号' : '禁用账号', '您确定' + (item.enabled == 0 ? '解禁' : '禁用') + '账号：' + item.name + '?', function (ngDialog, vm) {
                 vm.isPosting = true;
                 baseService.postData(baseService.api.user + 'setUserEnable', {
                     uid: item.id,

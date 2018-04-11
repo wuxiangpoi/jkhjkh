@@ -170,7 +170,7 @@ angular.module('sbAdminApp', ['chartService'])
 						var dateInterval = chartItem.startDate == chartItem.startDate?baseService.formateDayTime(chartItem.startDate,'date') : baseService.formateDayTime(chartItem.startDate,'date') + '-' + baseService.formateDayTime(chartItem.startDate,'date');
 						crossItem.msg = {
 							type: 4,
-							info:  dateInterval + '的时段' + chartItem.startTime + '至' + chartItem.endTime + '剩余时间不足'
+							info:  dateInterval + '的' + chartItem.startTime + '至' + chartItem.endTime + '剩余时长不足~'
 						};
 						result.cross.push(crossItem);
 						if (result.cross.length > 0) {
@@ -217,7 +217,7 @@ angular.module('sbAdminApp', ['chartService'])
 
 										crossItem.msg = {
 											type: 5,
-											info: crossItem.dateInterval?crossItem.dateInterval + '的时段' + chartItem.startTime + '至' + chartItem.endTime + '剩余时间不足' : crossItem.date + '的时段' + chartItem.startTime + '至' + chartItem.endTime + '剩余时间不足' 
+											info: crossItem.dateInterval?crossItem.dateInterval + '的' + chartItem.startTime + '至' + chartItem.endTime + '剩余时长不足~' : crossItem.date + '的' + chartItem.startTime + '至' + chartItem.endTime + '剩余时长不足~' 
 										};
 
 									} else {
