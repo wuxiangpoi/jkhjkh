@@ -1,0 +1,56 @@
+<div class="dialog-upload" ng-show="isShow" ng-class="{'dhide':isHide}">
+        <div class="dialog-upload-header">上传进度
+            <div class="fr">
+                <span class="btnHead" ng-click="isHideDialog()">
+                    <i ng-if="isHide" class="fa fa-window-maximize"></i>
+                    <i ng-if="!isHide" style="vertical-align:middle;" class="fa fa-minus"></i>
+                </span>
+                <span class="btnHead" ng-click="isShowDialog(false)">
+                    <i class="fa fa-close"></i>
+                </span>
+            </div>
+        </div>
+        <div class="dialog-upload-content">
+            <table class="table row-border hover">
+                <thead>
+                    <tr>
+                        <th>素材名称</th>
+                        <th>大小</th>
+                        <th>所属组</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in uploader.queue">
+                        <td style="max-width:130px;" class="ellipsTXt">
+                            <strong ng-if="item.file.desc">{{ item.file.desc }}</strong>
+                            <strong ng-if="!item.file.desc">{{ item.file.name }}</strong>
+                        </td>
+                        <td nowrap>{{item.file.size | dmbdResourceSizeFilter}}</td>
+                                <td>{{item.oid | getOrganizations}}</td>
+                                <td>
+                                    <div ng-if=" item.isUploading" class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }">{{item.progress}} %</div>
+                                    </div>
+                                    <span ng-show="item.isSuccess" style="color:green;font-size:18px;display:inline-block;margin-top:-4px;">
+                                        <i class="fa fa-check-circle"></i>
+                                    </span>
+                                    <span ng-show="item.isError" style="color:red;display: inline-block;max-width:100px;" class="ellipsTXt">
+                                        {{item.errorMsg}}
+                                </td>
+                                <td nowrap>
+                                    <button ng-if="item.isError" style="background:none;color:#9f9f9f;border:none;" type="button" class="btn btn-success btn-xs paginate_button next"
+                                        ng-click="item.upload()">
+                                        <i class="fa fa-repeat"></i>
+                                    </button>
+                                    <button style="background:none;color:#9f9f9f;border:none;font-size:20px;font-weight:700;" type="button" class="btn btn-danger btn-xs"
+                                        ng-click="removeItem(item,$index,$event)">
+                                        <i class="fa fa-close"></i>
+                                    </button>
+                                </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

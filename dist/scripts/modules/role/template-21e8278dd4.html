@@ -1,0 +1,35 @@
+<div class="content-wrap" style="min-width:400px;">
+    <div class="level2 clearfix">
+        <button type="button" ng-click="save()" class="btn btn-primary">
+            <i class="iconfont icon-tianjia-"></i>
+            添加角色
+        </button>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <thead>
+                <tr>
+                    <th st-sort="name">角色名称</th>
+                    <th st-sort="">说明</th>
+                    <th st-sort="">操作</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+                <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
+                    <td class="ellipsisTd">{{row.name}}</td>
+                    <td title="{{row.remark}}">{{row.remark}}</td>
+                    <td style="min-width:180px;">
+                        <div>
+                            <button class="btn btn-primary tableBtn" ng-click="checkPerms(row)">查看权限</button>
+                            <button ng-if="row.id != 0 && row.id != 1" class="btn btn-primary tableBtn" ng-click="save(row)">编辑</button>
+                            <button ng-if="row.id != 0 && row.id != 1" class="btn btn-primary tableBtn" ng-click="del(row)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-include="'tpl/table.html'"></tbody>
+            <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+        </table>
+    </div>
+</div>

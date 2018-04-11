@@ -1,0 +1,83 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+</div>
+
+
+<div class="modal-body">
+    <form name="modalForm" novalidate>
+
+        <div class="form-group clearfix">
+            <label class="col-sm-2 txt-left p0">节目名称</label>
+            <div class="col-sm-10 pdr0">
+                <input type="text" placeholder="节目名称" required class="form-control" name="name" ng-model="data.name" />
+                <div class="help-block" ng-messages="modalForm.name.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请输入节目名称</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <textarea ng-model="data.text" placeholder="请输入播放文字..." name="text" id="" rows="8" style="width:100%;overflow-x:hidden;border:1px solid #e2e3e6;padding:5px;line-height:18px;resize:none;"></textarea>
+            <div class="help-block" ng-messages="modalForm.text.$error" ng-if="isShowMessage">
+                <p ng-message="required">请输入播放文字</p>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <div class="col-sm-6 p0">
+                <label class="col-sm-4 txt-left p0">字体</label>
+                <div class="col-sm-8 pdr0">
+                    <select class="form-control" style="width:100%;" ng-model="data.font">
+                        <option ng-repeat="f in font" ng-selected="data.font==f.value" value={{f.value}}>{{f.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6 p0">
+                <label class="col-sm-4 txt-left pdr0">字体大小</label>
+                <div class="col-sm-8 pdr0">
+                    <select class="form-control" style="width:100%;" ng-model="data.fontSize">
+                        <option ng-repeat="s in fontSize" ng-selected="data.fontSize==s.value" value={{s.value}}>{{s.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <div class="col-sm-6 p0">
+                <label class="col-sm-4 txt-left p0">字体颜色</label>
+                <div class="col-sm-8 pdr0">
+                    <select class="form-control" style="width:100%;" ng-model="data.fontColor">
+                        <option ng-repeat="c in fontColor" ng-selected="data.fontColor==c.value" value={{c.value}}>{{c.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6 p0">
+                <label class="col-sm-4 txt-left pdr0">动画效果</label>
+                <div class="col-sm-8 pdr0">
+                    <select class="form-control" style="width:100%;" ng-model="data.displayStyle">
+                        <option ng-repeat="d in displayStyle" ng-selected="data.displayStyle==d.value" value={{d.value}}>{{d.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <label class="col-sm-2 txt-left p0" style="line-height:24px;">显示速度</label>
+            <div id="sliderWrap" class="col-sm-9 p0">
+                <slider floor="1" ceiling="30" step="1" precision="0" ng-model="data.speed"></slider>
+            </div>
+            <div class="col-sm-1 p0 txt-right">
+                {{data.speed.substr(0,4) + 's'}}
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <label class="col-sm-2 txt-left p0" style="line-height:24px;">停留时间</label>
+            <div id="sliderWrap1" class="col-sm-9 p0">
+                <slider floor="0" ceiling="10" step="0.1" precision="0" ng-model="data.stay"></slider>
+            </div>
+            <div class="col-sm-1 txt-right">
+                {{data.stay.substr(0,4) + 's'}}
+            </div>
+        </div>
+    </form>
+
+
+
+</div>
+<div ng-include="'tpl/modal_footer.html'"></div>

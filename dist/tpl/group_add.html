@@ -1,0 +1,19 @@
+<div ng-include="'tpl/modal_header.html'"></div>
+<div class="modal-body">
+    <form name="modalForm" novalidate>
+
+        <div class="form-group clearfix">
+            <label class="col-sm-3 p0">分组名称</label>
+            <div class="col-sm-9 pdr0">
+                <input type="text" required class="form-control" name="name" ng-model="name" />
+                <div class="help-block" ng-messages="modalForm.name.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请输入分组名称</p>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+</div>
+<div ng-include="'tpl/modal_footer.html'"></div>

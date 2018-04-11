@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+</div>
+
+
+<div class="modal-body">
+    <form name="modalForm" novalidate>
+
+        <div class="form-group clearfix">
+            <label class="col-sm-3 p0">素材名称：</label>
+            <div class="col-sm-9 pdr0">
+                <input type="text" required ng-maxlength="30" class="form-control" name="name" ng-model="data.name" />
+                <div class="help-block" ng-messages="modalForm.name.$error" ng-if="isShowMessage">
+                    <p ng-message="required">请输入素材名称</p>
+                    <p ng-maxlength="required">不能超过30个字符</p>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+
+</div>
+<div ng-include="'tpl/modal_footer.html'"></div>

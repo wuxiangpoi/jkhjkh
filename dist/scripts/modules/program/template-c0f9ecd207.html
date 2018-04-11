@@ -1,0 +1,151 @@
+<div class="content-wrap" style="min-width:850px;">
+    <div class="level2 clearfix">
+        <div ng-if="perms(432)" class="tipBtnWrap">
+            <button ui-sref="dashboard.programAdd" class="btn btn-primary h34">
+                <i class="iconfont icon-tianjia-"></i>
+                添加节目
+            </button>
+        </div>
+        <div ng-if="perms(439)" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event) class="tipBtnWrap">
+            <button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="setGroup()" class="btn btn-primary">
+                设置所属机构
+            </button>
+            <div class="tipDiv">请先选择节目</div>
+        </div>
+        <div ng-if="perms(437)" class="tipBtnWrap">
+            <button ng-click="addGroup()" class="btn btn-primary">
+                添加分组
+            </button>
+        </div>
+        <div ng-if="perms(438)" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event) class="tipBtnWrap">
+            <button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="setLeaf()" class="btn btn-primary">
+                设置分组
+            </button>
+            <div class="tipDiv">请先选择节目</div>
+        </div>
+        <div ng-if="perms(438)" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event) class="tipBtnWrap">
+            <button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="cancelLeaf()" class="btn btn-primary">
+                取消分组
+            </button>
+            <div class="tipDiv">请先选择节目</div>
+        </div>
+        <div class="serchWrap fr">
+            <div class="fl txtInputWrap">
+                <input class="form-control" ng-keyup="myKeyup($event,callServer,tableState)" ng-model="sp.search" placeholder="节目名称">
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="callServer(tableState)">查询</button>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <div class="tableHeader clearfix">
+            <div class="panel panel-default clearfix">
+                <div class="panelRow clearfix">
+                    <div class="panel-left">组织机构</div>
+                    <div class="panel-right">
+                        <group-leaf-select></group-leaf-select>
+                    </div>
+                </div>
+                <div class="panelRow clearfix">
+                    <div class="panel-left">节目筛选</div>
+                    <div class="panel-right">
+
+                        <div class="panelSelectWrap">
+                            <select class="form-control" ng-model="sp.resolution" ng-change="callServer(tableState)">
+                                <option value="">节目分辨率</option>
+                                <option ng-repeat="t in userData.root_programReslotions" value="{{t}}">{{t}}</option>
+                            </select>
+                        </div>
+                        <div class="panelSelectWrap">
+                            <select class="form-control" ng-model="sp.hasTerminal" ng-change="callServer(tableState)">
+                                <option value="">发布状态</option>
+                                <option value="1">已发布</option>
+                                <option value="0">未发布</option>
+                            </select>
+                        </div>
+                        <div class="panelSelectWrap">
+                            <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+                                <option value="">审核状态</option>
+                                <option ng-repeat="c in userData.root_checkStatusProgram" value="{{c.val}}">{{c.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="panelRow clearfix last">
+                    <div class="panel-left">节目分组</div>
+                    <div class="panel-right">
+                        <span class="leafGroup" ng-class="{'current': sp.gid == ''}" ng-click="chooseLeaf('',$event)">全部分组</span>
+                        <span class="leafGroup" ng-class="{'current': sp.gid == leaf.id}" ng-repeat="leaf in leafes">
+                            <span class="leafName" ng-click="chooseLeaf(leaf.id,$event)">{{leaf.name}}</span>
+                            <span class="leafEdit">
+                                <input class="form-control" type="text" ng-model="leaf.name">
+                            </span>
+                            <i ng-if="perms(437)" ng-click="editLeaf(leaf,$event)" class="iconfont icon-bianji"></i>
+                            <i ng-if="perms(437)" ng-click="delLeaf(leaf)" class="iconfont icon-shanchu"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <thead>
+                <tr>
+                    <th class="checkBoxTable">
+                        <input ng-checked="ids.length == displayed.length && displayed.length != 0" ng-click="checkAll($event)" type="checkbox">
+                    </th>
+                    <th>节目名称</th>
+                    <th>节目大小</th>
+                    <th>审核状态</th>
+                    <th>创建时间</th>
+                    <th>播放终端数</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+                <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
+                    <td class="checkBoxTable">
+                        <input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
+                    </td>
+                    <td class="tdClick ellipsisTd" title="{{row.name}}" ng-click="showProgram(row)">
+                        {{row.name}}
+                    </td>
+                    <td>{{row.size | dmbdResourceSizeFilter}}</td>
+                    <td>
+                            <div class="txt-grey" ng-if="row.status == 0">{{row.status | programStatusTxt}}</div>
+                            <div ng-if="row.status == 1 || row.status == 2 || row.status == 3 || row.status == 6">{{row.status | programStatusTxt}}</div>
+                            <div class="tex-red" ng-if="row.status == 4 || row.status == 5 || row.status == 7">{{row.status | programStatusTxt}}</div>
+                        
+                    </td>
+
+                    <td class="createTimeTd">
+                        {{row.createTime | formateTime}}
+                    </td>
+                    <td>
+                        <div class="tdClick" ng-click="sendCommandStopProgram(row,$index)">
+                            {{row.playTers}}
+                        </div>
+                    </td>
+                    <td style="{{row.status == 0 || ow.status == 4 || ow.status == 5 || ow.status == 7?'min-width:180px;':'120px'}}">
+                        <button ng-if="[0,4,5,7].indexOf(row.status) != -1 && perms(435)" class="btn tableBtn"
+                            ng-click="submitCheck(row)">提交审核
+                        </button>
+                        <button ng-if="[0,4,5,7].indexOf(row.status) != -1 && perms(432)" class="btn tableBtn"
+                            ng-click="saveEdit(row)">修改
+                        </button>
+                        <button ng-if="row.status == 1 && perms(436)" class="btn tableBtn" ng-click="sendDown(row)">发布
+                        </button>
+                        <button ng-if="[1,2,3,6].indexOf(row.status) != -1 && perms(432)" class="btn tableBtn"
+                            ng-click="saveAs(row)">另存为
+                        </button>
+                        <button ng-if="[0,1,4,5,7].indexOf(row.status) != -1 && perms(432)" class="btn tableBtn"
+                            ng-click="del(row)">删除
+                        </button>
+                    </td>
+
+                </tr>
+            </tbody>
+            <tbody ng-include="'tpl/table.html'"></tbody>
+            <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+        </table>
+    </div>
+</div>

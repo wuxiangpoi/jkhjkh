@@ -1,0 +1,51 @@
+<div class="content-wrap" style="min-width:680px;">
+    
+    <div class="table-wrapper">
+            <div class="tableHeader clearfix">
+                    <div class="serchWrap fr">
+                        <div class="fl txtInputWrap">
+                            <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.search" placeholder="节目名称">
+                        </div>
+                        <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
+                    </div>
+            
+                </div>
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <thead>
+                <tr>
+                    <th>节目名称</th>
+                    <th>节目大小</th>
+                    <th>上传账号</th>
+                    <th>创建时间</th>
+                    <th>审核状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+                <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
+                    <td class="tdClick ellipsisTd" title="{{row.name}}"  ng-click="showProgram(row,2)">
+                        {{row.name}}
+                    </td>
+                    <td>{{row.size | dmbdResourceSizeFilter}}</td>
+                    <td>{{row.applyUid}}</td>
+                    
+                    <td class="createTimeTd">
+                        {{row.createTime | formateTime}}
+                    </td>
+                    <td>
+                        {{row.status | programStatusTxt}}
+                    </td>
+                    <td>
+                        <button ng-if="row.status == 2  && perms(532)" class="btn tableBtn" ng-click="showProgram(row,1)">审核
+                        </button>
+                        <button ng-if="row.status == 6  && perms(533)" class="btn tableBtn" ng-click="showProgram(row,1)">审核
+                        </button>
+                    </td>
+
+                </tr>
+            </tbody>
+            <tbody ng-include="'tpl/table.html'"></tbody>
+            <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+        </table>
+    </div>
+</div>

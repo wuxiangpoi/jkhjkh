@@ -1,0 +1,237 @@
+<nav id="topNav" class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="dashboard.home">
+            <img class="logoImg" src="{{userData.root_logo}}">
+        </a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right">
+
+        <li class="dropdown message">
+            <a class="dropdown-toggle positionR" data-toggle="dropdown">
+                <i class="fa fa-bell fa-fw"></i>
+                <span ng-if="materialCheckCounts + programCheckCounts + programScheduleCheckCounts> 0" class="indicator">
+                    {{materialCheckCounts + programCheckCounts + programScheduleCheckCounts}}
+                </span>
+            </a>
+            <ul class="dropdown-menu dropdown-message">
+                <li>
+                    <h6 class="dropdown-header clearfix">
+                        <span class="fl">新通知</span>
+                        <span class="fr">{{materialCheckCounts + programCheckCounts + programScheduleCheckCounts}}</span>
+                        </span>
+                    </h6>
+                    <div class="dropdownItemWrap">
+                        <div ng-repeat="tip in userMessage" ng-click="goToDetail(tip)" class="dropdown-item clearfix">
+                            <span class="messageLeft fl" ng-style="{'background-color':'{{colorArr[$index%3]}}'}">
+                                <i ng-if="tip.name == 'materialCheck'" class="iconfont icon-neirongguanli"></i>
+                                <i ng-if="tip.name == 'programCheck'" class="iconfont icon-jiemuguanli"></i>
+                                <i ng-if="tip.name == 'scheduleCheck'" class="iconfont icon-paiqiguanli"></i>
+                            </span>
+                            <span class="messageRight fl" style="line-height:48px;">
+                                <span ng-if="tip.name == 'materialCheck'">
+                                    您有{{tip.value}}个素材待审核
+                                </span>
+                                <span ng-if="tip.name == 'programCheck'">
+                                    您有{{tip.value}}个节目待审核
+                                </span>
+                                <span ng-if="tip.name == 'scheduleCheck'">
+                                    您有{{tip.value}}个排期待审核
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <!-- /.dropdown-alerts -->
+        </li>
+        <!-- /.dropdown -->
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+                <i class="iconfont icon-touxiang"></i>
+                <span class="userName">{{userData.root_account}}</span>
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a href="javascript:void(0)" ng-click="updatePwd()">
+                        <span class="iconWrap" style="background:#00a0e9;">
+                            <i class="fa fa-user fa-fw"></i>
+                        </span>修改密码</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="logout()">
+                        <span class="iconWrap" style="background:#ff4040;">
+                            <i class="fa fa-sign-out fa-fw"></i>
+                        </span>退出登录</a>
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-top-links -->
+
+    <div class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="firstNav">
+                    <a ui-sref-active="active" ui-sref="dashboard.home" ng-click="checkRoute(0,$event)">
+                        <i class="iconfont icon-shouye"></i>
+                        <span class="navTle">首页</span>
+                    </a>
+                </li>
+                <li class="firstNav" ng-if="perms(21)">
+                    <a ui-sref-active="active" ui-sref="dashboard.terminal" ng-click="checkRoute(21,$event)">
+                        <i class="iconfont icon-zhongduanguanli"></i>
+                        <span class="navTle">终端管理</span>
+                    </a>
+
+                </li>
+                <li class="firstNav" ng-if="perms(41)">
+                    <a ui-sref-active="active" ui-sref="dashboard.material" ng-click="checkRoute(41,$event)">
+                        <i class="iconfont icon-neirongguanli"></i>
+                        <span class="navTle">素材管理</span>
+                    </a>
+                </li>
+                <li class="firstNav" ng-if="perms(43)">
+                    <a ui-sref-active="active" ui-sref="dashboard.program" ng-click="checkRoute(43,$event)">
+                        <i class="iconfont icon-jiemuguanli"></i>
+                        <span class="navTle">节目管理</span>
+                    </a>
+                </li>
+                <li class="firstNav" ng-if="perms(44)">
+                    <a ui-sref-active="active" ui-sref="dashboard.schedule" ng-click="checkRoute(9,$event)">
+                        <i class="iconfont icon-paiqiguanli"></i>
+                        <span class="navTle">排期管理</span>
+                    </a>
+                </li>
+                <li ng-if="perms(5)" ng-class="{current: currentState=='dashboard.materialCheck' || currentState=='dashboard.programCheck' || currentState=='dashboard.scheduleCheck'}">
+                    <a class="navSecondLevel" ng-click="check(5)" ng-class="{active: collapseVar==5}">
+                        <i class="iconfont icon-shenheguanli"></i>
+                        <span class="navTle">审核管理</span>
+                        <span id="mpTotal" ng-if="materialCheckCounts + programCheckCounts + programScheduleCheckCounts > 0" class="indicator">
+                            {{materialCheckCounts + programCheckCounts + programScheduleCheckCounts}}
+                        </span>
+                        <span class="fa arrow"></span>
+
+                    </a>
+                    <ul class="nav nav-second-level" ng-class="{collapse: collapseVar!=5}">
+                        <li ng-if="perms(51)">
+                            <a ui-sref="dashboard.materialCheck" ui-sref-active="active" ng-click="checkRoute(5,$event)">
+                                <span class="navName">素材审核</span>
+                                <span ng-if="materialCheckCounts > 0" class="indicator">
+                                    {{materialCheckCounts}}
+                                </span>
+                            </a>
+
+                        </li>
+                        <li ng-if="perms(53)">
+                            <a ui-sref="dashboard.programCheck" ui-sref-active="active" ng-click="checkRoute(5,$event)">
+                                <span class="navName">节目审核</span>
+                                <span ng-if="programCheckCounts > 0" class="indicator">
+                                    {{programCheckCounts}}
+                                </span>
+                            </a>
+                        </li>
+                        <li ng-if="perms(54)">
+                            <a ui-sref="dashboard.scheduleCheck" ui-sref-active="active" ng-click="checkRoute(5,$event)">
+                                <span class="navName">排期审核</span>
+                                <span ng-if="programScheduleCheckCounts > 0" class="indicator">
+                                    {{programScheduleCheckCounts}}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li ng-if="perms(3)" ng-class="{current: currentState=='dashboard.group' || currentState=='dashboard.user' || currentState=='dashboard.role' || currentState=='dashboard.auser'}">
+                    <a class="navSecondLevel" ng-click="check(3)" ng-class="{active: collapseVar==3}">
+                        <i class="iconfont icon-zhanghuguanli"></i>
+                        <span class="navTle">账户管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level nav-sub" ng-class="{'collapse':collapseVar != 3}">
+                        <li ng-if="perms(33)" ui-sref-active="active">
+                            <a ui-sref="dashboard.group" ui-sref-active="active" ng-click="checkRoute(3,$event)">
+                                <span class="navName">组织机构</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(31)">
+                            <a ui-sref="dashboard.user" ui-sref-active="active" ng-click="checkRoute(3,$event)">
+                                <span class="navName">账号管理</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(32)">
+                            <a ui-sref="dashboard.role" ui-sref-active="active" ng-click="checkRoute(3,$event)">
+                                <span class="navName">角色管理</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(32)">
+                            <a ui-sref="dashboard.auser" ui-sref-active="active" ng-click="checkRoute(3,$event)">
+                                <span class="navName">安装人员</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li ng-if="perms(6)" ng-class="{current: currentState=='dashboard.terminalCommand' || currentState=='dashboard.programCommand'}">
+                    <a class="navSecondLevel" ng-click="check(6)" ng-class="{active: collapseVar==6}">
+                        <i class="iconfont icon-rizhiguanli"></i>
+                        <span class="navTle">日志记录</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level nav-sub" ng-class="{'collapse':collapseVar != 6}">
+                        <li ui-sref-active="active" ng-if="perms(61)">
+                            <a ui-sref="dashboard.terminalCommand" ui-sref-active="active" ng-click="checkRoute(6,$event)">
+                                <span class="navName">终端命令记录</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(62)">
+                            <a ui-sref="dashboard.programCommand" ui-sref-active="active" ng-click="checkRoute(6,$event)">
+                                <span class="navName">节目命令记录</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li ng-if="perms(71) || perms(72)" ng-class="{current: currentState=='dashboard.led' || currentState=='dashboard.ledgram'}">
+                    <a class="navSecondLevel" ng-click="check(7)" ng-class="{active: collapseVar==7}">
+                        <i class="iconfont icon-wenzipingguanliicon"></i>
+                        <span class="navTle">文字屏管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level nav-sub" ng-class="{'collapse':collapseVar != 7}">
+                        <li ui-sref-active="active" ng-if="perms(71)">
+                            <a ui-sref="dashboard.led" ui-sref-active="active" ng-click="checkRoute(7,$event)">
+                                <span class="navName">终端管理</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(72)">
+                            <a ui-sref="dashboard.ledgram" ui-sref-active="active" ng-click="checkRoute(7,$event)">
+                                <span class="navName">内容管理</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+            </ul>
+            <!-- /#side-menu -->
+        </div>
+        <div class="progressWrap smallTxt">
+            <div class="progress">
+                <div ng-style="progressBar" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{root_oss_percent}}"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            {{'已使用' + userData.root_oss_percent}}%
+            <span class="pull-right text-muted">{{ userData.root_oss_title}}</span>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>

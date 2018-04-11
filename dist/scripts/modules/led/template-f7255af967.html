@@ -1,0 +1,99 @@
+<div class="content-wrap" style="min-width:780px;">
+    <div class="level2 clearfix">
+
+        <div class="tipBtnWrap" ng-if="perms(712)">
+            <button ng-click="save()" class="btn btn-primary">
+                <i class="iconfont icon-tianjia-"></i>
+                添加终端
+            </button>
+        </div>
+        <div class="tipBtnWrap" ng-if="perms(715)" class="dropdown" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event)>
+            <div class="tipDiv">请先选择终端</div>
+            <button ng-class="{'disabled': ids.length == 0 }" type="button" data-toggle="dropdown" class="btn btn-primary">
+                下发命令
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-alerts">
+                <li>
+                    <a href="javascript:void(0)" ng-click="sendCommand(1)">
+                        <i class="fa fa-circle-o-notch fa-fw"></i>
+                        开机</a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)" ng-click="sendCommand(2)">
+                        <i class="fa fa-power-off fa-fw"></i>
+                        关机</a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)" ng-click="sendCommand(3)">
+                        <i class="fa fa-clock-o fa-fw"></i>
+                        校时</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="sendCommand(4)">
+                        <i class="fa fa-history fa-fw"></i>
+                        格式化</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="sendCommand(5)">
+                        <i class="fa fa-lightbulb-o fa-fw"></i>
+                        亮度设置</a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="serchWrap fr">
+            <div class="fl txtInputWrap">
+                <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.search" placeholder="终端型号/名称">
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="callServer(tableState)">查询</button>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <div class="tableHeader clearfix">
+        </div>
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <thead>
+                <tr>
+                    <th class="checkBoxTable">
+                        <input ng-checked="ids.length == displayed.length && displayed.length != 0" ng-click="checkAll($event)" type="checkbox">
+                    </th>
+                    <th>网络ID</th>
+                    <th>终端名称</th>
+                    <th>终端型号</th>
+                    <th>终端尺寸</th>
+                    <th>单双色</th>
+                    <th>安装地址</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+                <tr ng-repeat="row in displayed">
+                    <td class="checkBoxTable">
+                        <input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
+                    </td>
+                    <td>{{row.sn}}</td>
+                    <td class="ellipsisTd">{{row.name}}</td>
+                    <td>{{row.model}}</td>
+                    <td>{{row.width + "*" + row.height}}</td>
+                    <td>
+                        <div ng-if="row.screenColor == 1">单色</div>
+                        <div ng-if="row.enabled != 0">双色</div>
+                    </td>
+                    <td class="ellipsisTd" title="{{row.addr}}">{{row.addr}}</td>
+                    <td style="min-width:180px;">
+                        <div>
+                            <button ng-if="perms(712)" class="btn btn-primary tableBtn" ng-click="save(row)">编辑</button>
+                            <button ng-if="perms(714)" class="btn btn-primary tableBtn" ng-click="playManage(row)">播放管理</button>
+                            <button ng-if="perms(713)" class="btn btn-primary tableBtn" ng-click="del(row,$index)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-include="'tpl/table.html'"></tbody>
+            <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+        </table>
+    </div>
+</div>

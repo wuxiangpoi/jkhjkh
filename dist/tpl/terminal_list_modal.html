@@ -1,0 +1,117 @@
+<div ng-include="'tpl/modal_header.html'"></div>
+<div class="modal-body">
+
+    <div class="table-wrapper row">
+        <div class="tableHeader clearfix" style="margin-bottom:0px;">
+            <div class="clearfix">
+
+                <div class="col-sm-6 ellipsTXt p0">
+                    节目名称：{{data.name}}
+                </div>
+                <div ng-if="data.pixelHorizontal" class="col-sm-6">
+                    节目分辨率：{{data.pixelHorizontal + '*' + data.pixelVertical}}
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="clearfix">
+                    <div class="fl lh34">选择终端：</div>
+                    <div class="fl">
+                        <div class="panelSelectWrap">
+                            <select class="form-control" ng-model="sp.resolution" ng-change="callServer(tableState)">
+                                <option value="">分辨率</option>
+                                <option ng-repeat="t in userData.root_programReslotions" value="{{t}}">{{t}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <div class="panelSelectWrap">
+                            <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+                                <option value="">网络状态</option>
+                                <option value="1">在线</option>
+                                <option value="2">离线</option>
+                                <option value="3">异常</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <div class="clearfix groupLeafSelect">
+                            <group-leaf-select reqleafurl="{{'/api/terminal/getTerminalGroups'}}"></group-leaf-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <ul class="nav nav-tabs tacleNav">
+                <li ng-class="{'active': showType == 0 }" ng-click="switchTab(0)">
+                    <a>发布成功</a>
+                </li>
+                <li ng-class="{'active': showType == 1 }" ng-click="switchTab(1)">
+                    <a>正在处理</a>
+                </li>
+            </ul>
+            <table class="table" st-pipe="callServer" st-table="displayed">
+                <thead>
+                    <tr>
+                        <th ng-if="showType == 0" class="checkBoxTable">
+                            <input ng-checked="ids.length == displayed.length && displayed.length != 0" ng-click="checkAll($event)" type="checkbox">
+                        </th>
+                        <th>终端编号</th>
+                        <th>终端名称</th>
+                        <th>网络状态</th>
+                        <th ng-if="showType == 1">命令名称</th>
+                        <th ng-if="showType == 1">节目状态</th>
+                        <!-- <th>播放时间</th> -->
+                    </tr>
+                </thead>
+                <tbody ng-show="!isLoading">
+                    <tr ng-repeat="row in displayed" class="{{$index%2 == 0?'odd':'even'}}">
+                        <td ng-if="showType == 0" class="checkBoxTable">
+                            <input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.tid) != -1" type="checkbox">
+                        </td>
+                        <td>{{row.terminalNo || row.terNo}}</td>
+                        <td class="ellipsisTd" title="{{row.terminalName || row.terName}}">{{row.terminalName || row.terName}}</td>
+                        <td>
+
+                            <div class="txt-red" ng-if="row.terminalStatus == 0">未激活</div>
+                            <div class="txt-green" ng-if="row.terminalStatus == 1">在线</div>
+                            <div class="txt-grey" ng-if="row.terminalStatus == 2">离线</div>
+                            <div class="txt-red" ng-if="row.terminalStatus == 3">异常</div>
+                        </td>
+                        <td ng-if="showType == 1">{{row.cmdCode | cmdCodeTxt}}</td>
+                        <td ng-if="showType == 1">
+                            <div ng-if="row.status == 1 || showType == 0">下发成功</div>
+                            <div class="tex-red" ng-if="row.status == 2">下发失败</div>
+                            <div ng-if="row.status == 3">
+                                    <div ng-if="row.terminalStatus == 1">等待终端执行</div>
+                                    <div ng-if="row.terminalStatus == 2">等待终端上线</div>                                
+                            </div>
+                            <div ng-if="row.status == 4">已取消</div>
+                            <div ng-if="row.status == 5">正在下载</div>
+                        </td>
+                        <!-- <td style="width:248px;">
+                            <div ng-if="showType == 0">
+                                <div ng-if="!row.stype && row.stype != 1">
+                                    {{row.startDate | formateDate}}至{{row.endDate | formateDate}} {{row.startTime | formateMinate}}至{{row.endTime | formateMinate}}
+                                </div>
+                            </div>
+                            <div ng-if="showType == 1 && [21].indexOf(row.cmdCode) != -1">
+                                {{row.message.split(',')[0].split('-')[0] | formateDate}}至{{row.message.split(',')[0].split('-')[1] | formateDate}} {{row.message.split(',')[1].split('-')[0]
+                                | formateMinate}}至{{row.message.split(',')[1].split('-')[1] | formateMinate}}
+                            </div>
+                        </td> -->
+                    </tr>
+                </tbody>
+                <tbody ng-include="'tpl/table.html'"></tbody>
+                <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+            </table>
+        </div>
+
+    </div>
+</div>
+<div class="modal-footer" ng-if="checkPerms && showType == 0 && displayed.length">
+    <button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="modalConfirmSubmit()">停播
+        <i class="fa fa-spinner"></i>
+    </button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
+</div>

@@ -1,0 +1,76 @@
+<div class="content-wrap" style="min-width:830px;">
+
+    <div class="table-wrapper">
+        <div class="tableHeader clearfix">
+            <div class="selectWrap" style="margin-right:5px;">
+                <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+                    <option value="">命令状态</option>
+                    <option value="3">等待终端上线</option>
+                    <option value="1">下发成功</option>
+                    <option value="2">下发失败</option>
+                    <option value="5">正在下发</option>
+                    <option value="4">已取消</option>
+                </select>
+            </div>
+            <div class="selectWrap">
+                <select class="form-control" ng-model="sp.cmdCode" ng-change="callServer(tableState)">
+                    <option value="">类型</option>
+                    <option value="22">节目</option>
+                    <option value="24">排期</option>
+                </select>
+            </div>
+            <div class="serchWrap fr">
+                <div class="fl txtInputWrap">
+                    <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.program" placeholder="节目名称">
+                </div>
+                <div class="fl txtInputWrap">
+                    <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.terminal" placeholder="设备编号/名称">
+                </div>
+                <div class="fl txtInputWrap">
+                    <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.user" placeholder="用户账号/名称">
+                </div>
+                <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
+            </div>
+
+        </div>
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <thead>
+                <tr>
+                    <th>节目/排期名称</th>
+                    <th>终端编号</th>
+                    <th>终端名称</th>
+                    <th>用户账号</th>
+                    <th>命令名称</th>
+                    <th>命令状态</th>
+                    <th>下发时间</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+                <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
+                    <td class="tdClick ellipsisTd" ng-click="showProgramOrSchedule(row)">{{row.programName}}</td>
+                    <td>{{row.terNo}}</td>
+                    <td>{{row.terName}}</td>
+                    <td title="{{row.userAccount}}">{{row.userAccount}}</td>
+                    <td>
+                        {{row.cmdCode | cmdCodeTxt}}
+                    </td>
+                    <td>
+                        <div ng-if="row.status == 1">下发成功</div>
+                        <div ng-if="row.status == 2">
+                            <div class="tex-red">下发失败</div>
+                            <div class="tdTipTxt" title="{{'原因是：' + row.errorMessage}}">{{'原因是：' + row.errorMessage}}</div>
+                        </div>
+                        <div ng-if="row.status == 3">等待终端上线</div>
+                        <div class="txt-grey" ng-if="row.status == 4">已取消</div>
+                        <div ng-if="row.status == 5">正在下载</div>
+                    </td>
+                    <td class="createTimeTd">
+                        {{row.sendTime | formateTime}}
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-include="'tpl/table.html'"></tbody>
+            <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+        </table>
+    </div>
+</div>

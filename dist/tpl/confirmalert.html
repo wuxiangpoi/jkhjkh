@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+</div>
+<div class="modal-body" style="padding-top:20px;">
+    <div style="text-align:center;font-size:18px;line-height:40px;">
+        <span ng-if="type == 'success'" style="color:#3c763d;font-size:24px;vertical-align:middle;">
+            <i class="fa fa-check-circle iconp"></i>
+        </span>
+        <span ng-if="type == 'info'" style="color:#31708f;font-size:24px;vertical-align:middle;">
+            <i class="fa fa-info-circle iconp"></i>
+        </span>
+        <span ng-if="type == 'warning'" style="color:#a94442;font-size:24px;vertical-align:middle;">
+            <i class="fa iconfont icon-jinggao iconp" style="font-size:24px;vertical-align:-2px;"></i>
+        </span> {{info}}
+    </div>
+    <div ng-if="tInfo" style="text-align:center;">
+        {{sInfo}}
+        <a style="color:#00a0e9;" ng-if="link" ui-sref="{{link}}">点击查看</a>
+    </div>
+    <div ng-if="tInfo" style="text-align:center;color:#9f9f9f;font-size:12px;">
+        {{tInfo}}
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="modalConfirmSubmit()">确定</button>
+</div>

@@ -1,0 +1,48 @@
+<div ng-include="'tpl/modal_header.html'">
+</div>
+
+<div class="modal-body">
+	<form name="modalForm" novalidate>
+		<div ng-if="data.id!=null" class="form-group clearfix">
+			<label class="col-sm-3 p0" ng-if="data.id!=null">终端编号</label>
+			<div class="col-sm-9 pdr0 lh34" ng-if="data.id!=null">
+				{{data.no}}</div>
+		</div>
+		<div class="form-group clearfix">
+
+			<label class="col-sm-3 p0">终端名称</label>
+			<div class="col-sm-9 pdr0">
+				<input type="text" class="form-control" ng-maxlength="30" name="name" required ng-model="data.name" />
+				<div class="help-block" ng-messages="modalForm.name.$error" ng-if="isShowMessage">
+					<p ng-message="required">请输入终端名称</p>
+					<p ng-message="maxlength">不能超过30个字符</p>
+				</div>
+			</div>
+		</div>
+		<div class="form-group clearfix">
+
+			<label class="col-sm-3 p0">备注信息</label>
+			<div class="col-sm-9 pdr0">
+				<input type="text" class="form-control" ng-model="data.remark" name="remark" ng-maxlength="30" />
+				<div class="help-block" ng-messages="modalForm.remark.$error" ng-if="isShowMessage">
+					<p ng-message="maxlength">不能超过30个字符</p>
+				</div>
+			</div>
+
+		</div>
+		<div class="form-group clearfix ">
+			<label class="col-sm-3 p0">地址</label>
+			<div class="col-sm-9 pdr0">
+				<input type="text" class="form-control" name="addr" required ng-model="data.addr" ng-maxlength="30" ng-pattern="/.*[\u4e00-\u9fa5].*/"/>
+				<div class="help-block" ng-messages="modalForm.addr.$error" ng-if="isShowMessage">
+					<p ng-message="required">请输入终端名称</p>
+					<p ng-message="pattern">请输入正确地址</p>
+					<p ng-message="maxlength">不能超过30个字符</p>
+				</div>
+			</div>
+
+		</div>
+	</form>
+
+</div>
+<div ng-include="'tpl/modal_footer.html'"></div>

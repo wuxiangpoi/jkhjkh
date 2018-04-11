@@ -1,0 +1,49 @@
+<div class="content-wrap" style="min-width:500px;">
+    <div class="level2 clearfix">
+
+        <div class="tipBtnWrap">
+            <button ng-click="save()" class="btn btn-primary">
+                <i class="iconfont icon-tianjia-"></i>
+                添加安装人员
+            </button>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <div class="tableHeader clearfix">
+            <div class="panel panel-default clearfix">
+                <div class="panelRow clearfix last">
+                    <div class="panel-left">组织机构</div>
+                    <div class="panel-right">
+                        <group-leaf-select></group-leaf-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <thead>
+                <tr>
+                    <th>手机号</th>
+                    <th>姓名</th>
+                    <th>所属组织机构</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+                <tr ng-repeat="row in displayed">
+                    <td>{{row.phone}}</td>
+                    <td>{{row.name}}</td>
+                    <td class="ellipsisTd" title="{{row.oid | getOrganizations}}">{{row.oid | getOrganizations}}</td>
+                    <td style="min-width:180px;">
+                        <div ng-if="!row.role || row.role != '0'">
+                            <button class="btn tableBtn" ng-click="save(row)">编辑</button>
+                            <button class="btn tableBtn" ng-click="resetPwd(row)">重置密码</button>
+                            <button class="btn tableBtn" ng-click="del(row,$index)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-include="'tpl/table.html'"></tbody>
+            <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+        </table>
+    </div>
+</div>

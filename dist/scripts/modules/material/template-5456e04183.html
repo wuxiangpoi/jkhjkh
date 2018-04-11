@@ -1,0 +1,148 @@
+<div class="content-wrap" style="min-width:860px;">
+	<div class="level2 clearfix">
+		<div ng-if="perms(412)" class="tipBtnWrap">
+			<button ng-click="save()" class="btn btn-primary h34">
+				<i class="iconfont icon-tianjia-"></i>
+				添加素材
+			</button>
+		</div>
+		<div ng-if="perms(417)" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event) class="tipBtnWrap">
+			<button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="setGroup()" class="btn btn-primary">
+				设置所属机构
+			</button>
+			<div class="tipDiv">请先选择素材</div>
+		</div>
+		<div ng-if="perms(415)" class="tipBtnWrap">
+			<button ng-click="addGroup()" class="btn btn-primary">
+				添加分组
+			</button>
+		</div>
+		<div ng-if="perms(416)" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event) class="tipBtnWrap">
+			<button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="setLeaf()" class="btn btn-primary">
+				设置分组
+			</button>
+			<div class="tipDiv">请先选择素材</div>
+		</div>
+		<div ng-if="perms(416)" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event) class="tipBtnWrap">
+			<button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="cancelLeaf()" class="btn btn-primary">
+				取消分组
+			</button>
+			<div class="tipDiv">请先选择素材</div>
+		</div>
+		<div ng-if="perms(418)" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event) class="tipBtnWrap">
+			<button ng-class="{'disabled': ids.length == 0}" type="button" ng-click="submitCheck()" class="btn btn-primary">
+				提交审核
+			</button>
+			<div class="tipDiv">请先选择待提交审核的素材</div>
+		</div>
+		<div class="serchWrap fr">
+			<div class="fl txtInputWrap">
+				<input class="form-control" ng-keyup="myKeyup($event,callServer,tableState)" ng-model="sp.search" placeholder="素材名称">
+			</div>
+			<button type="button" class="btn btn-primary" ng-click="callServer(tableState)">查询</button>
+		</div>
+	</div>
+	<div class="table-wrapper">
+		<div class="tableHeader clearfix">
+			<div class="panel panel-default clearfix">
+				<div class="panelRow clearfix">
+					<div class="panel-left">组织机构</div>
+					<div class="panel-right">
+						<group-leaf-select></group-leaf-select>
+					</div>
+				</div>
+				<div class="panelRow clearfix">
+					<div class="panel-left">素材筛选</div>
+					<div class="panel-right">
+						<div class="panelSelectWrap">
+							<select class="form-control" ng-model="sp.type" ng-change="callServer(tableState)">
+								<option value="">素材类型</option>
+								<option value="0">图片</option>
+								<option value="1">视频</option>
+							</select>
+						</div>
+						<div class="panelSelectWrap">
+							<select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+								<option value="">素材状态</option>
+								<option ng-repeat="c in userData.root_checkStatus" value="{{c.val}}">{{c.name}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="panelRow clearfix last">
+					<div class="panel-left">素材分组</div>
+					<div class="panel-right">
+						<span class="leafGroup" ng-class="{'current': sp.gid == ''}" ng-click="chooseLeaf('',$event)">全部分组</span>
+						<span class="leafGroup" ng-class="{'current': sp.gid == leaf.id}" ng-repeat="leaf in leafes">
+							<span class="leafName" ng-click="chooseLeaf(leaf.id,$event)">{{leaf.name}}</span>
+							<span class="leafEdit">
+								<input class="form-control" type="text" ng-model="leaf.name">
+							</span>
+							<i ng-if="perms(415)" ng-click="editLeaf(leaf,$event)" class="iconfont icon-bianji"></i>
+							<i ng-if="perms(415)" ng-click="delLeaf(leaf)" class="iconfont icon-shanchu"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<table class="table" st-pipe="callServer" st-table="displayed">
+			<thead>
+				<tr>
+					<th class="checkBoxTable">
+						<input ng-checked="ids.length == displayed.length && displayed.length != 0" ng-click="checkAll($event)" type="checkbox">
+					</th>
+					<th>素材名称</th>
+					<th>素材大小</th>
+					<th>分辨率</th>
+					<th>审核状态</th>
+					<th>创建时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody ng-show="!isLoading">
+				<tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
+					<td class="checkBoxTable">
+						<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
+					</td>
+					<td class="tdClick ellipsisTd" ng-click="showMaterial(row)">
+						<div style="position:relative;">
+							<div style="width:80px;position:absolute;top:10px;">
+								<img ng-if="row.type == 0" src="img/loading.gif" style="width:80px;height:60px;" lazy-src="{{dmbdOSSImageUrlResizeFilter(row.path,100)}}">
+								<img ng-if="row.type == 1" src="img/loading.gif" style="width:80px;height:60px;" lazy-src="{{ata.status == 7?'/img/no_pic.jpg':dmbdOSSImageUrlResizeFilter(row.snapshot,100)}}">
+								<div ng-if="row.type == 1" class="vedioPre">
+									<i class="iconfont icon-xialajiantou"></i>
+								</div>
+							</div>
+							<div class="ellipsTXt" title="{{row.name}}" style="padding-left:85px;line-height:80px;">{{row.name}}</div>
+						</div>
+
+					</td>
+					<td>{{row.size | dmbdResourceSizeFilter}}</td>
+					<td>{{row.width + "*" + row.height}}</td>
+					<td>
+						<div class="txt-grey" ng-if="row.status == 0">{{row.status | materialStatusTxt}}</div>
+						<div ng-if="row.status == 1 || row.status == 2 || row.status == 3 || row.status == 6 || row.status == 7">{{row.status | materialStatusTxt}}</div>
+						<div class="tex-red" ng-if="row.status == 4 || row.status == 5">{{row.status | materialStatusTxt}}</div>
+					</td>
+					<td class="createTimeTd">
+						{{row.createTime | formateTime}}
+					</td>
+					<td style="{{row.status < 6?'width:225px;':'width:100px;'}}">
+						<button ng-if="[0,4,5].indexOf(row.status) != -1 && perms(418)" class="btn tableBtn"
+						    ng-click="submitCheck(row)">提交审核
+						</button>
+						<button ng-if="[0,1,2,3,7].indexOf(row.status) != -1 && perms(413)"
+						    class="btn tableBtn" ng-click="saveName(row)">修改名称
+						</button>
+						<button ng-if="[0,4,5,6].indexOf(row.status) != -1 && perms(414)" class="btn tableBtn"
+						    ng-click="del(row)">删除
+						</button>
+					</td>
+
+				</tr>
+			</tbody>
+			<tbody ng-include="'tpl/table.html'"></tbody>
+			<tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+		</table>
+	</div>
+</div>

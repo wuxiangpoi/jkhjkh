@@ -1,0 +1,23 @@
+<div class="login_main_others_content" style="padding-top:90px;">
+    <div ng-include="'tpl/nav_noLogin.html'"></div>
+    <div class="smenuSideBar">
+        <ul class="nav nav-list" id="menuSideBar">
+            <li>
+                <a ui-sref-active="active" ui-sref="help.guide">新手指南</a>
+            </li>
+            <li>
+                <a ui-sref-active="active" ui-sref="help.statement">法律声明</a>
+            </li>
+            <li>
+                <a ui-sref-active="active" ui-sref="help.agreement">服务协议</a>
+            </li>
+            <li>
+                <a ui-sref-active="active" ui-sref="help.partner">合作伙伴</a>
+            </li>
+            <li>
+                <a ui-sref-active="active" ui-sref="help.aboutus">关于我们</a>
+            </li>
+        </ul>
+    </div>
+    <div ui-view></div>
+</div>

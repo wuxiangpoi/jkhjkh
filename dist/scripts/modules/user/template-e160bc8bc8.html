@@ -1,0 +1,81 @@
+<div class="content-wrap" style="min-width:780px;">
+    <div class="level2 clearfix">
+
+        <div class="tipBtnWrap">
+            <button ng-click="save()" class="btn btn-primary">
+                <i class="iconfont icon-tianjia-"></i>
+                添加账号
+            </button>
+        </div>
+        <div class="serchWrap fr">
+            <div class="fl txtInputWrap">
+                <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.search" placeholder="登录账号/账号名称">
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="callServer(tableState)">查询</button>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <div class="tableHeader clearfix">
+            <div class="panel panel-default clearfix">
+                <div class="panelRow clearfix">
+                    <div class="panel-left">组织机构</div>
+                    <div class="panel-right">
+                        <group-leaf-select></group-leaf-select>
+                    </div>
+                </div>
+                <div class="panelRow clearfix  last">
+                    <div class="panel-left">账号筛选</div>
+                    <div class="panel-right">
+                        <div class="panelSelectWrap">
+                            <select class="form-control" ng-model="sp.enabled" ng-change="callServer(tableState)">
+                                <option value="">账号状态</option>
+                                <option value="1">激活</option>
+                                <option value="0">禁用</option>
+                            </select>
+                        </div>
+                        <div class="panelSelectWrap">
+                            <select class="form-control" ng-model="sp.role" ng-change="callServer(tableState)">
+                                <option value="">角色类型</option>
+                                <option ng-show="r.id != 0" ng-repeat="r in roles" value="{{r.id}}">{{r.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <thead>
+                <tr>
+                    <th>登录账号</th>
+                    <th>账号名称</th>
+                    <th>所属组织机构</th>
+                    <th>账号角色</th>
+                    <th>账号状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+                <tr ng-repeat="row in displayed">
+                    <td title="{{row.account}}">{{row.account}}</td>
+                    <td>{{row.name}}</td>
+                    <td class="ellipsisTd" title="{{row.oid | getOrganizations}}">{{row.oid | getOrganizations}}</td>
+                    <td>{{row.roleName}}</td>
+                    <td>
+                        <div ng-if="row.enabled == 1" class="txt-green">激活</div>
+                        <div ng-if="row.enabled == 0" class="tex-red">禁用</div>
+                    </td>
+                    <td style="min-width:180px;">
+                        <div ng-if="!row.role || row.role != '0'">
+                            <button class="btn btn-primary tableBtn btnGreen" ng-click="save(row)">编辑</button>
+                            <button class="btn btn-primary tableBtn" ng-click="resetPwd(row)">重置密码</button>
+                            <button ng-if="row.enabled == 1" class="btn btn-primary tableBtn btbRed" ng-click="changeStatus(row,$index)">禁用</button>
+                            <button ng-if="row.enabled == 0" class="btn btn-primary tableBtn" ng-click="changeStatus(row,$index)">解禁</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-include="'tpl/table.html'"></tbody>
+            <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div ng-include="'tpl/modal_header.html'"></div>
+<div class="modal-body">
+    <ul ng-if="data.isSet" style="padding: 0 20px;max-height:400px;">
+        <li ng-repeat="leaf in data.leafes" style="line-height:32px;">
+            <input name='ckLeafes' value="{{leaf.id}}" style="margin-top:0px;width:18px;height:18px;vertical-align:middle;" type="checkbox" /> {{leaf.name}}
+        </li>
+    </ul>
+    <ul ng-if="!data.isSet" style="padding: 0 20px;max-height:400px;">
+        <li ng-if="data.currentLeaf.id != ''" style="line-height:32px;">
+            <input name='cancelLeafes' checked value="1" style="margin-top:0px;width:18px;height:18px;vertical-align:middle;" type="radio" /> 取消当前关联组
+        </li>
+        <li style="line-height:32px;">
+            <input name='cancelLeafes' value="0" style="margin-top:0px;width:18px;height:18px;vertical-align:middle;" type="radio" /> 取消所有关联组
+        </li>
+    </ul>
+
+</div>
+<div ng-include="'tpl/modal_footer.html'"></div>
