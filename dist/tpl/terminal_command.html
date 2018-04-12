@@ -17,12 +17,12 @@
             <label class="col-sm-4 p0">设置开机时间</label>
             <div class="col-sm-8 row pdr0">
                 <div class="col-sm-6 pdr0">
-                        <select class="form-control" ng-options="h.value as h.name for h in selectH" ng-init="data.start_h=0" ng-model="data.start_h"
+                        <select class="form-control" ng-options="h.value as h.name for h in selectH" ng-init="data.start_h?data.start_h:data.start_h=0" ng-model="data.start_h"
                         ng-change="checkTime()">
                     </select>
                 </div>
                 <div class="col-sm-6 pdr0">
-                        <select ng-options="m.value as m.name for m in selectM" ng-init="data.start_m=0" class="form-control" ng-change="checkTime()"
+                        <select ng-options="m.value as m.name for m in selectM" ng-init="data.start_m?data.start_m:data.start_m=0" class="form-control" ng-change="checkTime()"
                         ng-model="data.start_m" ng-disabled="data.start_h == 24">
                     </select>
                 </div>

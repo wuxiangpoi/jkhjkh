@@ -100,11 +100,8 @@
 							</select>
 						</div>
 						<div class="panelSelectWrap">
-							<select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
-								<option value="">网络状态</option>
-								<option ng-selected="init_status==1" value="1">在线</option>
-								<option ng-selected="init_status==2" value="2">离线</option>
-								<option ng-selected="init_status==3" value="3">异常</option>
+							<select class="form-control" ng-options="h.value as h.name for h in netStatus" ng-init="init_status?sp.status = init_status:sp.status = ''" ng-model="sp.status"
+							    ng-change="callServer(tableState)">
 							</select>
 						</div>
 						<div class="panelSelectWrap">

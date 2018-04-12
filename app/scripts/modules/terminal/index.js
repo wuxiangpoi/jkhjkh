@@ -14,6 +14,7 @@ angular.module('sbAdminApp', ['chartService'])
 			$scope.currentLeaf = {};
 			$scope.currentLeaf.id = '';
 			$scope.sp.gid = '';
+			$scope.netStatus = [{name:'网络状态',value:''},{name:'在线',value:1},{name:'离线',value:2},{name:'异常',value:3}];
 			$scope.init_status = $stateParams.status;
 			if ($stateParams.status) {
 				$scope.sp.status = $stateParams.status;
