@@ -94,9 +94,13 @@ angular.module('sbAdminApp', ['chartService'])
 						} else {
 							initItem(chartItem);
 						}
+						
 					}
 					if($stateParams.id && $stateParams.type != 'saveAs'){
 						$scope.scheduleName = schedule.name;
+					}
+					if($stateParams.pos){
+						$scope.schedulePos = $stateParams.pos;		
 					}
 					initChartSchedule();
 				});

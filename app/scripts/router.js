@@ -152,6 +152,9 @@
                 })
                 .state('dashboard.schedule', {
                     url: '/schedule',
+                    params: {
+                        "pos": null
+                    },
                     controller: 'scheduleCtrl',
                     templateUrl: 'scripts/modules/schedule/template.html',
                     resolve: {
@@ -166,7 +169,7 @@
                     }
                 })
                 .state('dashboard.scheduleCreate', {
-                    url: '/scheduleCreate/{id}/{type}',
+                    url: '/scheduleCreate/{type}/{pos}/{id}',
                     controller: 'scheduleCreateCtrl',
                     templateUrl: 'scripts/modules/scheduleCreate/template.html',
                     resolve: {
@@ -331,19 +334,7 @@
                         }
                     }
                 })
-                .state('dashboard.programAdd', { //  下面是编辑器相关
-                    url: '/programAdd/{gid}',
-                    templateUrl: 'TBXEditor/program/program_add.html',
-                    controller: 'programAddController'
-                }).state('dashboard.programEdit', {
-                    url: '/programEdit/{id}',
-                    templateUrl: 'TBXEditor/program/program_edit.html',
-                    controller: 'programEditController'
-                }).state('dashboard.programCopy', {
-                    url: '/programCopy/{id}',
-                    templateUrl: 'TBXEditor/program/program_copy.html',
-                    controller: 'programCopyController'
-                });
+                
         });
 
 })(window, window.angular);

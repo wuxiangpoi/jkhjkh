@@ -1,11 +1,20 @@
 'use strict';
 angular.module('sbAdminApp', ['chartService'])
 	.controller('scheduleCtrl',
-		function ($scope, $rootScope, $state, baseService, leafService, chartService) {
+		function ($scope, $rootScope,$stateParams, $state, baseService, leafService, chartService) {
 			$scope.displayed = [];
 			$scope.sp = {};
 			$scope.tableState = {};
+			
 			$scope.callServer = function (tableState) {
+				if ($stateParams.pos){
+					if(!tableState.pagination.init){
+						tableState.pagination = {};
+						tableState.pagination.start = $stateParams.pos;
+						tableState.pagination.init = true;
+					}
+				}
+
 				baseService.initTable($scope, tableState, baseService.api.programSchedule + 'getProgramSchedulePageList');
 			}
 			$scope.showSchedule = function (item) {
@@ -42,10 +51,11 @@ angular.module('sbAdminApp', ['chartService'])
 					id: item.id
 				});
 			}
-			$scope.saveAs = function (item) {
+			$scope.saveAs = function (item,start) {
 				$state.go('dashboard.scheduleCreate', {
-					id: item.id,
-					type: 'saveAs'
+					type: 'saveAs',
+					 pos: start,
+					 id: item.id
 				});
 			}
 			$scope.sendDown = function (item) {

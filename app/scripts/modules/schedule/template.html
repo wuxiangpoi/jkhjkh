@@ -69,7 +69,7 @@
                         <button ng-if="row.status == 1 && perms(445)" class="btn tableBtn" ng-click="sendDown(row)">发布
                         </button>
                         <button ng-if="row.status == 1 && perms(442)" class="btn tableBtn"
-                            ng-click="saveAs(row)">另存为
+                            ng-click="saveAs(row,tableState.pagination.start)">另存为
                         </button>
                         <button ng-if="[0,4].indexOf(row.status) != -1 && perms(443)" class="btn tableBtn"
                             ng-click="del(row)">删除

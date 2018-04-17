@@ -1,15 +1,15 @@
-var app = angular.module('myApp', ['ui.router', 'ngDialog', 'qmedia.editor', 'ui.sortable']);
+var less = require('./main.less');
 
 (function (app) {
 
-    app.controller('indexCtrl', ['$scope', function ($scope) {
+    require('./filters/index')(app);
 
-        //侧边栏折叠效果
-        $scope.isSidebarFold = false;
-        $scope.slideFold = function () {
-            $scope.isSidebarFold = !$scope.isSidebarFold;
-        };
+    require('./services/index')(app);
 
-    }]);
+    require('./components/index')(app);
+
+    require('./dialogs/index')(app);
+
+    require('./modules/router')(app);
 
 })(app);
