@@ -65,7 +65,7 @@
         </div>
         <div class="col-65 bg-white" style="padding:10px;">
             <div class="txt-center txt-grey" style="line-height:380px;" ng-show="!playList.length">请从左侧选择节目添加~</div>
-            <div ng-show="playList.length > 0" style="position:relative;height:480px;margin-top:-12px;overflow-y: auto;overflow-x:hidden;">
+            <div ng-show="playList.length > 0" style="position:relative;height:450px;margin-top:-12px;overflow-y: auto;overflow-x:hidden;">
                 <div class="clearfix" style="width:100px;position:absolute;left:0;top:7px;padding-left:4px;z-index:2;">
                     <div style="font-size:14px; color:#9f9f9f;height:24px;">节目排期</div>
                     <div class="clearfix" style="line-height:29px;" ng-repeat="item in playList">
@@ -77,7 +77,7 @@
                 </div>
                 <div e-chart eoption="eoption" ng-style="chartStyle"></div>
             </div>
-            <div class="txt-center mart20" ng-show="playList.length > 0">
+            <div class="txt-center mart10" ng-show="playList.length > 0">
                 <button ng-if="perms(442)" class="btn btn-primary midBtn" ng-class="{'disabled': isPosting}" type="button" ng-click="saveSchedule()">保存
                     <i class="fa fa-spinner"></i>
                 </button>

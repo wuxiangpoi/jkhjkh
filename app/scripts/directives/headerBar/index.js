@@ -131,7 +131,18 @@ angular.module('sbAdminApp')
 				$scope.progressBar = {
 					width: $rootScope.userData.root_oss_percent + '%'
 				}
+				$scope.ledShowPerms = function(){
+					if($rootScope.userData.ledShow != 0){
 
+						if($rootScope.perms(71) || $rootScope.perms(72)){
+							return true;
+						}else{
+							return false;
+						}
+					}else{
+						return false;
+					}
+				}
 				$scope.check = function (x, $event) {
 					if (x == $scope.collapseVar)
 						$scope.collapseVar = 0;

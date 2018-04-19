@@ -128,7 +128,7 @@ angular.module('sbAdminApp', ['chartService'])
 			}
 
 			function initChartSchedule() {
-				var minLen = 15;
+				var minLen = 14;
 				if ($scope.playList.length > minLen) {
 					minLen = $scope.playList.length;
 				}

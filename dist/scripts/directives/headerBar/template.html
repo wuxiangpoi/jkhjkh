@@ -198,8 +198,8 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-                <li ng-if="perms(71) || perms(72)" ng-class="{current: currentState=='dashboard.led' || currentState=='dashboard.ledgram'}">
-                    <a class="navSecondLevel" ng-click="check(7)" ng-class="{active: collapseVar==7}">
+                <li ng-if="ledShowPerms()" ng-class="{current: currentState=='dashboard.led' || currentState=='dashboard.ledgram'}">
+                   <a class="navSecondLevel" ng-click="check(7)" ng-class="{active: collapseVar==7}">
                         <i class="iconfont icon-wenzipingguanliicon"></i>
                         <span class="navTle">文字屏管理</span>
                         <span class="fa arrow"></span>
