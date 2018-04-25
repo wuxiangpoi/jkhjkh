@@ -4,9 +4,9 @@
             <div class="tableHeader clearfix">
                     <div class="serchWrap fr">
                         <div class="fl txtInputWrap">
-                            <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.search" placeholder="节目名称">
+                            <input ng-keyup="myKeyup($event,initPage,tableState)" class="form-control" ng-model="sp.search" placeholder="节目名称">
                         </div>
-                        <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
+                        <button type="button" class="btn btn-primary fr" ng-click="initPage()">查询</button>
                     </div>
             
                 </div>

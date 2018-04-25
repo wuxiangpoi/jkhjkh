@@ -19,6 +19,10 @@ angular.module('sbAdminApp', [])
             }
             baseService.initTable($scope, tableState, baseService.api.user + 'getUserPageList');
         }
+        $scope.initPage = function () {
+            $scope.tableState.pagination.start = 0;
+            $scope.callServer($scope.tableState);
+        }
         baseService.getJson(baseService.api.role + 'getRoleList', {}, function (data) {
             $scope.roles = data;
         });

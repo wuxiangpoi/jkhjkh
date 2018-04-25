@@ -24,8 +24,9 @@ angular.module('sbAdminApp')
 				})
 			}
 			$scope.initPage = function () {
-				$scope.callServer($scope.tableState);
+				$scope.tableState.pagination.start = 0;
 				$scope.ids = [];
+				$scope.callServer($scope.tableState);
 			}
 
 			$scope.$on('emitGroupLeaf', function (e, group) {
@@ -56,7 +57,6 @@ angular.module('sbAdminApp')
 			$scope.chooseLeaf = function (id, $event) {
 				$scope.currentLeaf.id = id;
 				$scope.sp.gid = id;
-				$scope.tableState.pagination.start = 0;
 				$scope.initPage();
 			}
 			$scope.setLeaf = function () {
@@ -247,14 +247,21 @@ angular.module('sbAdminApp')
 
 							var ctype = item.name.substr(item.name.lastIndexOf('.') + 1).toLowerCase();
 							var type = ',' + ctype + ',';
+							var audiofile_type = ',mp3,';
 							// var type = ',' + item.type.slice(item.type.lastIndexOf('/') + 1) + ',';
 							//var file_type = vm.data.type == '0' ? $rootScope.getRootDicNameStrs('image_format') : $rootScope.getRootDicNameStrs('video_format');
 							var imgfile_type = vm.imgfile_type = $rootScope.getRootDicNameStrs('image_format');
 							var videofile_type = vm.videofile_type = $rootScope.getRootDicNameStrs('video_format');
-							if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1) {
+							if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + audiofile_type.toLowerCase() + ',').indexOf(type) != -1) {
 								if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1) {
 									if (item.size > 10 * 1024 * 1024) {
 										baseService.alert('不得上传大于10Mb的图片', 'warning', true);
+									} else {
+										return true;
+									}
+								} else if ((',' + audiofile_type.toLowerCase() + ',').indexOf(type) != -1) {
+									if (item.size > 10 * 1024 * 1024) {
+										baseService.alert('不得上传大于10Mb的音乐', 'warning', true);
 									} else {
 										return true;
 									}
@@ -293,8 +300,18 @@ angular.module('sbAdminApp')
 						var key = '';
 						//	var	 expire = 0;
 						var token = '';
+						var ctype = filename.substr(filename.lastIndexOf('.') + 1).toLowerCase();
+							var type = ',' + ctype + ',';
+							var xType = '';
+							if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1) {
+								xType = 0;
+							} else if ((',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1) {
+								xType = 1;
+							} else {
+								xType = 2;
+							}
 						baseService.postData(baseService.api.material + 'addMaterial_getOssSignature', {
-							type: videofile_type.split(',').indexOf(item.file.type.split('/')[1]) == -1 ? 0 : 1
+							type: xType
 						}, function (obj) {
 							host = obj['host']
 							policyBase64 = obj['policy']
@@ -317,7 +334,7 @@ angular.module('sbAdminApp')
 								'callback': callbackbody,
 								'signature': signature,
 								'x:fname': filename,
-								'x:type': videofile_type.split(',').indexOf(item.file.type.split('/')[1]) == -1 ? 0 : 1,
+								'x:type': xType,
 								'x:gid': item.oid,
 								'x:opt': 0,
 								'x:token': token

@@ -1794,3 +1794,34 @@ div.timeSelectWrap {
     display: none;
   }
 }
+.audioPreWrap {
+  background: #e2e3e6;
+  height: 60px;
+}
+.audioPreWrap .audioPre {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  top: 15px;
+  left: 25px;
+  color: #fff;
+  text-align: center;
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+.audioPreWrap .audioPre i {
+  margin-top: 8px;
+  display: block;
+  transform: rotate(182deg);
+}
+.audioWrap {
+  margin-top: 100px;
+}
+.audioWrap .audioName {
+  padding: 0 10px;
+}

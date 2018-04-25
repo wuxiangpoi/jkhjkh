@@ -10,6 +10,10 @@ angular.module('sbAdminApp')
                     $rootScope.materialCheckCounts = data.recordsTotal;
                 });
             }
+            $scope.initPage = function () {
+				$scope.tableState.pagination.start = 0;
+				$scope.callServer($scope.tableState);
+			}
             $scope.showMaterial = function (item, type) {
                 baseService.showMaterial(item, type, function (status) {
                     baseService.confirm('素材审核', "确定" + (status == 3 ? "通过" : "不通过") + "素材：" + item.name + "?", function (ngDialog, vm) {

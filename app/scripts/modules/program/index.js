@@ -21,10 +21,10 @@ angular.module('sbAdminApp')
 				})
 			}
 			$scope.initPage = function () {
-				$scope.callServer($scope.tableState);
+				$scope.tableState.pagination.start = 0;
 				$scope.ids = [];
+				$scope.callServer($scope.tableState);
 			}
-
 			$scope.$on('emitGroupLeaf', function (e, group) {
 				if ($scope.sp.oid != group.id) {
 					$scope.currentGroup = group;
@@ -53,7 +53,6 @@ angular.module('sbAdminApp')
 			$scope.chooseLeaf = function (id, $event) {
 				$scope.currentLeaf.id = id;
 				$scope.sp.gid = id;
-				$scope.tableState.pagination.start = 0;
 				$scope.initPage();
 			}
 			$scope.setLeaf = function () {
@@ -192,6 +191,11 @@ angular.module('sbAdminApp')
 							}
 						});
 					}
+					vm.initPage = function () {
+						vm.tableState.pagination.start = 0;
+						vm.ids = [];
+						vm.callServer(vm.tableState);
+					}
 					vm.initTable = function () {
 						vm.sp.resolution = '';
 						vm.sp.status = '';
@@ -222,7 +226,7 @@ angular.module('sbAdminApp')
 							vm.currentGroup = group;
 							vm.sp.oid = group.id;
 							vm.sp.gid = leaf.id;
-							vm.callServer(vm.tableState);
+							vm.initPage();
 						}
 
 					});
@@ -269,6 +273,7 @@ angular.module('sbAdminApp')
 									ngDialog.close();
 									baseService.alert('发布成功', 'success',true);
 									vm.callServer(vm.tableState);
+									
 								})
 							}
 
@@ -324,6 +329,10 @@ angular.module('sbAdminApp')
 					vm.callServer = function (tableState) {
 						baseService.initTable(vm, tableState, baseService.api.program + 'programManage_getAllOkTerminalList');
 					}
+					vm.initPage = function () {
+						vm.tableState.pagination.start = 0;
+						vm.callServer(vm.tableState);
+					}
 					var now = new Date();
 					var nowYear = now.getFullYear();
 					var nowMonth = now.getMonth() + 1;
@@ -351,7 +360,7 @@ angular.module('sbAdminApp')
 							vm.currentGroup = group;
 							vm.sp.oid = group.id;
 							vm.sp.gid = leaf.id;
-							vm.callServer(vm.tableState);
+							vm.initPage();
 						}
 
 					});

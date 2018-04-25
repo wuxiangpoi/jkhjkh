@@ -99,7 +99,7 @@ angular.module('sbAdminApp')
                             if (treeNode.id == 0 && ztreeSetting.isSet) {
                                 var sObj = $("#" + treeNode.tId + "_span"); //获取节点信息                          
                                 var addStr = '';
-                                addStr += "<span id='addBtn_level0' style='margin-left: 80px;color:#000;font-size:12px;' title='add node' onfocus='this.blur();'><i class='iconfont icon-tianjia-' style='vertical-align:-1px;'></i>(点击添加组织机构)</span>"; //定义添加按钮  
+                                addStr += "<span id='addBtn_level0' style='margin-left: 80px;color:#000;font-size:12px;' onfocus='this.blur();'><i class='iconfont icon-tianjia-' style='vertical-align:-1px;'></i>(点击添加组织机构)</span>"; //定义添加按钮  
                                 sObj.after(addStr); //加载添加按钮 
                                 var addBtn = $("#addBtn_level0");
                                 if (addBtn) addBtn.bind("click", function () {
@@ -119,9 +119,9 @@ angular.module('sbAdminApp')
                         var sObj = $("#" + treeNode.tId + "_span"); //获取节点信息  
                         if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
 
-                        var addStr = "<span class='iconfont icon-tianjia- ztreeBtn' id='addBtn_" + treeNode.tId + "' title='add node' onfocus='this.blur();'></span>"; //定义添加按钮  
-                        addStr += "<span class='iconfont icon-bianji ztreeBtn' id='editBtn_" + treeNode.tId + "' title='add node' onfocus='this.blur();'></span>"; //定义添加按钮  
-                        addStr += "<span class='iconfont icon-shanchu ztreeBtn' id='delBtn_" + treeNode.tId + "' title='add node' onfocus='this.blur();'></span>"; //定义添加按钮  
+                        var addStr = "<span class='iconfont icon-tianjia- ztreeBtn' id='addBtn_" + treeNode.tId + "' title='添加' onfocus='this.blur();'></span>"; //定义添加按钮  
+                        addStr += "<span class='iconfont icon-bianji ztreeBtn' id='editBtn_" + treeNode.tId + "' title='编辑' onfocus='this.blur();'></span>"; //定义添加按钮  
+                        addStr += "<span class='iconfont icon-shanchu ztreeBtn' id='delBtn_" + treeNode.tId + "' title='删除' onfocus='this.blur();'></span>"; //定义添加按钮  
                         sObj.after(addStr); //加载添加按钮  
                         var addBtn = $("#addBtn_" + treeNode.tId);
                         var editBtn = $("#editBtn_" + treeNode.tId);

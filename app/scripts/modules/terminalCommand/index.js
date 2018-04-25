@@ -8,6 +8,10 @@ angular.module('sbAdminApp')
             $scope.callServer = function (tableState) {
                 baseService.initTable($scope, tableState, baseService.api.terminalCmd + 'getTerminalCmdPageList');
             }
+            $scope.initPage = function () {
+                $scope.tableState.pagination.start = 0;
+                $scope.callServer($scope.tableState);
+            }
             $scope.showProgram = function (item) {
                 baseService.showProgram(item);
             }

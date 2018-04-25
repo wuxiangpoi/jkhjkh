@@ -33,12 +33,12 @@
             <label class="col-sm-4 p0">设置关机时间</label>
             <div class="col-sm-8 row pdr0">
                 <div class="col-sm-6 pdr0">
-                    <select class="form-control" ng-options="h.value as h.name for h in selectH" ng-init="data.end_h=24" ng-model="data.end_h"
+                    <select class="form-control" ng-options="h.value as h.name for h in selectH" ng-init="data.end_h?data.end_h:data.end_h=24" ng-model="data.end_h"
                         ng-change="checkTime()">
                     </select>
                 </div>
                 <div class="col-sm-6 pdr0">
-                    <select ng-options="m.value as m.name for m in selectM" ng-init="data.end_m=0" class="form-control" ng-change="checkTime()"
+                    <select ng-options="m.value as m.name for m in selectM" ng-init="data.end_m?data.end_m:data.end_m=0" class="form-control" ng-change="checkTime()"
                         ng-model="data.end_m" ng-disabled="data.end_h == 24">
                     </select>
                 </div>

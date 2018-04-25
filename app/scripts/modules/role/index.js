@@ -14,7 +14,10 @@ angular.module('sbAdminApp', [])
         $scope.callServer = function (tableState) {
             baseService.initTable($scope, tableState, baseService.api.role + 'getRolePageList');
         }
-
+        $scope.initPage = function () {
+            $scope.tableState.pagination.start = 0;
+            $scope.callServer($scope.tableState);
+        }
         function getPerms(cb) {
             if ($scope.permList) {
                 cb();

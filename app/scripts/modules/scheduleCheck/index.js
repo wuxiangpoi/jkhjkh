@@ -10,6 +10,10 @@ angular.module('sbAdminApp',['chartService'])
                     $rootScope.programScheduleCheckCounts = data.recordsTotal;
                 });
             }
+            $scope.initPage = function () {
+				$scope.tableState.pagination.start = 0;
+				$scope.callServer($scope.tableState);
+			}
             $scope.showSchedule = function (item,type) {
 				baseService.showSchedule(item,type,chartService,function(status){
                     baseService.confirm('排期审核', "确定" + (status == 1 ? "通过" : "不通过") + "排期：" + item.name + "?", function (ngDialog,vm) {

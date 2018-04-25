@@ -1,22 +1,23 @@
 <div class="content-wrap" style="min-width:680px;">
-    
+
     <div class="table-wrapper">
-            <div class="tableHeader clearfix">
-                    <div class="selectWrap">
-                        <select class="form-control" ng-model="sp.type" ng-change="callServer(tableState)">
-                            <option value="">素材类型</option>
-                            <option value="0">图片</option>
-                            <option value="1">视频</option>
-                        </select>
-                    </div>
-                    <div class="serchWrap fr">
-                        <div class="fl txtInputWrap">
-                            <input class="form-control" ng-keyup="myKeyup($event,callServer,tableState)" ng-model="sp.search" placeholder="素材名称">
-                        </div>
-                        <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
-                    </div>
-            
+        <div class="tableHeader clearfix">
+            <div class="selectWrap">
+                <select class="form-control" ng-model="sp.type" ng-change="initPage()">
+                    <option value="">素材类型</option>
+                    <option value="0">图片</option>
+                    <option value="1">视频</option>
+                    <option value="2">音乐</option>
+                </select>
+            </div>
+            <div class="serchWrap fr">
+                <div class="fl txtInputWrap">
+                    <input class="form-control" ng-keyup="myKeyup($event,initPage,tableState)" ng-model="sp.search" placeholder="素材名称">
                 </div>
+                <button type="button" class="btn btn-primary fr" ng-click="initPage()">查询</button>
+            </div>
+
+        </div>
         <table class="table" st-pipe="callServer" st-table="displayed">
             <thead>
                 <tr>
@@ -38,13 +39,22 @@
                                 <div ng-if="row.type == 1" class="vedioPre">
                                     <i class="iconfont icon-xialajiantou"></i>
                                 </div>
+                                <div ng-if="row.type == 2" class="audioPreWrap">
+                                        <div class="audioPre">
+                                            <i class="fa fa-music"></i>
+                                        </div>
+                                    </div>
                             </div>
                             <div class="ellipsTXt" title="{{row.name}}" style="padding-left:85px;line-height:80px;">{{row.name}}</div>
                         </div>
 
                     </td>
                     <td>{{row.size | dmbdResourceSizeFilter}}</td>
-                    <td>{{row.width + "*" + row.height}}</td>
+                    <td>
+                        <span ng-if="row.type != 2">
+                            {{row.width + "*" + row.height}}
+                        </span>
+                    </td>
                     <td>
                         {{row.status | materialStatusTxt}}
                     </td>

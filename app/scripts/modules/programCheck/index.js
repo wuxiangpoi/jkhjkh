@@ -10,6 +10,10 @@ angular.module('sbAdminApp')
                     $rootScope.programCheckCounts = data.recordsTotal;
                 });
             }
+            $scope.initPage = function () {
+				$scope.tableState.pagination.start = 0;
+				$scope.callServer($scope.tableState);
+			}
             $scope.showProgram = function (item,type) {
                 item.pid = item.id;
                 baseService.showProgram(item,type,function(ntype){

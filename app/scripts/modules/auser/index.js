@@ -17,6 +17,7 @@ angular.module('sbAdminApp', [])
             baseService.initTable($scope, tableState, baseService.api.installUser + 'getInstallUserPageList');
         }
         $scope.initPage = function () {
+            $scope.tableState.pagination.start = 0;
             $scope.callServer($scope.tableState);
         }
         $scope.$on('emitGroupLeaf', function (e, group) {

@@ -3,7 +3,7 @@
     <div class="table-wrapper">
         <div class="tableHeader clearfix">
             <div class="selectWrap">
-                <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+                <select class="form-control" ng-model="sp.status" ng-change="initPage()">
                     <option value="">命令状态</option>
                     <option value="0">正在下发</option>
                     <option value="1">下发成功</option>
@@ -17,7 +17,7 @@
                 <div class="fl txtInputWrap">
                     <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.terminal" placeholder="终端编号/名称">
                 </div>
-                <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
+                <button type="button" class="btn btn-primary fr" ng-click="initPage()">查询</button>
             </div>
 
         </div>

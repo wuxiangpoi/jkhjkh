@@ -17,6 +17,10 @@ angular.module('sbAdminApp', ['chartService'])
 
 				baseService.initTable($scope, tableState, baseService.api.programSchedule + 'getProgramSchedulePageList');
 			}
+			$scope.initPage = function () {
+				$scope.tableState.pagination.start = 0;
+				$scope.callServer($scope.tableState);
+			}
 			$scope.showSchedule = function (item) {
 				baseService.showSchedule(item, 2, chartService);
 			}

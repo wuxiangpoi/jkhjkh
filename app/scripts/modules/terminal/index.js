@@ -28,9 +28,9 @@ angular.module('sbAdminApp', ['chartService'])
 				})
 			}
 			$scope.initPage = function () {
-				$scope.callServer($scope.tableState);
+				$scope.tableState.pagination.start = 0;
 				$scope.ids = [];
-				$scope.idsNormal = [];
+				$scope.callServer($scope.tableState);
 			}
 			$scope.$on('emitGroupLeaf', function (e, group) {
 				if ($scope.sp.oid != group.id) {
@@ -60,7 +60,6 @@ angular.module('sbAdminApp', ['chartService'])
 			$scope.chooseLeaf = function (id, $event) {
 				$scope.currentLeaf.id = id;
 				$scope.sp.gid = id;
-				$scope.tableState.pagination.start = 0;
 				$scope.initPage();
 			}
 			$scope.setLeaf = function () {
@@ -288,7 +287,7 @@ angular.module('sbAdminApp', ['chartService'])
 								},
 								function (data) {
 									ngDialog.close()
-									baseService.alert('操作成功', 'success')
+									baseService.alert('命令执行成功后，可在终端详情中查看', 'success')
 								});
 						})
 						break;

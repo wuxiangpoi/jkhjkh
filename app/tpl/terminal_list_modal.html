@@ -17,7 +17,7 @@
                     <div class="fl lh34">选择终端：</div>
                     <div class="fl">
                         <div class="panelSelectWrap">
-                            <select class="form-control" ng-model="sp.resolution" ng-change="callServer(tableState)">
+                            <select class="form-control" ng-model="sp.resolution" ng-change="initPage(tableState)">
                                 <option value="">分辨率</option>
                                 <option ng-repeat="t in userData.root_programReslotions" value="{{t}}">{{t}}</option>
                             </select>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="fl">
                         <div class="panelSelectWrap">
-                            <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+                            <select class="form-control" ng-model="sp.status" ng-change="initPage(tableState)">
                                 <option value="">网络状态</option>
                                 <option value="1">在线</option>
                                 <option value="2">离线</option>
