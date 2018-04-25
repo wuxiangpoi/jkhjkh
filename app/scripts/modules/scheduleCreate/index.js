@@ -45,6 +45,8 @@ angular.module('sbAdminApp', ['chartService'])
 					id: $stateParams.id
 				}, function (schedule) {
 					function initItem(chartItem) {
+						chartItem.sTime = parseInt(chartItem.startTime.split(':')[0] * 60) + parseInt(chartItem.startTime.split(':')[1]);
+						chartItem.eTime = parseInt(chartItem.endTime.split(':')[0] * 60) + parseInt(chartItem.endTime.split(':')[1]);
 						$scope.playListId.push(chartItem.id);
 						$scope.playList.push(chartItem);
 						if(baseService.formateDayTime(chartItem.startDate) < Date.parse(today)){
@@ -144,6 +146,14 @@ angular.module('sbAdminApp', ['chartService'])
 
 			function checkCross(chartItem) {
 				function cross(a1, a2, b1, b2, type) {
+					if (type == 'date') {
+						a1 = baseService.formateDayTime(a1);
+						a2 = baseService.formateDayTime(a2);
+						b1 = baseService.formateDayTime(b1);
+						b2 = baseService.formateDayTime(b2);
+						a2 += 24 * 60 * 60 * 1000;
+						b2 += 24 * 60 * 60 * 1000;
+					}
 					if(b1 == a1 && b2 == a2){
 						if (type == 'date') {
 							return true;
@@ -185,10 +195,11 @@ angular.module('sbAdminApp', ['chartService'])
 
 						for (var i = 0; i < $scope.playList.length; i++) {
 							if ($scope.playList[i].stype == 1) {
-
+								
 								if (cross(chartItem.sTime, chartItem.eTime, $scope.playList[i].sTime, $scope.playList[i].eTime, 'time')) {
 									
 									if (cross(chartItem.startDate, chartItem.endDate, $scope.playList[i].startDate, $scope.playList[i].endDate, 'date')) {
+										
 										var crossItem = $scope.playList[i];
 										crossItem.msg = {
 											type: 3,

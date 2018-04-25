@@ -247,7 +247,7 @@ angular.module('sbAdminApp')
 
 							var ctype = item.name.substr(item.name.lastIndexOf('.') + 1).toLowerCase();
 							var type = ',' + ctype + ',';
-							var type = ',' + item.type.slice(item.type.lastIndexOf('/') + 1) + ',';
+							// var type = ',' + item.type.slice(item.type.lastIndexOf('/') + 1) + ',';
 							//var file_type = vm.data.type == '0' ? $rootScope.getRootDicNameStrs('image_format') : $rootScope.getRootDicNameStrs('video_format');
 							var imgfile_type = vm.imgfile_type = $rootScope.getRootDicNameStrs('image_format');
 							var videofile_type = vm.videofile_type = $rootScope.getRootDicNameStrs('video_format');

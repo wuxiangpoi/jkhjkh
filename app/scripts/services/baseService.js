@@ -2,7 +2,7 @@ var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
     // var apiUrl = 'http://192.168.1.100:8080';
     var apiUrl = '';
-    var verson = '?_v2.1998888888888';
+    var verson = '?_v2.19987888888888889';
     var baseService = {
         verson: verson,
         api: {
@@ -253,6 +253,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             $scope.isLoading = true;
             $scope.tableState = tableState;
             var pagination = tableState.pagination;
+            
             var start = pagination.start || 0;
             var num = $scope.sp.length;
             $scope.sp.start = start;
@@ -268,6 +269,17 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 }
             })
         },
+        isRealNum:function(val){
+            // isNaN()函数 把空串 空格 以及NUll 按照0来处理 所以先去除
+            if(val === "" || val ==null){
+                return false;
+            }
+            if(!isNaN(val)){
+                return true;
+            }else{
+                return false;
+            }
+        },           
         checkAll: function ($event, vm) {
             vm.ids = [];
             if ($($event.currentTarget).is(':checked')) {

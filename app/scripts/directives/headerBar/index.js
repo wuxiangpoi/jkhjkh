@@ -157,13 +157,13 @@ angular.module('sbAdminApp')
 				});
 				$scope.checkRoute = function (x, $event) {
 					$scope.collapseVar = x;
-					if ($scope.currentState == 'dashboard.programAdd' || $scope.currentState == 'dashboard.programCopy' || $scope.currentState == 'dashboard.programEdit') {
-						$event.preventDefault();
-						baseService.confirm('提示', '当前节目未保存，是否离开当前页面？', function (ngDialog) {
-							ngDialog.close();
-							$location.path($event.currentTarget.href.split('#')[1]);
-						})
-					}
+					// if ($scope.currentState == 'dashboard.programAdd' || $scope.currentState == 'dashboard.programCopy' || $scope.currentState == 'dashboard.programEdit') {
+					// 	$event.preventDefault();
+					// 	baseService.confirm('提示', '当前节目未保存，是否离开当前页面？', function (ngDialog) {
+					// 		ngDialog.close();
+					// 		$location.path($event.currentTarget.href.split('#')[1]);
+					// 	})
+					// }
 				}
 
 				$scope.goToDetail = function (item) {

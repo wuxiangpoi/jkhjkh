@@ -13,7 +13,10 @@ angular.module('sbAdminApp', [])
         $scope.tableState = {};
         $scope.currentGroup = $rootScope.rootGroup;
         $scope.sp.oid = $scope.currentGroup.id;
-        $scope.callServer = function (tableState) {
+        $scope.callServer = function (tableState,num) {
+            if(baseService.isRealNum(num)){
+                tableState.pagination.start = num;
+            }
             baseService.initTable($scope, tableState, baseService.api.user + 'getUserPageList');
         }
         baseService.getJson(baseService.api.role + 'getRoleList', {}, function (data) {
