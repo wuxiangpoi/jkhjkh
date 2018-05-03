@@ -20,6 +20,8 @@ angular.module('sbAdminApp', ['chartService'])
 				$scope.sp.status = $stateParams.status;
 			}
 			$scope.callServer = function (tableState) {
+				$scope.ids = [];
+				$scope.idsNormal = [];
 				baseService.initTable($scope, tableState, baseService.api.terminal + 'getTerminalPageList');
 			}
 			$scope.getTerminalGroups = function (oid) {
@@ -30,6 +32,7 @@ angular.module('sbAdminApp', ['chartService'])
 			$scope.initPage = function () {
 				$scope.tableState.pagination.start = 0;
 				$scope.ids = [];
+				$scope.idsNormal = [];
 				$scope.callServer($scope.tableState);
 			}
 			$scope.$on('emitGroupLeaf', function (e, group) {

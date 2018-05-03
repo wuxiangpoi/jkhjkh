@@ -45,17 +45,17 @@ angular.module('sbAdminApp', ['chartService'])
 					id: $stateParams.id
 				}, function (schedule) {
 					function initItem(chartItem) {
-						chartItem.sTime = parseInt(chartItem.startTime.split(':')[0] * 60) + parseInt(chartItem.startTime.split(':')[1]);
-						chartItem.eTime = parseInt(chartItem.endTime.split(':')[0] * 60) + parseInt(chartItem.endTime.split(':')[1]);
+						
 						$scope.playListId.push(chartItem.id);
 						$scope.playList.push(chartItem);
-						if(baseService.formateDayTime(chartItem.startDate) < Date.parse(today)){
+						if (baseService.formateDayTime(chartItem.startDate) < Date.parse(today)) {
 							chartItem.startDate = today.split('-').join('');
 						}
 						if (chartItem.stype == 1) {
-							
+							chartItem.sTime = parseInt(chartItem.startTime.split(':')[0] * 60) + parseInt(chartItem.startTime.split(':')[1]);
+							chartItem.eTime = parseInt(chartItem.endTime.split(':')[0] * 60) + parseInt(chartItem.endTime.split(':')[1]);
 							var len = (baseService.formateDayTime(chartItem.endDate) - baseService.formateDayTime(chartItem.startDate)) / oneDay;
-							
+
 							for (var i = 0; i <= len; i++) {
 								if (dateMap[baseService.formateDayTime(chartItem.startDate) + i * oneDay][chartItem.timeSel]) {
 									dateMap[baseService.formateDayTime(chartItem.startDate) + i * oneDay][chartItem.timeSel] = {
@@ -89,6 +89,7 @@ angular.module('sbAdminApp', ['chartService'])
 							chartItem.plays = schedule.programs[i].plays;
 						}
 						if ($stateParams.type == 'saveAs' || $stateParams.id) {
+
 							if (baseService.formateDayTime(chartItem.endDate) >= Date.parse(today)) {
 								initItem(chartItem);
 							}
@@ -96,13 +97,13 @@ angular.module('sbAdminApp', ['chartService'])
 						} else {
 							initItem(chartItem);
 						}
-						
+
 					}
-					if($stateParams.id && $stateParams.type != 'saveAs'){
+					if ($stateParams.id && $stateParams.type != 'saveAs') {
 						$scope.scheduleName = schedule.name;
 					}
-					if($stateParams.pos){
-						$scope.schedulePos = $stateParams.pos;		
+					if ($stateParams.pos) {
+						$scope.schedulePos = $stateParams.pos;
 					}
 					initChartSchedule();
 				});
@@ -154,7 +155,7 @@ angular.module('sbAdminApp', ['chartService'])
 						a2 += 24 * 60 * 60 * 1000;
 						b2 += 24 * 60 * 60 * 1000;
 					}
-					if(b1 == a1 && b2 == a2){
+					if (b1 == a1 && b2 == a2) {
 						if (type == 'date') {
 							return true;
 						} else {
@@ -181,10 +182,10 @@ angular.module('sbAdminApp', ['chartService'])
 					result.cross = [];
 					if ((chartItem.eTime - chartItem.sTime) * 60 < chartItem.duration * chartItem.plays) {
 						var crossItem = chartItem;
-						var dateInterval = chartItem.startDate == chartItem.startDate?baseService.formateDayTime(chartItem.startDate,'date') : baseService.formateDayTime(chartItem.startDate,'date') + '-' + baseService.formateDayTime(chartItem.startDate,'date');
+						var dateInterval = chartItem.startDate == chartItem.startDate ? baseService.formateDayTime(chartItem.startDate, 'date') : baseService.formateDayTime(chartItem.startDate, 'date') + '-' + baseService.formateDayTime(chartItem.startDate, 'date');
 						crossItem.msg = {
 							type: 4,
-							info:  dateInterval + '的' + chartItem.startTime + '至' + chartItem.endTime + '剩余时长不足~'
+							info: dateInterval + '的' + chartItem.startTime + '至' + chartItem.endTime + '剩余时长不足~'
 						};
 						result.cross.push(crossItem);
 						if (result.cross.length > 0) {
@@ -195,11 +196,11 @@ angular.module('sbAdminApp', ['chartService'])
 
 						for (var i = 0; i < $scope.playList.length; i++) {
 							if ($scope.playList[i].stype == 1) {
-								
+
 								if (cross(chartItem.sTime, chartItem.eTime, $scope.playList[i].sTime, $scope.playList[i].eTime, 'time')) {
-									
+
 									if (cross(chartItem.startDate, chartItem.endDate, $scope.playList[i].startDate, $scope.playList[i].endDate, 'date')) {
-										
+
 										var crossItem = $scope.playList[i];
 										crossItem.msg = {
 											type: 3,
@@ -232,7 +233,7 @@ angular.module('sbAdminApp', ['chartService'])
 
 										crossItem.msg = {
 											type: 5,
-											info: crossItem.dateInterval?crossItem.dateInterval + '的' + chartItem.startTime + '至' + chartItem.endTime + '剩余时长不足~' : crossItem.date + '的' + chartItem.startTime + '至' + chartItem.endTime + '剩余时长不足~' 
+											info: crossItem.dateInterval ? crossItem.dateInterval + '的' + chartItem.startTime + '至' + chartItem.endTime + '剩余时长不足~' : crossItem.date + '的' + chartItem.startTime + '至' + chartItem.endTime + '剩余时长不足~'
 										};
 
 									} else {

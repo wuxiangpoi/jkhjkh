@@ -8,16 +8,16 @@
         </div>
         <div class="serchWrap fr">
             <div class="fl txtInputWrap">
-                <input class="form-control" ng-keyup="myKeyup($event,callServer,tableState)" ng-model="sp.search" placeholder="排期名称">
+                <input class="form-control" ng-keyup="myKeyup($event,initPage,tableState)" ng-model="sp.search" placeholder="排期名称">
             </div>
-            <button type="button" class="btn btn-primary" ng-click="callServer(tableState)">查询</button>
+            <button type="button" class="btn btn-primary" ng-click="initPage()">查询</button>
         </div>
     </div>
 
     <div class="table-wrapper">
         <div class="tableHeader clearfix">
             <div class="selectWrap">
-                <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+                <select class="form-control" ng-model="sp.status" ng-change="initPage()">
                     <option value="">审核状态</option>
                     <option value="0">待提交审核</option>
                     <option value="2">审核中</option>

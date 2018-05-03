@@ -13,6 +13,7 @@ angular.module('sbAdminApp')
 			$scope.sp.gid = '';
 			$scope.tableState = {};
 			$scope.callServer = function (tableState) {
+				$scope.ids = [];
 				baseService.initTable($scope, tableState, baseService.api.program + 'getProgramList');
 			}
 			$scope.getGroups = function (oid) {

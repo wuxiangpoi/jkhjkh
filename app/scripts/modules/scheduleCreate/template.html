@@ -46,7 +46,7 @@
                 </thead>
                 <tbody class="content" ng-show="!isLoading">
                     <tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
-                        <td class="tdClick"  title="{{row.name}}" ng-click="showProgram(row)">
+                        <td class="tdClick ellipsisTd" title="{{row.name}}" ng-click="showProgram(row)">
                             {{row.name}}
                         </td>
                         <td>

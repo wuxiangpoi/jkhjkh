@@ -34,12 +34,12 @@ chartService.factory('chartService', ['baseService', function (baseService) {
                         formatter: function (value, index) {
                             if (playData.xAxis.interval == intervalDay) {
                                 var date = new Date(value);
-
+                                var preDate = new Date(value - intervalDay/5);
                                 var texts = '';
                                 if(playData.xAxis.min == value){
                                     texts = [(date.getMonth() + 1), date.getDate()].join('/');
                                 }else{
-                                    texts = [(date.getMonth() + 1), (date.getDate() - 1)].join('/');
+                                    texts = [(preDate.getMonth() + 1), preDate.getDate()].join('/');
                                 }
                                 return ['', texts].join('\n');
                             } else {

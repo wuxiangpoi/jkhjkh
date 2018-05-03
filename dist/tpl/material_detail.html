@@ -5,7 +5,7 @@
 
 <div class="modal-body">
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-8"  style="background:#f6f7fa;height:350px;">
             <div ng-if="data.type==0" class="positionR" style="background:#f1f2f5;">
                 <img ng-if="data.width > data.height" src="img/loading.gif" style="width:100%;height:350px;display:block;" lazy-src="{{data.nUrl}}"
                 />
@@ -16,6 +16,8 @@
             <video ng-if="data.type==1" width="100%" height="360px" controls>
                 <source ng-src="{{data.path | play_url}}">
             </video>
+            <div km-audio ng-if="data.type==2" audiodata="{{data}}"></div>
+
         </div>
         <div class="col-sm-4 pdr0 modalDetail">
             <div class="col-sm-12 p0">
@@ -29,7 +31,7 @@
                     {{data.oid | getOrganizations}}
                 </div>
             </div>
-            <div class="col-sm-12 p0">
+            <div class="col-sm-12 p0" ng-if="data.type!=2">
                 <label class="col-sm-3 p0">分辨率</label>
                 <div class="col-sm-9 pdr0 txt-grey">{{data.width}}*{{data.height}}
                 </div>

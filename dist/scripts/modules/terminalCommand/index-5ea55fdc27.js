@@ -1,1 +1,0 @@
-"use strict";angular.module("sbAdminApp").controller("terminalCommandCtrl",["$scope","$rootScope","baseService",function(e,a,r){e.displayed=[],e.sp={},e.tableState={},e.callServer=function(a){r.initTable(e,a,r.api.terminalCmd+"getTerminalCmdPageList")},e.showProgram=function(e){r.showProgram(e)}}]);

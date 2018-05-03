@@ -3,7 +3,7 @@
     <div class="table-wrapper">
         <div class="tableHeader clearfix">
             <div class="selectWrap" style="margin-right:5px;">
-                <select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+                <select class="form-control" ng-model="sp.status" ng-change="initPage()">
                     <option value="">命令状态</option>
                     <option value="3">等待终端执行</option>
                     <option value="1">下发成功</option>
@@ -13,7 +13,7 @@
                 </select>
             </div>
             <div class="selectWrap">
-                <select class="form-control" ng-model="sp.cmdCode" ng-change="callServer(tableState)">
+                <select class="form-control" ng-model="sp.cmdCode" ng-change="initPage()">
                     <option value="">类型</option>
                     <option value="22">节目</option>
                     <option value="24">排期</option>
@@ -29,7 +29,7 @@
                 <div class="fl txtInputWrap">
                     <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.user" placeholder="用户账号/名称">
                 </div>
-                <button type="button" class="btn btn-primary fr" ng-click="callServer(tableState)">查询</button>
+                <button type="button" class="btn btn-primary fr" ng-click="initPage()">查询</button>
             </div>
 
         </div>

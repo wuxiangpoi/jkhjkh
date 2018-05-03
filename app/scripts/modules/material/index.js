@@ -16,6 +16,7 @@ angular.module('sbAdminApp')
 			$scope.sp.gid = '';
 
 			$scope.callServer = function (tableState) {
+				$scope.ids = [];
 				baseService.initTable($scope, tableState, baseService.api.material + 'getMaterialList');
 			}
 			$scope.getGroups = function (oid) {
@@ -204,7 +205,7 @@ angular.module('sbAdminApp')
 							filenameArray: JSON.stringify(filenameArray)
 						}, function (res) {
 							if (res.length) {
-								for(var i = 0;i < res.length;i ++){
+								for (var i = 0; i < res.length; i++) {
 									vm.uploader.queue[res[i].index].message = res[i].message;
 									vm.uploader.queue[res[i].index].oname = res[i].name;
 								}
@@ -259,13 +260,15 @@ angular.module('sbAdminApp')
 									} else {
 										return true;
 									}
-								} else if ((',' + audiofile_type.toLowerCase() + ',').indexOf(type) != -1) {
+								}
+								 else if ((',' + audiofile_type.toLowerCase() + ',').indexOf(type) != -1) {
 									if (item.size > 10 * 1024 * 1024) {
 										baseService.alert('不得上传大于10Mb的音乐', 'warning', true);
 									} else {
 										return true;
 									}
-								} else {
+								}
+								else {
 									if (item.size > 500 * 1024 * 1024) {
 										baseService.alert('不得上传大于500Mb的视频', 'warning', true);
 									} else {
@@ -300,16 +303,17 @@ angular.module('sbAdminApp')
 						var key = '';
 						//	var	 expire = 0;
 						var token = '';
-						var ctype = filename.substr(filename.lastIndexOf('.') + 1).toLowerCase();
-							var type = ',' + ctype + ',';
-							var xType = '';
-							if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1) {
-								xType = 0;
-							} else if ((',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1) {
-								xType = 1;
-							} else {
-								xType = 2;
-							}
+						var ctype = item.file.name.substr(item.file.name.lastIndexOf('.') + 1).toLowerCase();
+						var type = ',' + ctype + ',';
+						var xType = '';
+						if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1) {
+							xType = 0;
+						} else if ((',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1) {
+							xType = 1;
+						}
+						else {
+							xType = 2;
+						}
 						baseService.postData(baseService.api.material + 'addMaterial_getOssSignature', {
 							type: xType
 						}, function (obj) {
@@ -345,6 +349,14 @@ angular.module('sbAdminApp')
 
 
 					}
+					vm.uploader.onCompleteItem = function (fileItem, response, status, headers) {
+						if (response.code != 1) {
+							fileItem.isSuccess = false;
+							fileItem.isError = true;
+							fileItem.errorMsg = response.message;
+						}
+		
+					};
 				});
 			};
 			$scope.checkAll = function ($event) {

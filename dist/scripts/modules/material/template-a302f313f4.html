@@ -37,9 +37,9 @@
 		</div>
 		<div class="serchWrap fr">
 			<div class="fl txtInputWrap">
-				<input class="form-control" ng-keyup="myKeyup($event,callServer,tableState)" ng-model="sp.search" placeholder="素材名称">
+				<input class="form-control" ng-keyup="myKeyup($event,initPage,tableState)" ng-model="sp.search" placeholder="素材名称">
 			</div>
-			<button type="button" class="btn btn-primary" ng-click="callServer(tableState)">查询</button>
+			<button type="button" class="btn btn-primary" ng-click="initPage(tableState)">查询</button>
 		</div>
 	</div>
 	<div class="table-wrapper">
@@ -55,14 +55,15 @@
 					<div class="panel-left">素材筛选</div>
 					<div class="panel-right">
 						<div class="panelSelectWrap">
-							<select class="form-control" ng-model="sp.type" ng-change="callServer(tableState)">
+							<select class="form-control" ng-model="sp.type" ng-change="initPage()">
 								<option value="">素材类型</option>
 								<option value="0">图片</option>
 								<option value="1">视频</option>
+								<option value="2">音乐</option>								
 							</select>
 						</div>
 						<div class="panelSelectWrap">
-							<select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
+							<select class="form-control" ng-model="sp.status" ng-change="initPage()">
 								<option value="">素材状态</option>
 								<option ng-repeat="c in userData.root_checkStatus" value="{{c.val}}">{{c.name}}</option>
 							</select>
@@ -112,13 +113,22 @@
 								<div ng-if="row.type == 1" class="vedioPre">
 									<i class="iconfont icon-xialajiantou"></i>
 								</div>
+								<div ng-if="row.type == 2" class="audioPreWrap">
+									<div class="audioPre">
+										<i class="fa fa-music"></i>
+									</div>
+								</div>
 							</div>
 							<div class="ellipsTXt" title="{{row.name}}" style="padding-left:85px;line-height:80px;">{{row.name}}</div>
 						</div>
 
 					</td>
 					<td>{{row.size | dmbdResourceSizeFilter}}</td>
-					<td>{{row.width + "*" + row.height}}</td>
+					<td>
+							<span ng-if="row.type != 2">
+									{{row.width + "*" + row.height}}
+								</span>
+					</td>
 					<td>
 						<div class="txt-grey" ng-if="row.status == 0">{{row.status | materialStatusTxt}}</div>
 						<div ng-if="row.status == 1 || row.status == 2 || row.status == 3 || row.status == 6 || row.status == 7">{{row.status | materialStatusTxt}}</div>

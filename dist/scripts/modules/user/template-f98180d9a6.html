@@ -9,9 +9,9 @@
         </div>
         <div class="serchWrap fr">
             <div class="fl txtInputWrap">
-                <input ng-keyup="myKeyup($event,callServer,tableState)" class="form-control" ng-model="sp.search" placeholder="登录账号/账号名称">
+                <input ng-keyup="myKeyup($event,initPage,tableState)" class="form-control" ng-model="sp.search" placeholder="登录账号/账号名称">
             </div>
-            <button type="button" class="btn btn-primary" ng-click="callServer(tableState)">查询</button>
+            <button type="button" class="btn btn-primary" ng-click="initPage()">查询</button>
         </div>
     </div>
     <div class="table-wrapper">
@@ -27,14 +27,14 @@
                     <div class="panel-left">账号筛选</div>
                     <div class="panel-right">
                         <div class="panelSelectWrap">
-                            <select class="form-control" ng-model="sp.enabled" ng-change="callServer(tableState,0)">
+                            <select class="form-control" ng-model="sp.enabled" ng-change="initPage()">
                                 <option value="">账号状态</option>
                                 <option value="1">激活</option>
                                 <option value="0">禁用</option>
                             </select>
                         </div>
                         <div class="panelSelectWrap">
-                            <select class="form-control" ng-model="sp.role" ng-change="callServer(tableState,0)">
+                            <select class="form-control" ng-model="sp.role" ng-change="initPage()">
                                 <option value="">角色类型</option>
                                 <option ng-show="r.id != 0" ng-repeat="r in roles" value="{{r.id}}">{{r.name}}</option>
                             </select>

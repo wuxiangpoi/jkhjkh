@@ -768,6 +768,10 @@ div.timeSelectWrap {
   cursor: pointer;
   margin-right: 15px;
 }
+.tableHeader .panel .panelRow .panel-right .leafGroup .leafName {
+  line-height: 34px;
+  display: inline-block;
+}
 .tableHeader .panel .panelRow .panel-right .leafGroup i {
   cursor: pointer;
   margin-left: 10px;
