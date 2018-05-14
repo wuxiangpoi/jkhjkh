@@ -44,6 +44,7 @@ angular.module('sbAdminApp', ['chartService'])
 				baseService.postData(baseService.api.programSchedule + 'getProgramScheduleById', {
 					id: $stateParams.id
 				}, function (schedule) {
+					$scope.expiressd = [];
 					function initItem(chartItem) {
 						
 						$scope.playListId.push(chartItem.id);
@@ -92,6 +93,8 @@ angular.module('sbAdminApp', ['chartService'])
 
 							if (baseService.formateDayTime(chartItem.endDate) >= Date.parse(today)) {
 								initItem(chartItem);
+							}else{
+								$scope.expiressd.push(chartItem);
 							}
 
 						} else {
@@ -127,9 +130,9 @@ angular.module('sbAdminApp', ['chartService'])
 			});
 			$scope.showProgram = function (item) {
 				item.pid = item.id;
+				item.pStatus = 1;
 				baseService.showProgram(item);
 			}
-
 			function initChartSchedule() {
 				var minLen = 14;
 				if ($scope.playList.length > minLen) {

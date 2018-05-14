@@ -324,6 +324,7 @@ angular.module('sbAdminApp', ['chartService'])
 			}
 
 			$scope.showPrograms = function (item,index) {
+				item.info = "(同一终端上的节目与排期互斥)";
 				baseService.confirmDialog(720, '播放管理', item, 'tpl/terminal_programPlay_list.html', function (ngDialog, vm) {
 					var s = '';
 					s = vm.ids.join(',');

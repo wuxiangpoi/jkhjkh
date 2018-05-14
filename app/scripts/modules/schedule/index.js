@@ -63,6 +63,7 @@ angular.module('sbAdminApp', ['chartService'])
 				});
 			}
 			$scope.sendDown = function (item) {
+				item.info = "(排期发布后，终端上的节目将会停播)";
 				baseService.confirmDialog(720, '排期发布', item, 'tpl/terminal_schedule.html', function (ngDialog, vm) {
 					var s = '';
 					s = vm.ids.join(',');

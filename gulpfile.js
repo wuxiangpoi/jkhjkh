@@ -91,7 +91,7 @@ gulp.task('serve:prod', ['build:proxy'], () => {
 gulp.task('build:proxy', function () {
     return $.connect.server({
         root: ['dist'],
-        port: 9000,
+        port: 9090,
         fallback: 'dist/index.html',
         livereload: true,
         middleware: (connect, opts) => {

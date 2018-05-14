@@ -13,8 +13,14 @@
                 </div>
             </div>
             <div class="clearfix">
+                    
                 <div class="clearfix">
                     <div class="fl lh34">选择终端：</div>
+                    <div class="fl">
+                            <div class="clearfix groupLeafSelect">
+                                <group-leaf-select reqleafurl="{{'/api/terminal/getTerminalGroups'}}"></group-leaf-select>
+                            </div>
+                        </div>
                     <div class="fl">
                         <div class="panelSelectWrap">
                             <select class="form-control" ng-model="sp.resolution" ng-change="initPage(tableState)">
@@ -33,11 +39,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="fl">
-                        <div class="clearfix groupLeafSelect">
-                            <group-leaf-select reqleafurl="{{'/api/terminal/getTerminalGroups'}}"></group-leaf-select>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
