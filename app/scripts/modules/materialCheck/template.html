@@ -40,10 +40,15 @@
                                     <i class="iconfont icon-xialajiantou"></i>
                                 </div>
                                 <div ng-if="row.type == 2" class="audioPreWrap">
-                                        <div class="audioPre">
-                                            <i class="fa fa-music"></i>
-                                        </div>
+                                    <div class="audioPre">
+                                        <i class="fa fa-music"></i>
                                     </div>
+                                </div>
+                                <div ng-if="row.type == 3" class="audioPreWrap">
+                                    <div class="vedioPre">
+                                        <i class="iconfont icon-sucaiguanli-yasuobao"></i>
+                                    </div>
+                                </div>
                             </div>
                             <div class="ellipsTXt" title="{{row.name}}" style="padding-left:85px;line-height:80px;">{{row.name}}</div>
                         </div>
@@ -64,6 +69,7 @@
                     <td>
                         <button ng-if="perms(51)" class="btn tableBtn" ng-click="showMaterial(row,2)">审核
                         </button>
+                        <a ng-if="row.type == 3" href="{{row.path}}" class="btn tableBtn">下载</a>
                     </td>
 
                 </tr>

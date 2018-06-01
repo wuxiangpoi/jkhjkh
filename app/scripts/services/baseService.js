@@ -1,7 +1,7 @@
 var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
     var apiUrl = '';
-    var verson = '?_v2.199878888889123128961288181823';
+    var verson = '?_v2.19987854';
     var baseService = {
         verson: verson,
         api: {
@@ -22,7 +22,8 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
             terminalReport: apiUrl + '/api/terminalReport/',
             installUser: apiUrl + '/api/installUser/',
             schedule: apiUrl + '/api/schedule/',
-            programSchedule: apiUrl + '/api/programSchedule/'
+            programSchedule: apiUrl + '/api/programSchedule/',
+            termialRegReport: apiUrl + '/api/termialRegReport/'
         },
         md5_pwd: function (pwd) {
             var hexDigits = ['0', '1', '2', '3', '4', '5', '6', '7',
@@ -338,7 +339,6 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
         showProgram: function (item, detailType, cb) {
             var me = this;
             programService.getProgramById(item.pid, function (program) {
-                program.status = item.pStatus ? item.pStatus : item.status;
                 program.detailType = detailType;
                 me.confirmDialog(750, '节目预览', program, "tpl/program_details.html", function (type, ngDialog, vm) {
                     if (cb) {

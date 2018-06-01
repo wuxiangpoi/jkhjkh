@@ -5,19 +5,28 @@
 
 <div class="modal-body">
     <div class="row">
-        <div class="col-sm-8"  style="background:#f6f7fa;height:350px;">
+        <div class="col-sm-8" style="background:#f6f7fa;height:350px;">
             <div ng-if="data.type==0" class="positionR" style="background:#f1f2f5;">
                 <img ng-if="data.width > data.height" src="img/loading.gif" style="width:100%;height:350px;display:block;" lazy-src="{{data.nUrl}}"
                 />
                 <img ng-if="data.width < data.height || data.width == data.height" src="img/loading.gif" style="width:auto;height:350px;display:block;min-width:200px;margin:0 auto;"
                     lazy-src="{{data.nUrl}}" />
-                <button class="fullScreenBtn" ng-click=imgPreview(data)><i class="fa fa-arrows-alt"></i></button>
+                <button class="fullScreenBtn" ng-click=imgPreview(data)>
+                    <i class="fa fa-arrows-alt"></i>
+                </button>
             </div>
             <video ng-if="data.type==1" width="100%" height="360px" controls>
                 <source ng-src="{{data.path | play_url}}">
             </video>
             <div km-audio ng-if="data.type==2" audiodata="{{data}}"></div>
+            <div ng-if="data.type == 3" style="width:100%;height: 100%;padding-top: 15px;">
+                <a href="{{data.path}}" class="btn btn-primary">下载</a>
+                <div style="text-align: center;margin-top: 100px;">
+                    <i style="font-size: 64px;" class="iconfont icon-hudongbao"></i>
+                    <p class="txt-grey">互动包，下载预览</p>
+                </div>
 
+            </div>
         </div>
         <div class="col-sm-4 pdr0 modalDetail">
             <div class="col-sm-12 p0">
@@ -31,7 +40,7 @@
                     {{data.oid | getOrganizations}}
                 </div>
             </div>
-            <div class="col-sm-12 p0" ng-if="data.type!=2">
+            <div class="col-sm-12 p0" ng-if="data.type!=2 && data.type!=3">
                 <label class="col-sm-3 p0">分辨率</label>
                 <div class="col-sm-9 pdr0 txt-grey">{{data.width}}*{{data.height}}
                 </div>

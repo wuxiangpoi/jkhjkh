@@ -3,43 +3,54 @@
 
 	<div class="table-wrapper row">
 		<div class="tableHeader clearfix" style="margin-bottom:0px;">
-            <div class="clearfix">
+			<div class="clearfix">
 
-                <div class="col-sm-6 ellipsTXt p0">
-                    排期名称：{{data.name}} <span class="tex-red" ng-if="data.expired">[已过期]</span>
-                </div>
-            </div>
-            <div class="clearfix">
-                <div class="clearfix">
+				<div class="col-sm-6 ellipsTXt p0">
+					排期名称：{{data.name}}
+					<span class="tex-red" ng-if="data.expired">[已过期]</span>
+
+				</div>
+				<div class="col-sm-6">
+					<div class="serchWrap fr">
+						<div class="fl txtInputWrap">
+							<input class="form-control" ng-keyup="myKeyup($event,initPage,tableState)" ng-model="sp.search" placeholder="终端名称/终端编号">
+						</div>
+						<button type="button" class="btn btn-primary" ng-click="initPage(tableState)">查询</button>
+					</div>
+				</div>
+
+			</div>
+			<div class="clearfix">
+				<div class="clearfix">
 					<div class="fl lh34">选择终端：</div>
 					<div class="fl">
-							<div class="clearfix groupLeafSelect">
-								<group-leaf-select reqleafurl="{{'/api/terminal/getTerminalGroups'}}"></group-leaf-select>
-							</div>
+						<div class="clearfix groupLeafSelect">
+							<group-leaf-select reqleafurl="{{'/api/terminal/getTerminalGroups'}}"></group-leaf-select>
 						</div>
-                    <div class="fl">
-                        <div class="panelSelectWrap">
-                            <select class="form-control" ng-model="sp.resolution" ng-change="callServer(tableState)">
-                                <option value="">分辨率</option>
-                                <option ng-repeat="t in userData.root_programReslotions" value="{{t}}">{{t}}</option>
-                            </select>
-                        </div>
+					</div>
+					<div class="fl">
+						<div class="panelSelectWrap">
+							<select class="form-control" ng-model="sp.resolution" ng-change="callServer(tableState)">
+								<option value="">分辨率</option>
+								<option ng-repeat="t in userData.root_programReslotions" value="{{t}}">{{t}}</option>
+							</select>
+						</div>
 					</div>
 					<div class="fl">
 						<div class="panelSelectWrap">
 							<select class="form-control" ng-model="sp.status" ng-change="callServer(tableState)">
-								<option value="">网络状态</option>
+								<option value="">终端状态</option>
 								<option value="1">在线</option>
 								<option value="2">离线</option>
 								<option value="3">异常</option>
 							</select>
 						</div>
 					</div>
-                    
-                </div>
 
-            </div>
-        </div>
+				</div>
+
+			</div>
+		</div>
 		<table class="table" st-pipe="callServer" st-table="displayed">
 			<thead>
 				<tr>
@@ -49,7 +60,7 @@
 					<th>终端编号</th>
 					<th>终端名称</th>
 					<th>分辨率</th>
-					<th>网络状态</th>
+					<th>终端状态</th>
 				</tr>
 			</thead>
 			<tbody ng-show="!isLoading">

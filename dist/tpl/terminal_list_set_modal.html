@@ -1,6 +1,7 @@
 <div class="modal-header">{{title}}
     <span class="tex-red" style="font-size:14px;">(请选择与节目分辨率一致的终端下发，以免节目播放变形)</span>
-</div><div class="modal-body">
+</div>
+<div class="modal-body">
     <div class="row">
         <!-- <input type="radio" style="position:absolute;z-index:-1;opacity:0;">
         <div class="col-sm-4 p0" style="line-height:28px;">
@@ -73,12 +74,21 @@
         <div class="col-sm-12 p0">
             <div class="table-wrapper">
                 <div class="clearfix">
-                        <div class="col-sm-6 ellipsTXt p0">
-                                节目名称：{{data.name}}
-                            </div>
-                            <div ng-if="data.pixelVertical" class="col-sm-6 p0">
-                                节目分辨率：{{data.pixelHorizontal + '*' + data.pixelVertical}}
-                            </div>
+                    <div class="col-sm-4 ellipsTXt p0">
+                        节目名称：{{data.name}}
+                    </div>
+                    <div ng-if="data.pixelVertical" class="col-sm-4 p0">
+                        节目分辨率：{{data.pixelHorizontal + '*' + data.pixelVertical}}
+                        
+                    </div>
+                    <div class="col-sm-4">
+                            <div class="serchWrap fr">
+                                    <div class="fl txtInputWrap">
+                                        <input class="form-control" ng-keyup="myKeyup($event,initPage,tableState)" ng-model="sp.search" placeholder="终端名称/终端编号">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="initPage(tableState)">查询</button>
+                                </div>
+                    </div>
                     <div class="fl lh34">选择下发终端：</div>
                     <div class="fl">
                         <div class="clearfix groupLeafSelect">
@@ -96,7 +106,7 @@
                     <div class="fl">
                         <div class="panelSelectWrap last">
                             <select class="form-control" ng-model="sp.status" ng-change="initPage(tableState)">
-                                <option value="">网络状态</option>
+                                <option value="">终端状态</option>
                                 <option value="1">在线</option>
                                 <option value="2">离线</option>
                                 <option value="3">异常</option>
@@ -113,7 +123,7 @@
                             </th>
                             <th>终端编号</th>
                             <th>终端名称</th>
-                            <th>网络状态</th>
+                            <th>终端状态</th>
                             <th>分辨率</th>
                         </tr>
                     </thead>

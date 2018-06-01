@@ -19,7 +19,7 @@ angular.module('sbAdminApp', [])
 		}
 		
 		$scope.initPage = function () {
-			var map = new BMap.Map("allmap");
+			var map = new BMap.Map("allmap",{enableMapClick:false});
 			var point = new BMap.Point(113.649644, 34.75661);
 			var top_left_control = new BMap.ScaleControl({
 				anchor: BMAP_ANCHOR_TOP_LEFT

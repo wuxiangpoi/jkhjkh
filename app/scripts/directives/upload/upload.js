@@ -36,7 +36,6 @@ angular.module('sbAdminApp')
                 $($event.currentTarget).parents('tr').remove();
             }
             uploader.onCompleteItem = function (fileItem, response, status, headers) {
-
                 if (response.code != 1) {
                     fileItem.isSuccess = false;
                     fileItem.isError = true;

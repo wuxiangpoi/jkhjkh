@@ -176,6 +176,31 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
+                <li ng-if="perms(8)" ng-class="{current: currentState=='dashboard.terminalLoginReport' || currentState=='dashboard.terminalPlayReport' || currentState=='dashboard.programPlayReport'}">
+                    <a class="navSecondLevel" ng-click="check(8)" ng-class="{active: collapseVar==8}">
+                        <i class="iconfont icon-baobiaoguanli"></i>
+                        <span class="navTle">数据统计</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level nav-sub" ng-class="{'collapse':collapseVar != 8}">
+                        <li ng-if="perms(81)" ui-sref-active="active">
+                            <a ui-sref="dashboard.terminalLoginReport" ui-sref-active="active" ng-click="checkRoute(8,$event)">
+                                <span class="navName">终端注册统计</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(82)">
+                            <a ui-sref="dashboard.terminalPlayReport" ui-sref-active="active" ng-click="checkRoute(8,$event)">
+                                <span class="navName">终端播放统计</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="perms(83)">
+                            <a ui-sref="dashboard.programPlayReport" ui-sref-active="active" ng-click="checkRoute(8,$event)">
+                                <span class="navName">节目播放统计</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
                 <li ng-if="perms(6)" ng-class="{current: currentState=='dashboard.terminalCommand' || currentState=='dashboard.programCommand'}">
                     <a class="navSecondLevel" ng-click="check(6)" ng-class="{active: collapseVar==6}">
                         <i class="iconfont icon-rizhiguanli"></i>

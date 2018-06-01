@@ -304,6 +304,81 @@
                         }
                     }
                 })
+                .state('dashboard.terminalLoginReport', {
+                    url: '/terminalLoginReport',
+                    controller: 'terminalLoginReportCtrl',
+                    templateUrl: 'scripts/modules/terminalLoginReport/template.html',
+                    resolve: {
+                        loadMyFiles: function loadMyFiles($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/terminalLoginReport/index.js'
+                                ]
+                            });
+                        }
+                    }
+                })
+                .state('dashboard.terminalPlayReport', {
+                    url: '/terminalPlayReport',
+                    controller: 'terminalPlayReportCtrl',
+                    templateUrl: 'scripts/modules/terminalPlayReport/template.html',
+                    resolve: {
+                        loadMyFiles: function loadMyFiles($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/terminalPlayReport/index.js'
+                                ]
+                            });
+                        }
+                    }
+                })
+                .state('dashboard.terminalPlayDetail', {
+                    url: '/terminalPlayDetail/{id}/{name}/{resolution}/{pos}',
+                    controller: 'terminalPlayDetailCtrl',
+                    templateUrl: 'scripts/modules/terminalPlayDetail/template.html',
+                    resolve: {
+                        loadMyFiles: function loadMyFiles($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/terminalPlayDetail/index.js'
+                                ]
+                            });
+                        }
+                    }
+                })
+                .state('dashboard.programPlayReport', {
+                    url: '/programPlayReport',
+                    controller: 'programPlayReportCtrl',
+                    templateUrl: 'scripts/modules/programPlayReport/template.html',
+                    resolve: {
+                        loadMyFiles: function loadMyFiles($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/programPlayReport/index.js'
+                                ]
+                            });
+                        }
+                    }
+                })
+                .state('dashboard.programPlayDetail', {
+                    url: '/programPlayDetail/{id}/{name}/{month}/{pos}',
+                    controller: 'programPlayDetailCtrl',
+                    templateUrl: 'scripts/modules/programPlayDetail/template.html',
+                    resolve: {
+                        loadMyFiles: function loadMyFiles($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'sbAdminApp',
+                                files: [
+                                    'scripts/modules/programPlayDetail/index.js'
+                                ]
+                            });
+                        }
+                    }
+                })
                 .state('dashboard.led', {
                     url: '/led',
                     controller: 'ledCtrl',

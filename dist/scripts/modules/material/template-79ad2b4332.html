@@ -60,6 +60,7 @@
 								<option value="0">图片</option>
 								<option value="1">视频</option>
 								<option value="2">音乐</option>								
+								<option value="3">互动包</option>								
 							</select>
 						</div>
 						<div class="panelSelectWrap">
@@ -118,6 +119,12 @@
 										<i class="fa fa-music"></i>
 									</div>
 								</div>
+								<div ng-if="row.type == 3" class="audioPreWrap">
+									<div class="vedioPre">
+										<i class="iconfont icon-sucaiguanli-yasuobao"></i>
+									</div>
+								</div>
+
 							</div>
 							<div class="ellipsTXt" title="{{row.name}}" style="padding-left:85px;line-height:80px;">{{row.name}}</div>
 						</div>
@@ -125,7 +132,7 @@
 					</td>
 					<td>{{row.size | dmbdResourceSizeFilter}}</td>
 					<td>
-							<span ng-if="row.type != 2">
+							<span ng-if="row.type != 2 && row.type != 3">
 									{{row.width + "*" + row.height}}
 								</span>
 					</td>
@@ -147,6 +154,7 @@
 						<button ng-if="[0,4,5,6].indexOf(row.status) != -1 && perms(414)" class="btn tableBtn"
 						    ng-click="del(row)">删除
 						</button>
+						<a ng-if="row.type == 3" href="{{row.path}}" class="btn tableBtn">下载</a>
 					</td>
 
 				</tr>

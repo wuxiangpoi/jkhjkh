@@ -1,0 +1,44 @@
+<div ng-include="'tpl/modal_header.html'"></div>
+<div class="modal-body">
+
+    <div class="table-wrapper row">
+        <div class="clearfix" style="margin-bottom:15px;">
+
+            <div class="col-sm-6 ellipsTXt p0">
+                终端名称：{{data.terminalName}}
+            </div>
+            <div ng-if="data.resolution" class="col-sm-6">
+                终端分辨率：{{data.resolution}}
+            </div>
+        </div>
+        <div>
+            <table class="table" st-pipe="callServer" st-table="displayed">
+                <thead>
+                    <tr>
+                        <th>节目名称</th>
+                        <th>播放时长</th>
+                    </tr>
+                </thead>
+                <tbody ng-show="!isLoading">
+                    <tr ng-repeat="row in displayed" class="{{$index%2 == 0?'odd':'even'}}">
+                        <td class="tdClick" ng-click="showProgram(row)">
+                            {{row.programName}}
+                        </td>
+                        <td>
+                            {{row.duration  | secToTime}}
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody ng-include="'tpl/table.html'"></tbody>
+                <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+            </table>
+        </div>
+
+    </div>
+</div>
+<div class="modal-footer" ng-if="checkPerms && showType == 0 && displayed.length">
+    <button class="btn btn-primary" ng-class="{'disabled': isPosting}" type="button" ng-click="modalConfirmSubmit()">停播
+        <i class="fa fa-spinner"></i>
+    </button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
+</div>

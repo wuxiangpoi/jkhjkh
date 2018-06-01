@@ -550,6 +550,17 @@ div.timeSelectWrap {
   opacity: 1;
   width: 100%;
 }
+div.timeSelectWrap.timeSelectNoborder {
+  border: 0;
+  box-shadow: none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: url(../img/select_arrow.png) right center no-repeat;
+  text-align: left;
+  padding-right: 20px;
+  width: 120px;
+}
 .timeSelectWrap > input {
   cursor: pointer!important;
   margin-right: 0;
@@ -639,6 +650,14 @@ div.timeSelectWrap {
 }
 .groupSelect .diy_select_txt {
   background: url(../img/select_arrow.png) right center no-repeat;
+}
+.tableGroupGeafselect .groupSelect {
+  width: 232px;
+}
+.tableGroupGeafselect .diy_select {
+  width: 44%;
+  display: inline-block;
+  margin-right: 10px;
 }
 .groupLeafSelect .groupSelect {
   width: 232px;
@@ -1652,6 +1671,33 @@ div.timeSelectWrap {
 }
 .ngdialog-content .modal-body .modalDetail {
   font-size: 12px;
+}
+.ngdialog-content .modal-body .modalDetail dl {
+  margin-bottom: 0;
+}
+.ngdialog-content .modal-body .modalDetail dl dt {
+  color: #9f9f9f;
+  font-weight: 400;
+  position: relative;
+  overflow: hidden;
+}
+.ngdialog-content .modal-body .modalDetail dl dt::after {
+  content: '';
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  background: #ddd;
+  top: 8px;
+  left: 65px;
+}
+.ngdialog-content .modal-body .modalDetail .control-label-left {
+  font-weight: 400;
+  line-height: 24px;
+  padding-right: 0;
+  margin-bottom: 0;
+}
+.ngdialog-content .modal-body .modalDetail .control-label-left + div {
+  line-height: 24px;
 }
 .ngdialog-content .modal-body .modalDetail .form_input,
 .ngdialog-content .modal-body .modalDetail .form_right {

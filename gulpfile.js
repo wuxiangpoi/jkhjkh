@@ -11,6 +11,7 @@ var less = require('gulp-less');
 var htmlmin = require('gulp-htmlmin');
 var revReplace = require('gulp-rev-replace');
 var replaceFilesContent = require('gulp-batch-replace'); // 用来替换文件内容
+var proxy = require('http-proxy-middleware');
 
 
 var buildEnv = args.env || args.buildEnv || 'dev';
@@ -47,20 +48,13 @@ gulp.task('start:proxy', function () {
         port: 9090,
         fallback: 'app/index.html', // 若想运行打包后的代码，请将这里的"app"改为"dist"
         livereload: true,
-        middleware: (connect, opts) => {
-            var middlewares = [];
-            var url = require('url');
-            var proxy = require('proxy-middleware');
-            var createProxy = (prefixString, proxyServer) => {
-                var options = url.parse(proxyServer);
-                options.route = prefixString;
-                return proxy(options);
-            }
-            middlewares.push(createProxy('/devapi', '')); // 设置各种api代理
-            middlewares.push(createProxy('/testapi', ''));
-            middlewares.push(createProxy('/api', ''));
-            middlewares.push(createProxy('/imgapi', ''));
-            return middlewares;
+        middleware: function(connect, opt) {
+            return [
+                proxy('/api',  {
+                    target: 'http://47.92.116.16:9090',
+                    changeOrigin:true
+                })
+            ]
         }
     });
 });

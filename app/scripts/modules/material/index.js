@@ -249,11 +249,12 @@ angular.module('sbAdminApp')
 							var ctype = item.name.substr(item.name.lastIndexOf('.') + 1).toLowerCase();
 							var type = ',' + ctype + ',';
 							var audiofile_type = ',mp3,';
+							var programfile_type = ',zip,';
 							// var type = ',' + item.type.slice(item.type.lastIndexOf('/') + 1) + ',';
 							//var file_type = vm.data.type == '0' ? $rootScope.getRootDicNameStrs('image_format') : $rootScope.getRootDicNameStrs('video_format');
 							var imgfile_type = vm.imgfile_type = $rootScope.getRootDicNameStrs('image_format');
 							var videofile_type = vm.videofile_type = $rootScope.getRootDicNameStrs('video_format');
-							if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + audiofile_type.toLowerCase() + ',').indexOf(type) != -1) {
+							if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + audiofile_type.toLowerCase() + ',').indexOf(type) != -1 || (',' + programfile_type.toLowerCase() + ',').indexOf(type) != -1) {
 								if ((',' + imgfile_type.toLowerCase() + ',').indexOf(type) != -1) {
 									if (item.size > 10 * 1024 * 1024) {
 										baseService.alert('不得上传大于10Mb的图片', 'warning', true);
@@ -294,6 +295,7 @@ angular.module('sbAdminApp')
 						}
 						var imgfile_type = $rootScope.getRootDicNameStrs('image_format');
 						var videofile_type = $rootScope.getRootDicNameStrs('video_format');
+						var programfile_type = 'zip';
 						var host = '';
 						var accessid = '';
 						var policyBase64 = '';
@@ -310,10 +312,13 @@ angular.module('sbAdminApp')
 							xType = 0;
 						} else if ((',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1) {
 							xType = 1;
+						} else if((',' + programfile_type.toLowerCase() + ',').indexOf(type) != -1){
+							xType = 3;
 						}
 						else {
 							xType = 2;
 						}
+						console.log(1)
 						baseService.postData(baseService.api.material + 'addMaterial_getOssSignature', {
 							type: xType
 						}, function (obj) {
@@ -355,7 +360,6 @@ angular.module('sbAdminApp')
 							fileItem.isError = true;
 							fileItem.errorMsg = response.message;
 						}
-		
 					};
 				});
 			};

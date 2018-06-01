@@ -44,13 +44,13 @@ angular.module('sbAdminApp')
 							$scope.collapseVar = 43
 							break;
 						case 'dashboard.materialCheck':
-							$scope.collapseVar = '5'
+							$scope.collapseVar = 5
 							break;
 						case 'dashboard.programCheck':
-							$scope.collapseVar = '5'
+							$scope.collapseVar = 5
 							break;
 						case 'dashboard.scheduleCheck':
-							$scope.collapseVar = '5'
+							$scope.collapseVar = 5
 							break;
 						case 'dashboard.group':
 							$scope.collapseVar = 3
@@ -75,6 +75,15 @@ angular.module('sbAdminApp')
 							break;
 						case 'dashboard.ledgram':
 							$scope.collapseVar = 7
+							break;
+						case 'dashboard.terminalLoginReport':
+							$scope.collapseVar = 8
+							break;
+						case 'dashboard.terminalPlayReport':
+							$scope.collapseVar = 8
+							break;
+						case 'dashboard.programPlayReport':
+							$scope.collapseVar = 8
 							break;
 					}
 				}
@@ -131,15 +140,15 @@ angular.module('sbAdminApp')
 				$scope.progressBar = {
 					width: $rootScope.userData.root_oss_percent + '%'
 				}
-				$scope.ledShowPerms = function(){
-					if($rootScope.userData.ledShow != 0){
+				$scope.ledShowPerms = function () {
+					if ($rootScope.userData.ledShow != 0) {
 
-						if($rootScope.perms(71) || $rootScope.perms(72)){
+						if ($rootScope.perms(71) || $rootScope.perms(72)) {
 							return true;
-						}else{
+						} else {
 							return false;
 						}
-					}else{
+					} else {
 						return false;
 					}
 				}

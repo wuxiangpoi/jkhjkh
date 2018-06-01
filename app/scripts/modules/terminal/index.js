@@ -2,7 +2,7 @@
 angular.module('sbAdminApp', ['chartService'])
 	.controller(
 		'terminalCtrl',
-		function ($scope, $rootScope, $stateParams, baseService, leafService, chartService) {
+		function ($scope, $rootScope, $stateParams, baseService, leafService, chartService, ngDialog) {
 			$scope.displayed = [];
 			$scope.sp = {};
 			$scope.tableState = {};
@@ -14,7 +14,19 @@ angular.module('sbAdminApp', ['chartService'])
 			$scope.currentLeaf = {};
 			$scope.currentLeaf.id = '';
 			$scope.sp.gid = '';
-			$scope.netStatus = [{name:'网络状态',value:''},{name:'在线',value:1},{name:'离线',value:2},{name:'异常',value:3}];
+			$scope.netStatus = [{
+				name: '终端状态',
+				value: ''
+			}, {
+				name: '在线',
+				value: 1
+			}, {
+				name: '离线',
+				value: 2
+			}, {
+				name: '异常',
+				value: 3
+			}];
 			$scope.init_status = $stateParams.status;
 			if ($stateParams.status) {
 				$scope.sp.status = $stateParams.status;
@@ -323,7 +335,7 @@ angular.module('sbAdminApp', ['chartService'])
 				}
 			}
 
-			$scope.showPrograms = function (item,index) {
+			$scope.showPrograms = function (item, index) {
 				item.info = "(同一终端上的节目与排期互斥)";
 				baseService.confirmDialog(720, '播放管理', item, 'tpl/terminal_programPlay_list.html', function (ngDialog, vm) {
 					var s = '';
@@ -350,7 +362,7 @@ angular.module('sbAdminApp', ['chartService'])
 							baseService.postData(baseService.api.apiUrl + postUrl, postData,
 								function (data) {
 									ngDialog.close();
-									baseService.alert('操作成功', 'success',true)
+									baseService.alert('操作成功', 'success', true)
 								});
 						})
 					} else {
@@ -373,7 +385,7 @@ angular.module('sbAdminApp', ['chartService'])
 									if ($rootScope.perms(217)) {
 										vm.checkPerms = true;
 									}
-									if(vm.callUrl == baseService.api.terminal + 'getTerminalProgramPlayPageByTid'){
+									if (vm.callUrl == baseService.api.terminal + 'getTerminalProgramPlayPageByTid') {
 										$scope.displayed[index].programCounts = result.recordsTotal;
 									}
 									vm.programOrSchedule = 0;
@@ -382,12 +394,12 @@ angular.module('sbAdminApp', ['chartService'])
 										vm.checkPerms = true;
 									}
 									vm.programOrSchedule = 1;
-									if(vm.callUrl == baseService.api.terminal + 'getTerminalProgramPlayPageByTid'){
+									if (vm.callUrl == baseService.api.terminal + 'getTerminalProgramPlayPageByTid') {
 										$scope.displayed[index].programCounts = result.data[0].programCounts;
 									}
 								}
 							}
-							
+
 						});
 					}
 					vm.initTable = function () {
@@ -399,15 +411,15 @@ angular.module('sbAdminApp', ['chartService'])
 								vm.callUrl = baseService.api.terminal + 'getTerminalProgramCommandPengdingPageByTid';
 								break;
 						}
-						
+
 						vm.callServer(vm.tableState);
 					}
 					vm.switchTab = function (type) {
-						if(vm.showType != type){
+						if (vm.showType != type) {
 							vm.showType = type;
 							vm.initTable();
-						}						
-						
+						}
+
 					}
 					vm.checkAll = function ($event) {
 						vm.ids = [];
@@ -428,26 +440,26 @@ angular.module('sbAdminApp', ['chartService'])
 						}
 					}
 					vm.showProgramOrSchedule = function (item) {
-						if(vm.showType == 1){
+						if (vm.showType == 1) {
 							if (item.cmdCode == 24 || item.cmdCode == 25) {
 								item.id = item.pid;
 								baseService.showSchedule(item, 2, chartService);
-	
+
 							} else {
 								item.pStatus = 1;
 								baseService.showProgram(item);
 							}
-						}else{
+						} else {
 							if (item.stype && item.stype == 1) {
 								item.id = item.pid;
 								baseService.showSchedule(item, 2, chartService);
-	
+
 							} else {
 								item.pStatus = 1;
 								baseService.showProgram(item);
 							}
 						}
-						
+
 
 					}
 				})
@@ -479,6 +491,20 @@ angular.module('sbAdminApp', ['chartService'])
 					ngDialog.close()
 					window.open(baseService.api.terminal + 'exportTerminal' +
 						getExportQuery());
+				})
+			}
+			$scope.dealAbnormal = function (item) {
+				baseService.confirmDialog(540, '处理异常终端', item, 'tpl/dealAbnormal.html', function (ngDialog, vm) {
+					vm.isPosting = true;
+					baseService.postData(baseService.api.terminal + 'sendCommand', {
+							tids: item.id,
+							command: 9
+						},
+						function (data) {
+							ngDialog.close();
+							baseService.alert('处理成功', 'success');
+							$scope.initPage();
+						});
 				})
 			}
 		})

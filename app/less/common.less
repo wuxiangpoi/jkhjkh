@@ -623,6 +623,17 @@ div.timeSelectWrap {
   outline: none;
     opacity: 1;
     width: 100%;
+    &.timeSelectNoborder {
+      border: 0;
+    box-shadow: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: url(../img/select_arrow.png) right center no-repeat;
+    text-align: left;
+    padding-right: 20px;
+    width: 120px;
+    }
 }
 
 
@@ -729,6 +740,18 @@ div.timeSelectWrap {
   }
 }
 
+.tableGroupGeafselect {
+  .groupSelect {
+    width: 232px;
+  }
+  .diy_select {
+    width: 44%;
+    display: inline-block;
+     margin-right: 10px;
+    
+  }
+}
+
 .groupLeafSelect {
   .groupSelect {
     width: 232px;
@@ -761,6 +784,7 @@ div.timeSelectWrap {
   }
   
 }
+
 
 .modalGroup {
   .diy_select_list {
@@ -1873,6 +1897,33 @@ div.timeSelectWrap {
     }
     .modalDetail {
       font-size: 12px;
+      dl {
+        margin-bottom: 0;
+        dt {
+          color: @grey;
+          font-weight: 400;
+          position: relative;
+          overflow: hidden;
+          &::after {
+            content: '';
+            height: 1px;
+            width: 100%;
+            position: absolute;
+            background: #ddd;
+            top: 8px;
+            left: 65px;
+          }
+        }
+      }
+      .control-label-left {
+        font-weight: 400;
+        line-height: 24px;
+        padding-right: 0;
+        margin-bottom: 0;
+        &+div {
+          line-height: 24px;
+        }
+      }
       .form_input,.form_right {
         line-height: 24px;
       }

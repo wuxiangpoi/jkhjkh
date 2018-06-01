@@ -4,7 +4,7 @@
   position: absolute;
 }
 .loginContainer .loginBox {
-  height: 450px;
+  height: 480px;
   position: absolute;
   width: 100%;
   top: 50%;
@@ -23,11 +23,15 @@
 }
 .loginContainer .loginBox .loginContent .right {
   width: 35%;
-  background: rgba(0, 0, 0, 0.2);
   height: 100%;
   float: left;
+  padding: 20px 10px;
 }
-.loginContainer .loginBox .loginContent .right img {
+.loginContainer .loginBox .loginContent .right .rightBox {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+.loginContainer .loginBox .loginContent .right .logo {
   width: 80%;
   margin: 25px 10%;
 }

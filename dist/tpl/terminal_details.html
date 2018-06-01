@@ -12,154 +12,284 @@
 				</div>
 				
 			</div>
-			<div class="row modalDetail">
-		
-				<div class="col-sm-6">
-					<div class="form-group clearfix" ng-if="data.screenshot_time && data.screenshot_time !=''">
-							<label class="col-sm-4 p0">截图更新时间</label>
-							<div class="col-sm-8 pdr0 txt-grey">		
-								{{data.screenshot_time}}
+			<div class="modalDetail">
+					<div>
+						<dl class="row">
+							<dt class="col-sm-12">基本信息</dt>
+							<dd class="col-sm-6">
+								<div class="row">
+									<label class="col-sm-4 control-label-left">终端编号</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.no}}
+									</div>
+								</div>
+								<div class="row">
+									<label class="col-sm-4 control-label-left">注册时间</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}
+									</div>
+								</div>
+							</dd>
+							<div class="col-sm-6">
+								<div class="row">
+									<label class="col-sm-4 control-label-left">终端名称</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.name}}
+									</div>
+								</div>
 							</div>
+							<div class="col-sm-12" ng-if="data.info">
+								<div class="row">
+									<label class="col-sm-4 control-label-left">备注信息</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.info}}
+									</div>
+								</div>
+							</div>
+						</dl>
 					</div>
-		
-					<div class="form-group clearfix" ng-if="data.sync_time!=null&&data.sync_time!=''">
-						<label class="col-sm-4 p0">服务端时间</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.sync_time | date : 'yyyy-MM-dd HH:mm:ss'}}
+					<div>
+						<dl class="row">
+							<dt  class="col-sm-12">命令信息</dt>
+							<dd class="col-sm-6">
+								<div class="row" ng-if="data.screenshot_time && data.screenshot_time !=''">
+									<label class="col-sm-4 control-label-left">截图更新时间</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.screenshot_time}}
+									</div>
+								</div>
+								<div class="row" ng-if="data.sync_time!=null&&data.sync_time!=''">
+									<label class="col-sm-4 control-label-left">服务端时间</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.sync_time | date : 'yyyy-MM-dd HH:mm:ss'}}
+									</div>
+								</div>
+							</dd>
+							<dd class="col-sm-6" ng-if="data.terminal_time!=null">
+								<div class="row">
+									<label class="col-sm-4 control-label-left">终端时间</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.terminal_time | date : 'yyyy-MM-dd HH:mm:ss'}} </div>
+								</div>
+								<div class="row">
+									<label class="col-sm-4 control-label-left" ng-if="data.volumn!=null&&data.volumn!=''">当前音量</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.volumn}} </div>
+								</div>
+							</dd>
+			
+						</dl>
+					</div>
+					<div>
+						<dl class="row">
+							<dt class="col-sm-12">版本信息</dt>
+							<dd class="col-sm-6">
+								<div class="row" ng-if="data.appVersion!=null&&data.appVersion!=''">
+									<label class="col-sm-4 control-label-left">APP版本</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.appVersion}}
+									</div>
+								</div>
+								<div class="row" ng-if="data.target_ver!=null&&data.target_ver!=''">
+									<label class="col-sm-4 control-label-left">目标版本</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.target_ver}}
+									</div>
+								</div>
+							</dd>
+							<dd class="col-sm-6" ng-if="data.terminal_time!=null">
+								<div class="row" ng-if="data.settingVer!=null&&data.settingVer!=''">
+									<label class="col-sm-4 control-label-left">Setting版本</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.settingVer}}
+									</div>
+								</div>
+							</dd>
+			
+						</dl>
+					</div>
+					<div>
+						<dl class="row">
+							<dt class="col-sm-12">硬件信息</dt>
+							<dd class="col-sm-6">
+								<div class="row" ng-if="data.op!=null&&data.op!=''">
+									<label class="col-sm-4 control-label-left">系统</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.op == 1?'android':'window'}}
+									</div>
+								</div>
+								<div class="row" ng-if="data.mac!=null&&data.mac!=''">
+									<label class="col-sm-4 control-label-left">MAC地址</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.mac}}
+									</div>
+								</div>
+								<div class="row" ng-if="data.disk_info!=null&&data.disk_info!=''">
+									<label class="col-sm-4 control-label-left">硬盘信息</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.disk_info}}
+									</div>
+								</div>
+								<div class="row" ng-if="data.hw_info!=null&&data.hw_info!=''">
+									<label class="col-sm-4 control-label-left">内存信息</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.hw_info}}
+									</div>
+								</div>
+							</dd>
+							<dd class="col-sm-6" ng-if="data.cardModel!=null&&data.cardModel!=''">
+								<div class="row">
+									<label class="col-sm-4 control-label-left">板卡信息</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.cardModel}}
+									</div>
+								</div>
+								<div class="row" ng-if="data.sw_info!=null&&data.sw_info!=''">
+									<label class="col-sm-4 control-label-left">软件信息</label>
+									<div class="col-sm-8 txtGrey">
+										{{data.sw_info}} </div>
+								</div>
+								<div class="row" ng-if="data.netType!=null&&data.netType!=''">
+									<label class="col-sm-4 control-label-left">网络类型</label>
+									<div class="col-sm-8 txtGrey">
+										{{getRootDicName('net_type',data.netType)}}</div>
+								</div>
+							</dd>
+			
+						</dl>
+					</div>
+			
+					<!-- <div class="col-sm-6 p0">
+						<div class="col-sm-12 p0" ng-if="data.appVersion!=null&&data.appVersion!=''">
+							<label class="col-sm-4 control-label">服务端时间</label>
+							<div class="col-sm-8">
+								{{data.sync_time | date : 'yyyy-MM-dd HH:mm:ss'}}
+							</div>
 						</div>
-					</div>
-					<div class="form-group clearfix" ng-if="data.terminal_time!=null">
-						<label class="col-sm-4 p0">终端时间</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.terminal_time | date : 'yyyy-MM-dd HH:mm:ss'}}		
+						<div class="col-sm-12 p0" ng-if="data.terminal_time!=null">
+							<label class="col-sm-4 control-label">终端时间</label>
+							<div class="col-sm-8">
+								{{data.terminal_time | date : 'yyyy-MM-dd HH:mm:ss'}}
+			
+			
+							</div>
 						</div>
-					</div>
-					<div class="form-group clearfix">
-						<label class="col-sm-4 p0">终端名称</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.name}}
+						<div class="col-sm-12 p0">
+							<label class="col-sm-4 control-label">创建时间</label>
+							<div class="col-sm-8">
+								{{data.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}
+			
+			
+							</div>
 						</div>
-					</div>
-					<div class="form-group clearfix" ng-if="data.oid">
-						<label class="col-sm-4 p0">所属组织机构</label>
-						<div class="col-sm-8 pdr0 txt-grey ellipsTXt">
-							{{data.oid | getOrganizations}}
+						<div class="col-sm-12 p0" ng-if="data.op!=null&&data.op!=''">
+							<label class="col-sm-4 control-label">系统</label>
+							<div class="col-sm-8">
+								{{getRootDicName('terminal_op',data.op)}}
+							</div>
 						</div>
-					</div>
-					<div class="form-group clearfix">
-						<label class="col-sm-4 p0">创建时间</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}
-		
-		
+			
+						<div class="col-sm-12 p0" ng-if="data.appVersion!=null&&data.appVersion!=''">
+							<label class="col-sm-4 control-label">APP版本</label>
+							<div class="col-sm-8">
+								{{data.appVersion}}
+			
+							</div>
 						</div>
-					</div>
-					<div class="form-group clearfix" ng-if="data.op!=null&&data.op!=''">
-						<label class="col-sm-4 p0">系统</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{getRootDicName('terminal_op',data.op)}}
-		
+			
+						<div class="col-sm-12 p0" ng-if="data.target_ver!=null&&data.target_ver!=''">
+							<label class="col-sm-4 control-label">目标版本</label>
+							<div class="col-sm-8">
+								{{data.target_ver}}
+			
+							</div>
 						</div>
-					</div>
-		
-					<div class="form-group clearfix" ng-if="data.appVersion!=null&&data.appVersion!=''">
-						<label class="col-sm-4 p0">APP版本</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.appVersion}}
-		
+						<div class="col-sm-12 p0" ng-if="data.settingVer!=null&&data.settingVer!=''">
+							<label class="col-sm-4 control-label">Setting版本</label>
+							<div class="col-sm-8">
+								{{data.settingVer}}
+							</div>
 						</div>
-					</div>
-		
-					<div class="form-group clearfix" ng-if="data.target_ver!=null&&data.target_ver!=''">
-						<label class="col-sm-4 p0">目标版本</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.target_ver}}
-		
+			
+			
+			
+			
+						<div class="col-sm-12 p0" ng-if="data.netType!=null&&data.netType!=''">
+							<label class="col-sm-4 control-label">网络类型</label>
+							<div class="col-sm-8">
+								{{getRootDicName('net_type',data.netType)}}
+			
+							</div>
 						</div>
-					</div>
-					<div class="form-group clearfix" ng-if="data.settingVer!=null&&data.settingVer!=''">
-						<label class="col-sm-4 p0">Setting版本</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.settingVer}}
+						<div class="col-sm-12 p0" ng-if="data.ip!=null&&data.ip!=''">
+							<label class="col-sm-4 control-label">IP地址</label>
+							<div class="col-sm-8">
+								{{data.ip}}
+			
+							</div>
 						</div>
+			
 					</div>
-					<div class="form-group clearfix" ng-if="data.ip!=null&&data.ip!=''">
-						<label class="col-sm-4 p0">IP地址</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.ip}}
-		
+					<div class="col-sm-6 p0" style="line-height:32px;">
+						<div class="col-sm-12 p0" ng-if="data.mac!=null&&data.mac!=''">
+							<label class="col-sm-4 control-label">MAC地址</label>
+							<div class="col-sm-8">
+								{{data.mac}}
+			
+							</div>
 						</div>
-					</div>
-		
-		
-		
-		
+						<div class="col-sm-12 p0" ng-if="data.disk_info!=null&&data.disk_info!=''">
+							<label class="col-sm-4 control-label">硬盘信息</label>
+							<div class="col-sm-8">
+								{{data.disk_info}}
+			
+							</div>
+						</div>
+			
+						<div class="col-sm-12 p0" ng-if="data.hw_info!=null&&data.hw_info!=''">
+							<label class="col-sm-4 control-label">内存信息</label>
+							<div class="col-sm-8">
+								{{data.hw_info}}
+			
+							</div>
+						</div>
+						<div class="col-sm-12 p0" ng-if="data.cardModel!=null&&data.cardModel!=''">
+							<label class="col-sm-4 control-label">板卡信息</label>
+							<div class="col-sm-8">
+								{{data.cardModel}}
+			
+							</div>
+						</div>
+			
+						<div class="col-sm-12 p0" ng-if="data.sw_info!=null&&data.sw_info!=''">
+							<label class="col-sm-4 control-label">软件信息</label>
+							<div class="col-sm-8">
+								{{data.sw_info}}
+			
+							</div>
+						</div>
+						<div class="col-sm-12 p0" ng-if="data.program_id!=null&&data.program_id!=''">
+							<label class="col-sm-4 control-label">当前播放</label>
+							<div class="col-sm-8 ellipsTXt">
+								{{data.program_id}}
+							</div>
+						</div>
+			
+			
+						<div class="col-sm-12 p0" ng-if="data.volumn!=null&&data.volumn!=''">
+							<label class="col-sm-4 control-label">当前音量</label>
+							<div class="col-sm-8">
+								{{data.volumn}}
+			
+							</div>
+						</div>
+						<div class="col-sm-12 p0" ng-if="data.remark!=null&&data.remark!=''">
+							<label class="col-sm-4 control-label">备注信息</label>
+							<div class="col-sm-8">
+								{{data.remark}}
+							</div>
+						</div>
+					</div> -->
+			
 				</div>
-				<div class="col-sm-6">
-					<div class="form-group clearfix" ng-if="data.mac!=null&&data.mac!=''">
-						<label class="col-sm-4 p0">MAC地址</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.mac}}
-		
-						</div>
-					</div>
-					<div class="form-group clearfix" ng-if="data.disk_info!=null&&data.disk_info!=''">
-						<label class="col-sm-4 p0">硬盘信息</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.disk_info}}
-		
-						</div>
-					</div>
-		
-					<div class="form-group clearfix" ng-if="data.hw_info!=null&&data.hw_info!=''">
-						<label class="col-sm-4 p0">内存信息</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.hw_info}}
-		
-						</div>
-					</div>
-					<div class="form-group clearfix" ng-if="data.cardModel!=null&&data.cardModel!=''">
-						<label class="col-sm-4 p0">板卡信息</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.cardModel}}
-						</div>
-					</div>
-		
-					<div class="form-group clearfix" ng-if="data.sw_info!=null&&data.sw_info!=''">
-						<label class="col-sm-4 p0">软件信息</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.sw_info}}
-		
-						</div>
-					</div>
-					<div class="form-group clearfix" ng-if="data.program_id&&data.program_id!=''">
-						<label class="col-sm-4 p0">当前播放</label>
-						<div class="col-sm-8 pdr0 txt-grey ellipsTXt">
-							{{data.program_id}}
-						</div>
-					</div>
-		
-					<div class="form-group clearfix" ng-if="data.netType!=null&&data.netType!=''">
-						<label class="col-sm-4 p0">网络类型</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{getRootDicName('net_type',data.netType)}}
-		
-						</div>
-					</div>
-					<div class="form-group clearfix" ng-if="data.volumn!=null&&data.volumn!=''">
-						<label class="col-sm-4 p0">当前音量</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.volumn}}
-		
-						</div>
-					</div>
-					<div class="form-group clearfix" ng-if="data.remark!=null&&data.remark!=''">
-						<label class="col-sm-4 p0">备注信息</label>
-						<div class="col-sm-8 pdr0 txt-grey">
-							{{data.remark}}
-						</div>
-					</div>
-				</div>
-		
-			</div>
 </div>

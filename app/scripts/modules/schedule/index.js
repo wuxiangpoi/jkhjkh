@@ -96,6 +96,10 @@ angular.module('sbAdminApp', ['chartService'])
 					vm.callServer = function (tableState) {
 						baseService.initTable(vm, tableState, baseService.api.programSchedule + 'scheduleManage_getAllOkTerminalList');
 					}
+					vm.initPage = function () {
+						vm.tableState.pagination.start = 0;
+						vm.callServer(vm.tableState);
+					}
 					vm.$on('emitGroupLeaf', function (e, group, leaf) {
 						if (vm.sp.oid != group.id || vm.sp.gid != leaf.id) {
 							vm.currentGroup = group;

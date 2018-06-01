@@ -1,0 +1,31 @@
+<div class="content-wrap" style="min-width:780px;">
+    <div class="level2 clearfix">
+        <button class="iconBtn btn btn-primary" ui-sref="dashboard.programPlayReport({pos:pos})">
+            <i class="fa fa-angle-left"></i> 返回
+        </button>
+    </div>
+    <div class="table-wrapper">
+        <div class="tableHeader clearfix">
+            <span>节目名称：{{programName}}</span>
+            <span style="padding-left: 20px;">时间：{{sp.month.substr(0,4) + '-' + sp.month.substr(4,6)}}</span>
+        </div>
+        <table class="table" st-pipe="callServer" st-table="displayed">
+            <thead>
+                <tr>
+                    <th>终端编号</th>
+                    <th>终端名称</th>
+                    <th>播放时长(时:分:秒)</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+                <tr ng-repeat="row in displayed">
+                    <td>{{row.terminalNo}}</td>
+                    <td>{{row.terminalName}}</td>
+                    <td>{{row.duration | secToTime}}</td>
+                </tr>
+            </tbody>
+            <tbody ng-include="'tpl/table.html'"></tbody>
+            <tfoot ng-show="!isLoading" ng-include="'tpl/table_footer.html'"></tfoot>
+        </table>
+    </div>
+</div>

@@ -100,8 +100,8 @@
 							</select>
 						</div>
 						<div class="panelSelectWrap">
-							<select class="form-control" ng-options="h.value as h.name for h in netStatus" ng-init="init_status?sp.status = init_status:sp.status = ''" ng-model="sp.status"
-							    ng-change="initPage(tableState)">
+							<select class="form-control" ng-options="h.value as h.name for h in netStatus" ng-init="init_status?sp.status = init_status:sp.status = ''"
+							    ng-model="sp.status" ng-change="initPage(tableState)">
 							</select>
 						</div>
 						<div class="panelSelectWrap">
@@ -137,7 +137,7 @@
 					</th>
 					<th>终端编号</th>
 					<th>终端名称</th>
-					<th>网络状态</th>
+					<th>终端状态</th>
 					<th>屏幕分辨率</th>
 					<th>所属城市</th>
 					<th>节目数量</th>
@@ -155,7 +155,7 @@
 						<div class="txt-red" ng-if="row.status == 0">未激活</div>
 						<div class="txt-green" ng-if="row.status == 1">在线</div>
 						<div class="txt-grey" ng-if="row.status == 2">离线</div>
-						<div class="txt-red" ng-if="row.status == 3">异常</div>
+						<div class="tex-red" ng-if="row.status == 3">异常</div>
 					</td>
 					<td>
 						{{row.resolution}}
@@ -170,6 +170,8 @@
 					</td>
 					<td>
 						<button ng-if="perms(213)" class="btn tableBtn" ng-click="save(row)">编辑
+						</button>
+						<button ng-if="row.status == 3 && perms(217)" class="btn tableBtn" ng-click="dealAbnormal(row)">处理异常
 						</button>
 					</td>
 				</tr>

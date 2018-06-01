@@ -31,5 +31,8 @@
     "proxy-middleware": "^0.15.0",
     "run-sequence": "^1.2.2",
     "wiredep": "^4.0.0"
+  },
+  "dependencies": {
+    "http-proxy-middleware": "^0.18.0"
   }
 }
