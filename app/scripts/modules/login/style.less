@@ -37,17 +37,17 @@
   }
   .loginContainer .loginBox .loginContent .right .title {
     text-align: center;
-    color: #fff;
+    color: #000;
   }
   .loginContainer .loginBox .loginContent .right .english {
     text-align: center;
-    color: #fff;
+    color: #000;
     font-size: 10px;
     line-height: 24px;
   }
   .loginContainer .loginBox .loginContent .right #form_modal_btn {
-    border: solid 1px #24243E;
-    background: #24243E;
+    border: solid 1px #00a0e9;
+    background: #00a0e9;
     width: 100%;
     color: #fff;
     border-radius: 6px;
@@ -82,7 +82,6 @@
 
   .loginContainer .loginBox .loginContent .right .chkdiv a {
     font-size: 12px;
-    color:#232935;
     cursor: pointer;
     text-decoration: none;
     line-height: 18px;
@@ -91,11 +90,11 @@
     padding: 20px 10%;
   }
   .loginContainer #loginForm .form-control {
-    background-color: transparent;
-    border: 1px solid #667185;
-    box-shadow: 0 0 5px #404650 inset;
-    -moz-box-shadow: 0 0 5px #404650 inset;
-    -webkit-box-shadow: 0 0 5px #404650 inset;
+    background-color: #fff;
+    &:-webkit-autofill {
+-webkit-box-shadow: 0 0 0 1000px white inset;
+  }
+    
   }
   .loginContainer #loginForm .form-control::-webkit-input-placeholder {
     color: #c4c4c4;
