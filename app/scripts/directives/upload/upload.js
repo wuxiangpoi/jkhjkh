@@ -82,7 +82,10 @@ angular.module('sbAdminApp')
             $scope.$on("callUploader", function(event, data) {
                 $scope.uploader.queue = $scope.uploader.queue.concat(data.queue);
                 $scope.isShow = true;
-                $scope.uploadAll();               
+                for (var i = 0; i < data.queue.length; i++) {
+                    var item = data.queue[i];
+                    beforeUpload(item);
+                }                 
             });
             $scope.removeItem = function(item,index,$event){
                 item.cancel();
@@ -102,7 +105,7 @@ angular.module('sbAdminApp')
                 $.apply();
             };
             $scope.upload = function (item) {
-                item.upload();
+                beforeUpload(item);
             };
             $scope.uploadAll = function () {
                 uploader.uploadAll();
