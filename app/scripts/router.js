@@ -214,21 +214,21 @@
                         }
                     }
                 })
-                .state('dashboard.auser', {
-                    url: '/auser',
-                    controller: 'auserCtrl',
-                    templateUrl: 'scripts/modules/auser/template.html',
-                    resolve: {
-                        loadMyFiles: function ($ocLazyLoad) {
-                            return $ocLazyLoad.load({
-                                name: 'sbAdminApp',
-                                files: [
-                                    'scripts/modules/auser/index.js'
-                                ]
-                            })
-                        }
-                    }
-                })
+                // .state('dashboard.auser', {
+                //     url: '/auser',
+                //     controller: 'auserCtrl',
+                //     templateUrl: 'scripts/modules/auser/template.html',
+                //     resolve: {
+                //         loadMyFiles: function ($ocLazyLoad) {
+                //             return $ocLazyLoad.load({
+                //                 name: 'sbAdminApp',
+                //                 files: [
+                //                     'scripts/modules/auser/index.js'
+                //                 ]
+                //             })
+                //         }
+                //     }
+                // })
                 .state('dashboard.materialCheck', {
                     url: '/materialCheck',
                     controller: 'materialCheckCtrl',
