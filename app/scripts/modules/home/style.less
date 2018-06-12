@@ -4,32 +4,52 @@
     margin-bottom: 15px;
     #allmap {
         height: 100%;
-        min-height: 260px;
-        background: #fff;
+        min-height: 450px;
         border-radius: 6px;
         .fileReportWrap {
             margin-bottom: 0;
             height: 100%;
             overflow: hidden;
-            padding: 20px;
+            background: #fff;
             dt {
-                margin-bottom: 20px;
+                padding: 20px;
             }
             dd {
                 float: left;
                 width: 50%;
                 height: 50%;
-                min-height: 100px;
                 border-right: 1px solid #f1f2f5;
                 border-bottom: 1px solid #f1f2f5;
+                min-height: 220px;
+                position: relative;
+                .con {
+                    width: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 30px;
+                    margin-top: -78px;
+                    .tle {
+                        display: block;
+                        font-size: 24px;
+                    }
+                    .conLeft {
+                        border-right: 1px solid #f1f2f5;
+                    }
+                    .conCenter {
+                        text-align: center;
+                        margin-top: 56px;
+                    }
+                    .conRright {
+                        text-align: center;
+                        margin-top: 56px;
+                    }
+                }
                 .iconWrap {
-                    width: 15rem;
-                    height: 15rem;
+                    width: 150px;
+                    height: 150px;
                     display: inline-block;
                     position: relative;
-                    border: 1px solid #00A0E9;
                     border-radius: 50%;
-                    color: #00A0E9;
                     text-align: center;
                     .tipLabel {
                         position: absolute;
@@ -111,4 +131,52 @@
     .homePage {
         padding: 90px 20px 128px 75px;
     }
+    
   }
+  @media (max-width: 1200px){
+    .fileReportWrap {
+        min-height: 600px;
+        dd {
+            width: 100%!important;
+            height: 25%!important;
+            min-height: 140px!important;
+            .con {
+                width: 100%;
+                position: absolute;
+                top: 50%;
+                left: 30px;
+                margin-top: -60px!important;
+                .tle {
+                    display: block;
+                    font-size: 24px;
+                }
+                .conLeft {
+                    border-right: 1px solid #f1f2f5;
+                }
+                .conCenter {
+                    text-align: center;
+                    margin-top: 20px!important;
+                }
+                .conRright {
+                    text-align: center;
+                    margin-top: 20px!important;
+                }
+            }
+        }
+        .iconWrap {
+            width: 100px!important;
+            height: 100px!important;
+            display: inline-block;
+            position: relative;
+            border: 1px solid #00A0E9;
+            border-radius: 50%;
+            color: #00A0E9;
+            text-align: center;
+            
+            .iconfont {
+                font-size: 48px;
+            }
+        }
+    }
+  }
+  
