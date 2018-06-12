@@ -37,6 +37,12 @@
 										{{data.name}}
 									</div>
 								</div>
+								<div class="row" ng-if="data.oid">
+										<label class="col-sm-4 control-label-left">所属组织机构</label>
+										<div class="col-sm-8 txtGrey">
+											{{data.oid | getOrganizations}}
+										</div>
+									</div>
 							</div>
 							<div class="col-sm-12" ng-if="data.info">
 								<div class="row">
