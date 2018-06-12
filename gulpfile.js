@@ -51,7 +51,7 @@ gulp.task('start:proxy', function () {
         middleware: function(connect, opt) {
             return [
                 proxy('/api',  {
-                    target: 'http://47.92.116.16:9090',
+                    target: 'http://192.168.1.158:9090',
                     changeOrigin:true
                 })
             ]
