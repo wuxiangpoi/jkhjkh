@@ -294,6 +294,8 @@ angular.module('sbAdminApp')
 							fileItem.isSuccess = false;
 							fileItem.isError = true;
 							fileItem.errorMsg = response.message;
+						}else{
+							$scope.initPage();
 						}
 					};
 				});
