@@ -1,20 +1,57 @@
-.BMap_cpyCtrl {
-  display: none;
-}
-.anchorBL {
-  display: none;
-}
 .mapWrap {
-  min-height: 260px;
   width: 100%;
   height: 100%;
   margin-bottom: 15px;
 }
 .mapWrap #allmap {
   height: 100%;
+  min-height: 260px;
+  background: #fff;
+  border-radius: 6px;
 }
-.mapWrap #allmap .BMap_bubble_title {
-  font-weight: bold;
+.mapWrap #allmap .fileReportWrap {
+  margin-bottom: 0;
+  height: 100%;
+  overflow: hidden;
+  padding: 20px;
+}
+.mapWrap #allmap .fileReportWrap dt {
+  margin-bottom: 20px;
+}
+.mapWrap #allmap .fileReportWrap dd {
+  float: left;
+  width: 50%;
+  height: 50%;
+  min-height: 100px;
+  border-right: 1px solid #f1f2f5;
+  border-bottom: 1px solid #f1f2f5;
+}
+.mapWrap #allmap .fileReportWrap dd .iconWrap {
+  width: 15rem;
+  height: 15rem;
+  display: inline-block;
+  position: relative;
+  border: 1px solid #00A0E9;
+  border-radius: 50%;
+  color: #00A0E9;
+  text-align: center;
+}
+.mapWrap #allmap .fileReportWrap dd .iconWrap .tipLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -60px;
+  margin-left: -60px;
+}
+.mapWrap #allmap .fileReportWrap dd .iconWrap .tipLabel span.dibik {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: 20px;
+  margin-left: -15px;
+}
+.mapWrap #allmap .fileReportWrap dd .iconWrap .iconfont {
+  font-size: 68px;
 }
 .homePage {
   position: absolute;
