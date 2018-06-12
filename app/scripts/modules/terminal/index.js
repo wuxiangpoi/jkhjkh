@@ -155,15 +155,15 @@ angular.module('sbAdminApp', ['chartService'])
 
 			$scope.save = function (item) {
 				var modalData = {
-					name: item.name,
-					no: item.no,
-					id: item.id,
-					city_no: item.city_no,
-					remark: item.remark,
+					name: item?item.name:'',
+					no: item?item.no: '',
+					id: item?item.id: '',
+					city_no: item?item.city_no: '',
+					remark: item?item.remark:'',
 					cityName: '',
-					addr: item.addr
+					addr: item?item.addr:''
 				};
-				baseService.confirmDialog(580, '编辑终端信息', modalData, 'tpl/terminal_save.html', function (ngDialog, vm) {
+				baseService.confirmDialog(580, item?'编辑终端信息':'添加终端', modalData, 'tpl/terminal_save.html', function (ngDialog, vm) {
 					if (vm.modalForm.$valid) {
 						var formData = {
 							name: vm.data.name,

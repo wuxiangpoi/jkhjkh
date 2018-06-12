@@ -1,5 +1,9 @@
-<div class="content-wrap" style="min-width:760px;">
+<div class="content-wrap" style="min-width:860px;">
 	<div class="level2 clearfix">
+		<button ng-if="perms(213)" type="button" ng-click="save()" class="btn btn-primary">
+			<i class="iconfont icon-tianjia-"></i>
+			添加终端
+		</button>
 		<div class="tipBtnWrap" ng-if="perms(217)" class="dropdown" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event)>
 			<div class="tipDiv">选中在线终端才能进行此操作</div>
 			<button ng-class="{'disabled': idsNormal.length == 0 || idsNormal.length != ids.length }" type="button" data-toggle="dropdown"
