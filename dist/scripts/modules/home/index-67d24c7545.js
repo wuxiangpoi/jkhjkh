@@ -1,0 +1,1 @@
+"use strict";angular.module("sbAdminApp",[]).controller("homeCtrl",["$scope","$window","$rootScope","baseService",function(o,e,r,c){}]);

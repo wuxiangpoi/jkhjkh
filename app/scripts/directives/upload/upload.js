@@ -82,8 +82,8 @@ angular.module('sbAdminApp')
             $scope.$on("callUploader", function(event, data) {
                 $scope.uploader.queue = $scope.uploader.queue.concat(data.queue);
                 $scope.isShow = true;
-                for (let i = 0; i < data.queue.length; i++) {
-                    let item = data.queue[i];
+                for (var i = 0; i < data.queue.length; i++) {
+                    var item = data.queue[i];
                     beforeUpload(item);
                 }               
             });
