@@ -59,8 +59,8 @@
 								<option value="">素材类型</option>
 								<option value="0">图片</option>
 								<option value="1">视频</option>
-								<option value="2">音乐</option>								
-								<option value="3">互动包</option>								
+								<option value="2">音乐</option>
+								<option value="3">互动包</option>
 							</select>
 						</div>
 						<div class="panelSelectWrap">
@@ -132,9 +132,9 @@
 					</td>
 					<td>{{row.size | dmbdResourceSizeFilter}}</td>
 					<td>
-							<span ng-if="row.type != 2 && row.type != 3">
-									{{row.width + "*" + row.height}}
-								</span>
+						<span ng-if="row.type != 2 && row.type != 3">
+							{{row.width + "*" + row.height}}
+						</span>
 					</td>
 					<td>
 						<div class="txt-grey" ng-if="row.status == 0">{{row.status | materialStatusTxt}}</div>
@@ -146,14 +146,11 @@
 						{{row.createTime | formateTime}}
 					</td>
 					<td style="{{row.status < 6?'width:225px;':'width:100px;'}}">
-						<button ng-if="[0,4,5].indexOf(row.status) != -1 && perms(418)" class="btn tableBtn"
-						    ng-click="submitCheck(row)">提交审核
+						<button ng-if="[0,4,5].indexOf(row.status) != -1 && perms(418)" class="btn tableBtn" ng-click="submitCheck(row)">提交审核
 						</button>
-						<button ng-if="[0,1,2,3,7].indexOf(row.status) != -1 && perms(413)"
-						    class="btn tableBtn" ng-click="saveName(row)">修改名称
+						<button ng-if="[0,1,2,3,7].indexOf(row.status) != -1 && perms(413)" class="btn tableBtn" ng-click="saveName(row)">修改名称
 						</button>
-						<button ng-if="[0,4,5,6].indexOf(row.status) != -1 && perms(414)" class="btn tableBtn"
-						    ng-click="del(row)">删除
+						<button ng-if="[0,4,5,6].indexOf(row.status) != -1 && perms(414)" class="btn tableBtn" ng-click="del(row)">删除
 						</button>
 						<a ng-if="row.type == 3" href="{{row.path}}" class="btn tableBtn">下载</a>
 					</td>
