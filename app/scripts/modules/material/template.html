@@ -138,7 +138,8 @@
 					</td>
 					<td>
 						<div class="txt-grey" ng-if="row.status == 0">{{row.status | materialStatusTxt}}</div>
-						<div ng-if="row.status == 1 || row.status == 2 || row.status == 3 || row.status == 6 || row.status == 7">{{row.status | materialStatusTxt}}</div>
+						<div ng-if="row.status == 1 || row.status == 2 || row.status == 3 || row.status == 6">{{row.status | materialStatusTxt}}</div>
+						<div ng-if="row.status == 7">{{row.process}}</div>
 						<div class="tex-red" ng-if="row.status == 4 || row.status == 5">{{row.status | materialStatusTxt}}</div>
 					</td>
 					<td class="createTimeTd">
