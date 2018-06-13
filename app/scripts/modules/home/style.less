@@ -1,73 +1,77 @@
-.mapWrap {
-    width: 100%;
+#allmap {
     height: 100%;
-    margin-bottom: 15px;
-    #allmap {
+    min-height: 360px;
+    border-radius: 6px;
+    .fileReportWrap {
+        margin-bottom: 15px;
         height: 100%;
-        min-height: 450px;
-        border-radius: 6px;
-        .fileReportWrap {
-            margin-bottom: 0;
-            height: 100%;
-            overflow: hidden;
-            background: #fff;
-            dt {
-                padding: 20px;
+        background: #fff;
+        padding: 0;
+        overflow: hidden;
+        li {
+            float: left;
+            width: 50%;
+            height: 50%;
+            border-right: 1px solid #f1f2f5;
+            border-bottom: 1px solid #f1f2f5;
+            min-height: 180px;
+            position: relative;
+            .con {
+                width: 100%;
+                position: absolute;
+                top: 50%;
+                left: 30px;
+                margin-top: -78px;
+                .wrap {
+                    width: 50%;
+                    float: left;
+                }
+                .tle {
+                    display: block;
+                    font-size: 24px;
+                }
+                .conLeft {
+                    border-right: 1px solid #f1f2f5;
+                    width: 60%;
+                    overflow: hidden;
+                    float: left;
+                }
+                .conCenter {
+                    text-align: center;
+                    margin-top: 56px;
+                }
+                .conRright {
+                    text-align: center;
+                    margin-top: 56px;
+                    width: 40%;
+                    overflow: hidden;
+                    float: left;
+                }
             }
-            dd {
-                float: left;
-                width: 50%;
-                height: 50%;
-                border-right: 1px solid #f1f2f5;
-                border-bottom: 1px solid #f1f2f5;
-                min-height: 220px;
+            .iconWrap {
+                width: 150px;
+                height: 150px;
+                display: inline-block;
                 position: relative;
-                .con {
-                    width: 100%;
+                border-radius: 50%;
+                text-align: center;
+                .tipLabel {
                     position: absolute;
                     top: 50%;
-                    left: 30px;
-                    margin-top: -78px;
-                    .tle {
-                        display: block;
-                        font-size: 24px;
-                    }
-                    .conLeft {
-                        border-right: 1px solid #f1f2f5;
-                    }
-                    .conCenter {
-                        text-align: center;
-                        margin-top: 56px;
-                    }
-                    .conRright {
-                        text-align: center;
-                        margin-top: 56px;
-                    }
-                }
-                .iconWrap {
-                    width: 150px;
-                    height: 150px;
-                    display: inline-block;
-                    position: relative;
-                    border-radius: 50%;
-                    text-align: center;
-                    .tipLabel {
+                        left: 50%;
+                        margin-top: -60px;
+                        margin-left: -60px;
+                    span.dibik {
                         position: absolute;
                         top: 50%;
-                            left: 50%;
-                            margin-top: -60px;
-                            margin-left: -60px;
-                        span.dibik {
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            margin-top: 20px;
-                            margin-left: -15px;
-                        }
+                        margin-top: 30px;
+                        left: 0px;
+                        text-align: center;
+                        width: 100%;
                     }
-                    .iconfont {
-                        font-size: 68px;
-                    }
+                }
+                .iconfont {
+                    font-size: 68px;
                 }
             }
         }
@@ -78,6 +82,11 @@
 .homePage {
     .huge {
         font-size: 32px;
+    }
+    h4 {
+        margin: 0;
+        padding: 20px;
+        background: #fff;
     }
     .userTip {
         padding: 5px 10px;
@@ -124,19 +133,19 @@
     height: 100%;
     top: 0;
     left: 0;
-    padding: 90px 20px 128px 270px;
+    padding: 90px 20px 198px 270px;
 }
 
 @media (max-width: 992px){
     .homePage {
-        padding: 90px 20px 128px 75px;
+        padding: 90px 20px 198px 75px;
     }
     
   }
   @media (max-width: 1200px){
     .fileReportWrap {
-        min-height: 600px;
-        dd {
+        min-height: 560px;
+        li {
             width: 100%!important;
             height: 25%!important;
             min-height: 140px!important;
@@ -145,7 +154,7 @@
                 position: absolute;
                 top: 50%;
                 left: 30px;
-                margin-top: -60px!important;
+                margin-top: -52px!important;
                 .tle {
                     display: block;
                     font-size: 24px;
@@ -172,9 +181,20 @@
             border-radius: 50%;
             color: #00A0E9;
             text-align: center;
-            
+            .tipLabel {
+               margin-top: -46px!important;
+                    margin-left: -46px!important;
+                span.dibik {
+                    position: absolute;
+                    top: 50%;
+                    margin-top: 30px;
+                    left: 0px;
+                    text-align: center;
+                    width: 100%;
+                }
+            }
             .iconfont {
-                font-size: 48px;
+                font-size: 48px!important;
             }
         }
     }

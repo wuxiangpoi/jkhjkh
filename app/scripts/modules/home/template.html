@@ -65,37 +65,35 @@
             </div>
         </div>
     </div>
-    <div class="mapWrap">
-        <div id="allmap">
-            <dl class="fileReportWrap">
-                <dt>文件统计</dt>
-                <dd ng-repeat="material in materialReport">
-                    <div class="row con">
-                        <div class="col-sm-8 conLeft">
-                            <div class="col-sm-6">
-                                <span class="iconWrap" ng-style="materialStyle(material.color)">
-                                    <div class="tipLabel">
-                                        <i class="icon iconfont icon-shipin-bendihua">
-                                        </i>
-                                        <span class="dibik">{{material.name}}</span>
-                                    </div>
-                                </span>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="conCenter">
-                                    <sapn class="tle">{{material.allCount}}</sapn>
-                                    <p>数量(个)</p>
+    <h4>文件统计</h4>
+    <div id="allmap">
+        <ul class="fileReportWrap">
+            <li ng-repeat="material in materialReport">
+                <div class="con">
+                    <div class="conLeft">
+                        <div class="wrap">
+                            <span class="iconWrap" ng-style="materialStyle(material.color)">
+                                <div class="tipLabel">
+                                    <i class="icon iconfont {{material.icon}}">
+                                    </i>
+                                    <span class="dibik">{{material.name}}</span>
                                 </div>
+                            </span>
+                        </div>
+                        <div class="wrap">
+                            <div class="conCenter">
+                                <sapn class="tle">{{material.allCount}}</sapn>
+                                <p>数量(个)</p>
                             </div>
                         </div>
-                        <div class="col-sm-4 conRright">
-                            <sapn class="tle">{{material.allSize/1024/1024|number:2}}</sapn>
-                            <p>大小(Mb)</p>
-                        </div>
-
                     </div>
-                </dd>
-            </dl>
-        </div>
+                    <div class="conRright">
+                        <sapn class="tle">{{material.allSize/1024/1024|number:2}}</sapn>
+                        <p>大小(Mb)</p>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

@@ -21,18 +21,22 @@ angular.module('sbAdminApp', [])
 				if(item.type == 1){
 					item.name = '视频';
 					item.color = '#00a0e9';
+					item.icon = 'icon-shipin-bendihua';
 					$scope.materialReport.unshift(item);
 				}else if(item.type == 0){
 					item.name = '图片';
 					item.color = '#faae30';
+					item.icon = 'icon-tupian-bendihua';
 					$scope.materialReport.push(item);
 				}else if(item.type == 2){
 					item.name = '音乐';
 					item.color = '#7fbe25';
+					item.icon = 'icon-yinpin-bendihua';
 					$scope.materialReport.push(item);
 				}else if(item.type == 3){
 					item.name = '互动包';
 					item.color = '#ff4040';
+					item.icon = 'icon-hudongbao-bendihua';
 					$scope.materialReport.push(item);
 				}
 			}
