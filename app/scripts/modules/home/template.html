@@ -1,6 +1,6 @@
 <div class="homePage">
     <div class="row">
-        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{status:1},21)">
+        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{status:'1'},21)">
             <div class="panel">
                 <div class="panel-heading">
                     <div class="clearfix" style="text-align:center;">
@@ -16,7 +16,7 @@
 
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{status:2},21)">
+        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{status:'2'},21)">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <div class="clearfix" style="text-align:center;">
@@ -32,7 +32,7 @@
 
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{status:3},21)">
+        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{status:'3'},21)">
             <div class="panel">
                 <div class="panel-heading">
                     <div class="clearfix" style="text-align:center;">
@@ -48,7 +48,7 @@
 
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{},21)">
+        <div class="col-lg-3 col-md-6 stats" ng-click="goTostate('dashboard.terminal',{status:'0'},21)">
             <div class="panel">
                 <div class="panel-heading">
                     <div class="clearfix" style="text-align:center;">
@@ -56,8 +56,8 @@
                             <i class="iconfont icon-suoyouzhongduan state_all"></i>
                         </div>
                         <div class="dibik txt-left" style="margin-left:40px;">
-                            <div>所有终端</div>
-                            <div class="huge">{{ter_all}}</div>
+                            <div>未激活终端</div>
+                            <div class="huge">{{ter_noAct}}</div>
                         </div>
                     </div>
                 </div>

@@ -18,18 +18,21 @@ angular.module('sbAdminApp', ['chartService'])
 				name: '终端状态',
 				value: ''
 			}, {
+				name: '未激活',
+				value: '0'
+			},{
 				name: '在线',
-				value: 1
+				value: '1'
 			}, {
 				name: '离线',
-				value: 2
+				value: '2'
 			}, {
 				name: '异常',
-				value: 3
+				value: '3'
 			}];
 			$scope.init_status = $stateParams.status;
 			if ($stateParams.status) {
-				$scope.sp.status = $stateParams.status;
+				$scope.sp.status = parseInt($stateParams.status);
 			}
 			$scope.callServer = function (tableState) {
 				$scope.ids = [];
