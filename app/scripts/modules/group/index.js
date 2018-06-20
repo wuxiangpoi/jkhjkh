@@ -46,19 +46,24 @@ controller('groupCtrl', function ($scope, $rootScope, baseService) {
     }
     $scope.sumbitSort = function () {
         var zTree = $.fn.zTree.getZTreeObj('groupSet');
-        baseService.postData(baseService.api.organization + 'saveOrganizationSort', {
-            sorts: JSON.stringify(zTree.getNodes()[0].children)
-        }, function (res) {
-            $scope.root_organizations = $rootScope.userData.root_organizations = res;
+        if(zTree.getNodes()[0].children){
+            baseService.postData(baseService.api.organization + 'saveOrganizationSort', {
+                sorts: JSON.stringify(zTree.getNodes()[0].children)
+            }, function (res) {
+                $scope.root_organizations = $rootScope.userData.root_organizations = res;
+                $scope.isSort = false;
+                $scope.ztreeSetting = {
+                    zNodes: getOrganizations(),
+                    isSort: false,
+                    isSet: true,
+                    isCheck: false,
+                    selectedNodes: []
+                }
+            })
+        }else{
             $scope.isSort = false;
-            $scope.ztreeSetting = {
-                zNodes: getOrganizations(),
-                isSort: false,
-                isSet: true,
-                isCheck: false,
-                selectedNodes: []
-            }
-        })
+        }
+        
     }
     $scope.$on('addNode', function (e, zTree, treeNode) {
         baseService.confirmDialog(540, '新建组织机构', {}, 'tpl/group_save.html', function (ngDialog, vm) {
