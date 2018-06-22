@@ -173,6 +173,24 @@ var kmsz = kmsz || {};
         return dom;
     }
 
+    //创建背景音乐节点
+    function createMusicDOM(music, audioUrlConverter) {
+        var dom = document.createElement('audio');
+        dom.classList.add('element-music');
+        dom.setAttribute('loop', 'loop');
+
+        switch (music.ver) {
+            case 1:
+                (function () {
+                    dom.src = audioUrlConverter(music);
+                })();
+                break;
+            default :
+                break;
+        }
+        return dom;
+    }
+
     //创建边框节点
     function createBorderDOM(border) {
         var dom = document.createElement('div');
@@ -734,79 +752,225 @@ var kmsz = kmsz || {};
                                     return item.id === data.animation.outId;
                                 }) || outAnims[0];
                                 var imageQueue = new CycleQueue(data.images, true);
+                                //创建三个装载图片的lDOM
+                                var imgDOMs = [createImageDOM(), createImageDOM(), createImageDOM()];
+                                imgDOMs.forEach(function (img) {
+                                    dom.appendChild(img);
+                                });
+                                var imgDOMQueue = new CycleQueue(imgDOMs);
+                                imgDOMQueue.get(0).src = imageUrlConverter(imageQueue.get(0));
+                                imgDOMQueue.get(1).src = imageUrlConverter(imageQueue.get(1));
 
-                                var prevImageDOM = createImageDOM();
-                                var curImageDOM = createImageDOM();
-                                var nextImageDOM = createImageDOM();
-                                prevImageDOM.src = imageUrlConverter(imageQueue.prev());
-                                curImageDOM.src = imageUrlConverter(imageQueue.next());
-                                nextImageDOM.src = imageUrlConverter(imageQueue.next());
-                                dom.appendChild(prevImageDOM);
-                                dom.appendChild(curImageDOM);
-                                dom.appendChild(nextImageDOM);
+                                //上一个/下一个
+                                var btnPrev = document.createElement('button');
+                                btnPrev.innerHTML = '<i class="fa fa-angle-left"></i>';
+                                btnPrev.classList.add('hidden2');
+                                btnPrev.classList.add('btnNav');
+                                btnPrev.style.left = '0';
+                                var btnNext = document.createElement('button');
+                                btnNext.innerHTML = '<i class="fa fa-angle-right"></i>';
+                                btnNext.classList.add('hidden2');
+                                btnNext.classList.add('btnNav');
+                                btnNext.style.right = '0';
 
-                                curImageDOM.classList.remove('hidden');
+                                dom.appendChild(btnPrev);
+                                dom.appendChild(btnNext);
 
-                                var playing = function () {
-                                    prevImageDOM.classList.add('hidden');
-                                    prevImageDOM.style.webkitAnimation
-                                        = prevImageDOM.style.mozAnimation
-                                        = prevImageDOM.style.oAnimation
-                                        = prevImageDOM.style.animation
+                                var timer22 = null;
+
+                                function onDOMTouch(e) {
+                                    btnPrev.classList.remove('hidden2');
+                                    btnNext.classList.remove('hidden2');
+                                    if (timer22 !== null) {
+                                        window.clearTimeout(timer22);
+                                    }
+                                    timer22 = window.setTimeout(function () {
+                                        btnPrev.classList.add('hidden2');
+                                        btnNext.classList.add('hidden2');
+                                    }, 5000);
+                                }
+
+                                dom.addEventListener('click', onDOMTouch);
+
+                                function playNext() {
+                                    function ininin() {
+                                        afterIn(inDOM);
+                                        inDOM.removeEventListener('webkitAnimationEnd', ininin);
+                                        inDOM.removeEventListener('mozAnimationEnd', ininin);
+                                        inDOM.removeEventListener('animationend', ininin);
+                                    }
+
+                                    function outout() {
+                                        afterOut(outDOM);
+                                        outDOM.removeEventListener('webkitAnimationEnd', outout);
+                                        outDOM.removeEventListener('mozAnimationEnd', outout);
+                                        outDOM.removeEventListener('animationend', outout);
+                                    }
+
+                                    var outDOM = imgDOMQueue.get(0);
+                                    var inDOM = imgDOMQueue.get(1);
+                                    var cacheDOM = imgDOMQueue.get(2);
+
+                                    outDOM.style.webkitAnimation
+                                        = outDOM.style.mozAnimation
+                                        = outDOM.style.oAnimation
+                                        = outDOM.style.animation
+                                        = outAnim.value + ' ' + data.duration + 'ms ease-in-out normal forwards';
+                                    outDOM.classList.remove('hidden');
+                                    outDOM.addEventListener('webkitAnimationEnd', outout);
+                                    outDOM.addEventListener('mozAnimationEnd', outout);
+                                    outDOM.addEventListener('animationend', outout);
+
+                                    inDOM.style.webkitAnimation
+                                        = inDOM.style.mozAnimation
+                                        = inDOM.style.oAnimation
+                                        = inDOM.style.animation
+                                        = inAnim.value + ' ' + data.duration + 'ms ease-in-out normal forwards';
+                                    inDOM.classList.remove('hidden');
+                                    inDOM.addEventListener('webkitAnimationEnd', ininin);
+                                    inDOM.addEventListener('mozAnimationEnd', ininin);
+                                    inDOM.addEventListener('animationend', ininin);
+
+                                    cacheDOM.classList.add('hidden');
+                                    cacheDOM.style.webkitAnimation
+                                        = cacheDOM.style.mozAnimation
+                                        = cacheDOM.style.oAnimation
+                                        = cacheDOM.style.animation
                                         = '';
-                                    prevImageDOM.src = imageUrlConverter(imageQueue.next());
-                                    curImageDOM.style.webkitAnimation
-                                        = curImageDOM.style.mozAnimation
-                                        = curImageDOM.style.oAnimation
-                                        = curImageDOM.style.animation
-                                        = outAnim.value + ' ' + data.duration + 'ms forwards';
-                                    nextImageDOM.style.webkitAnimation
-                                        = nextImageDOM.style.mozAnimation
-                                        = nextImageDOM.style.oAnimation
-                                        = nextImageDOM.style.animation
-                                        = inAnim.value + ' ' + data.duration + 'ms forwards';
-                                    nextImageDOM.classList.remove('hidden');
+                                    cacheDOM.src = imageUrlConverter(imageQueue.get(2));
 
-                                    var cacheImageDOM = prevImageDOM;
-                                    prevImageDOM = curImageDOM;
-                                    curImageDOM = nextImageDOM;
-                                    nextImageDOM = cacheImageDOM;
-                                };
+                                    imgDOMQueue.skipNext();
+                                    imageQueue.skipNext();
+                                }
+
+                                function afterOut(dom) {
+                                    dom.style.webkitAnimation
+                                        = dom.style.mozAnimation
+                                        = dom.style.oAnimation
+                                        = dom.style.animation
+                                        = '';
+                                    dom.classList.add('hidden');
+                                }
+
+                                function afterIn(dom) {
+                                    dom.style.webkitAnimation
+                                        = dom.style.mozAnimation
+                                        = dom.style.oAnimation
+                                        = dom.style.animation
+                                        = '';
+                                    dom.classList.remove('hidden');
+                                }
+
+                                function playPrev() {//reverse
+                                    function ininin() {
+                                        afterIn(inDOM);
+                                        inDOM.removeEventListener('webkitAnimationEnd', ininin);
+                                        inDOM.removeEventListener('mozAnimationEnd', ininin);
+                                        inDOM.removeEventListener('animationend', ininin);
+                                    }
+
+                                    function outout() {
+                                        afterOut(outDOM);
+                                        outDOM.removeEventListener('webkitAnimationEnd', outout);
+                                        outDOM.removeEventListener('mozAnimationEnd', outout);
+                                        outDOM.removeEventListener('animationend', outout);
+                                    }
+
+                                    imgDOMQueue.skipPrev();
+                                    imageQueue.skipPrev();
+
+                                    var inDOM = imgDOMQueue.get(0);
+                                    var outDOM = imgDOMQueue.get(1);
+                                    var cacheDOM = imgDOMQueue.get(2);
+
+                                    inDOM.style.webkitAnimation
+                                        = inDOM.style.mozAnimation
+                                        = inDOM.style.oAnimation
+                                        = inDOM.style.animation
+                                        = outAnim.value + ' ' + data.duration + 'ms ease-in-out reverse forwards';
+                                    inDOM.classList.remove('hidden');
+                                    inDOM.addEventListener('webkitAnimationEnd', ininin);
+                                    inDOM.addEventListener('mozAnimationEnd', ininin);
+                                    inDOM.addEventListener('animationend', ininin);
+
+                                    outDOM.style.webkitAnimation
+                                        = outDOM.style.mozAnimation
+                                        = outDOM.style.oAnimation
+                                        = outDOM.style.animation
+                                        = inAnim.value + ' ' + data.duration + 'ms ease-in-out reverse forwards';
+                                    outDOM.classList.remove('hidden');
+                                    outDOM.addEventListener('webkitAnimationEnd', outout);
+                                    outDOM.addEventListener('mozAnimationEnd', outout);
+                                    outDOM.addEventListener('animationend', outout);
+
+                                    cacheDOM.classList.add('hidden');
+                                    cacheDOM.style.webkitAnimation
+                                        = cacheDOM.style.mozAnimation
+                                        = cacheDOM.style.oAnimation
+                                        = cacheDOM.style.animation
+                                        = '';
+                                    cacheDOM.src = imageUrlConverter(imageQueue.get(-1));
+                                }
+
+                                btnPrev.addEventListener('click', btnPrevClick);
+                                btnNext.addEventListener('click', btnNextClick);
 
                                 //场景调度时计时器启/停
                                 var timer = null;
-                                var startHandler = function () {
-                                    if (timer === null) {
-                                        //playing();
-                                        timer = window.setInterval(playing, data.stay * 1000 + data.duration);
+
+                                function btnPrevClick() {
+                                    if (timer !== null) {
+                                        window.clearInterval(timer);
                                     }
-                                };
-                                var stopHandler = function () {
+                                    timer = window.setInterval(playPrev, data.stay * 1000 + data.duration);
+                                    playPrev();
+                                }
+
+                                function btnNextClick() {
+                                    if (timer !== null) {
+                                        window.clearInterval(timer);
+                                    }
+                                    timer = window.setInterval(playNext, data.stay * 1000 + data.duration);
+                                    playNext();
+                                }
+
+                                function startHandler() {
+                                    if (timer === null) {
+                                        //playNext();
+                                        timer = window.setInterval(playNext, data.stay * 1000 + data.duration);
+                                    }
+                                }
+
+                                function stopHandler() {
                                     if (timer !== null) {
                                         window.clearInterval(timer);
                                         timer = null;
                                     }
-                                };
+                                }
+
                                 that.addStartHandler(startHandler);
                                 that.addStopHandler(stopHandler);
+
+                                playNext();
 
                                 that.onDestroy(function () {
                                     var that = this;
                                     that.removeStopHandler(stopHandler);
                                     that.removeStartHandler(startHandler);
-                                    stopHandler = null;
-                                    startHandler = null;
-                                    playing = null;
+                                    btnPrev.removeEventListener('click', btnPrevClick);
+                                    btnNext.removeEventListener('click', btnNextClick);
 
-                                    dom.removeChild(nextImageDOM);
-                                    dom.removeChild(curImageDOM);
-                                    dom.removeChild(prevImageDOM);
-                                    nextImageDOM.src = '';
-                                    curImageDOM.src = '';
-                                    prevImageDOM.src = '';
-                                    nextImageDOM = null;
-                                    curImageDOM = null;
-                                    prevImageDOM = null;
+                                    dom.removeEventListener('click', onDOMTouch);
+                                    if (timer22 !== null) {
+                                        window.clearTimeout(timer22);
+                                    }
+                                    imgDOMs.forEach(function (img) {
+                                        img.src = '';
+                                        dom.removeChild(img);
+                                    });
+
+                                    dom.removeChild(btnPrev);
+                                    dom.removeChild(btnNext);
                                 });
                             })();
                         }
@@ -984,7 +1148,7 @@ var kmsz = kmsz || {};
                                 var onCurrentPlay = function () {
                                     this.removeEventListener('error', onLoadError);
                                     nextVideoDOM.addEventListener('error', onLoadError);
-                                    nextVideoDOM.src = videoUrlConverter(videoQueue.next());
+                                    nextVideoDOM.src = videoUrlConverter(videoQueue.skipNext());
                                 };
                                 var onCurrentEnded = function () {
                                     this.removeEventListener('error', onCurrentPlayError);
@@ -1002,7 +1166,7 @@ var kmsz = kmsz || {};
                                 var onNextPlay = function () {
                                     this.removeEventListener('error', onLoadError);
                                     curVideoDOM.addEventListener('error', onLoadError);
-                                    curVideoDOM.src = videoUrlConverter(videoQueue.next());
+                                    curVideoDOM.src = videoUrlConverter(videoQueue.skipNext());
                                 };
                                 var onNextEnded = function () {
                                     this.removeEventListener('error', onNextPlayError);
@@ -1033,7 +1197,7 @@ var kmsz = kmsz || {};
                                 var onLoadError = function (e) {
                                     var errorMSG = e.target.error ? e.target.error.message : '未知';
                                     kmsz.util.toast('加载错误:' + errorMSG + ':' + e.target.currentSrc, 5000);
-                                    this.src = videoUrlConverter(videoQueue.next());
+                                    this.src = videoUrlConverter(videoQueue.skipNext());
                                 };
 
                                 var startHandler = function () {
@@ -1056,7 +1220,7 @@ var kmsz = kmsz || {};
                                 };
 
                                 curVideoDOM.addEventListener('error', onLoadError);
-                                curVideoDOM.src = videoUrlConverter(videoQueue.current());
+                                curVideoDOM.src = videoUrlConverter(videoQueue.skipNext());
 
                                 curVideoDOM.addEventListener('play', onCurrentPlay);
                                 curVideoDOM.addEventListener('ended', onCurrentEnded);
@@ -1253,6 +1417,7 @@ var kmsz = kmsz || {};
         this._destroyHandler = null;
         this._imageUrlConverter = null;
         this._videoUrlConverter = null;
+        this._audioUrlConverter = null;
         this._originalPixel = 1920;
 
         this.hide();
@@ -1279,6 +1444,12 @@ var kmsz = kmsz || {};
         },
         getVideoUrlConverter: function () {
             return this._videoUrlConverter;
+        },
+        setAudioUrlConverter: function (converter) {
+            this._audioUrlConverter = converter;
+        },
+        getAudioUrlConverter: function () {
+            return this._audioUrlConverter;
         },
         setOriginalPixel: function (originalPixel) {
             this._originalPixel = originalPixel;
@@ -1342,6 +1513,22 @@ var kmsz = kmsz || {};
                             var backgroundDOM = createBackgroundDOM(page.background, null, that.getImageUrlConverter());
                             dom.appendChild(backgroundDOM);
 
+                            //背景音乐
+                            if (page.music) {
+                                var musicDOM = createMusicDOM(page.music, that.getAudioUrlConverter());
+                                dom.appendChild(musicDOM);
+                                that.addStartHandler(function () {
+                                    if (musicDOM) {
+                                        musicDOM.play();
+                                    }
+                                });
+                                that.addStopHandler(function () {
+                                    if (musicDOM) {
+                                        musicDOM.pause();
+                                    }
+                                });
+                            }
+
                             //填充元素集合
                             var boxsDOM = document.createElement('div');
                             boxsDOM.classList.add('page-elements');
@@ -1370,6 +1557,11 @@ var kmsz = kmsz || {};
 
                                 dom.removeChild(boxsDOM);
                                 boxsDOM = null;
+                                if (musicDOM) {
+                                    musicDOM.src = '';
+                                    dom.removeChild(musicDOM);
+                                    musicDOM = null;
+                                }
                                 dom.removeChild(backgroundDOM);
                                 backgroundDOM = null;
                             };
@@ -1427,6 +1619,7 @@ var kmsz = kmsz || {};
         this._autoRotate = false;
         this._imageUrlConverter = defaultConverter;
         this._videoUrlConverter = defaultConverter;
+        this._audioUrlConverter = defaultConverter;
 
         this._canvas = null;
         this._scenes = [];
@@ -1462,6 +1655,12 @@ var kmsz = kmsz || {};
         getVideoUrlConverter: function () {
             return this._videoUrlConverter;
         },
+        setAudioUrlConverter: function (converter) {
+            this._audioUrlConverter = converter;
+        },
+        getAudioUrlConverter: function () {
+            return this._audioUrlConverter;
+        },
         inflate: function (canvas, pages) {
             var that = this;
 
@@ -1473,6 +1672,7 @@ var kmsz = kmsz || {};
                 var scene = new Scene();
                 scene.setImageUrlConverter(that.getImageUrlConverter());
                 scene.setVideoUrlConverter(that.getVideoUrlConverter());
+                scene.setAudioUrlConverter(that.getAudioUrlConverter());
                 scene.setOriginalPixel(that._pixelHorizontal > that._pixelVertical ? that._pixelHorizontal : that._pixelVertical);
                 return scene;
             }
@@ -1506,8 +1706,8 @@ var kmsz = kmsz || {};
                     that._scenes.push(curScene);
                     that._scenes.push(nextScene);
 
-                    var curPage = pageQueue.current();
-                    var nextPage = pageQueue.next();
+                    var curPage = pageQueue.skipNext();
+                    var nextPage = pageQueue.skipNext();
                     curScene.load(curPage);
                     curScene.show();
                     curScene.start();
@@ -1515,7 +1715,7 @@ var kmsz = kmsz || {};
 
                     var timer = window.setTimeout(function () {
                         curPage = nextPage;
-                        nextPage = pageQueue.next();
+                        nextPage = pageQueue.skipNext();
 
                         var cacheScene = curScene;
                         curScene = nextScene;
@@ -1634,54 +1834,6 @@ var kmsz = kmsz || {};
 
     editor.Parser = Parser;
 
-
-    //循环队列
-    var CycleQueue = (function () {
-        function CycleQueue(arr, isClone) {
-            if (isClone === true) {
-                var newArr = [];
-                for (var i = 0, len = arr.length; i < len; i++) {
-                    newArr.push(arr[i]);
-                }
-                this._arr = newArr;
-            } else {
-                this._arr = arr;
-            }
-            this._index = 0;
-        }
-
-        CycleQueue.prototype = {
-            getIndex: function () {//获取指针位置
-                return this._index;
-            },
-            setIndex: function (index) {//设置指针位置
-                var len = this._arr.length;
-                this._index = (index % len + len) % len;
-            },
-            prev: function () {//取前一个，并将指针前移
-                return this.skipPrev(1);
-            },
-            skipPrev: function (step) {//向前跳几步
-                return this.skipNext(-step);
-            },
-            next: function () {//取后一个，并将指针后移
-                return this.skipNext(1);
-            },
-            skipNext: function (step) {//向后跳几步
-                var arr = this._arr;
-                var len = arr.length;
-                var index = this._index = ((this._index + step) % len + len) % len;
-                return arr[index];
-            },
-            current: function () {//取当前位置，指针不变
-                return this._arr[this._index];
-            }
-        };
-
-        CycleQueue.prototype.constructor = CycleQueue;
-
-        return CycleQueue;
-    })();
 
     //日期格式化
     var formatDate = (function () {

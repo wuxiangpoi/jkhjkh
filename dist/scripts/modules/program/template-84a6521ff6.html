@@ -1,9 +1,15 @@
 <div class="content-wrap" style="min-width:850px;">
     <div class="level2 clearfix">
         <div ng-if="perms(432)" class="tipBtnWrap">
-            <button ui-sref="dashboard.programAdd" class="btn btn-primary h34">
+            <button ng-click="goTostate('dashboard.programAdd',{type:0},432)" class="btn btn-primary h34">
                 <i class="iconfont icon-tianjia-"></i>
                 制作节目
+            </button>
+        </div>
+        <div ng-if="perms(432)" class="tipBtnWrap">
+            <button ng-click="goTostate('dashboard.programAdd',{type:1},432)" class="btn btn-primary h34">
+                <i class="iconfont icon-tianjia-"></i>
+                制作互动节目
             </button>
         </div>
         <div ng-if="perms(439)" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event) class="tipBtnWrap">
