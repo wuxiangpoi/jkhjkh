@@ -65,7 +65,7 @@ angular.module('sbAdminApp')
                         'x:fname': filename,
                         'x:type': xType,
                         'x:gid': item.oid,
-                        'x:opt': 0,
+                        'x:opt': xType,
                         'x:token': token
                     };
                     item.formData = [new_multipart_params]; //上传前，添加描述文本
