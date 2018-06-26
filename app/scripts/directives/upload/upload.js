@@ -8,18 +8,19 @@
  */
 
 angular.module('sbAdminApp')
-    .directive('dmbdUpload',['$rootScope','FileUploader','baseService', function ($rootScope,FileUploader,baseService) {
+    .directive('dmbdUpload', ['$rootScope', 'FileUploader', 'baseService', function ($rootScope, FileUploader, baseService) {
         function link($scope, element, attrs) {
             $scope.isShow = false;
             $scope.isHide = false;
-            var uploader = $scope.uploader = new FileUploader(
-                {
-                    url: 'http://dmbd4.oss-cn-hangzhou.aliyuncs.com',
-                }
-            );
-            function beforeUpload (item) {
+            var uploader = $scope.uploader = new FileUploader({
+                url: 'http://dmbd4.oss-cn-hangzhou.aliyuncs.com',
+            });
+
+            function beforeUpload(item) {
                 var imgfile_type = $rootScope.getRootDicNameStrs('image_format');
                 var videofile_type = $rootScope.getRootDicNameStrs('video_format');
+                var audiofile_type = ',mp3,';
+                var programfile_type = ',zip,';
                 var host = '';
                 var accessid = '';
                 var policyBase64 = '';
@@ -36,8 +37,10 @@ angular.module('sbAdminApp')
                     xType = 0;
                 } else if ((',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1) {
                     xType = 1;
-                } else {
+                } else if ((',' + audiofile_type.toLowerCase() + ',').indexOf(type) != -1){
                     xType = 2;
+                }else {
+                    xType = 3;
                 }
                 baseService.postData(baseService.api.material + 'addMaterial_getOssSignature', {
                     type: xType
@@ -65,29 +68,29 @@ angular.module('sbAdminApp')
                         'x:fname': filename,
                         'x:type': xType,
                         'x:gid': item.oid,
-                        'x:opt': xType,
+                        'x:opt': 0,
                         'x:token': token
                     };
                     item.formData = [new_multipart_params]; //上传前，添加描述文本
                     item.upload();
                 });
             }
-            
+
             $scope.isShowDialog = function (isShow) {
                 $scope.isShow = isShow;
             }
             $scope.isHideDialog = function () {
                 $scope.isHide = !$scope.isHide;
             }
-            $scope.$on("callUploader", function(event, data) {
+            $scope.$on("callUploader", function (event, data) {
                 $scope.uploader.queue = $scope.uploader.queue.concat(data.queue);
                 $scope.isShow = true;
                 for (var i = 0; i < data.queue.length; i++) {
                     var item = data.queue[i];
                     beforeUpload(item);
-                }                 
+                }
             });
-            $scope.removeItem = function(item,index,$event){
+            $scope.removeItem = function (item, index, $event) {
                 item.cancel();
                 $scope.uploader.queue.splice(index, 1);
                 $($event.currentTarget).parents('tr').remove();
