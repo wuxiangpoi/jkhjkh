@@ -166,7 +166,7 @@ angular.module('sbAdminApp', ['chartService'])
 				baseService.confirmDialog(580, '编辑终端信息', modalData, 'tpl/terminal_save.html', function (ngDialog, vm) {
 					if (vm.modalForm.$valid) {
 						var formData = {
-							name: vm.data.name,
+							name: baseService.trim(vm.data.name,'g'),
 							id: vm.data.id,
 							city_no: vm.data.city_no,
 							remark: vm.data.remark ? vm.data.remark : '',

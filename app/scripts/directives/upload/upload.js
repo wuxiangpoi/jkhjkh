@@ -54,9 +54,9 @@ angular.module('sbAdminApp')
                     key = obj['key']
                     token = obj['token']
                     //	$scope.uploader.url=host;
-                    var filename = item.file.name;
+                    var filename = baseService.trim(item.file.name,'g');
                     if (item.file['desc']) {
-                        filename = item.file.desc;
+                        filename = baseService.trim(item.file.desc,'g');
                     }
                     var new_multipart_params = {
                         'key': (key + item.file.name.substr(item.file.name.lastIndexOf('.'))),

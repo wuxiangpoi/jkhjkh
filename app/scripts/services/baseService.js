@@ -298,6 +298,14 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 vm.ids = this.removeAry(vm.ids, item.id);
             }
         },
+        trim(str, is_global) {
+            var result;
+            result = str.replace(/(^\s+)|(\s+$)/g, "");
+            if (is_global.toLowerCase() == "g") {
+                result = result.replace(/\s/g, "");
+            }
+            return result;
+        },
         formateDay: function (day) {
             if (day < 10) {
                 return '0' + day.toString();

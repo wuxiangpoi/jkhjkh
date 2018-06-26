@@ -165,7 +165,7 @@ angular.module('sbAdminApp')
 						vm.isPosting = true;
 						baseService.postData(baseService.api.material + 'saveMaterial', {
 							id: item.id,
-							name: vm.data.name
+							name: baseService.trim(vm.data.name, 'g')
 						}, function () {
 							ngDialog.close();
 							$scope.callServer($scope.tableState);
@@ -199,6 +199,7 @@ angular.module('sbAdminApp')
 						for (var i = 0; i < vm.uploader.queue.length; i++) {
 							vm.uploader.queue[i].oid = vm.currentGroup.id;
 							vm.uploader.queue[i].gid = vm.currentLeaf.id;
+							vm.uploader.queue[i].file.desc = baseService.trim(vm.uploader.queue[i].file.desc,'g');
 							filenameArray.push(vm.uploader.queue[i].file.desc);
 						}
 						baseService.postData(baseService.api.material + 'addMaterial_checkUpload', {
