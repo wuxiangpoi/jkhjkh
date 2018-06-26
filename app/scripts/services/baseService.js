@@ -1,7 +1,7 @@
 var baseService = angular.module('baseService', []);
 baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialog', 'programService', function ($rootScope, $http, $location, ngDialog, programService) {
     var apiUrl = '';
-    var verson = '?_v2.199878541254312';
+    var verson = '?_v2.19987854125431218';
     var baseService = {
         verson: verson,
         api: {
@@ -298,7 +298,7 @@ baseService.factory('baseService', ['$rootScope', '$http', '$location', 'ngDialo
                 vm.ids = this.removeAry(vm.ids, item.id);
             }
         },
-        trim(str, is_global) {
+        trim: function(str, is_global) {
             var result;
             result = str.replace(/(^\s+)|(\s+$)/g, "");
             if (is_global.toLowerCase() == "g") {

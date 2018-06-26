@@ -3,13 +3,13 @@
         <div ng-if="perms(432)" class="tipBtnWrap">
             <button ng-click="goTostate('dashboard.programAdd',{type:0},432)" class="btn btn-primary h34">
                 <i class="iconfont icon-tianjia-"></i>
-                制作节目
+                普通节目
             </button>
         </div>
         <div ng-if="perms(432)" class="tipBtnWrap">
             <button ng-click="goTostate('dashboard.programAdd',{type:1},432)" class="btn btn-primary h34">
                 <i class="iconfont icon-tianjia-"></i>
-                制作互动节目
+                互动节目
             </button>
         </div>
         <div ng-if="perms(439)" ng-mouseenter="showTip($event)" ng-mouseleave=hideTip($event) class="tipBtnWrap">
@@ -73,6 +73,13 @@
                             <select class="form-control" ng-model="sp.status" ng-change="initPage(tableState)">
                                 <option value="">审核状态</option>
                                 <option ng-repeat="c in userData.root_checkStatusProgram" value="{{c.val}}">{{c.name}}</option>
+                            </select>
+                        </div>
+                        <div class="panelSelectWrap">
+                            <select class="form-control" ng-model="sp.type" ng-change="initPage(tableState)">
+                                <option value="">节目类型</option>
+                                <option value="0">普通节目</option>
+                                <option value="1">互动节目</option>
                             </select>
                         </div>
                     </div>
