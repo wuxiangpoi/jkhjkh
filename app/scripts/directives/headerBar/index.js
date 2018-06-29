@@ -179,7 +179,13 @@ angular.module('sbAdminApp')
 					baseService.goToUrl('/dashboard/' + item.name)
 					$scope.collapseVar = 5;
 				}
-
+				$scope.updateLogo = function(){
+					baseService.confirmDialog(560, '修改Logo', {
+						info: '(支持jpg,png,jpeg,bmp格式的图片，不超过5M)'
+					}, '/tpl/update_logo.html', function (vm, ngDialog) {
+						vm.$broadcast('uploadImg',() => {});
+					})
+				}
 			}
 		}
 	});

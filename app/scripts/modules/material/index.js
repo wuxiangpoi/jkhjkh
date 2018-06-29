@@ -270,9 +270,15 @@ angular.module('sbAdminApp')
 										return true;
 									}
 								}
-								else {
+								else if ((',' + videofile_type.toLowerCase() + ',').indexOf(type) != -1){
 									if (item.size > 500 * 1024 * 1024) {
 										baseService.alert('不得上传大于500Mb的视频', 'warning', true);
+									} else {
+										return true;
+									}
+								}else if ((',' + programfile_type.toLowerCase() + ',').indexOf(type) != -1){
+									if (item.size > 500 * 1024 * 1024) {
+										baseService.alert('不得上传大于500Mb的互动包', 'warning', true);
 									} else {
 										return true;
 									}

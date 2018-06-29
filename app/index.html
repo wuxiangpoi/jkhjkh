@@ -22,12 +22,13 @@
     <link rel="stylesheet" href="bower_components/angular-moment-picker/dist/angular-moment-picker.min.css" />
     <link rel="stylesheet" href="bower_components/zTree/zTreeStyle.css" />
     <link rel="stylesheet" href="bower_components/angular-slider/angular-slider.min.css" type="text/css">
+    <link rel="stylesheet" href="bower_components/cropper/cropper.min.css" type="text/css">
     <!-- endbower -->
     <link rel="stylesheet" href="css/font/iconfont.css" />
-    <link rel="stylesheet" href="css/animate.css"/>
+    <link rel="stylesheet" href="css/animate.css" />
     <link rel="stylesheet" href="css/sb-admin-2.css" />
     <link rel="stylesheet" href="css/common.css" />
-   <!-- endbuild -->
+    <!-- endbuild -->
 </head>
 
 <body ng-app="sbAdminApp" id="sbAdminApp">
@@ -35,7 +36,7 @@
 
     <!-- build:js scripts/depend.js -->
     <!-- bower:js -->
-    
+
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -45,6 +46,7 @@
     <script src="bower_components/angular-file-upload/angular-file-upload.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/smart-table/smart-table.min.js"></script>
+    <script src="bower_components/cropper/cropper.min.js"></script>
     <script src="js/md5.js"></script>
     <script src="js/jquery.cookie.js"></script>
     <script src="bower_components/angular-message/angular-message.js"></script>
@@ -65,6 +67,7 @@
     <script src="scripts/directives/upload/upload.js"></script>
     <script src="scripts/directives/imageView/imageview.js"></script>
     <script src="scripts/directives/eCharts.js"></script>
+    <script src="scripts/directives/imageJrop/index.js"></script>
     <script src="scripts/directives/eInstructions/eInstructions.js"></script>
     <script src="scripts/directives/audio/kmAudio.js"></script>
     <!--  services start -->
@@ -76,7 +79,7 @@
     <script src="scripts/services/chartService.js"></script>
 
     <!-- 服务 -->
-   
+
 
     <!--  services end -->
     <!--  filters start -->
@@ -84,7 +87,7 @@
     <!--  filters end -->
     <!-- endbuild -->
     <!--  js start -->
-     <!-- <link href="styles/morrisjs/morris.css" rel="stylesheet"> -->
+    <!-- <link href="styles/morrisjs/morris.css" rel="stylesheet"> -->
     <!--<script src="./bower_components/jquery/dist/jquery.js"></script>-->
     <script src="TBXEditor/bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="TBXEditor/bower_components/layer/build/layer.js"></script>
@@ -94,6 +97,11 @@
     <link href="TBXEditor/bower_components/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet">
     <script src="TBXEditor/bower_components/angular-ui-sortable/sortable.js"></script>
     <script src="TBXEditor/bower_components/ng-dialog/js/ngDialog.min.js"></script>
+
+    <link href="TBXEditor/libs/videojs/video-js.css" rel="stylesheet">
+    <script src="TBXEditor/libs/videojs/video.js"></script>
+    <script src="TBXEditor/libs/videojs/videojs-contrib-hls.js"></script>
+    <script src="TBXEditor/bower_components/blueimp-md5/js/md5.js"></script>
 
     <link href="TBXEditor/build/css/editor-e57b1.css" rel="stylesheet">
     <link href="TBXEditor/build/css/editor-less-18ab0.css" rel="stylesheet">
