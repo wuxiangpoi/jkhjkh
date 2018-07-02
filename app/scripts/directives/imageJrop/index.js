@@ -28,6 +28,7 @@ angular.module('sbAdminApp')
                     dragMode: 'move',
                     preview: '.imgPreview',
                     minContainerHeight: 325,
+                    minCropBoxHeight: 40,
                     movable: true
                 });
                 $scope.isJcrop = true;
