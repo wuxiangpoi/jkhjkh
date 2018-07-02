@@ -95,13 +95,7 @@ angular.module('sbAdminApp')
 
             };
             $scope.uploader.onCompleteItem = function (fileItem, response, status, headers) {
-                if (response.code != 1) {
-                    baseService.alert(response.message,'warning');
-                }else{
-                    $rootScope.root_logo = '';
-                    ngDialog.close();
-                    baseService.alert('修改成功','success');
-                }
+                $scope.$emit('uploadImgComplete',response);
             };
             $scope.$on('uploadImg', function(e, data) {
                 var cas = $('#jcropImg').cropper('getCroppedCanvas');

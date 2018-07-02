@@ -183,7 +183,20 @@ angular.module('sbAdminApp')
 					baseService.confirmDialog(560, '修改Logo', {
 						info: '(支持jpg,png,jpeg,bmp格式的图片，不超过5M)'
 					}, '/tpl/update_logo.html', function (ngDialog,vm) {
-						vm.$broadcast('uploadImg',function(){});
+						vm.isPosting = true;
+						vm.$broadcast('uploadImg',vm);
+					},function(vm){
+						vm.$on('uploadImgComplete',function(e,response){
+							vm.isPosting = false;
+							if (response.code != 1) {
+								baseService.alert(response.message,'warning');
+							}else{
+								vm.closeThisDialog();
+								baseService.alert('修改成功','success');
+								$rootScope.userData.root_logo = response.content;
+							}
+							
+						});
 					})
 				}
 			}
