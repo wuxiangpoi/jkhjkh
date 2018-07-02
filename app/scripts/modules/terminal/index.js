@@ -4,6 +4,7 @@ angular.module('sbAdminApp', ['chartService'])
 		'terminalCtrl',
 		function ($scope, $rootScope, $stateParams, baseService, leafService, chartService, ngDialog) {
 			$scope.displayed = [];
+			$scope.displayedEnabled = [];
 			$scope.sp = {};
 			$scope.tableState = {};
 			$scope.ids = [];
@@ -26,6 +27,9 @@ angular.module('sbAdminApp', ['chartService'])
 			}, {
 				name: '异常',
 				value: 3
+			}, {
+				name: '到期',
+				value: 4
 			}];
 			$scope.init_status = $stateParams.status;
 			if ($stateParams.status) {
@@ -34,7 +38,14 @@ angular.module('sbAdminApp', ['chartService'])
 			$scope.callServer = function (tableState) {
 				$scope.ids = [];
 				$scope.idsNormal = [];
-				baseService.initTable($scope, tableState, baseService.api.terminal + 'getTerminalPageList');
+				$scope.displayedEnabled = [];
+				baseService.initTable($scope, tableState, baseService.api.terminal + 'getTerminalPageList',function(res){
+					for(var i = 0; i < res.data.length; i++){
+						if(res.data[i].status != 4){
+							$scope.displayedEnabled.push(res.data[i]);
+						}
+					}
+				});
 			}
 			$scope.getTerminalGroups = function (oid) {
 				leafService.getLeafes(baseService.api.terminal + 'getTerminalGroups', oid, function (data) {
@@ -45,6 +56,7 @@ angular.module('sbAdminApp', ['chartService'])
 				$scope.tableState.pagination.start = 0;
 				$scope.ids = [];
 				$scope.idsNormal = [];
+				$scope.displayedEnabled = [];
 				$scope.callServer($scope.tableState);
 			}
 			$scope.$on('emitGroupLeaf', function (e, group) {
@@ -311,9 +323,13 @@ angular.module('sbAdminApp', ['chartService'])
 			$scope.checkAll = function ($event) {
 				$scope.ids = [];
 				$scope.idsNormal = [];
+				$scope.displayedEnabled = [];
 				if ($($event.currentTarget).is(':checked')) {
 					for (var i = 0; i < $scope.displayed.length; i++) {
 						$scope.ids.push($scope.displayed[i].id)
+						if ($scope.displayed[i].status != 4) {
+							$scope.ids.push($scope.displayed[i].id)
+						}
 						if ($scope.displayed[i].status == 1) {
 							$scope.idsNormal.push($scope.displayed[i].id)
 						}
@@ -321,11 +337,14 @@ angular.module('sbAdminApp', ['chartService'])
 				} else {
 					$scope.ids = [];
 					$scope.idsNormal = [];
+					$scope.displayedEnabled = [];
 				}
 			}
 			$scope.checkThis = function (item, $event) {
 				if ($($event.currentTarget).is(':checked')) {
-					$scope.ids.push(item.id);
+					if(item.status != 4){
+						$scope.ids.push(item.id);
+					}
 					if (item.status == 1) {
 						$scope.idsNormal.push(item.id);
 					}
