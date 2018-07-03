@@ -133,7 +133,7 @@
 			<thead>
 				<tr>
 					<th class="checkBoxTable">
-						<input ng-checked="ids.length == displayed.length && displayed.length != 0" ng-click="checkAll($event)" type="checkbox">
+						<input ng-checked="ids.length == displayedEnabled.length && displayedEnabled.length != 0" ng-click="checkAll($event)" type="checkbox">
 					</th>
 					<th>终端编号</th>
 					<th>终端名称</th>
@@ -147,7 +147,8 @@
 			<tbody ng-show="!isLoading">
 				<tr class="{{$index%2 == 0?'odd':'even'}}" ng-repeat="row in displayed">
 					<td class="checkBoxTable">
-						<input ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
+						<input ng-if="row.status != 4" ng-click="checkThis(row,$event)" ng-checked="ids.indexOf(row.id) != -1" type="checkbox">
+						<span class="tex-red" ng-if="row.status == 4">到期</span>
 					</td>
 					<td class="tdClick" ng-click="details(row)">{{row.no}}</td>
 					<td class="ellipsisTd" title="{{row.name}}">{{row.name}}</td>
@@ -156,6 +157,7 @@
 						<div class="txt-green" ng-if="row.status == 1">在线</div>
 						<div class="txt-grey" ng-if="row.status == 2">离线</div>
 						<div class="tex-red" ng-if="row.status == 3">异常</div>
+						<div class="txt-grey" ng-if="row.status == 4">到期</div>
 					</td>
 					<td>
 						{{row.resolution}}

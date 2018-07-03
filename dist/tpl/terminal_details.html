@@ -24,9 +24,9 @@
 						</div>
 					</div>
 					<div class="row">
-						<label class="col-sm-4 control-label-left">注册时间</label>
+						<label class="col-sm-4 control-label-left">有效期</label>
 						<div class="col-sm-8 txtGrey">
-							{{data.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}
+							{{row.billingDate | date : 'yyyy-MM-dd HH:mm:ss'}} 至 {{row.dueDate | date : 'yyyy-MM-dd HH:mm:ss'}}
 						</div>
 					</div>
 				</dd>
@@ -159,6 +159,11 @@
 						<label class="col-sm-4 control-label-left">网络类型</label>
 						<div class="col-sm-8 txtGrey">
 							{{getRootDicName('net_type',data.netType)}}</div>
+					</div>
+					<div class="row" ng-if="data.licenseNo&&data.licenseNo!=''">
+						<label class="col-sm-4 control-label-left">授权编号</label>
+						<div class="col-sm-8 txtGrey">
+							{{data.licenseNo}}</div>
 					</div>
 				</dd>
 

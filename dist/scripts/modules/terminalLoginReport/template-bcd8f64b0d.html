@@ -38,6 +38,13 @@
                             </div>
 
                         </div>
+                        <div class="panelSelectWrap">
+                            <select class="form-control" ng-model="sp.hasLicense" ng-change="initPage(tableState)">
+                                <option value="">注册类型</option>
+                                <option value="1">有授权</option>
+                                <option value="0">无授权</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,6 +55,7 @@
                     <th>注册时间</th>
                     <th>终端编号</th>
                     <th>终端名称</th>
+                    <th>授权编号</th>
                     <th>所属城市</th>
                 </tr>
             </thead>
@@ -56,6 +64,7 @@
                     <td title="{{row.account}}">{{row.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
                     <td>{{row.no}}</td>
                     <td>{{row.name}}</td>
+                    <td>{{row.licenseNo?row.licenseNo:'-'}}</td>
                     <td>{{getCityName(row.city_no)}}</td>
                     <!-- <td class="ellipsisTd" title="{{row.oid | getOrganizations}}">{{row.oid | getOrganizations}}</td> -->
                 </tr>

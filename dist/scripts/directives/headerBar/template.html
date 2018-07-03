@@ -1,7 +1,7 @@
 <nav id="topNav" class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <a class="navbar-brand" ui-sref="dashboard.home">
-            <img class="logoImg" src="{{userData.root_logo}}">
+            <img class="logoImg" src="{{userData.root_logo?userData.root_logo:'../../../img/logo.png'}}">
         </a>
     </div>
     <!-- /.navbar-header -->
@@ -59,6 +59,12 @@
                         <span class="iconWrap" style="background:#00a0e9;">
                             <i class="fa fa-user fa-fw"></i>
                         </span>修改密码</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="updateLogo()">
+                        <span class="iconWrap" style="background:#00a0e9;">
+                            <i class="fa fa-picture-o"></i>
+                        </span>修改Logo</a>
                 </li>
                 <li>
                     <a href="javascript:void(0)" ng-click="logout()">

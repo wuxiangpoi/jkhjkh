@@ -1,0 +1,22 @@
+<div class="image-jrop clearfix">
+    <div class="fl" style="width:360px;">
+        <div class="form-group clearfix" ng-if="uploader">
+            <a href="javascript:;" class="file fl btn btn-primary lh34">
+                <i class="iconfont icon-tianjia-"></i>选择图片
+                <input id="chooseImg" type="file" nv-file-select="" name="file" uploader="uploader">
+            </a>
+        </div>
+        <div class="jcropImgWrap" style="max-height: 325px">
+            <label ng-if="!isJcrop" class="placeBox" for="chooseImg">
+                <i class="iconfont icon-tianjia-"></i>添加图片
+            </label>
+            <img id="jcropImg" ng-src="{{imgSrc}}" alt="">
+        </div>
+    </div>
+    <div class="imgPreviewWrap fr" style="width: 120px;overflow: hidden;">
+        <p style="line-height: 34px;margin-bottom:5px;">{{isJcrop?'预览logo':'当前logo'}}</p>
+        <img ng-if="!isJcrop" style="width: 100%;height: auto;" ng-src="{{userData.root_logo?userData.root_logo:'../../../img/logo.png'}}" alt="">
+        <div class="imgPreview" style="height: 30px;overflow: hidden;"></div>
+    </div>
+
+</div>

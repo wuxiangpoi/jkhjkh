@@ -60,7 +60,7 @@
                             <i class="fa fa-user fa-fw"></i>
                         </span>修改密码</a>
                 </li>
-                <li>
+                <li ng-if="perms(3)">
                     <a href="javascript:void(0)" ng-click="updateLogo()">
                         <span class="iconWrap" style="background:#00a0e9;">
                             <i class="fa fa-picture-o"></i>
